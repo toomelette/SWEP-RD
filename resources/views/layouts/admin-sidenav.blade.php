@@ -23,7 +23,7 @@
       {{-- User --}}
       @if(!$global_user_menus_u->isEmpty())
 
-          <li class="header">Navigation</li>
+          <li class="header">NAVIGATION</li>
           @foreach($global_user_menus_u as $user_menu)
 
             @if($user_menu->is_menu == true)
@@ -78,8 +78,63 @@
         {{-- SU --}}
         @if(!$global_user_menus_su->isEmpty())
 
-          <li class="header">SU</li>
+          <li class="header">SUPER USER</li>
           @foreach($global_user_menus_su as $user_menu)
+
+            @if($user_menu->is_menu == true)
+
+              @if($user_menu->is_dropdown == false)
+
+              <li class="{!! Route::currentRouteNamed($user_menu->route) ? 'active' : '' !!}">
+                <a href="{{ route($user_menu->route) }}">
+                  <i class="fa {{ $user_menu->icon }}"></i> <span>{{ $user_menu->name }}</span>
+                </a>
+              </li>
+
+              @else
+
+                <li class="treeview {!! Route::currentRouteNamed($user_menu->route) ? 'active' : '' !!}">
+                  <a href="#">
+                    <i class="fa {{ $user_menu->icon }}"></i> <span>{{ $user_menu->name }}</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                    <ul class="treeview-menu">
+
+                      @foreach($user_menu->userSubMenu as $user_nav)
+
+                        @if($user_nav->is_nav == true)
+
+                          <li class="{!! Route::currentRouteNamed($user_nav->route) ? 'active' : '' !!}">
+                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->name }}</a>
+                          </li>
+
+                        @endif
+
+                      @endforeach
+
+                    </ul>
+
+                </li>
+
+              @endif
+
+            @endif
+
+          @endforeach
+
+        @endif
+
+
+
+
+        {{-- SGRLAB --}}
+        @if(!$global_user_menus_sgrlab->isEmpty())
+
+          <li class="header">SUGAR LAB</li>
+          @foreach($global_user_menus_sgrlab as $user_menu)
 
             @if($user_menu->is_menu == true)
 

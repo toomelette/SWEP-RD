@@ -40,6 +40,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** MENU **/
 	Route::resource('menu', 'MenuController');
+
+
+	/** SUGAR ORDER OF PAYMENT **/
+	Route::resource('sugar_order_of_payment', 'SugarOrderOfPaymentController');
 	
 });
 

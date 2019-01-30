@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
 
-class OrderOfPayment extends Model{
+class SugarOrderOfPayment extends Model{
 
 
 
@@ -26,7 +26,7 @@ class OrderOfPayment extends Model{
 
         'slug' => '',
         'sample_no' => '',
-        'kind_of_sample' => '',
+        'sugar_sample' => '',
         'date' => null,
         'address' => '',
         'received_from' => '',
