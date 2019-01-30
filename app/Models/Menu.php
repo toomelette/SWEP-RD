@@ -10,8 +10,6 @@ class Menu extends Model{
 
 
 
-
-
     use Sortable;
 
     protected $table = 'su_menus';
@@ -19,7 +17,6 @@ class Menu extends Model{
     protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
-
 
 
 
