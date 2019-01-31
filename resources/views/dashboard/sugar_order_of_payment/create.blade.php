@@ -26,12 +26,22 @@
             @csrf
 
             {!! __form::select_static(
-              '4', 'customer_type', 'Customer Type *', old('customer_type'), ['Walk in / Trader' => 'CT1001', 'Mill' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
+              '4', 'customer_type', 'Customer Type *', old('customer_type'), ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
             ) !!}
 
-            {!! __form::textbox(
-              '4', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), ''
-            ) !!}
+            {{-- IF WALK IN --}}
+            <div class="col-md-4 no-padding" id="recieved_from_div">
+              {!! __form::textbox(
+                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), ''
+              ) !!}
+            </div>
+            
+            {{-- IF MILL --}}
+            <div class="col-md-4 no-padding" id="mill_div">
+              {!! __form::select_dynamic(
+                '12', 'mill_id', 'Milling Company *', old('mill_id'), $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
+              ) !!}
+            </div>
 
             {!! __form::textbox(
               '4', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
@@ -70,7 +80,7 @@
 
                   <tr>
                     <th>Services *</th>
-                    <th>Price *</th>
+                    <th>Price</th>
                     <th style="width: 40px"></th>
                   </tr>
 
@@ -154,6 +164,27 @@
     @if(Session::has('SOOP_CREATE_SUCCESS'))
       $('#soop_create').modal('show');
     @endif
+
+
+    $('#recieved_from_div').show();
+    $('#mill_div').hide();
+
+
+    $(document).on("change", "#customer_type", function () {
+      $('#received_from').val('');
+      $('#address').val('');
+      var val = $(this).val();
+        if(val == "CT1001"){ 
+          $('#recieved_from_div').show();
+          $('#mill_div').hide();
+        }else if(val == "CT1002"){
+          $('#recieved_from_div').hide();
+          $('#mill_div').show();
+        }else{
+          $('#recieved_from_div').show();
+          $('#mill_div').hide();
+        }
+    });
 
 
     {{-- ADD ROW --}}

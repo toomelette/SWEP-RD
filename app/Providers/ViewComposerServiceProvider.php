@@ -26,6 +26,10 @@ class ViewComposerServiceProvider extends ServiceProvider{
         // SUBMENU
         View::composer(['dashboard.user.create', 
                         'dashboard.user.edit'], 'App\Core\ViewComposers\SubmenuComposer');
+        
+
+        // MILLS
+        View::composer(['dashboard.sugar_order_of_payment.create',], 'App\Core\ViewComposers\MillComposer');
 
         
     }

@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
 
-class SugarOrderOfPayment extends Model{
-
+class SugarServices extends Model{
 
 
 	use Sortable;
 
-    protected $table = 'sgrlab_order_of_payment';
+    protected $table = 'sgrlab_sugar_services';
 
-    protected $dates = ['date', 'created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
-
 
 
 
@@ -25,12 +23,9 @@ class SugarOrderOfPayment extends Model{
     protected $attributes = [
 
         'slug' => '',
-        'sample_no' => '',
-        'sugar_sample' => '',
-        'date' => null,
-        'address' => '',
-        'received_from' => '',
-        'received_by' => '',
+        'sugar_service_id' => '',
+        'name' => '',
+        'price' => 0.00,
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -40,7 +35,5 @@ class SugarOrderOfPayment extends Model{
 
     ];
     
-
-
     
 }
