@@ -80,27 +80,27 @@
                 <div class="form-group" style="margin-left: 15px;">
 
                   <label>
-                    <input type="checkbox" class="minimal" name="test[]" value="1">
+                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="1aaa">
                     &nbsp; Services 1
                   </label>
                   <br>
                   <label>
-                    <input type="checkbox" class="minimal" name="test[]" value="2">
+                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="2aaa">
                     &nbsp; Services 2
                   </label>
                   <br>
                   <label>
-                    <input type="checkbox" class="minimal" name="test[]" value="3">
+                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="3aaa">
                     &nbsp; Services 3
                   </label>
                   <br>
                   <label>
-                    <input type="checkbox" class="minimal" name="test[]" value="4">
+                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="4aaa">
                     &nbsp; Services 4
                   </label>
                   <br>
                   <label>
-                    <input type="checkbox" class="minimal" name="test[]" value="5">
+                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="5aaa">
                     &nbsp; Services 5
                   </label>
                   <br>
@@ -132,10 +132,10 @@
 
 @section('modals')
 
-  @if(Session::has('SOOP_CREATE_SUCCESS'))
+  @if(Session::has('SUGAR_OOP_CREATE_SUCCESS'))
 
-    {!! __html::modal(
-      'soop_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('SOOP_CREATE_SUCCESS')
+    {!! __html::modal_print(
+      'soop_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('SUGAR_OOP_CREATE_SUCCESS'), route('dashboard.sugar_order_of_payment.show', Session::get('SUGAR_OOP_CREATE_SUCCESS_SLUG'))
     ) !!}
   
   @endif
@@ -151,7 +151,7 @@
 
   <script type="text/javascript">
 
-    @if(Session::has('SOOP_CREATE_SUCCESS'))
+    @if(Session::has('SUGAR_OOP_CREATE_SUCCESS'))
       $('#soop_create').modal('show');
     @endif
 
@@ -167,12 +167,15 @@
         if(val == "CT1001"){ 
           $('#recieved_from_div').show();
           $('#mill_div').hide();
+          $('#mill_div :input').attr("disabled", true);
         }else if(val == "CT1002"){
           $('#recieved_from_div').hide();
+          $('#recieved_from_div :input').attr("disabled", true);
           $('#mill_div').show();
         }else{
           $('#recieved_from_div').show();
           $('#mill_div').hide();
+          $('#mill_div :input').attr("disabled", true);
         }
     });
 
@@ -199,9 +202,7 @@
         $("#table_body").append($(content));
       });
     });
-
-
-
+    
   </script>
     
 @endsection

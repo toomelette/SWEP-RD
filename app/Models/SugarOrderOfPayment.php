@@ -12,7 +12,7 @@ class SugarOrderOfPayment extends Model{
 
 	use Sortable;
 
-    protected $table = 'sgrlab_order_of_payment';
+    protected $table = 'sgrlab_sugar_order_of_payment';
 
     protected $dates = ['date', 'created_at', 'updated_at'];
     

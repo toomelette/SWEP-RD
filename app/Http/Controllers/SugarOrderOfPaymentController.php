@@ -5,10 +5,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SugarOrderOfPayment\SugarOrderOfPaymentFormRequest;
 use App\Http\Requests\SugarOrderOfPayment\SugarOrderOfPaymentFilterRequest;
+use App\Core\Services\SugarOrderOfPaymentService;
+
 
 
 class SugarOrderOfPaymentController extends Controller{
 
+
+
+    protected $sugar_oop;
+
+
+
+
+    public function __construct(SugarOrderOfPaymentService $sugar_oop){
+
+        $this->sugar_oop = $sugar_oop;
+
+    }
 
 
 
@@ -18,6 +32,7 @@ class SugarOrderOfPaymentController extends Controller{
         dd('List');
 
     }
+
 
     
 
@@ -29,9 +44,10 @@ class SugarOrderOfPaymentController extends Controller{
 
    
 
+
     public function store(SugarOrderOfPaymentFormRequest $request){
         
-        dd($request->test);
+        return $this->sugar_oop->store($request);
 
     }
  

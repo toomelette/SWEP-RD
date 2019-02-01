@@ -26,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider {
 
 
 		$this->app->bind('App\Core\Interfaces\MillInterface', 'App\Core\Repositories\MillRepository');
+		$this->app->bind('App\Core\Interfaces\SugarOrderOfPaymentInterface', 'App\Core\Repositories\SugarOrderOfPaymentRepository');
 		
 	}
 
