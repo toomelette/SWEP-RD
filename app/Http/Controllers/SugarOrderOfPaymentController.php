@@ -31,7 +31,7 @@ class SugarOrderOfPaymentController extends Controller{
 
     public function store(SugarOrderOfPaymentFormRequest $request){
         
-        dd('Store');
+        dd($request->test);
 
     }
  

@@ -66,59 +66,49 @@
           </div>
 
 
-          {{-- USER MENU DYNAMIC TABLE GRID --}}
-          <div class="col-md-12" style="padding-top:50px;">
+
+          {{-- Sugar Services --}}
+          <div class="col-md-12" style="padding-top:20px;">
             <div class="box box-solid">
-              <div class="box-header with-border">
-                <h3 class="box-title">Kind of Analysis</h3>
-                <button id="add_row" type="button" class="btn btn-sm bg-green pull-right">Add Row &nbsp;<i class="fa fw fa-plus"></i></button>
+
+              <div class="box-header">
+                <h3 class="box-title">Kind of Analysis *</h3>
               </div>
-              
-              <div class="box-body no-padding">
+
+              <div class="box-body">
                 
-                <table class="table table-bordered">
+                <div class="form-group" style="margin-left: 15px;">
 
-                  <tr>
-                    <th>Services *</th>
-                    <th>Price</th>
-                    <th style="width: 40px"></th>
-                  </tr>
+                  <label>
+                    <input type="checkbox" class="minimal" name="test[]" value="1">
+                    &nbsp; Services 1
+                  </label>
+                  <br>
+                  <label>
+                    <input type="checkbox" class="minimal" name="test[]" value="2">
+                    &nbsp; Services 2
+                  </label>
+                  <br>
+                  <label>
+                    <input type="checkbox" class="minimal" name="test[]" value="3">
+                    &nbsp; Services 3
+                  </label>
+                  <br>
+                  <label>
+                    <input type="checkbox" class="minimal" name="test[]" value="4">
+                    &nbsp; Services 4
+                  </label>
+                  <br>
+                  <label>
+                    <input type="checkbox" class="minimal" name="test[]" value="5">
+                    &nbsp; Services 5
+                  </label>
+                  <br>
 
-                  <tbody id="table_body">
+                </div>
 
-
-                    @if(old('row'))
-
-                      @foreach(old('row') as $key => $value)
-
-                        <tr>
-
-                          <td>
-                            <div class="form-group">
-                              <input type="text" name="row[{{ $key }}][sugar_service_name]" class="form-control" placeholder="Name" value="{{ $value['sugar_service_name'] }}">
-                              <small class="text-danger">{{ $errors->first('row.'. $key .'.sugar_service_id') }}</small>
-                            </div>
-                          </td>
-
-
-                          <td></td>
-
-
-                          <td>
-                              <button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>
-                          </td>
-
-                        </tr>
-
-                      @endforeach
-
-                    @endif
-
-                    </tbody>
-                </table>
-               
               </div>
-
+                
             </div>
           </div>
 
