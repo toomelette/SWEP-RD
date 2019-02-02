@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
 
-class SugarServices extends Model{
+class SugarService extends Model{
 
 
 	use Sortable;

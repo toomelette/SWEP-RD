@@ -31,6 +31,7 @@ class SugarOrderOfPayment extends Model{
         'address' => '',
         'received_from' => '',
         'received_by' => '',
+        'total_price' => 0.00,
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -39,6 +40,17 @@ class SugarOrderOfPayment extends Model{
         'user_updated' => '',
 
     ];
+
+
+
+
+
+
+    /** RELATIONSHIPS **/ 
+    public function sugarAnalysisParameter() {
+        return $this->hasMany('App\Models\SugarAnalysisParameter','sample_no','sample_no');
+    }
+
     
 
 

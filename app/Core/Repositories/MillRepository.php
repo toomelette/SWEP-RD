@@ -40,5 +40,25 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
+    public function getByMillId($mill_id){
+
+        $mill = $this->cache->remember('mills:getByMillId:' . $mill_id, 240, function() use ($mill_id){
+            return $this->mill->select('address', 'name')
+                              ->where('mill_id', $mill_id)
+                              ->get();
+        }); 
+        
+        if(empty($mill)){
+            abort(404);
+        }
+
+        return $mill;
+
+    }
+
+
+
+
+
 
 }

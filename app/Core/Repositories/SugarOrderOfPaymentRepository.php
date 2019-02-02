@@ -26,7 +26,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function store($request){
+    public function store($request, $total_price){
 
         $sugar_oop = new SugarOrderOfPayment;
         $sugar_oop->slug = $this->str->random(16);
@@ -36,6 +36,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oop->address = $request->address;
         $sugar_oop->received_from = $request->received_from;
         $sugar_oop->received_by = $request->received_by;
+        $sugar_oop->total_price = $total_price;
         $sugar_oop->created_at = $this->carbon->now();
         $sugar_oop->updated_at = $this->carbon->now();
         $sugar_oop->ip_created = request()->ip();

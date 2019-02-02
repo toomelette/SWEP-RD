@@ -17,7 +17,7 @@
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_order_of_payment.store') }}">
+      <form method="POST" action="{{ route('dashboard.sugar_order_of_payment.store') }}">
 
         <div class="box-body">
 
@@ -32,7 +32,7 @@
             {{-- IF WALK IN --}}
             <div class="col-md-4 no-padding" id="recieved_from_div">
               {!! __form::textbox(
-                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), ''
+                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
               ) !!}
             </div>
             
@@ -44,7 +44,7 @@
             </div>
 
             {!! __form::textbox(
-              '4', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
+              '4', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), 'data-transform="uppercase"'
             ) !!}
 
             <div class="col-md-12"></div>
@@ -58,59 +58,55 @@
             ) !!}
 
             {!! __form::textbox(
-              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample'), $errors->has('sugar_sample'), $errors->first('sugar_sample'), ''
+              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample'), $errors->has('sugar_sample'), $errors->first('sugar_sample'), 'data-transform="uppercase"'
             ) !!}
 
             <div class="col-md-12"></div>
 
-          </div>
+            {!! __form::textbox(
+              '4', 'received_by', 'text', 'Received By *', 'Received By', old('received_by'), $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
+            ) !!}
 
+          </div>
 
 
           {{-- Sugar Services --}}
-          <div class="col-md-12" style="padding-top:20px;">
+
+          <div class="col-md-12" style="padding:30px;">
             <div class="box box-solid">
-
-              <div class="box-header">
-                <h3 class="box-title">Kind of Analysis *</h3>
+              <div class="box-header with-border">
+                <h3 class="box-title">Services</h3>
               </div>
+              
+              <div class="box-body no-padding">
 
-              <div class="box-body">
-                
-                <div class="form-group" style="margin-left: 15px;">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                  <tr>  
+                  
+                    <td>
+                      <label>
+                        <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}">
+                        &nbsp; {{ $data->name }}
+                      </label>
+                    </td>
 
-                  <label>
-                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="1aaa">
-                    &nbsp; Services 1
-                  </label>
-                  <br>
-                  <label>
-                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="2aaa">
-                    &nbsp; Services 2
-                  </label>
-                  <br>
-                  <label>
-                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="3aaa">
-                    &nbsp; Services 3
-                  </label>
-                  <br>
-                  <label>
-                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="4aaa">
-                    &nbsp; Services 4
-                  </label>
-                  <br>
-                  <label>
-                    <input type="checkbox" class="minimal" name="sugar_service_id[]" value="5aaa">
-                    &nbsp; Services 5
-                  </label>
-                  <br>
+                    <td>Php {{ $data->price }}</td>
 
-                </div>
+                  </tr>
+                  @endforeach
+                </table>
 
-              </div>
-                
+              </div> 
             </div>
           </div>
+
+          
+
 
         </div>
 
@@ -156,8 +152,23 @@
     @endif
 
 
-    $('#recieved_from_div').show();
-    $('#mill_div').hide();
+    @if(old('customer_type') == "CT1001")
+      $( document ).ready(function() {
+        $('#recieved_from_div').show();
+        $('#mill_div').hide();
+        $('#mill_id').attr("disabled", true);
+      });
+    @elseif(old('customer_type') == "CT1002")
+      $( document ).ready(function() {
+        $('#mill_div').show();
+        $('#recieved_from_div').hide();
+      });
+    @else
+      $( document ).ready(function() {
+        $('#recieved_from_div').show();
+        $('#mill_div').hide();
+      });
+    @endif
 
 
     $(document).on("change", "#customer_type", function () {
@@ -167,41 +178,27 @@
         if(val == "CT1001"){ 
           $('#recieved_from_div').show();
           $('#mill_div').hide();
-          $('#mill_div :input').attr("disabled", true);
+          $('#mill_id').attr("disabled", true);
         }else if(val == "CT1002"){
-          $('#recieved_from_div').hide();
-          $('#recieved_from_div :input').attr("disabled", true);
           $('#mill_div').show();
+          $('#mill_id').removeAttr("disabled");
+          $('#recieved_from_div').hide();
         }else{
           $('#recieved_from_div').show();
           $('#mill_div').hide();
-          $('#mill_div :input').attr("disabled", true);
         }
     });
 
 
-    {{-- ADD ROW --}}
-    $(document).ready(function() {
-      $("#add_row").on("click", function() {
-        var i = $("#table_body").children().length;
-        var content ='<tr>' +
-                        '<td>' +
-                          '<div class="form-group">' +
-                            '<input type="text" name="row[' + i + '][sugar_service_id]" class="form-control" placeholder="Service">' +
-                          '</div>' +
-                        '</td>' +
+    {!! __js::ajax_select_to_input(
+      'mill_id', 'address', '/api/mill/input_mill_byMillId/', 'address'
+    ) !!}
 
-                        '<td>' +
-                        '</td>' +
 
-                        '<td>' +
-                            '<button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>' +
-                        '</td>' +
+    {!! __js::ajax_select_to_input(
+      'mill_id', 'received_from', '/api/mill/input_mill_byMillId/', 'name'
+    ) !!}
 
-                      '</tr>';
-        $("#table_body").append($(content));
-      });
-    });
     
   </script>
     

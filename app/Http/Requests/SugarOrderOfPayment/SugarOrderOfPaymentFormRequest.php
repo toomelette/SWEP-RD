@@ -25,11 +25,12 @@ class SugarOrderOfPaymentFormRequest extends FormRequest{
             
             'customer_type'=>'required|string|max:11',
             'received_from'=>'sometimes|required|string|max:90',
-            'mill_id'=>'sometimes|required|string|max:11',
+            'mill_id'=>'sometimes|required|string|max:45',
             'address'=>'required|string|max:255',
-            'sample_no'=>'required|string|max:45',
+            'sample_no'=>'required|string|max:45|unique:sgrlab_sugar_order_of_payment,sample_no',
             'date'=>'required|date_format:"m/d/Y"',
             'sugar_sample'=>'required|string|max:90',
+            'received_by'=>'required|string|max:90',
 
         ];
         
