@@ -25,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\SugarOrderOfPaymentInterface', 'App\Core\Repositories\SugarOrderOfPaymentRepository');
 		$this->app->bind('App\Core\Interfaces\SugarServiceInterface', 'App\Core\Repositories\SugarServiceRepository');
 		$this->app->bind('App\Core\Interfaces\SugarAnalysisParameterInterface', 'App\Core\Repositories\SugarAnalysisParameterRepository');
+		$this->app->bind('App\Core\Interfaces\SugarAnalysisInterface', 'App\Core\Repositories\SugarAnalysisRepository');
 		
 	}
 

@@ -32,6 +32,7 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
         $sa_parameter->sample_no = $sample_no;
         $sa_parameter->sugar_service_id = $sugar_service->sugar_service_id;
         $sa_parameter->sugar_service_name = $sugar_service->name;
+        $sa_parameter->price = $sugar_service->price;
         $sa_parameter->save();
 
         return $sa_parameter;

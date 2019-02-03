@@ -90,7 +90,8 @@
                   
                     <td>
                       <label>
-                        <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}">
+                        <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                        {{ is_array(old('sugar_service_id')) && in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
                         &nbsp; {{ $data->name }}
                       </label>
                     </td>

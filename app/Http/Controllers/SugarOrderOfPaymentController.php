@@ -13,14 +13,14 @@ class SugarOrderOfPaymentController extends Controller{
 
 
 
-    protected $sugar_oop;
+    protected $sugar_oop_service;
 
 
 
 
-    public function __construct(SugarOrderOfPaymentService $sugar_oop){
+    public function __construct(SugarOrderOfPaymentService $sugar_oop_service){
 
-        $this->sugar_oop = $sugar_oop;
+        $this->sugar_oop_service = $sugar_oop_service;
 
     }
 
@@ -47,7 +47,7 @@ class SugarOrderOfPaymentController extends Controller{
 
     public function store(SugarOrderOfPaymentFormRequest $request){
         
-        return $this->sugar_oop->store($request);
+        return $this->sugar_oop_service->store($request);
 
     }
  
@@ -75,6 +75,15 @@ class SugarOrderOfPaymentController extends Controller{
     public function destroy($slug){
         
         dd('Destroy');
+
+    }
+
+    
+
+
+    public function show($slug){
+        
+        return $this->sugar_oop_service->show($slug);
 
     }
 

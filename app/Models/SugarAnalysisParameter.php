@@ -21,6 +21,7 @@ class SugarAnalysisParameter extends Model{
         'sample_no' => '',
         'sugar_service_id' => '',
         'sugar_service_name' => '',
+        'price' => 0.00,
         'result' => '',
         'assesment' => '',
 

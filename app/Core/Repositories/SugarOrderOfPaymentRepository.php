@@ -54,4 +54,25 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
+    public function findBySlug($slug){
+
+        $sugar_oop = $this->cache->remember('sugar_order_of_payments:findBySlug:' . $slug, 240, function() use ($slug){
+            return $this->sugar_oop->where('slug', $slug)
+                              ->with(['sugarAnalysisParameter'])
+                              ->first();
+        }); 
+        
+        if(empty($sugar_oop)){
+            abort(404);
+        }
+
+        return $sugar_oop;
+
+    }
+
+
+
+
+
+
 }

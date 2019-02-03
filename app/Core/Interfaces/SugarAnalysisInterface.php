@@ -4,10 +4,8 @@ namespace App\Core\Interfaces;
  
 
 
-interface SugarOrderOfPaymentInterface {
+interface SugarAnalysisInterface {
 
 	public function store($request, $total_price);
-
-	public function findBySlug($slug);
 		
 }
