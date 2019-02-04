@@ -24,6 +24,8 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
 	public function subscribe($events){
 
 		$events->listen('sugar_oop.store', 'App\Core\Subscribers\SugarOrderOfPaymentSubscriber@onStore');
+        $events->listen('sugar_oop.update', 'App\Core\Subscribers\SugarOrderOfPaymentSubscriber@onUpdate');
+        $events->listen('sugar_oop.destroy', 'App\Core\Subscribers\SugarOrderOfPaymentSubscriber@onDestroy');
 
 	}
 
@@ -32,8 +34,36 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
 
     public function onStore($sugar_oop){
 
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_order_of_payments:fetch:*');
+
         $this->session->flash('SUGAR_OOP_CREATE_SUCCESS', 'Order of Payment has been successfully created!');
         $this->session->flash('SUGAR_OOP_CREATE_SUCCESS_SLUG', $sugar_oop->slug);
+
+    }
+
+
+
+
+    public function onUpdate($sugar_oop){
+
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_order_of_payments:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_order_of_payments:findBySlug:'. $sugar_oop->slug .'');
+
+        $this->session->flash('SUGAR_OOP_UPDATE_SUCCESS', 'Order of Payment has been successfully updated!');
+        $this->session->flash('SUGAR_OOP_UPDATE_SUCCESS_SLUG', $sugar_oop->slug);
+
+    }
+
+
+
+
+    public function onDestroy($sugar_oop){
+
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_order_of_payments:fetch:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_order_of_payments:findBySlug:'. $sugar_oop->slug .'');
+
+        $this->session->flash('SUGAR_OOP_DELETE_SUCCESS', 'Order of Payment has been successfully deleted!');
+        $this->session->flash('SUGAR_OOP_DELETE_SUCCESS_SLUG', $sugar_oop->slug);
 
     }
 

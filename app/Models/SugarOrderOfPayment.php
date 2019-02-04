@@ -51,8 +51,13 @@ class SugarOrderOfPayment extends Model{
         return $this->hasMany('App\Models\SugarAnalysisParameter','sample_no','sample_no');
     }
 
-    
 
+
+    public function sugarAnalysis() {
+        return $this->hasOne('App\Models\SugarAnalysis','sample_no','sample_no');
+    }
+
+    
 
     
 }

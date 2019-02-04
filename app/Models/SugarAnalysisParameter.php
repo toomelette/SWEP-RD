@@ -26,7 +26,23 @@ class SugarAnalysisParameter extends Model{
         'assesment' => '',
 
     ];
+
+
+
+
+    /** RELATIONSHIPS **/
+    public function sugarOrderOfPayment() {
+      return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
+    }
+
+
+
+
+    public function sugarAnalysis() {
+      return $this->belongsTo('App\Models\SugarAnalysis','sample_no','sample_no');
+    }
     
+
 
 
 }

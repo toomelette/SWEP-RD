@@ -36,6 +36,22 @@ class SugarOrderOfPaymentService extends BaseService{
 
 
 
+
+    public function fetch($request){
+
+        $sugar_oops = $this->sugar_oop_repo->fetch($request);
+
+        $request->flash();
+        
+        return view('dashboard.sugar_order_of_payment.index')->with('sugar_oops', $sugar_oops);
+
+    }
+
+
+
+
+
+
     public function store($request){
 
         $total_price = $this->getTotalPrice($request);
@@ -55,12 +71,60 @@ class SugarOrderOfPaymentService extends BaseService{
 
 
 
+
+    public function update($request, $slug){
+
+        $total_price = $this->getTotalPrice($request);
+        
+        $sugar_oop = $this->sugar_oop_repo->update($request, $slug, $total_price);    
+
+        $this->sa_repo->store($request, $total_price);
+
+        $this->storeSugarAnalysisParameter($request);
+
+        $this->event->fire('sugar_oop.update', $sugar_oop);
+        return redirect()->route('dashboard.sugar_order_of_payment.index');
+
+    }
+
+
+
+
+
+
+    public function edit($slug){
+        
+        $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
+        return view('dashboard.sugar_order_of_payment.edit')->with('sugar_oop', $sugar_oop);
+
+    }
+
+
+
+
+
+
     public function show($slug){
         
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
         return view('dashboard.sugar_order_of_payment.show')->with('sugar_oop', $sugar_oop);
 
     }
+
+
+
+
+
+
+    public function delete($slug){
+
+        $sugar_oop = $this->sugar_oop_repo->destroy($slug);
+
+        $this->event->fire('sugar_oop.destroy', $sugar_oop);
+        return redirect()->back();
+
+    }
+
 
 
 

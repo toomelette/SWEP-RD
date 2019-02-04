@@ -45,6 +45,22 @@ class SugarAnalysis extends Model{
 
     ];
 
+
+
+
+
+
+    /** RELATIONSHIPS **/ 
+    public function sugarAnalysisParameter() {
+        return $this->hasMany('App\Models\SugarAnalysisParameter','sample_no','sample_no');
+    }
+
+
+
+    public function sugarOrderOfPayment() {
+        return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
+    }
+
     
 
 }

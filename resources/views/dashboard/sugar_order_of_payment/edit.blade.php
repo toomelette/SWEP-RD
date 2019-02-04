@@ -1,9 +1,18 @@
+<?php
+  
+  $ss_id_array = $sugar_oop->sugarAnalysisParameter->pluck('sugar_service_id')->toArray();
+
+?>
+
 @extends('layouts.admin-master')
 
 @section('content')
 
 <section class="content-header">
-    <h1>Create Order Of Payment</h1>
+    <h1>Edit Order Of Payment</h1>
+    <div class="pull-right" style="margin-top: -25px;">
+      {!! __html::back_button(['dashboard.sugar_order_of_payment.index', 'dashboard.sugar_order_of_payment.show']) !!}
+    </div>
 </section>
 
 <section class="content">
@@ -17,54 +26,56 @@
         </div> 
       </div>
       
-      <form method="POST" action="{{ route('dashboard.sugar_order_of_payment.store') }}">
+      <form method="POST" action="{{ route('dashboard.sugar_order_of_payment.update', $sugar_oop->slug) }}">
 
         <div class="box-body">
 
           <div class="col-md-12">
-                  
+                    
             @csrf
 
+            <input name="_method" value="PUT" type="hidden">
+
             {!! __form::select_static(
-              '4', 'customer_type', 'Customer Type *', old('customer_type'), ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
+              '4', 'customer_type', 'Customer Type *', old('customer_type') ? old('customer_type') : optional($sugar_oop->sugarAnalysis)->customer_type, ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
             ) !!}
 
             {{-- IF WALK IN --}}
             <div class="col-md-4 no-padding" id="recieved_from_div">
               {!! __form::textbox(
-                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
+                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from') ? old('received_from') : $sugar_oop->received_from, $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
               ) !!}
             </div>
             
             {{-- IF MILL --}}
             <div class="col-md-4 no-padding" id="mill_div">
               {!! __form::select_dynamic(
-                '12', 'mill_id', 'Milling Company *', old('mill_id'), $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
+                '12', 'mill_id', 'Milling Company *', old('mill_id') ? old('mill_id') : optional($sugar_oop->sugarAnalysis)->mill_id, $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
               ) !!}
             </div>
 
             {!! __form::textbox(
-              '4', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
+              '4', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $sugar_oop->address, $errors->has('address'), $errors->first('address'), ''
             ) !!}
 
             <div class="col-md-12"></div>
 
             {!! __form::textbox(
-              '4', 'sample_no', 'text', 'Sample No. *', 'Sample No.', old('sample_no'), $errors->has('sample_no'), $errors->first('sample_no'), 'data-transform="uppercase"'
+              '4', 'sample_no', 'text', 'Sample No. *', 'Sample No.', old('sample_no') ? old('sample_no') : $sugar_oop->sample_no, $errors->has('sample_no'), $errors->first('sample_no'), 'data-transform="uppercase"'
             ) !!}
 
             {!! __form::datepicker(
-              '4', 'date',  'Date Received *', old('date'), $errors->has('date'), $errors->first('date')
+              '4', 'date',  'Date Received *', old('date') ? old('date') : __dataType::date_parse($sugar_oop->date), $errors->has('date'), $errors->first('date')
             ) !!}
 
             {!! __form::textbox(
-              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample'), $errors->has('sugar_sample'), $errors->first('sugar_sample'), 'data-transform="uppercase"'
+              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample') ? old('sugar_sample') : $sugar_oop->sugar_sample, $errors->has('sugar_sample'), $errors->first('sugar_sample'), 'data-transform="uppercase"'
             ) !!}
 
             <div class="col-md-12"></div>
 
             {!! __form::textbox(
-              '4', 'received_by', 'text', 'Received By *', 'Received By', old('received_by'), $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
+              '4', 'received_by', 'text', 'Received By *', 'Received By', old('received_by') ? old('received_by') : $sugar_oop->received_by, $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
             ) !!}
 
           </div>
@@ -87,14 +98,28 @@
                   </tr>
                   @foreach ($global_sugar_service_all as $data)
                   <tr>  
-                  
-                    <td>
-                      <label>
-                        <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
-                        {{ is_array(old('sugar_service_id')) && in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
-                        &nbsp; {{ $data->name }}
-                      </label>
-                    </td>
+
+                    @if(is_array(old('sugar_service_id')))
+
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+
+                    @else
+
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $ss_id_array) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+
+                    @endif
 
                     <td>Php {{ $data->price }}</td>
 
@@ -106,8 +131,7 @@
             </div>
           </div>
 
-          
-
+        
 
         </div>
 
@@ -153,13 +177,13 @@
     @endif
 
 
-    @if(old('customer_type') == "CT1001")
+    @if(old('customer_type') == "CT1001" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1001")
       $( document ).ready(function() {
         $('#recieved_from_div').show();
         $('#mill_div').hide();
         $('#mill_id').attr("disabled", true);
       });
-    @elseif(old('customer_type') == "CT1002")
+    @elseif(old('customer_type') == "CT1002" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1002")
       $( document ).ready(function() {
         $('#mill_div').show();
         $('#recieved_from_div').hide();

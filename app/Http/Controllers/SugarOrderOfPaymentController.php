@@ -29,7 +29,7 @@ class SugarOrderOfPaymentController extends Controller{
 
 	 public function index(SugarOrderOfPaymentFilterRequest $request){
         
-        dd('List');
+        return $this->sugar_oop_service->fetch($request);
 
     }
 
@@ -56,7 +56,7 @@ class SugarOrderOfPaymentController extends Controller{
 
     public function edit($slug){
         
-        dd('Edit');
+        return $this->sugar_oop_service->edit($slug);
 
     }
 
@@ -65,7 +65,7 @@ class SugarOrderOfPaymentController extends Controller{
 
     public function update(SugarOrderOfPaymentFormRequest $request, $slug){
         
-        dd('Update');
+        return $this->sugar_oop_service->update($request, $slug);
 
     }
 
@@ -74,7 +74,7 @@ class SugarOrderOfPaymentController extends Controller{
 
     public function destroy($slug){
         
-        dd('Destroy');
+        return $this->sugar_oop_service->delete($slug);
 
     }
 
