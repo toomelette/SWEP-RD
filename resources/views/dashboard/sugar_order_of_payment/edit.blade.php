@@ -151,30 +151,10 @@
 
 
 
-@section('modals')
-
-  @if(Session::has('SUGAR_OOP_CREATE_SUCCESS'))
-
-    {!! __html::modal_print(
-      'soop_create', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('SUGAR_OOP_CREATE_SUCCESS'), route('dashboard.sugar_order_of_payment.show', Session::get('SUGAR_OOP_CREATE_SUCCESS_SLUG'))
-    ) !!}
-  
-  @endif
-
-@endsection 
-
-
-
-
-
 
 @section('scripts')
 
   <script type="text/javascript">
-
-    @if(Session::has('SUGAR_OOP_CREATE_SUCCESS'))
-      $('#soop_create').modal('show');
-    @endif
 
 
     @if(old('customer_type') == "CT1001" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1001")

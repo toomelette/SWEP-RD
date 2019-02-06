@@ -29,7 +29,11 @@ class SugarAnalysisService extends BaseService{
 
     public function fetch($request){
 
-        return dd('List');
+        $sugar_analysis = $this->sa_repo->fetch($request);
+
+        $request->flash();
+        
+        return view('dashboard.sugar_analysis.index')->with('sugar_analysis', $sugar_analysis);
 
     }
 
@@ -40,7 +44,8 @@ class SugarAnalysisService extends BaseService{
 
     public function edit($slug){
 
-        return dd('Edit');
+        $sa = $this->sa_repo->findBySlug($slug);  
+        return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
 
     }
 
@@ -51,7 +56,10 @@ class SugarAnalysisService extends BaseService{
 
     public function update($request, $slug){
 
-        return dd('Update');
+        $sa = $this->sa_repo->updateResult($request, $slug);
+
+        $this->event->fire('sugar_analysis.update', $sa);
+        return redirect()->route('dashboard.sugar_analysis.index');
 
     }
 
