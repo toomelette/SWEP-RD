@@ -35,7 +35,7 @@ class SugarServiceSubscriber extends BaseSubscriber{
     public function onStore(){
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:fetch:*');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll');
 
         $this->session->flash('SUGAR_SERVICE_CREATE_SUCCESS', 'Laboratory Service has been successfully created!');
 
@@ -48,7 +48,7 @@ class SugarServiceSubscriber extends BaseSubscriber{
     public function onUpdate($sugar_service){
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:fetch:*');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySlug:'. $sugar_service->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySugarServiceId:'. $sugar_service->sugar_service_id .'');
 
@@ -62,7 +62,7 @@ class SugarServiceSubscriber extends BaseSubscriber{
     public function onDestroy($sugar_service){
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:fetch:*');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySlug:'. $sugar_service->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySugarServiceId:'. $sugar_service->sugar_service_id .'');
 

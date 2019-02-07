@@ -20,20 +20,16 @@
       <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.store') }}">
 
         <div class="box-body">
-
-          <div class="col-md-12">
                   
-            @csrf    
+          @csrf    
 
-            {!! __form::textbox(
-              '3', 'name', 'text', 'Name *', 'Name', old('name'), $errors->has('name'), $errors->first('name'), ''
-            ) !!}
+          {!! __form::textbox(
+            '3', 'name', 'text', 'Name *', 'Name', old('name'), $errors->has('name'), $errors->first('name'), ''
+          ) !!}
 
-            {!! __form::textbox_numeric(
-              '3', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
-            ) !!}
-
-          </div>
+          {!! __form::textbox_numeric(
+            '3', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
+          ) !!}
 
         </div>
 
