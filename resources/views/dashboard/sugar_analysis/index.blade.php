@@ -43,6 +43,7 @@
             <th>@sortablelink('sample_no', 'Sample No.')</th>
             <th>@sortablelink('origin', 'Origin')</th>
             <th>@sortablelink('week_ending', 'Week Ending')</th>
+            <th>@sortablelink('status', 'Status')</th>
             <th style="width: 150px">Action</th>
           </tr>
           @foreach($sugar_analysis as $data) 
@@ -50,6 +51,13 @@
               <td>{{ $data->sample_no }}</td>
               <td>{{ $data->origin }}</td>
               <td>{{ __dataType::date_parse($data->week_ending, 'F d,Y') }}</td>
+              <td>
+                @if($data->status == "PENDING")
+                  <span class="label label-warning">PENDING</span>
+                @elseif($data->status == "ANALYZED")
+                  <span class="label label-success">ANALYZED</span> 
+                @endif
+              </td>
               <td>
                 <a href="{{ route('dashboard.sugar_analysis.edit', $data->slug) }}" type="button" class="btn btn-default">  Fill Results
                 </a>

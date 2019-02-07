@@ -51,6 +51,16 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::get('/sugar_analysis/{slug}/edit', 'SugarAnalysisController@edit')->name('sugar_analysis.edit');
 	Route::put('/sugar_analysis/update/{slug}', 'SugarAnalysisController@update')->name('sugar_analysis.update');
 	Route::get('/sugar_analysis/reports', 'SugarAnalysisController@report')->name('sugar_analysis.report');
+
+
+	/** MILLS **/
+	Route::resource('mill', 'MillController');
+
+
+	/** SUGAR LABORATORY SERVICES **/
+	Route::resource('sugar_service', 'SugarServiceController');
+
+
 	
 });
 

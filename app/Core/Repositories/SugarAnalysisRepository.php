@@ -70,6 +70,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date_analyzed = null;
         $sugar_analysis->description = '';
         $sugar_analysis->total_price = $total_price;
+        $sugar_analysis->status = 'PENDING';
         $sugar_analysis->created_at = $this->carbon->now();
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_created = request()->ip();
@@ -96,12 +97,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date = $this->__dataType->date_parse($request->date);
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
-        $sugar_analysis->quantity = 0.00;
-        $sugar_analysis->week_ending = null;
-        $sugar_analysis->date_sampled = null;
-        $sugar_analysis->date_submitted = null;
-        $sugar_analysis->date_analyzed = null;
-        $sugar_analysis->description = '';
         $sugar_analysis->total_price = $total_price;
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_updated = request()->ip();
@@ -126,6 +121,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date_analyzed = $this->__dataType->date_parse($request->date_analyzed);
         $sugar_analysis->quantity = $this->__dataType->string_to_num($request->quantity);
         $sugar_analysis->description = $request->description;
+        $sugar_analysis->status = "ANALYZED";
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_updated = request()->ip();
         $sugar_analysis->user_updated = $this->auth->user()->user_id;
@@ -155,7 +151,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
     public function populate($model){
 
-        return $model->select('sample_no', 'origin', 'week_ending', 'slug')
+        return $model->select('sample_no', 'origin', 'week_ending', 'status', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
                      ->paginate(10);

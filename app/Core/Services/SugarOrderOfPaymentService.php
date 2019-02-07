@@ -78,11 +78,14 @@ class SugarOrderOfPaymentService extends BaseService{
         
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
 
+        // Sugar Analysis
         $this->sa_repo->updateOrderOfPayment($request, $sugar_oop->sugarAnalysis->slug, $total_price);
 
-        $this->storeSugarAnalysisParameter($request);
-
+        // Sugar OOP
         $this->sugar_oop_repo->update($request, $sugar_oop, $total_price);
+
+        // Sugar Analysis Parameters
+        $this->storeSugarAnalysisParameter($request);
 
         $this->event->fire('sugar_oop.update', $sugar_oop);
         return redirect()->route('dashboard.sugar_order_of_payment.index');

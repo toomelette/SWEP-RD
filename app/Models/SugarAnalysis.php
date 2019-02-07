@@ -36,6 +36,7 @@ class SugarAnalysis extends Model{
         'date_analyzed' => null,
         'description' => '',
         'total_price' => 0.00,
+        'status' => '',
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -44,7 +45,6 @@ class SugarAnalysis extends Model{
         'user_updated' => '',
 
     ];
-
 
 
 
@@ -60,6 +60,7 @@ class SugarAnalysis extends Model{
     public function sugarOrderOfPayment() {
         return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
     }
+
 
     
 
