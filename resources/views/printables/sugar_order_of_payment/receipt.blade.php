@@ -28,12 +28,18 @@
       margin-bottom: 15px;
       
     }
+      
+    .std_font_size{
+ 
+      font-size: 12px;
+      
+    }
 
   </style>
 
 </head> 
   
-<body onload="window.print();" onafterprint="window.close()">
+<body onload="window.print();" onafterprint="window.close()" style="padding:5px;">
 
   <div class="wrapper" style="overflow:hidden !important;">
 
@@ -52,22 +58,22 @@
     {{-- Fields --}}
     <div class="row" style="padding-bottom: 10px;">
 
-      <div class="col-sm-8">
+      <div class="col-sm-8" style="margin-bottom: 15px;">
         &nbsp;
       </div>
 
       <div class="col-sm-4">
-        <div class="col-sm-3">
-          <p style="font-size:13px;">Date:</p>
+        <div class="col-sm-3 std_font_size">
+          Date:
         </div>
-        <div class="col-sm-9" style="border-bottom: solid 1px; font-size: 11px; font-weight: bold;">
+        <div class="col-sm-9 std_div">
           {{ __dataType::date_parse($sugar_oop->date, 'F d,Y') }}
         </div>
       </div>
 
       <div class="col-sm-6">
-        <div class="col-sm-5">
-          <p style="font-size:13px;">Received From:</p>
+        <div class="col-sm-5 std_font_size">
+          Received From:
         </div>
         <div class="col-sm-7 std_div no-padding">
           {{ $sugar_oop->received_from }}
@@ -75,8 +81,8 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="col-sm-5">
-          <p style="font-size:13px;">Address:</p>
+        <div class="col-sm-5 std_font_size">
+          Address:
         </div>
         <div class="col-sm-7 std_div no-padding" >
           {{ $sugar_oop->address }}
@@ -84,8 +90,8 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="col-sm-5">
-          <p style="font-size:13px;">Kind of Sample:</p>
+        <div class="col-sm-5 std_font_size">
+          Kind of Sample:
         </div>
         <div class="col-sm-7 std_div no-padding" >
           {{ $sugar_oop->sugar_sample }}
@@ -93,8 +99,8 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="col-sm-5">
-          <p style="font-size:13px;">Entry Number:</p>
+        <div class="col-sm-5 std_font_size">
+          Entry Number:
         </div>
         <div class="col-sm-7 std_div no-padding">
           {{ $sugar_oop->sample_no }}
@@ -102,8 +108,8 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="col-sm-5">
-          <p style="font-size:13px;">Kind of Analysis:</p>
+        <div class="col-sm-5 std_font_size">
+          Kind of Analysis:
         </div>
         <div class="col-sm-7 std_div no-padding">
           @foreach ($sugar_oop->sugarAnalysisParameter as $data)
@@ -120,22 +126,22 @@
     {{-- Body --}}
     <div class="row">
 
-      <div class="col-sm-12" style="text-indent: 5%;">
+      <div class="col-sm-12 std_font_size" style="text-indent: 5%;">
         <p>Please pay to Sugar Regulatory Administration at our Treasury Division, Singcang, Bacolod City, the amount of </p>
       </div>
 
-      <div class="col-sm-12 std_div" style="margin-bottom: 20px;">
+      <div class="col-sm-12 std_div" style="margin-bottom: 20px; text-align: center;">
         {{ __dataType::num_to_words($sugar_oop->total_price) }}
       </div>
 
-      <div class="col-sm-12" style="margin-bottom: 10px;">
+      <div class="col-sm-12 std_font_size" style="margin-bottom: 10px;">
         <p style="font-weight: bold;">
           Pesos (PhP <span style="text-decoration: underline;">{{ number_format($sugar_oop->total_price, 2) }}</span>)
         </p>
       </div>
 
-      <div class="col-sm-12" style="margin-bottom: 20px;">
-        Note: No report of analysis will be release unless the amount due has been pain in advance, either on the time of sample submission, or before the report of the analysis is claimed. 
+      <div class="col-sm-12 std_font_size" style="margin-bottom: 20px;">
+        Note: No report of analysis will be release unless the amount due has been paid in advance, either on the time of sample submission, or before the report of the analysis is claimed. 
       </div>
 
     </div>
@@ -153,8 +159,8 @@
 
 
       <div class="col-sm-6" style="margin-bottom: 20px;">
-        <div class="col-sm-4">
-          <p style="font-size:13px;">Received by:</p>
+        <div class="col-sm-4 std_font_size">
+          Received by:
         </div>
         <div class="col-sm-8 std_div">
           {{ $sugar_oop->received_by }}
@@ -162,10 +168,10 @@
       </div>
 
 
-      <div class="col-sm-12">
+      <div class="col-sm-12 no-padding">
         <div class="col-sm-5" >
-          <div class="col-sm-4">
-            <p style="font-size:13px;">OR. No.</p>
+          <div class="col-sm-4 std_font_size">
+            OR. No.
           </div>
           <div class="col-sm-8 std_div">
             &nbsp;
@@ -174,10 +180,10 @@
       </div>
 
 
-      <div class="col-sm-12">
+      <div class="col-sm-12 no-padding">
         <div class="col-sm-5" >
-          <div class="col-sm-4">
-            <p style="font-size:13px;">Date:</p>
+          <div class="col-sm-4 std_font_size">
+            Date:
           </div>
           <div class="col-sm-8 std_div">
             &nbsp;
