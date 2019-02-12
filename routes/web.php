@@ -44,6 +44,7 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** SUGAR ORDER OF PAYMENT **/
 	Route::resource('sugar_order_of_payment', 'SugarOrderOfPaymentController');
+	Route::get('/sugar_order_of_payment/print/{slug}', 'SugarOrderOfPaymentController@print')->name('sugar_order_of_payment.print');
 
 
 	/** SUGAR ANALYSIS **/

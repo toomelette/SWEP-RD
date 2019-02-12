@@ -87,6 +87,15 @@ class SugarOrderOfPaymentController extends Controller{
 
     }
 
+    
+
+
+    public function print($slug){
+        
+        return $this->sugar_oop_service->print($slug);
+
+    }
+
 
 
     

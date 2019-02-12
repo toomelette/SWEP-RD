@@ -54,7 +54,7 @@
             ) !!}
 
             {!! __form::datepicker(
-              '4', 'date',  'Date Received *', old('date'), $errors->has('date'), $errors->first('date')
+              '4', 'date',  'Date Received *', old('date') ? old('date') : Carbon::now()->format('m/d/Y'), $errors->has('date'), $errors->first('date')
             ) !!}
 
             {!! __form::textbox(

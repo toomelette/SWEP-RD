@@ -21,25 +21,21 @@
 
         <div class="box-body">
 
-          <div class="col-md-12">
+          <input name="_method" value="PUT" type="hidden">
+                
+          @csrf    
 
-            <input name="_method" value="PUT" type="hidden">
-                  
-            @csrf    
+          {!! __form::textbox(
+            '2', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id') ? old('mill_id') : $mill->mill_id, $errors->has('mill_id'), $errors->first('mill_id'), ''
+          ) !!}
 
-            {!! __form::textbox(
-              '2', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id') ? old('mill_id') : $mill->mill_id, $errors->has('mill_id'), $errors->first('mill_id'), ''
-            ) !!}
+          {!! __form::textbox(
+            '5', 'name', 'text', 'Company Name *', 'Company Name', old('name') ? old('name') : $mill->name, $errors->has('name'), $errors->first('name'), ''
+          ) !!}    
 
-            {!! __form::textbox(
-              '5', 'name', 'text', 'Company Name *', 'Company Name', old('name') ? old('name') : $mill->name, $errors->has('name'), $errors->first('name'), ''
-            ) !!}    
-
-            {!! __form::textbox(
-              '5', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $mill->address, $errors->has('address'), $errors->first('address'), ''
-            ) !!}
-
-          </div>
+          {!! __form::textbox(
+            '5', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $mill->address, $errors->has('address'), $errors->first('address'), ''
+          ) !!}
 
         </div>
 

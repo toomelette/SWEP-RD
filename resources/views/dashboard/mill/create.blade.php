@@ -20,24 +20,20 @@
       <form method="POST" autocomplete="off" action="{{ route('dashboard.mill.store') }}">
 
         <div class="box-body">
-
-          <div class="col-md-12">
                   
-            @csrf    
+          @csrf    
 
-            {!! __form::textbox(
-              '2', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id'), $errors->has('mill_id'), $errors->first('mill_id'), ''
-            ) !!}
+          {!! __form::textbox(
+            '2', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id'), $errors->has('mill_id'), $errors->first('mill_id'), ''
+          ) !!}
 
-            {!! __form::textbox(
-              '5', 'name', 'text', 'Company Name *', 'Company Name', old('name'), $errors->has('name'), $errors->first('name'), ''
-            ) !!}    
+          {!! __form::textbox(
+            '5', 'name', 'text', 'Company Name *', 'Company Name', old('name'), $errors->has('name'), $errors->first('name'), ''
+          ) !!}    
 
-            {!! __form::textbox(
-              '5', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
-            ) !!}
-
-          </div>
+          {!! __form::textbox(
+            '5', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
+          ) !!}
 
         </div>
 

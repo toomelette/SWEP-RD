@@ -16,6 +16,7 @@
     <div class="box-header with-border">
       <h3 class="box-title">Details</h3>
       <div class="box-tools">
+        <a href="{{ route('dashboard.sugar_order_of_payment.print', $sugar_oop->slug) }}" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Print</a>&nbsp;
         <a href="{{ route('dashboard.sugar_order_of_payment.edit', $sugar_oop->slug) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
       </div>
     </div>

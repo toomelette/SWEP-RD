@@ -134,6 +134,18 @@ class SugarOrderOfPaymentService extends BaseService{
 
 
 
+
+    public function print($slug){
+        
+        $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
+        return view('printables.sugar_order_of_payment.receipt')->with('sugar_oop', $sugar_oop);
+
+    }
+
+
+
+
+
     // UTILS
     private function getTotalPrice($request){
 
