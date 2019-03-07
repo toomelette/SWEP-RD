@@ -26,7 +26,7 @@ class SugarOrderOfPayment extends Model{
 
         'slug' => '',
         'sample_no' => '',
-        'sugar_sample' => '',
+        'sugar_sample_id' => '',
         'date' => null,
         'address' => '',
         'received_from' => '',
@@ -55,6 +55,12 @@ class SugarOrderOfPayment extends Model{
 
     public function sugarAnalysis() {
         return $this->hasOne('App\Models\SugarAnalysis','sample_no','sample_no');
+    }
+
+
+
+    public function sugarSample() {
+        return $this->hasOne('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
     }
 
     

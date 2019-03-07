@@ -68,8 +68,8 @@
               '4', 'date',  'Date Received *', old('date') ? old('date') : __dataType::date_parse($sugar_oop->date), $errors->has('date'), $errors->first('date')
             ) !!}
 
-            {!! __form::textbox(
-              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample') ? old('sugar_sample') : $sugar_oop->sugar_sample, $errors->has('sugar_sample'), $errors->first('sugar_sample'), 'data-transform="uppercase"'
+            {!! __form::select_dynamic(
+              '4', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
             ) !!}
 
             <div class="col-md-12"></div>

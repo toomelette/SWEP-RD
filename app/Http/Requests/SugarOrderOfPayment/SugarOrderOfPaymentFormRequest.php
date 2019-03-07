@@ -29,7 +29,7 @@ class SugarOrderOfPaymentFormRequest extends FormRequest{
             'address'=>'required|string|max:255',
             'sample_no'=>'required|string|max:11|unique:sgrlab_sugar_order_of_payment,sample_no,'.$this->route('sugar_order_of_payment').',slug',
             'date'=>'required|date_format:"m/d/Y"',
-            'sugar_sample'=>'required|string|max:90',
+            'sugar_sample_id'=>'required|string|max:11',
             'received_by'=>'required|string|max:90',
 
         ];

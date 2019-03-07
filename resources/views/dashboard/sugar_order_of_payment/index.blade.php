@@ -42,7 +42,7 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('sample_no', 'Sample No.')</th>
-            <th>@sortablelink('sugar_sample', 'Kind of Sample')</th>
+            <th>@sortablelink('sugar_sample_id', 'Kind of Sample')</th>
             <th>@sortablelink('received_from', 'Received From')</th>
             <th>@sortablelink('date', 'Date')</th>
             <th>@sortablelink('received_by', 'Received By')</th>
@@ -51,7 +51,7 @@
           @foreach($sugar_oops as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td>{{ $data->sample_no }}</td>
-              <td>{{ $data->sugar_sample }}</td>
+              <td>{{ optional($data->sugarSample)->name }}</td>
               <td>{{ $data->received_from }}</td>
               <td>{{ __dataType::date_parse($data->date, 'F d,Y') }}</td>
               <td>{{ $data->received_by }}</td>

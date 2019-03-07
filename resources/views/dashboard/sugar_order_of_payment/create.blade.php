@@ -57,8 +57,8 @@
               '4', 'date',  'Date Received *', old('date') ? old('date') : Carbon::now()->format('m/d/Y'), $errors->has('date'), $errors->first('date')
             ) !!}
 
-            {!! __form::textbox(
-              '4', 'sugar_sample', 'text', 'Kind of Sample *', 'Kind of Sample', old('sugar_sample'), $errors->has('sugar_sample'), $errors->first('sugar_sample'), 'data-transform="uppercase"'
+            {!! __form::select_dynamic(
+              '4', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
             ) !!}
 
             <div class="col-md-12"></div>
@@ -71,6 +71,7 @@
 
 
           {{-- Sugar Services --}}
+
 
           <div class="col-md-12" style="padding:30px;">
             <div class="box box-solid">

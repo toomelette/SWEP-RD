@@ -40,8 +40,8 @@
               <dd>{{ $sugar_oop->received_from }}</dd>
               <dt>Address:</dt>
               <dd>{{ $sugar_oop->address }}</dd>
-              <dt>Sugar Sample:</dt>
-              <dd>{{ $sugar_oop->sugar_sample }}</dd>
+              <dt>Kind of Sample:</dt>
+              <dd>{{ $sugar_oop->sugarSample->name }}</dd>
               <dt>Received By:</dt>
               <dd>{{ $sugar_oop->received_by }}</dd>
             </dl>
