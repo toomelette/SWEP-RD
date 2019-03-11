@@ -165,8 +165,13 @@ class __dataType{
           if(substr($i,1,1) == 0) {
              $rettxt .= $tens[substr($i,0,1)];
           }else{
-            $rettxt .= $tens[substr($i,0,1)];
-            $rettxt .= " ".$ones[substr($i,1,1)];
+            if (substr($i,0,1) == 0) {
+              $rettxt .= $tens[substr($i,1,1)];
+              $rettxt .= " ".$ones[substr($i,2,1)];
+            }else{
+              $rettxt .= $tens[substr($i,0,1)];
+              $rettxt .= " ".$ones[substr($i,1,1)];
+            }
           } 
         }elseif($i == 0){
           $rettxt .= "";
