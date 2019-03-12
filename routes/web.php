@@ -62,6 +62,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::resource('sugar_service', 'SugarServiceController');
 
 
+	/** SUGAR SAMPLES **/
+	Route::resource('sugar_sample', 'SugarSampleController');
+
+
 	
 });
 

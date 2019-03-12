@@ -16,4 +16,15 @@ class SugarSampleParameter extends Model{
 	public $timestamps = false;
 
 
+
+
+
+	/** RELATIONSHIPS **/
+    public function sugarSample() {
+      return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
+    }
+
+
+
+
 }

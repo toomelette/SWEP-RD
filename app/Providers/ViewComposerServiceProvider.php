@@ -35,10 +35,12 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
         // SUGAR SERVICES
         View::composer(['dashboard.sugar_order_of_payment.create',
-                        'dashboard.sugar_order_of_payment.edit'], 'App\Core\ViewComposers\SugarServiceComposer');
+                        'dashboard.sugar_order_of_payment.edit',
+                        'dashboard.sugar_sample.create',
+                        'dashboard.sugar_sample.edit'], 'App\Core\ViewComposers\SugarServiceComposer');
         
 
-        // SUGAR SERVICES
+        // SUGAR SAMPLE
         View::composer(['dashboard.sugar_order_of_payment.create',
                         'dashboard.sugar_order_of_payment.edit'], 'App\Core\ViewComposers\SugarSampleComposer');
 
@@ -49,15 +51,11 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
 
 
-
-    
     public function register(){
-
-      
-
 
     
     }
+
 
 
 

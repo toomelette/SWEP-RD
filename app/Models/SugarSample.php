@@ -16,5 +16,16 @@ class SugarSample extends Model{
     
 	public $timestamps = false;
 
-    
+    	
+
+
+
+    /** RELATIONSHIPS **/
+    public function sugarSampleParameter() {
+      return $this->hasMany('App\Models\SugarSampleParameter','sugar_sample_id','sugar_sample_id');
+    }
+
+
+
+
 }
