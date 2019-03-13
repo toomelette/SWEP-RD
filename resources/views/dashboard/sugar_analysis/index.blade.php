@@ -59,8 +59,8 @@
                 @endif
               </td>
               <td>
-                <a href="{{ route('dashboard.sugar_analysis.edit', $data->slug) }}" type="button" class="btn btn-default">  Fill Results
-                </a>
+                <a href="{{ route('dashboard.sugar_analysis.edit', $data->slug) }}" type="button" class="btn btn-default btn-sm">Fill Results</a>
+                <a href="{{ route('dashboard.sugar_analysis.show', $data->slug) }}" type="button" class="btn btn-default btn-sm">Print</a>
               </td>
             </tr>
             @endforeach

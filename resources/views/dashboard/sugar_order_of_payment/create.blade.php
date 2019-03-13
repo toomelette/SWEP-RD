@@ -70,8 +70,8 @@
           </div>
 
 
-          {{-- Sugar Services --}}
 
+          {{-- Sugar Services --}}
 
           <div class="col-md-12" style="padding:30px;" id="ss_id">
             <div class="box box-solid">

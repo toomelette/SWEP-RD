@@ -81,9 +81,10 @@
           </div>
 
 
+
           {{-- Sugar Services --}}
 
-          <div class="col-md-12" style="padding:30px;">
+          <div class="col-md-12" style="padding:30px;" id="ss_id">
             <div class="box box-solid">
               <div class="box-header with-border">
                 <h3 class="box-title">Services</h3>
@@ -157,6 +158,7 @@
   <script type="text/javascript">
 
 
+
     @if(old('customer_type') == "CT1001" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1001")
       $( document ).ready(function() {
         $('#recieved_from_div').show();
@@ -176,6 +178,29 @@
     @endif
 
 
+
+    {{-- SUGAR SAMPLE ID --}}
+    @if(old('sugar_sample_id') == "SS1005" || $sugar_oop->sugar_sample_id == "SS1005")
+      $( document ).ready(function() {
+        $('#ss_id').show();
+      });
+    @else
+      $( document ).ready(function() {
+        $('#ss_id').hide();
+      });
+    @endif
+
+    $(document).on("change", "#sugar_sample_id", function () {
+      var val = $(this).val();
+        if(val == "SS1005"){ 
+          $('#ss_id').show();
+        }else{
+          $('#ss_id').hide();
+        }
+    });
+
+
+
     $(document).on("change", "#customer_type", function () {
       $('#received_from').val('');
       $('#address').val('');
@@ -193,6 +218,7 @@
           $('#mill_div').hide();
         }
     });
+
 
 
     {!! __js::ajax_select_to_input(

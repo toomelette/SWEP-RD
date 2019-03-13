@@ -131,7 +131,7 @@
       </div>
 
       <div class="col-sm-12 std_div" style="margin-bottom: 20px; text-align: center;">
-        {{ $sugar_oop->total_price > 0 ? __dataType::num_to_words($sugar_oop->total_price) . ' PESOS' : ''}}      
+        {{ $sugar_oop->total_price > 0 ? __dataType::num_to_words(150) . ' PESOS' : ''}}      
       </div>
 
       <div class="col-sm-12 std_font_size" style="margin-bottom: 10px;">

@@ -53,6 +53,24 @@ class SugarAnalysisController extends Controller{
 
 
 
+     public function show($slug){
+        
+        return dd($slug);
+
+    }
+
+
+
+
+     public function print($slug){
+        
+        return dd($slug);
+
+    }
+
+
+
+
 	 public function report(){
         
         return dd('Reports');

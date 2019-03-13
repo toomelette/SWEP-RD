@@ -107,6 +107,7 @@ class __dataType{
     public static function num_to_words($num){ 
 
       $ones = array( 
+          0 => "",
           1 => "one", 
           2 => "two", 
           3 => "three", 
@@ -129,6 +130,7 @@ class __dataType{
       ); 
 
       $tens = array( 
+          0 => "",
           1 => "ten",
           2 => "twenty", 
           3 => "thirty", 

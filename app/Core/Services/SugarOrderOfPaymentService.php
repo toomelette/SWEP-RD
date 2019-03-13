@@ -7,6 +7,7 @@ use App\Core\Interfaces\SugarOrderOfPaymentInterface;
 use App\Core\Interfaces\SugarServiceInterface;
 use App\Core\Interfaces\SugarAnalysisParameterInterface;
 use App\Core\Interfaces\SugarAnalysisInterface;
+use App\Core\Interfaces\SugarSampleInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -19,15 +20,17 @@ class SugarOrderOfPaymentService extends BaseService{
     protected $sugar_service_repo;
     protected $sa_parameter_repo;
     protected $sa_repo;
+    protected $ss_repo;
 
 
 
-    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sa_parameter_repo, SugarAnalysisInterface $sa_repo){
+    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sa_parameter_repo, SugarAnalysisInterface $sa_repo, SugarSampleInterface $ss_repo){
 
         $this->sugar_oop_repo = $sugar_oop_repo;
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sa_parameter_repo = $sa_parameter_repo;
         $this->sa_repo = $sa_repo;
+        $this->ss_repo = $ss_repo;
         parent::__construct();
 
     }
@@ -149,16 +152,27 @@ class SugarOrderOfPaymentService extends BaseService{
     // UTILS
     private function getTotalPrice($request){
 
-        $services = $request->sugar_service_id;
         $total_price = 0.00;
 
-        if(!empty($services)){
-            foreach ($services as $data) {
-                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                $total_price += $ss_obj->price;
-            }  
+        if($request->sugar_sample_id == "SS1005"){
+
+            $services = $request->sugar_service_id;
+
+            if(!empty($services)){
+                foreach ($services as $data) {
+                    $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
+                    $total_price += $ss_obj->price;
+                }  
+            }
+
+        }else{
+
+            $sugar_sample = $this->ss_repo->findBySugarSampleId($request->sugar_sample_id);
+
+            $total_price = $sugar_sample->sugarSampleParameter->sum('price');
+
         }
-            
+
         return $total_price;
 
     }
@@ -169,13 +183,29 @@ class SugarOrderOfPaymentService extends BaseService{
 
     private function storeSugarAnalysisParameter($request){
 
-        $services = $request->sugar_service_id;
+        if ($request->sugar_sample_id == "SS1005") {
 
-        if(!empty($services)){
-            foreach ($services as $data) {
-                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                $this->sa_parameter_repo->store($request->sample_no, $ss_obj);
-            }  
+            $services = $request->sugar_service_id;
+
+            if(!empty($services)){
+                foreach ($services as $data) {
+                    $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
+                    $this->sa_parameter_repo->store($request->sample_no, $ss_obj);
+                }  
+            }
+
+        }else{
+
+            $sugar_sample = $this->ss_repo->findBySugarSampleId($request->sugar_sample_id);
+
+            $services = $sugar_sample->sugarSampleParameter;
+
+            if(!empty($services)){
+                foreach ($services as $obj) {
+                    $this->sa_parameter_repo->store($request->sample_no, $obj);
+                }  
+            }
+
         }
 
         return null;

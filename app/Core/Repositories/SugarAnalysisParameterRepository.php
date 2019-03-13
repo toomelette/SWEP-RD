@@ -26,13 +26,13 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
-    public function store($sample_no, $sugar_service){
+    public function store($sample_no, $obj){
 
         $sa_parameter = new SugarAnalysisParameter;
         $sa_parameter->sample_no = $sample_no;
-        $sa_parameter->sugar_service_id = $sugar_service->sugar_service_id;
-        $sa_parameter->sugar_service_name = $sugar_service->name;
-        $sa_parameter->price = $sugar_service->price;
+        $sa_parameter->sugar_service_id = $obj->sugar_service_id;
+        $sa_parameter->sugar_service_name = $obj->name;
+        $sa_parameter->price = $obj->price;
         $sa_parameter->save();
 
         return $sa_parameter;

@@ -15,43 +15,32 @@
 
     <div class="box-body">
 
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">Sugar Sample Info</h3>
           </div>
           <div class="box-body">
-            <dl class="dl-horizontal">
+
+
+            <dl class="dl-horizontal" style="margin-left:-55px;">
               <dt>Name of Sample:</dt>
               <dd>{{ $sugar_sample->name }}</dd>
             </dl>
-          </div>
-        </div>
-      </div> 
 
-
-
-
-      <div class="col-md-6">
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title">Parameters</h3>
-          </div>
-          <div class="box-body">
+            <h5><b>PARAMETERS:</b></h5>
 
             <table class="table table-bordered">
-              
               <tr>
                   <th>Kind Of Analysis</th>
               </tr>  
-
               @foreach($sugar_sample->sugarSampleParameter as $data)
                 <tr>
                     <td>{{ $data->name }}</td>
                 </tr> 
               @endforeach
-
             </table>
+
 
           </div>
         </div>
