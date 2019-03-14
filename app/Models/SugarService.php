@@ -26,6 +26,7 @@ class SugarService extends Model{
         'sugar_service_id' => '',
         'name' => '',
         'price' => 0.00,
+        'standard' => '',
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',

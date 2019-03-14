@@ -24,8 +24,9 @@ class SugarAnalysis extends Model{
 
        	'slug' => '',
         'sample_no' => '',
-        'customer_type' => '',
         'mill_id' => '',
+        'sugar_sample_id' => '',
+        'customer_type' => '',
         'date' => null,
         'origin' => '',
         'address' => '',
@@ -36,7 +37,10 @@ class SugarAnalysis extends Model{
         'date_analyzed' => null,
         'description' => '',
         'total_price' => 0.00,
-        'status' => '',
+        'code' => '',
+        'source' => '',
+        'report_no' => '',
+        'status' => 'PENDING',
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -56,11 +60,14 @@ class SugarAnalysis extends Model{
     }
 
 
+    public function sugarSample() {
+        return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
+    }
+
 
     public function sugarOrderOfPayment() {
         return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
     }
-
 
     
 

@@ -58,19 +58,13 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis = new SugarAnalysis;
         $sugar_analysis->slug = $this->str->random(16);
         $sugar_analysis->sample_no = $request->sample_no;
+        $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;
         $sugar_analysis->date = $this->__dataType->date_parse($request->date);
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
-        $sugar_analysis->quantity = 0.00;
-        $sugar_analysis->week_ending = null;
-        $sugar_analysis->date_sampled = null;
-        $sugar_analysis->date_submitted = null;
-        $sugar_analysis->date_analyzed = null;
-        $sugar_analysis->description = '';
         $sugar_analysis->total_price = $total_price;
-        $sugar_analysis->status = 'PENDING';
         $sugar_analysis->created_at = $this->carbon->now();
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_created = request()->ip();
@@ -92,6 +86,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $sugar_analysis = $this->findBySlug($slug);
         $sugar_analysis->sample_no = $request->sample_no;
+        $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;
         $sugar_analysis->date = $this->__dataType->date_parse($request->date);
@@ -120,6 +115,9 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
         $sugar_analysis->date_analyzed = $this->__dataType->date_parse($request->date_analyzed);
         $sugar_analysis->quantity = $this->__dataType->string_to_num($request->quantity);
+        $sugar_analysis->code = $request->code;
+        $sugar_analysis->report_no = $request->report_no;
+        $sugar_analysis->source = $request->source;
         $sugar_analysis->description = $request->description;
         $sugar_analysis->status = "ANALYZED";
         $sugar_analysis->updated_at = $this->carbon->now();

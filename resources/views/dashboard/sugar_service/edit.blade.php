@@ -26,11 +26,15 @@
           @csrf    
 
           {!! __form::textbox(
-            '3', 'name', 'text', 'Name *', 'Name', old('name') ? old('name') : $sugar_service->name, $errors->has('name'), $errors->first('name'), ''
+            '4', 'name', 'text', 'Name *', 'Name', old('name') ? old('name') : $sugar_service->name, $errors->has('name'), $errors->first('name'), ''
           ) !!}
 
           {!! __form::textbox_numeric(
-            '3', 'price', 'text', 'Price *', 'Price', old('price') ? old('price') : $sugar_service->price, $errors->has('price'), $errors->first('price'), ''
+            '4', 'price', 'text', 'Price *', 'Price', old('price') ? old('price') : $sugar_service->price, $errors->has('price'), $errors->first('price'), ''
+          ) !!}  
+
+          {!! __form::textbox(
+            '4', 'standard', 'text', 'Standard *', 'Standard', old('standard') ? old('standard') : $sugar_service->standard, $errors->has('standard'), $errors->first('standard'), ''
           ) !!}
 
         </div>

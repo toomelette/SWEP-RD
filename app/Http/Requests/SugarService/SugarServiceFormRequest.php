@@ -22,7 +22,8 @@ class SugarServiceFormRequest extends FormRequest{
         return [
             
             'name'=>'required|string|max:255',
-            'price'=>'required|string|max:13'
+            'price'=>'required|string|max:13',
+            'standard'=>'required|string|max:90'
 
         ];
     

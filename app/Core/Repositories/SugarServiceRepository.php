@@ -61,6 +61,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         $sugar_service->sugar_service_id = $this->getSugarServiceIdInc();
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
+        $sugar_service->standard = $request->standard;
         $sugar_service->created_at = $this->carbon->now();
         $sugar_service->updated_at = $this->carbon->now();
         $sugar_service->ip_created = request()->ip();
@@ -83,6 +84,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         $sugar_service = $this->findBySlug($slug);
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
+        $sugar_service->standard = $request->standard;
         $sugar_service->updated_at = $this->carbon->now();
         $sugar_service->ip_updated = request()->ip();
         $sugar_service->user_updated = $this->auth->user()->user_id;

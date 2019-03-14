@@ -29,10 +29,17 @@
             @endif
           <dt>Sample No:</dt>
           <dd>{{ $sa->sample_no }}</dd>
+          <dt>Kind of Sample:</dt>
+          <dd>{{ optional($sa->sugarSample)->name }}</dd>
           <dt>Origin:</dt>
           <dd>{{ $sa->origin }}</dd>
           <dt>Address:</dt>
           <dd>{{ $sa->address }}</dd>
+
+          @if($sa)
+            
+          @endif
+
           <dt>Charge:</dt>
           <dd>Php {{ number_format($sa->total_price, 2) }}</dd>
         </dl>
@@ -61,121 +68,112 @@
 
           <input name="_method" value="PUT" type="hidden">
 
-          {!! __form::datepicker(
-            '3', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
-          ) !!}
+          
+          <div class="col-md-6">
+            <div class="box box-solid">
+              <div class="box-header with-border">
+                <h3 class="box-title"><b>Form</b></h3>
+              </div>
+              
+              <div class="box-body">
 
-          {!! __form::datepicker(
-            '3', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : __dataType::date_parse($sa->date_sampled), $errors->has('date_sampled'), $errors->first('date_sampled')
-          ) !!}
+                {!! __form::datepicker(
+                  '6', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
+                ) !!}
 
-          {!! __form::datepicker(
-            '3', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : __dataType::date_parse($sa->date_submitted), $errors->has('date_submitted'), $errors->first('date_submitted')
-          ) !!}
+                <div class="col-md-12"></div>
 
-          {!! __form::datepicker(
-            '3', 'date_analyzed',  'Date Analyzed *', old('date_analyzed') ? old('date_analyzed') : __dataType::date_parse($sa->date_analyzed), $errors->has('date_analyzed'), $errors->first('date_analyzed')
-          ) !!}
+                {!! __form::datepicker(
+                  '6', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : __dataType::date_parse($sa->date_sampled), $errors->has('date_sampled'), $errors->first('date_sampled')
+                ) !!}
 
-          <div class="col-md-12"></div>
+                <div class="col-md-12"></div>
 
-          {!! __form::textbox_numeric(
-            '3', 'quantity', 'text', 'Quantity *', 'Quantity', old('quantity') ? old('quantity') : $sa->quantity, $errors->has('quantity'), $errors->first('quantity'), ''
-          ) !!}
+                {!! __form::datepicker(
+                  '6', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : __dataType::date_parse($sa->date_submitted), $errors->has('date_submitted'), $errors->first('date_submitted')
+                ) !!}
 
-          {!! __form::textbox(
-            '9', 'description', 'text', 'Description *', 'Description', old('description') ? old('description') : $sa->description, $errors->has('description'), $errors->first('description'), 'data-transform="uppercase"'
-          ) !!}
+                <div class="col-md-12"></div>
 
+                {!! __form::datepicker(
+                  '6', 'date_analyzed',  'Date Analyzed *', old('date_analyzed') ? old('date_analyzed') : __dataType::date_parse($sa->date_analyzed), $errors->has('date_analyzed'), $errors->first('date_analyzed')
+                ) !!}
+
+                <div class="col-md-12"></div>
+
+                {!! __form::textbox_numeric(
+                  '6', 'quantity', 'text', 'Quantity', 'Quantity', old('quantity') ? old('quantity') : $sa->quantity, $errors->has('quantity'), $errors->first('quantity'), ''
+                ) !!}
+
+                <div class="col-md-12"></div>
+
+                @if($sa->sugar_sample_id == "SS1003")
+
+                  {!! __form::textbox_numeric(
+                    '6', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sa->code, $errors->has('code'), $errors->first('code'), ''
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+
+                @endif
+
+                @if($sa->sugar_sample_id == "SS1004")
+
+                  {!! __form::textbox_numeric(
+                    '6', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sa->report_no, $errors->has('report_no'), $errors->first('report_no'), ''
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+
+                  {!! __form::textbox_numeric(
+                    '6', 'source', 'text', 'Source', 'Source', old('source') ? old('source') : $sa->source, $errors->has('source'), $errors->first('source'), ''
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+
+                @endif
+
+                {!! __form::textbox(
+                  '12', 'description', 'text', 'Description', 'Description', old('description') ? old('description') : $sa->description, $errors->has('description'), $errors->first('description'), 'data-transform="uppercase"'
+                ) !!}
+
+              </div> 
+
+            </div>
+          </div>
+
+          
+          <div class="col-md-6">
+            <div class="box box-solid">
+              <div class="box-header with-border">
+                <h3 class="box-title"><b>Parameters</b></h3>
+              </div>
+              
+              <div class="box-body">
+
+                @foreach ($sa->sugarAnalysisParameter as $data)
+
+                  {!! __form::textbox(
+                    '6', $data->sugar_service_id, 'text', $data->sugar_service_name, $data->sugar_service_name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+                  
+                @endforeach
+
+              </div> 
+
+            </div>
           </div>
 
 
 
-
-          <div class="col-md-12">
-
-            @foreach ($sa->sugarAnalysisParameter as $data)
+        </div>
 
 
-              @if($data->sugar_service_id == "SS1001")
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Polarization</h3> 
-                  </div>
-                  <div class="box-body">
-
-
-
-                  </div>
-                </div>
-
-
-
-              @elseif($data->sugar_service_id == "SS1002")
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Color UI</h3> 
-                  </div>
-                  <div class="box-body">
-
-
-
-                  </div>
-                </div>
-
-
-
-              @elseif($data->sugar_service_id == "SS1003")
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Moisture</h3> 
-                  </div>
-                  <div class="box-body">
-
-
-
-                  </div>
-                </div>
-
-
-
-              @elseif($data->sugar_service_id == "SS1004")
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Ash</h3> 
-                  </div>
-                  <div class="box-body">
-
-
-
-                  </div>
-                </div>
-
-
-
-              @elseif($data->sugar_service_id == "SS1005")
-                <div class="box">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Grain Size</h3> 
-                  </div>
-                  <div class="box-body">
-
-
-
-                  </div>
-                </div>
-
-
-              @endif
-
-            @endforeach
-          </div>
-
-
-
-          <div class="box-footer">
-            <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
-          </div>
+        <div class="box-footer">
+          <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
+        </div>
 
         </form>
 

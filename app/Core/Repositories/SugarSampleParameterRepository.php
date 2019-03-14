@@ -33,6 +33,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
         $ss_parameter->sugar_service_id = $sugar_service->sugar_service_id;
         $ss_parameter->name = $sugar_service->name;
         $ss_parameter->price = $sugar_service->price;
+        $ss_parameter->standard = $sugar_service->standard;
         $ss_parameter->save();
 
         return $ss_parameter;

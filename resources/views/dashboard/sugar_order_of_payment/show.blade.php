@@ -41,7 +41,7 @@
               <dt>Address:</dt>
               <dd>{{ $sugar_oop->address }}</dd>
               <dt>Kind of Sample:</dt>
-              <dd>{{ $sugar_oop->sugarSample->name }}</dd>
+              <dd>{{ optional($sugar_oop->sugarSample)->name }}</dd>
               <dt>Received By:</dt>
               <dd>{{ $sugar_oop->received_by }}</dd>
             </dl>

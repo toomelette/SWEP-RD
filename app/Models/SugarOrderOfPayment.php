@@ -60,7 +60,7 @@ class SugarOrderOfPayment extends Model{
 
 
     public function sugarSample() {
-        return $this->hasOne('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
+        return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
     }
 
     
