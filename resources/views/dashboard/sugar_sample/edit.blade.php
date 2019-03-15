@@ -56,7 +56,7 @@
                 <table class="table table-bordered">
                   <tr>
                     <th>Kind of Analysis</th>
-                    <th>Price</th>
+                    <th>Standard</th>
                   </tr>
                   @foreach ($global_sugar_service_all as $data)
                   <tr>  
@@ -83,7 +83,7 @@
 
                     @endif
 
-                    <td>Php {{ $data->price }}</td>
+                    <td>{{ $data->standard }}</td>
 
                   </tr>
                   @endforeach

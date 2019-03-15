@@ -132,6 +132,25 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
 
 
+    public function findBySugarServiceId($sugar_service_id){
+
+        $sugar_service = $this->cache->remember('sugar_services:findBySugarServiceId:' . $sugar_service_id, 240, function() use ($sugar_service_id){
+            return $this->sugar_service->where('sugar_service_id', $sugar_service_id)->first();
+        });
+        
+        if(empty($sugar_service)){
+            abort(404);
+        }
+        
+        return $sugar_service;
+
+    }
+
+
+
+
+
+
     public function search($model, $key){
 
         return $model->where(function ($model) use ($key) {
@@ -146,7 +165,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
     public function populate($model){
 
-        return $model->select('name', 'price', 'slug')
+        return $model->select('name', 'price', 'standard', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
                      ->paginate(10);
@@ -165,25 +184,6 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         });
         
         return $sugar_services;
-
-    }
-
-
-
-
-
-
-    public function findBySugarServiceId($sugar_service_id){
-
-        $sugar_service = $this->cache->remember('sugar_services:findBySugarServiceId:' . $sugar_service_id, 240, function() use ($sugar_service_id){
-            return $this->sugar_service->where('sugar_service_id', $sugar_service_id)->first();
-        });
-        
-        if(empty($sugar_service)){
-            abort(404);
-        }
-        
-        return $sugar_service;
 
     }
 

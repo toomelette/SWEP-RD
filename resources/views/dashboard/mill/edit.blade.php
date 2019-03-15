@@ -4,6 +4,9 @@
 
 <section class="content-header">
     <h1>Edit Mill</h1>
+    <div class="pull-right" style="margin-top: -25px;">
+      {!! __html::back_button(['dashboard.mill.index']) !!}
+    </div>
 </section>
 
 <section class="content">

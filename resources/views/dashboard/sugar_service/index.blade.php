@@ -42,12 +42,14 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('name', 'Name')</th>
+            <th>@sortablelink('standard', 'Standards')</th>
             <th>@sortablelink('price', 'Price')</th>
             <th style="width: 150px">Action</th>
           </tr>
           @foreach($sugar_services as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td>{{ $data->name }}</td>
+              <td>{{ $data->standard }}</td>
               <td>{{ number_format($data->price, 2) }}</td>
               <td> 
                 <select id="action" class="form-control input-md">

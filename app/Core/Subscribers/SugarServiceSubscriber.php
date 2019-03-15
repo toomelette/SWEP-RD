@@ -51,6 +51,7 @@ class SugarServiceSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySlug:'. $sugar_service->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySugarServiceId:'. $sugar_service->sugar_service_id .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
 
         $this->session->flash('SUGAR_SERVICE_UPDATE_SUCCESS', 'Laboratory Service has been successfully updated!');
         $this->session->flash('SUGAR_SERVICE_UPDATE_SUCCESS_SLUG', $sugar_service->slug);
@@ -65,6 +66,7 @@ class SugarServiceSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:getAll');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySlug:'. $sugar_service->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_services:findBySugarServiceId:'. $sugar_service->sugar_service_id .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
 
         $this->session->flash('SUGAR_SERVICE_DELETE_SUCCESS', 'Laboratory Service has been successfully deleted!');
         $this->session->flash('SUGAR_SERVICE_DELETE_SUCCESS_SLUG', $sugar_service->slug);

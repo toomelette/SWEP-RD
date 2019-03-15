@@ -48,6 +48,7 @@ class SugarSampleSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySlug:'. $sugar_sample->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:getAll');
 
         $this->session->flash('SUGAR_SAMPLE_UPDATE_SUCCESS', 'Sugar Sample has been successfully updated!');
@@ -62,6 +63,7 @@ class SugarSampleSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySlug:'. $sugar_sample->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:getAll');
 
         $this->session->flash('SUGAR_SAMPLE_DELETE_SUCCESS', 'Sugar Sample has been successfully deleted!');

@@ -78,39 +78,39 @@
               <div class="box-body">
 
                 {!! __form::datepicker(
-                  '6', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
+                  '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
                 ) !!}
 
                 <div class="col-md-12"></div>
 
                 {!! __form::datepicker(
-                  '6', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : __dataType::date_parse($sa->date_sampled), $errors->has('date_sampled'), $errors->first('date_sampled')
+                  '12', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : __dataType::date_parse($sa->date_sampled), $errors->has('date_sampled'), $errors->first('date_sampled')
                 ) !!}
 
                 <div class="col-md-12"></div>
 
                 {!! __form::datepicker(
-                  '6', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : __dataType::date_parse($sa->date_submitted), $errors->has('date_submitted'), $errors->first('date_submitted')
+                  '12', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : __dataType::date_parse($sa->date_submitted), $errors->has('date_submitted'), $errors->first('date_submitted')
                 ) !!}
 
                 <div class="col-md-12"></div>
 
                 {!! __form::datepicker(
-                  '6', 'date_analyzed',  'Date Analyzed *', old('date_analyzed') ? old('date_analyzed') : __dataType::date_parse($sa->date_analyzed), $errors->has('date_analyzed'), $errors->first('date_analyzed')
+                  '12', 'date_analyzed',  'Date Analyzed *', old('date_analyzed') ? old('date_analyzed') : __dataType::date_parse($sa->date_analyzed), $errors->has('date_analyzed'), $errors->first('date_analyzed')
                 ) !!}
 
                 <div class="col-md-12"></div>
 
-                {!! __form::textbox_numeric(
-                  '6', 'quantity', 'text', 'Quantity', 'Quantity', old('quantity') ? old('quantity') : $sa->quantity, $errors->has('quantity'), $errors->first('quantity'), ''
+                {!! __form::textbox(
+                  '12', 'quantity', 'text', 'Quantity', 'Quantity', old('quantity') ? old('quantity') : number_format($sa->quantity), $errors->has('quantity'), $errors->first('quantity'), ''
                 ) !!}
 
                 <div class="col-md-12"></div>
 
                 @if($sa->sugar_sample_id == "SS1003")
 
-                  {!! __form::textbox_numeric(
-                    '6', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sa->code, $errors->has('code'), $errors->first('code'), ''
+                  {!! __form::textbox(
+                    '12', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sa->code, $errors->has('code'), $errors->first('code'), ''
                   ) !!}
 
                   <div class="col-md-12"></div>
@@ -119,14 +119,14 @@
 
                 @if($sa->sugar_sample_id == "SS1004")
 
-                  {!! __form::textbox_numeric(
-                    '6', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sa->report_no, $errors->has('report_no'), $errors->first('report_no'), ''
+                  {!! __form::textbox(
+                    '12', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sa->report_no, $errors->has('report_no'), $errors->first('report_no'), ''
                   ) !!}
 
                   <div class="col-md-12"></div>
 
-                  {!! __form::textbox_numeric(
-                    '6', 'source', 'text', 'Source', 'Source', old('source') ? old('source') : $sa->source, $errors->has('source'), $errors->first('source'), ''
+                  {!! __form::textbox(
+                    '12', 'source', 'text', 'Source', 'Source', old('source') ? old('source') : $sa->source, $errors->has('source'), $errors->first('source'), ''
                   ) !!}
 
                   <div class="col-md-12"></div>
@@ -154,7 +154,7 @@
                 @foreach ($sa->sugarAnalysisParameter as $data)
 
                   {!! __form::textbox(
-                    '6', $data->sugar_service_id, 'text', $data->sugar_service_name, $data->sugar_service_name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                    '12', $data->sugar_service_id, 'text', $data->sugar_service_name, $data->sugar_service_name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
                   ) !!}
 
                   <div class="col-md-12"></div>

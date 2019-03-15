@@ -41,6 +41,7 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('sample_no', 'Sample No.')</th>
+            <th>@sortablelink('sugar_sample_id', 'Kind of Sample')</th>
             <th>@sortablelink('origin', 'Origin')</th>
             <th>@sortablelink('week_ending', 'Week Ending')</th>
             <th>@sortablelink('status', 'Status')</th>
@@ -49,6 +50,7 @@
           @foreach($sugar_analysis as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td>{{ $data->sample_no }}</td>
+              <td>{{ $data->sugarSample->name }}</td>
               <td>{{ $data->origin }}</td>
               <td>{{ __dataType::date_parse($data->week_ending, 'F d,Y') }}</td>
               <td>

@@ -54,6 +54,8 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:*');
 
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
+
         $this->session->flash('SUGAR_OOP_UPDATE_SUCCESS', 'Order of Payment has been successfully updated!');
         $this->session->flash('SUGAR_OOP_UPDATE_SUCCESS_SLUG', $sugar_oop->slug);
 
@@ -69,6 +71,8 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:*');
+        
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
 
         $this->session->flash('SUGAR_OOP_DELETE_SUCCESS', 'Order of Payment has been successfully deleted!');
         $this->session->flash('SUGAR_OOP_DELETE_SUCCESS_SLUG', $sugar_oop->slug);

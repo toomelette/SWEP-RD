@@ -43,5 +43,39 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
+    public function update($sample_no, $sugar_service_id, $result){
+
+        $sa_parameter = $this->findBySampleNoSugarServiceId($sample_no, $sugar_service_id);
+        $sa_parameter->result = $result;
+        $sa_parameter->save();
+
+        return $sa_parameter;
+        
+    }
+
+
+
+
+
+
+    private function findBySampleNoSugarServiceId($sample_no, $sugar_service_id){
+
+        $ss = $this->cache->remember('sugar_analysis_parameter:findBySampleNoSugarServiceId:'.$sample_no.':'. $sugar_service_id, 240, function() use ($sample_no, $sugar_service_id){
+            return $this->sa_parameter->where('sample_no', $sample_no)
+                                      ->where('sugar_service_id', $sugar_service_id)
+                                      ->first();
+        }); 
+        
+        if(empty($ss)){
+            abort(404);
+        }
+
+        return $ss;
+
+    }
+
+
+
+
 
 }

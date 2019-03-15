@@ -149,7 +149,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
     public function populate($model){
 
-        return $model->select('sample_no', 'origin', 'week_ending', 'status', 'slug')
+        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
                      ->paginate(10);
