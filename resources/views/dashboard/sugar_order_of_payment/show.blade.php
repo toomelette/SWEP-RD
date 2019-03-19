@@ -68,7 +68,7 @@
 
               @foreach($sugar_oop->sugarAnalysisParameter as $data)
                 <tr>
-                    <td>{{ $data->sugar_service_name }}</td>
+                    <td>{{ $data->name }}</td>
                     <td>{{ number_format($data->price, 2) }}</td>
                 </tr> 
               @endforeach

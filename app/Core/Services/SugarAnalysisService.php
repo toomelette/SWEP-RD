@@ -65,7 +65,7 @@ class SugarAnalysisService extends BaseService{
             
             $id = $data->sugar_service_id;
 
-            if (isset($request->$id)){
+            if (isset($request->$id) || $request->$id == ""){
                 $this->sa_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id);
             }
 

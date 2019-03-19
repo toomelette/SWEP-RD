@@ -59,10 +59,13 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = $this->getTotalPrice($request);
         
+        // Sugar OOP
         $sugar_oop = $this->sugar_oop_repo->store($request, $total_price);    
 
+        // Sugar Analysis
         $this->sa_repo->store($request, $total_price);
 
+        // Sugar Analysis Parameter
         $this->storeSugarAnalysisParameter($request);
 
         $this->event->fire('sugar_oop.store', $sugar_oop);

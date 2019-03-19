@@ -154,7 +154,7 @@
                 @foreach ($sa->sugarAnalysisParameter as $data)
 
                   {!! __form::textbox(
-                    '12', $data->sugar_service_id, 'text', $data->sugar_service_name, $data->sugar_service_name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                    '12', $data->sugar_service_id, 'text', $data->name, $data->name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
                   ) !!}
 
                   <div class="col-md-12"></div>

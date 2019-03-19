@@ -21,6 +21,8 @@ class SugarAnalysisFilterRequest extends FormRequest{
 
         return [
             
+        	'q'=>'nullable|string|max:90',
+            
         ];
 
     }

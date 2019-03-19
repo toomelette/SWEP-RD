@@ -94,7 +94,7 @@
           Kind of Sample:
         </div>
         <div class="col-sm-7 std_div no-padding" >
-          {{ $sugar_oop->sugar_sample }}
+          {{ $sugar_oop->sugarSample->name }}
         </div>
       </div>
 
@@ -113,7 +113,7 @@
         </div>
         <div class="col-sm-7 std_div no-padding">
           @foreach ($sugar_oop->sugarAnalysisParameter as $data)
-          {{ $data->sugar_service_name }}, 
+          {{ $data->name }}, 
           @endforeach
         </div>
       </div>
@@ -131,7 +131,7 @@
       </div>
 
       <div class="col-sm-12 std_div" style="margin-bottom: 20px; text-align: center;">
-        {{ $sugar_oop->total_price > 0 ? __dataType::num_to_words(150) . ' PESOS' : ''}}      
+        {{ $sugar_oop->total_price > 0 ? __dataType::num_to_words($sugar_oop->total_price) . ' PESOS' : ''}}      
       </div>
 
       <div class="col-sm-12 std_font_size" style="margin-bottom: 10px;">
@@ -162,7 +162,7 @@
         <div class="col-sm-4 std_font_size">
           Received by:
         </div>
-        <div class="col-sm-8 std_div">
+        <div class="col-sm-8 std_div" style="text-align: center;">
           {{ $sugar_oop->received_by }}
         </div>
       </div>
