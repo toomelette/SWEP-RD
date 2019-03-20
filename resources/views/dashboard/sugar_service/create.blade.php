@@ -29,9 +29,9 @@
 
           {!! __form::textbox_numeric(
             '4', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
-          ) !!}
+          ) !!} 
 
-          {!! __form::textbox_numeric(
+          {!! __form::textbox(
             '4', 'standard', 'text', 'Standard *', 'Standard', old('standard'), $errors->has('standard'), $errors->first('standard'), ''
           ) !!}
 

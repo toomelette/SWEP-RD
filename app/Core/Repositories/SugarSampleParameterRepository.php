@@ -43,5 +43,20 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
 
 
 
+    public function getBySugarSampleId($sugar_sample_id){
+
+        $ss_parameters = $this->cache->remember('sugar_sample_parameters:getBySugarSampleId:'. $sugar_sample_id, 240, function() use ($sugar_sample_id){
+        
+            return $this->ss_parameter->where('sugar_sample_id', $sugar_sample_id)
+                                       ->get();
+        });
+
+        return $ss_parameters;
+
+    }
+
+
+
+
 
 }

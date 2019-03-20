@@ -180,7 +180,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     public function getAll(){
 
         $sugar_services = $this->cache->remember('sugar_services:getAll', 240, function(){
-            return $this->sugar_service->select('sugar_service_id', 'name', 'price')->get();
+            return $this->sugar_service->select('sugar_service_id', 'name', 'price', 'standard')->get();
         });
         
         return $sugar_services;

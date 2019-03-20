@@ -1,6 +1,11 @@
 <?php
   
   $ss_id_array = $sugar_oop->sugarAnalysisParameter->pluck('sugar_service_id')->toArray();
+  $raw_sugar_services = $global_sugar_sample_parameter_raw_sugar->pluck('sugar_service_id')->toArray();
+  $raw_sugar_complete_services = $global_sugar_sample_parameter_raw_sugar_complete->pluck('sugar_service_id')->toArray();
+  $raw_sugar_special_services = $global_sugar_sample_parameter_raw_sugar_special->pluck('sugar_service_id')->toArray();
+  $muscovado_services = $global_sugar_sample_parameter_muscovado->pluck('sugar_service_id')->toArray();
+  $molasses_services = $global_sugar_sample_parameter_molasses->pluck('sugar_service_id')->toArray();
 
 ?>
 
@@ -92,26 +97,14 @@
               
               <div class="box-body no-padding">
 
-                <table class="table table-bordered">
+                {{-- DEFAULT --}}
+                <table class="table table-bordered" id="default">
                   <tr>
                     <th>Kind of Analysis</th>
                     <th>Price</th>
                   </tr>
                   @foreach ($global_sugar_service_all as $data)
-                  <tr>  
-
-                    @if(is_array(old('sugar_service_id')))
-
-                      <td>
-                        <label>
-                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
-                          {{ in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
-                          &nbsp; {{ $data->name }}
-                        </label>
-                      </td>
-
-                    @else
-
+                    <tr>  
                       <td>
                         <label>
                           <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
@@ -119,14 +112,140 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-
-                    @endif
-
-                    <td>Php {{ $data->price }}</td>
-
-                  </tr>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
                   @endforeach
                 </table>
+
+
+                {{-- OLD VALUE --}}      
+                @if(is_array(old('sugar_service_id')))         
+                  <table class="table table-bordered">
+                    <tr>
+                      <th>Kind of Analysis</th>
+                      <th>Price</th>
+                    </tr>
+                    @foreach ($global_sugar_service_all as $data)
+                      <tr>  
+                        <td>
+                          <label>
+                            <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                            {{ in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
+                            &nbsp; {{ $data->name }}
+                          </label>
+                        </td>
+                        <td>Php {{ $data->price }}</td>
+                      </tr>
+                    @endforeach
+                  </table>
+                @endif 
+
+
+                {{-- RAW SUGAR SERVICES --}}
+                <table class="table table-bordered" id="raw_sugar">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $raw_sugar_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
+                {{-- RAW SUGAR COMPLETE SERVICES --}}
+                <table class="table table-bordered" id="raw_sugar_complete">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $raw_sugar_complete_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
+                {{-- RAW SUGAR SPECIAL SERVICES --}}
+                <table class="table table-bordered" id="raw_sugar_special">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $raw_sugar_special_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
+                {{-- MUSCOVADO SERVICES --}}
+                <table class="table table-bordered" id="muscovado">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $muscovado_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
+                {{-- MOLASSES SERVICES --}}
+                <table class="table table-bordered" id="molasses">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $molasses_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
 
               </div> 
             </div>
@@ -158,7 +277,7 @@
   <script type="text/javascript">
 
 
-
+    {{-- CUSTOMER TYPE --}}
     @if(old('customer_type') == "CT1001" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1001")
       $( document ).ready(function() {
         $('#recieved_from_div').show();
@@ -176,30 +295,6 @@
         $('#mill_div').hide();
       });
     @endif
-
-
-
-    {{-- SUGAR SAMPLE ID --}}
-    @if(old('sugar_sample_id') == "SS1005" || $sugar_oop->sugar_sample_id == "SS1005")
-      $( document ).ready(function() {
-        $('#ss_id').show();
-      });
-    @else
-      $( document ).ready(function() {
-        $('#ss_id').hide();
-      });
-    @endif
-
-    $(document).on("change", "#sugar_sample_id", function () {
-      var val = $(this).val();
-        if(val == "SS1005"){ 
-          $('#ss_id').show();
-        }else{
-          $('#ss_id').hide();
-        }
-    });
-
-
 
     $(document).on("change", "#customer_type", function () {
       $('#received_from').val('');
@@ -221,6 +316,155 @@
 
 
 
+
+    {{-- SUGAR SAMPLE SERVICES --}}
+
+    @if (is_array(old('sugar_service_id')))
+
+      $( document ).ready(function() {
+        
+        $('#default').hide();
+        $("#default input").attr("disabled", true);
+        $('#raw_sugar').hide();
+        $("#raw_sugar input").attr("disabled", true);
+        $('#raw_sugar_complete').hide();
+        $("#raw_sugar_complete input").attr("disabled", true);
+        $('#raw_sugar_special').hide();
+        $("#raw_sugar_special input").attr("disabled", true);
+        $('#muscovado').hide();
+        $("#muscovado input").attr("disabled", true);
+        $('#molasses').hide();
+        $("#molasses input").attr("disabled", true);
+
+      });
+
+    @else
+
+      $( document ).ready(function() {
+
+        $('#default').show();
+        $("#default input").removeAttr('disabled');
+        $('#raw_sugar').hide();
+        $("#raw_sugar input").attr("disabled", true);
+        $('#raw_sugar_complete').hide();
+        $("#raw_sugar_complete input").attr("disabled", true);
+        $('#raw_sugar_special').hide();
+        $("#raw_sugar_special input").attr("disabled", true);
+        $('#muscovado').hide();
+        $("#muscovado input").attr("disabled", true);
+        $('#molasses').hide();
+        $("#molasses input").attr("disabled", true);
+
+      });
+
+    @endif
+
+
+
+    $(document).on("change", "#sugar_sample_id", function () {
+      var val = $(this).val();
+
+        if(val == "SS1001"){ 
+
+          $('#raw_sugar').show();
+          $("#raw_sugar input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
+
+        }else if(val == "SS1002"){ 
+
+          $('#raw_sugar_complete').show();
+          $("#raw_sugar_complete input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
+
+        }else if(val == "SS1005"){ 
+
+          $('#raw_sugar_special').show();
+          $("#raw_sugar_special input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
+
+        }else if(val == "SS1003"){
+
+          $('#muscovado').show();
+          $("#muscovado input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
+
+        }else if(val == "SS1004"){ 
+
+          $('#molasses').show();
+          $("#molasses input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+
+        }else{
+
+          $('#default').show();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
+
+        }
+    });
+
+
+
+    {{-- MILL --}}
     {!! __js::ajax_select_to_input(
       'mill_id', 'address', '/api/mill/input_mill_byMillId/', 'address'
     ) !!}

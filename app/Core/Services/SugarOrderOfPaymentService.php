@@ -58,7 +58,7 @@ class SugarOrderOfPaymentService extends BaseService{
     public function store($request){
 
         $total_price = $this->getTotalPrice($request);
-        
+
         // Sugar OOP
         $sugar_oop = $this->sugar_oop_repo->store($request, $total_price);    
 
@@ -157,23 +157,13 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = 0.00;
 
-        if($request->sugar_sample_id == "SS1005"){
+        $services = $request->sugar_service_id;
 
-            $services = $request->sugar_service_id;
-
-            if(!empty($services)){
-                foreach ($services as $data) {
-                    $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                    $total_price += $ss_obj->price;
-                }  
-            }
-
-        }else{
-
-            $sugar_sample = $this->ss_repo->findBySugarSampleId($request->sugar_sample_id);
-
-            $total_price = $sugar_sample->sugarSampleParameter->sum('price');
-
+        if(!empty($services)){
+            foreach ($services as $data) {
+                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
+                $total_price += $ss_obj->price;
+            }  
         }
 
         return $total_price;
@@ -186,29 +176,13 @@ class SugarOrderOfPaymentService extends BaseService{
 
     private function storeSugarAnalysisParameter($request){
 
-        if ($request->sugar_sample_id == "SS1005") {
+        $services = $request->sugar_service_id;
 
-            $services = $request->sugar_service_id;
-
-            if(!empty($services)){
-                foreach ($services as $data) {
-                    $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                    $this->sa_parameter_repo->store($request->sample_no, $ss_obj);
-                }  
-            }
-
-        }else{
-
-            $sugar_sample = $this->ss_repo->findBySugarSampleId($request->sugar_sample_id);
-
-            $services = $sugar_sample->sugarSampleParameter;
-
-            if(!empty($services)){
-                foreach ($services as $obj) {
-                    $this->sa_parameter_repo->store($request->sample_no, $obj);
-                }  
-            }
-
+        if(!empty($services)){
+            foreach ($services as $data) {
+                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
+                $this->sa_parameter_repo->store($request->sample_no, $ss_obj);
+            }  
         }
 
         return null;
