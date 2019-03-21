@@ -57,6 +57,18 @@ class SugarAnalysisService extends BaseService{
 
 
 
+    public function show($slug){
+
+        $sa = $this->sa_repo->findBySlug($slug);  
+        return view('dashboard.sugar_analysis.show')->with('sa', $sa);
+
+    }
+
+
+
+
+
+
     public function update($request, $slug){
 
         $sa = $this->sa_repo->updateResult($request, $slug);
@@ -73,6 +85,18 @@ class SugarAnalysisService extends BaseService{
 
         $this->event->fire('sugar_analysis.update', $sa);
         return redirect()->route('dashboard.sugar_analysis.index');
+
+    }
+
+
+
+
+
+
+    public function print($slug){
+
+        $sa = $this->sa_repo->findBySlug($slug);  
+        return view('printables.sugar_analysis.result')->with('sa', $sa);
 
     }
 

@@ -55,7 +55,7 @@ class SugarAnalysisController extends Controller{
 
      public function show($slug){
         
-        return dd($slug);
+        return $this->sa_service->show($slug);
 
     }
 
@@ -64,7 +64,7 @@ class SugarAnalysisController extends Controller{
 
      public function print($slug){
         
-        return dd($slug);
+        return $this->sa_service->print($slug);
 
     }
 
