@@ -30,7 +30,7 @@ class SugarAnalysis extends Model{
         'date' => null,
         'origin' => '',
         'address' => '',
-        'quantity' => 0.00,
+        'quantity' => '',
         'week_ending' => null,
         'date_sampled' => null,
         'date_submitted' => null,

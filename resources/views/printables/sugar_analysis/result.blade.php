@@ -17,14 +17,37 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial">
 
+
   <style type="text/css">
+
+    table, td {
+
+      border: 1px solid black;
+
+    }
+
+    thead{
+
+      -webkit-print-color-adjust: exact; 
+      background-color: #78B681 !important;
+
+    }
+
+    .data-row-head{
+
+      text-align: center;
+      padding:5px;
+      font-size:14px;
+      font-weight: bold;
       
-    .div-height{
+    }
 
-      margin-bottom: -50px; 
-      padding-bottom: 50px; 
-      overflow: hidden;
+    .data-row-body{
 
+      text-align: center;
+      padding:5px;
+      font-size:14  px;
+      
     }
 
   </style>
@@ -34,6 +57,9 @@
 <body onload="window.print();" onafterprint="window.close()">
 
   <div class="wrapper">
+
+
+
 
     {{-- HEADER --}}
     <div class="row" style="padding:10px;">
@@ -54,8 +80,11 @@
       <div class="col-md-1"></div>
     </div>
 
+
+
+
     {{-- Body --}}
-    <div class="row" style="margin-top:10px; border-top:solid 1px;">
+    <div class="row" style="margin-top:5px; border-top:solid 1px;">
 
       <div class="col-md-12" style="text-align:center; margin-top:5px;">
         @if ($sa->sugar_sample_id == "SS1003")
@@ -193,6 +222,89 @@
       </div>
 
     </div>
+
+
+
+
+
+    {{-- TABLE --}}
+    <table style="margin-left:10px; margin-right:10px; border:solid 1px;">
+      
+      <thead>
+  
+        <td class="data-row-head" style="width:350px;">PARAMETERS</td>
+        <td class="data-row-head" style="width:150px;">RESULTS</td>
+        <td class="data-row-head" style="width:150px;">STANDARDS</td>
+        <td class="data-row-head" style="width:150px;">ASSESSMENT</td>
+
+      </thead>
+            
+      @foreach ($sa->sugarAnalysisParameter as $data)
+
+        <tbody>
+
+          <td class="data-row-body">{{ $data->name }}</td>
+          <td class="data-row-body">{{ $data->result }}</td>
+          <td class="data-row-body">{{ $data->standard }}</td>
+          <td class="data-row-body">{{ $data->assessment }}</td>
+
+        </tbody>
+
+      @endforeach
+
+    </table>
+
+
+
+
+
+    {{-- FOOTER --}}
+    <div class="row">
+
+      <div class="col-sm-12" style="margin-left:-5px; margin-top:10px;">
+
+        <div class="col-sm-2">
+          <span>Charges</span>
+        </div>
+
+        <div class="col-sm-10">
+          <span>: Php <b>{{ number_format($sa->total_price, 2) }}</b></span>
+        </div>
+
+        <div class="col-sm-2">
+          <span>&nbsp;</span>
+        </div>
+
+        <div class="col-sm-10">
+          <span>OR #</span>
+        </div>
+
+        <div class="col-sm-6" style="margin-top:30px;">
+          <span>Certified Correct:</span>
+        </div>
+
+        <div class="col-sm-6" style="margin-top:30px;">
+          <span>Noted by:</span>
+        </div>
+
+        <div class="col-sm-6" style="margin-top:50px;">
+          <span><b>JANET C. DILAG, RCh</b></span><br>
+          <span>SRS II - LABORATORY SERVICES, VISAYAS</span><br>
+          <span>CHEMIST LICENSE NO. 6302</span>
+        </div>
+
+        <div class="col-sm-6" style="margin-top:50px;">
+          <span><b>{{ Request::get('nb') }}</b></span><br>
+          <span>{{ Request::get('p') }}</span><br>
+          <span>{{ Request::get('d') }}</span>
+        </div>
+
+      </div>
+    
+    </div>
+
+
+
 
   </div>
 

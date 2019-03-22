@@ -56,7 +56,7 @@
               @endif
 
               <dt>Quantity:</dt>
-              <dd>{{ number_format($sa->quantity, 2) }}</dd>
+              <dd>{{ $sa->quantity }}</dd>
               <dt>Week Ending:</dt>
               <dd>{{ __dataType::date_parse($sa->week_ending, 'F d,Y') }}</dd>
               <dt>Date Sampled:</dt>

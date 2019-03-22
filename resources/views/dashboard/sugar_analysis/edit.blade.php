@@ -1,5 +1,36 @@
-
 @extends('layouts.admin-master')
+
+
+@section('css')
+  
+  <style type="text/css">
+
+    table, td {
+      border: 1px solid black;
+    }
+
+    thead{
+      -webkit-print-color-adjust: exact; 
+      background-color: #78B681 !important;
+    }
+
+    .data-row-head{
+      text-align: center;
+      padding:5px;
+      font-size:14px;
+      font-weight: bold;
+    }
+
+    .data-row-body{
+      text-align: center;
+      padding:5px;
+      font-size:14px;
+    }
+
+  </style>
+
+@endsection
+
 
 @section('content')
 
@@ -69,7 +100,7 @@
           <input name="_method" value="PUT" type="hidden">
 
           
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="box box-solid">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>Form</b></h3>
@@ -102,7 +133,7 @@
                 <div class="col-md-12"></div>
 
                 {!! __form::textbox(
-                  '12', 'quantity', 'text', 'Quantity', 'Quantity', old('quantity') ? old('quantity') : number_format($sa->quantity), $errors->has('quantity'), $errors->first('quantity'), ''
+                  '12', 'quantity', 'text', 'Quantity', 'Quantity', old('quantity') ? old('quantity') : $sa->quantity, $errors->has('quantity'), $errors->first('quantity'), ''
                 ) !!}
 
                 <div class="col-md-12"></div>
@@ -143,7 +174,7 @@
           </div>
 
           
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="box box-solid">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>Parameters</b></h3>
@@ -153,12 +184,20 @@
 
                 @foreach ($sa->sugarAnalysisParameter as $data)
 
+                  <?php
+                    $assessment_name = $data->sugar_service_id .'_assessment';
+                  ?>
+
                   {!! __form::textbox(
-                    '12', $data->sugar_service_id, 'text', $data->name, $data->name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                    '6', $data->sugar_service_id, 'text', strtoupper($data->name) .' &nbsp;&nbsp;('. $data->standard.')', $data->name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
                   ) !!}
 
-                  <div class="col-md-12"></div>
-                  
+                  <div class="col-md-1" style="margin-top:30px;"><span> &nbsp;&nbsp;&nbsp;&nbsp;=</span></div>
+
+                  {!! __form::select_static(
+                    '5', $assessment_name, 'Assessment', old($assessment_name) ? old($assessment_name) : $data->assessment, ['Within Std.' => 'Within Std.', 'Below Std.' => 'Below Std.'], $errors->has($assessment_name), $errors->first($assessment_name), '', ''
+                  ) !!}
+                            
                 @endforeach
 
               </div> 
@@ -184,18 +223,4 @@
 
 </section>
 
-@endsection
-
-
-
-
-
-
-@section('scripts')
-
-  <script type="text/javascript">
-
-    
-  </script>
-    
 @endsection

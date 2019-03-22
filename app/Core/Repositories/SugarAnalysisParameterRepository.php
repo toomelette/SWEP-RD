@@ -43,10 +43,11 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
-    public function update($sample_no, $sugar_service_id, $result){
+    public function update($sample_no, $sugar_service_id, $result, $assessment){
 
         $sa_parameter = $this->findBySampleNoSugarServiceId($sample_no, $sugar_service_id);
         $sa_parameter->result = $result;
+        $sa_parameter->assessment = $assessment;
         $sa_parameter->save();
 
         return $sa_parameter;

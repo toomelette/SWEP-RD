@@ -10,6 +10,8 @@
 
     @include('layouts.css-plugins')
 
+    @yield('css')
+
   </head>
   <body class="hold-transition {!! Auth::check() ? __sanitize::html_encode(Auth::user()->color) : '' !!}">
 
