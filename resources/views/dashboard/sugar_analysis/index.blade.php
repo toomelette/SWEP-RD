@@ -1,6 +1,6 @@
 <?php
 
-  $table_sessions = [ Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG') ];
+  $table_sessions = [ ];
 
   $appended_requests = [
                         'q'=> Request::get('q'),
@@ -84,20 +84,4 @@
 
   </section>
 
-@endsection
-
-
-
-
-@section('scripts')
-
-  <script type="text/javascript">
-
-    {{-- UPDATE TOAST --}}
-    @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
-      {!! __js::toast(Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS')) !!}
-    @endif
-
-  </script>
-    
 @endsection

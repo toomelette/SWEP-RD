@@ -224,3 +224,38 @@
 </section>
 
 @endsection
+
+
+
+
+
+
+@section('modals')
+
+  @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
+
+    {!! __html::modal_print(
+      'sa_update', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS'), route('dashboard.sugar_analysis.show', Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG'))
+    ) !!}
+  
+  @endif
+
+@endsection 
+
+
+
+
+
+
+
+@section('scripts')
+
+  <script type="text/javascript">
+
+    @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
+      $('#sa_update').modal('show');
+    @endif
+
+  </script>
+
+@endsection

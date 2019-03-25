@@ -1,6 +1,6 @@
 <?php
 
-  $table_sessions = [ Session::get('SUGAR_OOP_UPDATE_SUCCESS_SLUG') ];
+  $table_sessions = [];
 
   $appended_requests = [
                         'q'=> Request::get('q'),
@@ -58,7 +58,7 @@
               <td> 
                 <select id="action" class="form-control input-md">
                   <option value="">Select</option>
-                  <option data-type="1" data-url="{{ route('dashboard.sugar_order_of_payment.show', $data->slug) }}">Details</option>
+                  <option data-type="1" data-url="{{ route('dashboard.sugar_order_of_payment.show', $data->slug) }}">Print</option>
                   <option data-type="1" data-url="{{ route('dashboard.sugar_order_of_payment.edit', $data->slug) }}">Edit</option>
                   <option data-type="0" data-action="delete" data-url="{{ route('dashboard.sugar_order_of_payment.destroy', $data->slug) }}">Delete</option>
                 </select>
@@ -105,11 +105,6 @@
 
     {{-- CALL CONFIRM DELETE MODAL --}}
     {!! __js::modal_confirm_delete_caller('sugar_oop_delete') !!}
-
-    {{-- UPDATE TOAST --}}
-    @if(Session::has('SUGAR_OOP_UPDATE_SUCCESS'))
-      {!! __js::toast(Session::get('SUGAR_OOP_UPDATE_SUCCESS')) !!}
-    @endif
 
     {{-- DELETE TOAST --}}
     @if(Session::has('SUGAR_OOP_DELETE_SUCCESS'))

@@ -94,7 +94,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $this->storeSugarAnalysisParameter($request);
 
         $this->event->fire('sugar_oop.update', $sugar_oop);
-        return redirect()->route('dashboard.sugar_order_of_payment.index');
+        return redirect()->back();
 
     }
 

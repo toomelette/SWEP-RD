@@ -4,6 +4,9 @@
 
 <section class="content-header">
     <h1>Edit Laboratory Service</h1>
+    <div class="pull-right" style="margin-top: -25px;">
+      {!! __html::back_button(['dashboard.sugar_service.index']) !!}
+    </div>
 </section>
 
 <section class="content">

@@ -85,7 +85,7 @@ class SugarAnalysisService extends BaseService{
         }
 
         $this->event->fire('sugar_analysis.update', $sa);
-        return redirect()->route('dashboard.sugar_analysis.index');
+        return redirect()->back();
 
     }
 
