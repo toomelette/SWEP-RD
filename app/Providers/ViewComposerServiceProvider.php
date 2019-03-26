@@ -42,7 +42,9 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
         // SUGAR SAMPLE
         View::composer(['dashboard.sugar_order_of_payment.create',
-                        'dashboard.sugar_order_of_payment.edit'], 'App\Core\ViewComposers\SugarSampleComposer');
+                        'dashboard.sugar_order_of_payment.edit',
+                        'dashboard.sugar_order_of_payment.index',
+                        'dashboard.sugar_analysis.index'], 'App\Core\ViewComposers\SugarSampleComposer');
         
 
         // SUGAR SAMPLE PARAMETER

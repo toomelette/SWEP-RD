@@ -35,9 +35,20 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oops = $this->cache->remember('sugar_order_of_payments:fetch:' . $key, 240, function() use ($request){
 
             $sugar_oop = $this->sugar_oop->newQuery();
-            
+
+            $df = $this->__dataType->date_parse($request->df);
+            $dt = $this->__dataType->date_parse($request->dt);
+
             if(isset($request->q)){
                 $this->search($sugar_oop, $request->q);
+            }
+
+            if(isset($request->ss)){
+                $sugar_oop->where('sugar_sample_id', $request->ss);
+            }
+
+            if(isset($request->df) || isset($request->dt)){
+                $sugar_oop->whereBetween('date', [$df, $dt]);
             }
 
             return $this->populate($sugar_oop);

@@ -6,6 +6,10 @@
                         'q'=> Request::get('q'),
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
+
+                        'ss' => Request::get('ss'),
+                        'df' => Request::get('df'),
+                        'dt' => Request::get('dt'),
                       ];
 
 ?>
@@ -26,6 +30,30 @@
     
     {{-- Form Start --}}
     <form data-pjax class="form" id="filter_form" method="GET" autocomplete="off" action="{{ route('dashboard.sugar_order_of_payment.index') }}">
+
+
+      {{-- Advance Filters --}}
+      {!! __html::filter_open() !!}
+
+        {!! __form::select_dynamic_for_filter(
+          '3', 'ss', 'Kind Of Sample', old('ss'), $global_sugar_samples_all, 'sugar_sample_id', 'name', 'submit_soop_filter', '', ''
+        ) !!}
+
+        <div class="col-md-12 no-padding">
+          
+          <h5>Date Filter : </h5>
+
+          {!! __form::datepicker('3', 'df',  'From', old('df'), '', '') !!}
+
+          {!! __form::datepicker('3', 'dt',  'To', old('dt'), '', '') !!}
+
+          <button type="submit" class="btn btn-primary" style="margin:25px;">Filter Date <i class="fa fa-fw fa-arrow-circle-right"></i></button>
+
+        </div>
+
+      {!! __html::filter_close('submit_soop_filter') !!}
+
+
 
     <div class="box" id="pjax-container" style="overflow-x:auto;">
 

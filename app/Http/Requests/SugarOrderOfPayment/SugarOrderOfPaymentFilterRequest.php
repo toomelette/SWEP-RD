@@ -24,6 +24,9 @@ class SugarOrderOfPaymentFilterRequest extends FormRequest{
         return [
             
         	'q'=>'nullable|string|max:90',
+            'ss' => 'nullable|max:20|string',
+            'df' => 'date_format:"m/d/Y"|nullable',
+            'dt' => 'date_format:"m/d/Y"|nullable',
             
         ];
 

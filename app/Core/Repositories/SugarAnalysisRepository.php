@@ -36,8 +36,18 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
             $sa = $this->sugar_analysis->newQuery();
             
+            $we = $this->__dataType->date_parse($request->we);
+
             if(isset($request->q)){
                 $this->search($sa, $request->q);
+            }
+            
+            if(isset($request->ss)){
+                $sa->where('sugar_sample_id', $request->ss);
+            }
+            
+            if(isset($request->we)){
+                $sa->whereDate('week_ending', $we);
             }
 
             return $this->populate($sa);
