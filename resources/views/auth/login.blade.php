@@ -17,10 +17,6 @@
 			{!! __html::alert('danger', '<i class="icon fa fa-ban"></i> Oops!', Session::get('CHECK_UNAUTHENTICATED')) !!}
 		@endif
 
-		@if(Session::has('CHECK_NOT_LOGGED_IN'))
-			{!! __html::alert('danger', '<i class="icon fa fa-ban"></i> Oops!', Session::get('CHECK_NOT_LOGGED_IN')) !!}
-		@endif
-
 		@if(Session::has('CHECK_NOT_ACTIVE'))
 			{!! __html::alert('danger', '<i class="icon fa fa-ban"></i> Oops!', Session::get('CHECK_NOT_ACTIVE')) !!}
 		@endif

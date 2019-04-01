@@ -89,10 +89,6 @@
                   <option data-type="1" data-url="{{ route('dashboard.user.edit', $data->slug) }}">Edit</option>
                   <option data-type="0" data-action="delete" data-url="{{ route('dashboard.user.destroy', $data->slug) }}">Delete</option>
                   
-                  @if($data->is_active == 1 && $data->is_online == 1)
-                    <option data-type="0" data-action="logout" data-url="{{ route('dashboard.user.logout', $data->slug) }}">Logout</option>
-                  @endif 
-                  
                   @if($data->is_active == 0)
                     <option data-type="0" data-action="activate" data-url="{{ route('dashboard.user.activate', $data->slug) }}">Activate</option>
                   @else

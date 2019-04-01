@@ -25,7 +25,6 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	/** USER **/   
 	Route::post('/user/activate/{slug}', 'UserController@activate')->name('user.activate');
 	Route::post('/user/deactivate/{slug}', 'UserController@deactivate')->name('user.deactivate');
-	Route::post('/user/logout/{slug}', 'UserController@logout')->name('user.logout');
 	Route::get('/user/{slug}/reset_password', 'UserController@resetPassword')->name('user.reset_password');
 	Route::patch('/user/reset_password/{slug}', 'UserController@resetPasswordPost')->name('user.reset_password_post');
 	Route::resource('user', 'UserController');

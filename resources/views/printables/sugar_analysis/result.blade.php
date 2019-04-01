@@ -217,7 +217,7 @@
           <span>DESCRIPTION OF SAMPLE</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->quantity }}</p>
+          <p>: {{ $sa->description }}</p>
         </div>
       </div>
 
