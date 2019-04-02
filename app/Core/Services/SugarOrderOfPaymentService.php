@@ -7,7 +7,6 @@ use App\Core\Interfaces\SugarOrderOfPaymentInterface;
 use App\Core\Interfaces\SugarServiceInterface;
 use App\Core\Interfaces\SugarAnalysisParameterInterface;
 use App\Core\Interfaces\SugarAnalysisInterface;
-use App\Core\Interfaces\SugarSampleInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -20,17 +19,15 @@ class SugarOrderOfPaymentService extends BaseService{
     protected $sugar_service_repo;
     protected $sa_parameter_repo;
     protected $sa_repo;
-    protected $ss_repo;
 
 
 
-    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sa_parameter_repo, SugarAnalysisInterface $sa_repo, SugarSampleInterface $ss_repo){
+    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sa_parameter_repo, SugarAnalysisInterface $sa_repo){
 
         $this->sugar_oop_repo = $sugar_oop_repo;
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sa_parameter_repo = $sa_parameter_repo;
         $this->sa_repo = $sa_repo;
-        $this->ss_repo = $ss_repo;
         parent::__construct();
 
     }

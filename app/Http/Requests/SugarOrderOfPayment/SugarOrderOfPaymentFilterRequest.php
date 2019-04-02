@@ -16,7 +16,6 @@ class SugarOrderOfPaymentFilterRequest extends FormRequest{
 
     
 
-
    
 
     public function rules(){

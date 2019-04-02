@@ -55,14 +55,14 @@
       <div class="col-md-6">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Services</h3>
+            <h3 class="box-title">Parameters</h3>
           </div>
           <div class="box-body">
 
             <table class="table table-bordered">
               
               <tr>
-                  <th>Kind Of Analysis</th>
+                  <th>Name</th>
                   <th>Price</th>
               </tr>  
 

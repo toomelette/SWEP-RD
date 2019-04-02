@@ -1,37 +1,5 @@
 @extends('layouts.admin-master')
 
-
-@section('css')
-  
-  <style type="text/css">
-
-    table, td {
-      border: 1px solid black;
-    }
-
-    thead{
-      -webkit-print-color-adjust: exact; 
-      background-color: #78B681 !important;
-    }
-
-    .data-row-head{
-      text-align: center;
-      padding:5px;
-      font-size:14px;
-      font-weight: bold;
-    }
-
-    .data-row-body{
-      text-align: center;
-      padding:5px;
-      font-size:14px;
-    }
-
-  </style>
-
-@endsection
-
-
 @section('content')
 
 <section class="content-header">

@@ -48,7 +48,6 @@ class SugarSampleSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySlug:'. $sugar_sample->slug .'');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:getAll');
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_sample_parameters:getBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');
@@ -65,7 +64,6 @@ class SugarSampleSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySlug:'. $sugar_sample->slug .'');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:findBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_samples:getAll');
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_sample_parameters:getBySugarSampleId:'. $sugar_sample->sugar_sample_id .'');

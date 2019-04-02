@@ -131,27 +131,6 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function findBySugarSampleId($id){
-
-        $sugar_sample = $this->cache->remember('sugar_samples:findBySugarSampleId:'. $id, 240, function() use ($id){
-            return $this->sugar_sample->where('sugar_sample_id', $id)
-                                      ->with('sugarSampleParameter')
-                                      ->first();
-        }); 
-        
-        if(empty($sugar_sample)){
-            abort(404);
-        }
-
-        return $sugar_sample;
-
-    }
-
-
-
-
-
-
     public function search($model, $key){
 
         return $model->where(function ($model) use ($key) {

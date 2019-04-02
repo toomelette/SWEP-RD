@@ -12,8 +12,6 @@ interface SugarSampleInterface{
 	
 	public function findBySlug($slug);
 	
-	public function findBySugarSampleId($id);
-	
 	public function update($request, $slug);
 	
 	public function destroy($slug);
