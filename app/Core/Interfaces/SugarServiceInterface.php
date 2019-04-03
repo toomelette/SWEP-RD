@@ -18,6 +18,6 @@ interface SugarServiceInterface {
 
 	public function getAll();
 
-	public function findBySugarServiceId($ss_id);
+	public function findBySugarServiceId($sugar_service_id);
 		
 }

@@ -123,8 +123,8 @@ class SugarSampleService extends BaseService{
 
         if(!empty($services)){
             foreach ($services as $data) {
-                $sugar_service_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                $this->sugar_sample_parameter_repo->store($sugar_sample_id, $sugar_service_obj);
+                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
+                $this->sugar_sample_parameter_repo->store($sugar_sample_id, $sugar_service_instance);
             }  
         }
 

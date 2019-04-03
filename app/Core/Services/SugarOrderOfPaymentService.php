@@ -17,17 +17,17 @@ class SugarOrderOfPaymentService extends BaseService{
 
     protected $sugar_oop_repo;
     protected $sugar_service_repo;
-    protected $sa_parameter_repo;
-    protected $sa_repo;
+    protected $sugar_analysis_parameter_repo;
+    protected $sugar_analysis_repo;
 
 
 
-    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sa_parameter_repo, SugarAnalysisInterface $sa_repo){
+    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, SugarAnalysisInterface $sugar_analysis_repo){
 
         $this->sugar_oop_repo = $sugar_oop_repo;
         $this->sugar_service_repo = $sugar_service_repo;
-        $this->sa_parameter_repo = $sa_parameter_repo;
-        $this->sa_repo = $sa_repo;
+        $this->sugar_analysis_parameter_repo = $sugar_analysis_parameter_repo;
+        $this->sugar_analysis_repo = $sugar_analysis_repo;
         parent::__construct();
 
     }
@@ -60,7 +60,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $sugar_oop = $this->sugar_oop_repo->store($request, $total_price);    
 
         // Sugar Analysis
-        $this->sa_repo->store($request, $total_price);
+        $this->sugar_analysis_repo->store($request, $total_price);
 
         // Sugar Analysis Parameter
         $this->storeSugarAnalysisParameter($request);
@@ -82,7 +82,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
 
         // Sugar Analysis
-        $this->sa_repo->updateOrderOfPayment($request, $sugar_oop->sugarAnalysis->slug, $total_price);
+        $this->sugar_analysis_repo->updateOrderOfPayment($request, $sugar_oop->sugarAnalysis->slug, $total_price);
 
         // Sugar OOP
         $this->sugar_oop_repo->update($request, $sugar_oop, $total_price);
@@ -158,8 +158,8 @@ class SugarOrderOfPaymentService extends BaseService{
 
         if(!empty($services)){
             foreach ($services as $data) {
-                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                $total_price += $ss_obj->price;
+                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
+                $total_price += $sugar_service_instance->price;
             }  
         }
 
@@ -177,8 +177,8 @@ class SugarOrderOfPaymentService extends BaseService{
 
         if(!empty($services)){
             foreach ($services as $data) {
-                $ss_obj = $this->sugar_service_repo->findBySugarServiceId($data);
-                $this->sa_parameter_repo->store($request->sample_no, $ss_obj);
+                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
+                $this->sugar_analysis_parameter_repo->store($request->sample_no, $sugar_service_instance);
             }  
         }
 

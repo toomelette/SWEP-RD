@@ -12,13 +12,13 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 	
 
 
-    protected $sa_parameter;
+    protected $sugar_analysis_parameter;
 
 
 
-	public function __construct(SugarAnalysisParameter $sa_parameter){
+	public function __construct(SugarAnalysisParameter $sugar_analysis_parameter){
 
-        $this->sa_parameter = $sa_parameter;
+        $this->sugar_analysis_parameter = $sugar_analysis_parameter;
         parent::__construct();
 
     }
@@ -26,17 +26,17 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
-    public function store($sample_no, $obj){
+    public function store($sample_no, $sugar_service_instance){
 
-        $sa_parameter = new SugarAnalysisParameter;
-        $sa_parameter->sample_no = $sample_no;
-        $sa_parameter->sugar_service_id = $obj->sugar_service_id;
-        $sa_parameter->name = $obj->name;
-        $sa_parameter->price = $obj->price;
-        $sa_parameter->standard = $obj->standard;
-        $sa_parameter->save();
+        $sugar_analysis_parameter = new SugarAnalysisParameter;
+        $sugar_analysis_parameter->sample_no = $sample_no;
+        $sugar_analysis_parameter->sugar_service_id = $sugar_service_instance->sugar_service_id;
+        $sugar_analysis_parameter->name = $sugar_service_instance->name;
+        $sugar_analysis_parameter->price = $sugar_service_instance->price;
+        $sugar_analysis_parameter->standard = $sugar_service_instance->standard;
+        $sugar_analysis_parameter->save();
 
-        return $sa_parameter;
+        return $sugar_analysis_parameter;
         
     }
 
@@ -45,12 +45,12 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
     public function update($sample_no, $sugar_service_id, $result, $assessment){
 
-        $sa_parameter = $this->findBySampleNoSugarServiceId($sample_no, $sugar_service_id);
-        $sa_parameter->result = $result;
-        $sa_parameter->assessment = $assessment;
-        $sa_parameter->save();
+        $sugar_analysis_parameter = $this->findBySampleNoSugarServiceId($sample_no, $sugar_service_id);
+        $sugar_analysis_parameter->result = $result;
+        $sugar_analysis_parameter->assessment = $assessment;
+        $sugar_analysis_parameter->save();
 
-        return $sa_parameter;
+        return $sugar_analysis_parameter;
         
     }
 
@@ -61,17 +61,17 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
     private function findBySampleNoSugarServiceId($sample_no, $sugar_service_id){
 
-        $ss = $this->cache->remember('sugar_analysis_parameter:findBySampleNoSugarServiceId:'.$sample_no.':'. $sugar_service_id, 240, function() use ($sample_no, $sugar_service_id){
-            return $this->sa_parameter->where('sample_no', $sample_no)
+        $sugar_analysis_parameter = $this->cache->remember('sugar_analysis_parameter:findBySampleNoSugarServiceId:'.$sample_no.':'. $sugar_service_id, 240, function() use ($sample_no, $sugar_service_id){
+            return $this->sugar_analysis_parameter->where('sample_no', $sample_no)
                                       ->where('sugar_service_id', $sugar_service_id)
                                       ->first();
         }); 
         
-        if(empty($ss)){
+        if(empty($sugar_analysis_parameter)){
             abort(404);
         }
 
-        return $ss;
+        return $sugar_analysis_parameter;
 
     }
 

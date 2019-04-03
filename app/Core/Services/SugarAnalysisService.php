@@ -12,15 +12,15 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    protected $sa_repo;
-    protected $sa_parameter_repo;
+    protected $sugar_analysis_repo;
+    protected $sugar_analysis_parameter_repo;
 
 
 
-    public function __construct(SugarAnalysisInterface $sa_repo, SugarAnalysisParameterInterface $sa_parameter_repo){
+    public function __construct(SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo){
 
-        $this->sa_repo = $sa_repo;
-        $this->sa_parameter_repo = $sa_parameter_repo;
+        $this->sugar_analysis_repo = $sugar_analysis_repo;
+        $this->sugar_analysis_parameter_repo = $sugar_analysis_parameter_repo;
         parent::__construct();
 
     }
@@ -32,7 +32,7 @@ class SugarAnalysisService extends BaseService{
 
     public function fetch($request){
 
-        $sugar_analysis = $this->sa_repo->fetch($request);
+        $sugar_analysis = $this->sugar_analysis_repo->fetch($request);
 
         $request->flash();
         
@@ -47,7 +47,7 @@ class SugarAnalysisService extends BaseService{
 
     public function edit($slug){
 
-        $sa = $this->sa_repo->findBySlug($slug);  
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
         return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
 
     }
@@ -59,7 +59,7 @@ class SugarAnalysisService extends BaseService{
 
     public function show($slug){
 
-        $sa = $this->sa_repo->findBySlug($slug);  
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
         return view('dashboard.sugar_analysis.show')->with('sa', $sa);
 
     }
@@ -71,7 +71,7 @@ class SugarAnalysisService extends BaseService{
 
     public function update($request, $slug){
 
-        $sa = $this->sa_repo->updateResult($request, $slug);
+        $sa = $this->sugar_analysis_repo->updateResult($request, $slug);
 
         foreach ($sa->sugarAnalysisParameter as $data) {
             
@@ -79,7 +79,7 @@ class SugarAnalysisService extends BaseService{
             $assessment = $data->sugar_service_id.'_assessment';
 
             if (isset($request->$id) || $request->$id == ""){
-                $this->sa_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
+                $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
             }
 
         }
@@ -96,7 +96,7 @@ class SugarAnalysisService extends BaseService{
 
     public function print($slug){
 
-        $sa = $this->sa_repo->findBySlug($slug);  
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
         return view('printables.sugar_analysis.result')->with('sa', $sa);
 
     }
