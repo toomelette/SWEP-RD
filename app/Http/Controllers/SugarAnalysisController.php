@@ -73,7 +73,16 @@ class SugarAnalysisController extends Controller{
 
 	 public function report(){
         
-        return dd('Reports');
+        return view('dashboard.sugar_analysis.report');
+
+    }
+
+
+
+
+     public function report_generate(){
+        
+        return dd('Report Generate');
 
     }
 

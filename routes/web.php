@@ -47,12 +47,13 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 
 	/** SUGAR ANALYSIS **/
+	Route::get('/sugar_analysis/report', 'SugarAnalysisController@report')->name('sugar_analysis.report');
+	Route::get('/sugar_analysis/report_generate', 'SugarAnalysisController@report_generate')->name('sugar_analysis.report_generate');
 	Route::get('/sugar_analysis', 'SugarAnalysisController@index')->name('sugar_analysis.index');
 	Route::get('/sugar_analysis/{slug}/edit', 'SugarAnalysisController@edit')->name('sugar_analysis.edit');
 	Route::put('/sugar_analysis/update/{slug}', 'SugarAnalysisController@update')->name('sugar_analysis.update');
 	Route::get('/sugar_analysis/{slug}', 'SugarAnalysisController@show')->name('sugar_analysis.show');
 	Route::get('/sugar_analysis/print/{slug}', 'SugarAnalysisController@print')->name('sugar_analysis.print');
-	Route::get('/sugar_analysis/reports', 'SugarAnalysisController@report')->name('sugar_analysis.report');
 
 
 	/** MILLS **/
@@ -65,6 +66,10 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	/** SUGAR SAMPLES **/
 	Route::resource('sugar_sample', 'SugarSampleController');
+
+
+	/** CANE JUICE ANALYSIS **/
+	Route::resource('cane_juice_analysis', 'CaneJuiceAnalysisController');
 
 
 	
