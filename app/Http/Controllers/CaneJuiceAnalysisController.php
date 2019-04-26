@@ -23,8 +23,7 @@ class CaneJuiceAnalysisController extends Controller{
 
     public function create(){
         
-        return dd('Create');
-
+        return view('dashboard.cane_juice_analysis.create');
     }
 
 
