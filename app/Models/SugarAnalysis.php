@@ -59,6 +59,10 @@ class SugarAnalysis extends Model{
         return $this->hasMany('App\Models\SugarAnalysisParameter','sample_no','sample_no');
     }
 
+    public function caneJuiceAnalysisParameter() {
+        return $this->hasMany('App\Models\CaneJuiceAnalysisParameter','sample_no','sample_no');
+    }
+
 
     public function sugarSample() {
         return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');

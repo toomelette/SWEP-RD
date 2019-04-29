@@ -68,10 +68,6 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 	Route::resource('sugar_sample', 'SugarSampleController');
 
 
-	/** CANE JUICE ANALYSIS **/
-	Route::resource('cane_juice_analysis', 'CaneJuiceAnalysisController');
-
-
 	
 });
 

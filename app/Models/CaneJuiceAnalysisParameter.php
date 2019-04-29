@@ -22,7 +22,7 @@ class CaneJuiceAnalysisParameter extends Model{
     protected $attributes = [
 
         'slug' => '',
-        'cane_juice_analysis_id' => '',
+        'sample_no' => '',
         'entry_no' => '',
         'date_sampled' => null,
         'date_analyzed' => null,
@@ -40,8 +40,8 @@ class CaneJuiceAnalysisParameter extends Model{
 
     /** RELATIONSHIPS **/
 
-    public function caneJuiceAnalysis() {
-      return $this->belongsTo('App\Models\CaneJuiceAnalysis','cane_juice_analysis_id','cane_juice_analysis_id');
+    public function sugarAnalysis() {
+      return $this->belongsTo('App\Models\SugarAnalysis','sample_no','sample_no');
     }
 
 

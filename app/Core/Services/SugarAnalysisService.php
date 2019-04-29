@@ -48,7 +48,12 @@ class SugarAnalysisService extends BaseService{
     public function edit($slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
-        return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
+
+        if($sa->sugar_sample_id == "SS1006"){
+            return view('dashboard.sugar_analysis.edit_cane_juice')->with('sa', $sa);
+        }else{
+            return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
+        }  
 
     }
 
