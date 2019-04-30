@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFilterRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceFormRequest;
 use App\Core\Services\SugarAnalysisService;
 
 
@@ -83,6 +84,42 @@ class SugarAnalysisController extends Controller{
      public function report_generate(){
         
         return dd('Report Generate');
+
+    }
+
+
+
+
+     public function caneJuiceAnalysisStore(SugarAnalysisCaneJuiceFormRequest $request, $slug){
+        
+        return $this->sa_service->caneJuiceAnalysisStore($request, $slug);
+
+    }
+
+
+
+
+     public function caneJuiceAnalysisUpdate(SugarAnalysisCaneJuiceFormRequest $request, $slug, $cja_slug){
+        
+        return $this->sa_service->caneJuiceAnalysisUpdate($request, $slug, $cja_slug);
+
+    }
+
+
+
+
+     public function caneJuiceAnalysisDestroy($cja_slug){
+        
+        return $this->sa_service->caneJuiceAnalysisDestroy($cja_slug);
+
+    }
+
+
+
+
+     public function caneJuiceAnalysisPrint($slug){
+        
+        return $this->sa_service->caneJuiceAnalysisPrint($slug);
 
     }
 

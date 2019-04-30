@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
 
-class CaneJuiceAnalysisParameter extends Model{
+class CaneJuiceAnalysis extends Model{
 
 
 	use Sortable;
 
-    protected $table = 'sgrlab_cane_juice_analysis_parameters';
+    protected $table = 'sgrlab_cane_juice_analysis';
 
     protected $dates = ['date_sampled', 'date_analyzed'];
     

@@ -1,3 +1,11 @@
+<?php
+
+  $table_sessions = [ 
+                      Session::get('CJ_ANALYSIS_CREATE_SUCCESS_SLUG'),
+                    ];
+
+?>
+
 @extends('layouts.admin-master')
 
 @section('content')
@@ -9,7 +17,7 @@
     </div>
 </section>
 
-<section class="content">
+<section class="content" id="pjax-container">
     
 
 
@@ -53,45 +61,141 @@
     <div class="box">
       
       <div class="box-header with-border">
-        <h3 class="box-title">Results</h3>
+        <h3 class="box-title">Cane Juice Analysis</h3>
         <div class="pull-right">
             <code>Fields with asterisks(*) are required</code>
         </div> 
       </div>
       
-      <form method="POST" action="{{ route('dashboard.sugar_analysis.update', $sa->slug) }}">
-
         <div class="box-body">
 
-          @csrf
-
-          <input name="_method" value="PUT" type="hidden">
-
           
-          <div class="col-md-4">
-            <div class="box box-solid">
+          <div class="col-md-12">
+            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>Form</b></h3>
               </div>
               
-              <div class="box-body">
+              <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sa->slug) }}">
 
-                
+              @csrf
 
-              </div> 
+                <div class="box-body">
+
+                  {!! __form::textbox(
+                     '3', 'entry_no', 'entry_no', 'Entry No. ', 'Entry No.', old('entry_no'), $errors->has('entry_no'), $errors->first('entry_no'), ''
+                  ) !!}
+
+
+                  {!! __form::datepicker(
+                    '3', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
+                  ) !!}
+
+
+                  {!! __form::datepicker(
+                    '3', 'date_analyzed',  'Date Analyzed', old('date_analyzed'), $errors->has('date_analyzed'), $errors->first('date_analyzed')
+                  ) !!}
+
+
+                  {!! __form::textbox(
+                     '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+
+                  {!! __form::textbox(
+                     '3', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
+                  ) !!}
+
+
+                  {!! __form::textbox(
+                     '3', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
+                  ) !!}
+
+
+                  {!! __form::textbox(
+                     '3', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
+                  ) !!}
+
+
+                  {!! __form::textbox(
+                     '3', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
+                  ) !!}
+
+                  <div class="col-md-12"></div>
+
+                  {!! __form::textbox(
+                     '6', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
+                  ) !!}
+
+                </div> 
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
+              </div>
+
+              </form>
 
             </div>
+
           </div>
 
+
           
-          <div class="col-md-8">
-            <div class="box box-solid">
+          <div class="col-md-12" style="margin-top:25px;">
+            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>List</b></h3>
+                <div class="box-tools">
+                  <a href="#" id="print_cja" data-url="" class="btn btn-sm btn-default">
+                    <i class="fa fa-print"></i> Print
+                  </a>
+                </div>
               </div>
               
               <div class="box-body">
 
+                <table class="table table-hover">
+                  <tr>
+                    <th>Entry No.</th>
+                    <th>Date Sampled</th>
+                    <th>Date Analyzed</th>
+                    <th>Variety</th>
+                    <th>Hacienda</th>
+                    <th>Corrected Brix</th>
+                    <th>% POL</th>
+                    <th>Purity</th>
+                    <th>Remarks</th>
+                    <th>Action</th>
+                  </tr>
+                  @foreach($sa->caneJuiceAnalysis as $data) 
+                    <tr 
+                      {!! __html::table_highlighter( $data->slug, $table_sessions) !!} 
+                      {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
+                    >
+                      <td>{{ $data->entry_no }}</td>
+                      <td>{{ __dataType::date_parse($data->date_sampled, '  m/d/Y') }}</td>
+                      <td>{{ __dataType::date_parse($data->date_analyzed, 'm/d/Y') }}</td>
+                      <td>{{ $data->variety }}</td>
+                      <td>{{ $data->hacienda }}</td>
+                      <td>{{ $data->corrected_brix }}</td>
+                      <td>{{ $data->polarization }}</td>
+                      <td>{{ $data->purity }}</td>
+                      <td>{{ $data->remarks }}</td>
+                      <td>
+                        <div class="btn-group">
+                          <a href="#" id="sa_update_btn" es="" data-url="" class="btn btn-sm btn-default">
+                            <i class="fa fa-pencil-square-o"></i>
+                          </a>
+                          <a href="#" id="sa_update_btn" data-url="" class="btn btn-sm btn-default">
+                            <i class="fa  fa-trash-o"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
+                </table>
+
               </div> 
 
             </div>
@@ -100,13 +204,6 @@
 
 
         </div>
-
-
-        <div class="box-footer">
-          <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
-        </div>
-
-        </form>
 
       </div>
     </div>

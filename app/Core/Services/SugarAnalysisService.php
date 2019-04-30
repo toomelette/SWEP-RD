@@ -4,6 +4,7 @@ namespace App\Core\Services;
 
 use App\Core\Interfaces\SugarAnalysisInterface;
 use App\Core\Interfaces\SugarAnalysisParameterInterface;
+use App\Core\Interfaces\CaneJuiceAnalysisInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -14,13 +15,15 @@ class SugarAnalysisService extends BaseService{
 
     protected $sugar_analysis_repo;
     protected $sugar_analysis_parameter_repo;
+    protected $cane_juice_analysis_repo;
 
 
 
-    public function __construct(SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo){
+    public function __construct(SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, CaneJuiceAnalysisInterface $cane_juice_analysis_repo){
 
         $this->sugar_analysis_repo = $sugar_analysis_repo;
         $this->sugar_analysis_parameter_repo = $sugar_analysis_parameter_repo;
+        $this->cane_juice_analysis_repo = $cane_juice_analysis_repo;
         parent::__construct();
 
     }
@@ -103,6 +106,53 @@ class SugarAnalysisService extends BaseService{
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
         return view('printables.sugar_analysis.result')->with('sa', $sa);
+
+    }
+
+
+
+
+
+
+    public function caneJuiceAnalysisStore($request, $slug){
+
+        $cja = $this->cane_juice_analysis_repo->store($request, $slug);
+
+        $this->event->fire('cane_juice_analysis.store', [$cja[0], $cja[1]]);
+        return redirect()->back();
+
+    }
+
+
+
+
+
+
+    public function caneJuiceAnalysisUpdate($request, $slug, $cja_slug){
+
+        dd('services update');
+
+    }
+
+
+
+
+
+
+    public function caneJuiceAnalysisDestroy($cja_slug){
+
+        dd('services destroy');
+
+    }
+
+
+
+
+
+
+    public function caneJuiceAnalysisPrint($slug){
+
+        dd('services print');
 
     }
 

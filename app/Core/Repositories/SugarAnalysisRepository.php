@@ -175,7 +175,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $sa = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){
             return $this->sugar_analysis->where('slug', $slug)
-                              ->with(['sugarAnalysisParameter'])
+                              ->with(['sugarAnalysisParameter', 'caneJuiceAnalysis'])
                               ->first();
         }); 
         
