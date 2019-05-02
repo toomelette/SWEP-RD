@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFilterRequest;
-use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceFormRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceCreateFormRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceEditFormRequest;
 use App\Core\Services\SugarAnalysisService;
 
 
@@ -90,7 +91,7 @@ class SugarAnalysisController extends Controller{
 
 
 
-     public function caneJuiceAnalysisStore(SugarAnalysisCaneJuiceFormRequest $request, $slug){
+     public function caneJuiceAnalysisStore(SugarAnalysisCaneJuiceCreateFormRequest $request, $slug){
         
         return $this->sa_service->caneJuiceAnalysisStore($request, $slug);
 
@@ -99,7 +100,7 @@ class SugarAnalysisController extends Controller{
 
 
 
-     public function caneJuiceAnalysisUpdate(SugarAnalysisCaneJuiceFormRequest $request, $slug, $cja_slug){
+     public function caneJuiceAnalysisUpdate(SugarAnalysisCaneJuiceEditFormRequest $request, $slug, $cja_slug){
         
         return $this->sa_service->caneJuiceAnalysisUpdate($request, $slug, $cja_slug);
 
@@ -108,9 +109,9 @@ class SugarAnalysisController extends Controller{
 
 
 
-     public function caneJuiceAnalysisDestroy($cja_slug){
+     public function caneJuiceAnalysisDestroy($slug, $cja_slug){
         
-        return $this->sa_service->caneJuiceAnalysisDestroy($cja_slug);
+        return $this->sa_service->caneJuiceAnalysisDestroy($slug, $cja_slug);
 
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests\SugarAnalysis;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SugarAnalysisCaneJuiceFormRequest extends FormRequest{
+class SugarAnalysisCaneJuiceCreateFormRequest extends FormRequest{
 
 
     

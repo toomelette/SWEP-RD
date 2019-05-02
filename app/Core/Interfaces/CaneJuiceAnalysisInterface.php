@@ -10,6 +10,8 @@ interface CaneJuiceAnalysisInterface {
 
 	public function update($request, $slug, $cja_slug);
 
-	public function destroy($cja_slug);
+	public function destroy($slug, $cja_slug);
+
+	public function getBySlug($cja_slug);
 		
 }

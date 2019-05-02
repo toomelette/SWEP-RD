@@ -11,4 +11,9 @@ Route::get('/mill/input_mill_byMillId/{mill_id}', 'Api\ApiMillController@inputMi
 		->name('inputMillByMillId');
 
 
+// Sugar Analysis
+Route::get('/sugar_analysis/cane_juice_analysis/{slug}/edit', 'Api\ApiSugarAnalysisController@editCaneJuiceAnalysis')
+		->name('sugar_analysis.cane_juice_analysis_edit');
+
+
 

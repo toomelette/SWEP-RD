@@ -116,9 +116,9 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisStore($request, $slug){
 
-        $cja = $this->cane_juice_analysis_repo->store($request, $slug);
+        $obj = $this->cane_juice_analysis_repo->store($request, $slug);
 
-        $this->event->fire('cane_juice_analysis.store', [$cja[0], $cja[1]]);
+        $this->event->fire('cane_juice_analysis.store', [$obj[0], $obj[1]]);
         return redirect()->back();
 
     }
@@ -130,7 +130,10 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisUpdate($request, $slug, $cja_slug){
 
-        dd('services update');
+        $obj = $this->cane_juice_analysis_repo->update($request, $slug, $cja_slug);
+
+        $this->event->fire('cane_juice_analysis.update', [$obj[0], $obj[1]]);
+        return redirect()->back();
 
     }
 
@@ -139,9 +142,12 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    public function caneJuiceAnalysisDestroy($cja_slug){
+    public function caneJuiceAnalysisDestroy($slug, $cja_slug){
 
-        dd('services destroy');
+        $obj = $this->cane_juice_analysis_repo->destroy($slug, $cja_slug);
+
+        $this->event->fire('cane_juice_analysis.destroy', [$obj[0], $obj[1]]);
+        return redirect()->back();
 
     }
 

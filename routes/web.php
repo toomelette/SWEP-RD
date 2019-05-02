@@ -57,7 +57,7 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 
 	Route::post('/sugar_analysis/cane_juice_analysis/store/{slug}', 'SugarAnalysisController@caneJuiceAnalysisStore')->name('sugar_analysis.cane_juice_analysis_store');
 	Route::put('/sugar_analysis/cane_juice_analysis/update/{slug}/{cja_slug}', 'SugarAnalysisController@caneJuiceAnalysisUpdate')->name('sugar_analysis.cane_juice_analysis_update');
-	Route::delete('/sugar_analysis/cane_juice_analysis/destroy/{cja_slug}', 'SugarAnalysisController@caneJuiceAnalysisDestroy')->name('sugar_analysis.cane_juice_analysis_destroy');
+	Route::delete('/sugar_analysis/cane_juice_analysis/destroy/{slug}/{cja_slug}', 'SugarAnalysisController@caneJuiceAnalysisDestroy')->name('sugar_analysis.cane_juice_analysis_destroy');
 	Route::get('/sugar_analysis/cane_juice_analysis/print/{slug}', 'SugarAnalysisController@caneJuiceAnalysisPrint')->name('sugar_analysis.cane_juice_analysis_print');
 
 

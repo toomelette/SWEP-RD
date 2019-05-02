@@ -2,6 +2,7 @@
 
   $table_sessions = [ 
                       Session::get('CJ_ANALYSIS_CREATE_SUCCESS_SLUG'),
+                      Session::get('CJ_ANALYSIS_UPDATE_SUCCESS_SLUG'),
                     ];
 
 ?>
@@ -42,11 +43,6 @@
           <dd>{{ $sa->origin }}</dd>
           <dt>Address:</dt>
           <dd>{{ $sa->address }}</dd>
-
-          @if($sa)
-            
-          @endif
-
           <dt>Charge:</dt>
           <dd>Php {{ number_format($sa->total_price, 2) }}</dd>
         </dl>
@@ -147,14 +143,20 @@
               <div class="box-header with-border">
                 <h3 class="box-title"><b>List</b></h3>
                 <div class="box-tools">
-                  <a href="#" id="print_cja" data-url="" class="btn btn-sm btn-default">
+                  <a href="#" id="print_cja" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default">
                     <i class="fa fa-print"></i> Print
                   </a>
                 </div>
               </div>
               
               <div class="box-body">
-
+                @if($errors->all())
+                  <ul style="line-height: 10px;">
+                    @foreach ($errors->all() as $data)
+                      <li><p class="text-danger">{{ $data }}</p></li>
+                    @endforeach
+                  </ul>
+                @endif
                 <table class="table table-hover">
                   <tr>
                     <th>Entry No.</th>
@@ -168,7 +170,7 @@
                     <th>Remarks</th>
                     <th>Action</th>
                   </tr>
-                  @foreach($sa->caneJuiceAnalysis as $data) 
+                  @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
                     <tr 
                       {!! __html::table_highlighter( $data->slug, $table_sessions) !!} 
                       {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
@@ -184,10 +186,10 @@
                       <td>{{ $data->remarks }}</td>
                       <td>
                         <div class="btn-group">
-                          <a href="#" id="sa_update_btn" es="" data-url="" class="btn btn-sm btn-default">
+                          <a href="#" id="cja_update_btn" es="{{ $data->slug }}" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_update', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-pencil-square-o"></i>
                           </a>
-                          <a href="#" id="sa_update_btn" data-url="" class="btn btn-sm btn-default">
+                          <a href="#" id="cja_delete_btn" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_destroy', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
                             <i class="fa  fa-trash-o"></i>
                           </a>
                         </div>
@@ -221,13 +223,124 @@
 
 @section('modals')
 
-  @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
 
-    {!! __html::modal_print(
-      'sa_update', '<i class="fa fa-fw fa-check"></i> Saved!', Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS'), route('dashboard.sugar_analysis.show', Session::get('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG'))
-    ) !!}
-  
-  @endif
+  {{-- Update CJA --}}
+  <div class="modal fade bs-example-modal-lg" id="cja_update" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body" id="cja_update_body">
+          <form data-pjax id="cja_update_form" method="POST" autocomplete="off">
+
+            <div class="row">
+                
+              @csrf
+
+              <input name="_method" value="PUT" type="hidden">
+
+              <input name="e_slug" id="e_slug"  type="hidden">
+
+              {!! __form::textbox(
+                 '3', 'e_entry_no', 'e_entry_no', 'Entry No. ', 'Entry No.', old('e_entry_no'), $errors->has('e_entry_no'), $errors->first('e_entry_no'), ''
+              ) !!}
+
+
+              {!! __form::datepicker(
+                '3', 'e_date_sampled',  'Date Sampled', old('e_date_sampled'), $errors->has('e_date_sampled'), $errors->first('e_date_sampled')
+              ) !!}
+
+
+              {!! __form::datepicker(
+                '3', 'e_date_analyzed',  'Date Analyzed', old('e_date_analyzed'), $errors->has('e_date_analyzed'), $errors->first('e_date_analyzed')
+              ) !!}
+
+
+              {!! __form::textbox(
+                 '3', 'e_variety', 'e_variety', 'Variety', 'Variety', old('e_variety'), $errors->has('e_variety'), $errors->first('e_variety'), ''
+              ) !!}
+
+              <div class="col-md-12"></div>
+
+              {!! __form::textbox(
+                 '3', 'e_hacienda', 'e_hacienda', 'Hacienda', 'Hacienda', old('e_hacienda'), $errors->has('e_hacienda'), $errors->first('e_hacienda'), ''
+              ) !!}
+
+
+              {!! __form::textbox(
+                 '3', 'e_corrected_brix', 'e_corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('e_corrected_brix'), $errors->has('e_corrected_brix'), $errors->first('e_corrected_brix'), ''
+              ) !!}
+
+
+              {!! __form::textbox(
+                 '3', 'e_polarization', 'e_polarization', '% Pol', '% Pol', old('e_polarization'), $errors->has('e_polarization'), $errors->first('e_polarization'), ''
+              ) !!}
+
+
+              {!! __form::textbox(
+                 '3', 'e_purity', 'e_purity', 'Purity', 'Purity', old('e_purity'), $errors->has('e_purity'), $errors->first('e_purity'), ''
+              ) !!}
+
+              <div class="col-md-12"></div>
+
+              {!! __form::textbox(
+                 '6', 'e_remarks', 'e_remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('e_remarks'), $errors->has('e_remarks'), $errors->first('e_remarks'), ''
+              ) !!}
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  {{-- Delete CJA --}}
+  {!! __html::modal_delete('cja_delete') !!}
+
+
+
+  {{-- Print Modal --}}
+  <div class="modal fade" id="print_cja_modal" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Signatories:</h4>
+        </div>
+        <form id="print_cja_form" method="GET" target="_blank">
+          <div class="modal-body">
+
+            {!! __form::textbox(
+               '12', 'nb', 'text', 'Noted By:', 'Noted By', old('nb'), $errors->has('nb'), $errors->first('nb'), 'data-transform="uppercase"'
+            ) !!}
+
+            {!! __form::textbox(
+               '12', 'p', 'text', 'Position:', 'Position', old('p'), $errors->has('p'), $errors->first('p'), 'data-transform="uppercase"'
+            ) !!}
+
+            {!! __form::textbox(
+               '12', 'd', 'text', 'Department/Division:', 'Department/Division', old('d'), $errors->has('d'), $errors->first('d'), 'data-transform="uppercase"'
+            ) !!}
+
+          </div>
+          <div class="modal-footer" style="overflow: hidden;">
+            <button class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Print</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
 
 @endsection 
 
@@ -241,9 +354,89 @@
 
   <script type="text/javascript">
 
-    @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
-      $('#sa_update').modal('show');
-    @endif
+
+    // Update Button Action
+    $(document).on("click", "#cja_update_btn", function () {
+
+      var slug = $(this).attr("es");
+
+      $("#cja_update").modal("show");
+      $("#cja_update_body #cja_update_form").attr("action", $(this).data("url"));
+
+      // Datepicker
+      $('.datepicker').each(function(){
+          $(this).datepicker({
+              autoclose: true,
+              dateFormat: "mm/dd/yy",
+              orientation: "bottom"
+          })
+      });
+
+      $.ajax({
+        headers: {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")},
+        url: "/api/sugar_analysis/cane_juice_analysis/"+slug+"/edit",
+        type: "GET",
+        dataType: "json",
+        success:function(data) {       
+            
+          $.each(data, function(key, value) {
+            $("#cja_update_form #e_slug").val(value.slug);
+            $("#cja_update_form #e_entry_no").val(value.entry_no);
+            $("#cja_update_form #e_date_sampled").datepicker("setDate", new Date(value.date_sampled));
+            $("#cja_update_form #e_date_analyzed").datepicker("setDate", new Date(value.date_analyzed));
+            $("#cja_update_form #e_variety").val(value.variety);
+            $("#cja_update_form #e_hacienda").val(value.hacienda);
+            $("#cja_update_form #e_corrected_brix").val(value.corrected_brix);
+            $("#cja_update_form #e_polarization").val(value.polarization);
+            $("#cja_update_form #e_purity").val(value.purity);
+            $("#cja_update_form #e_remarks").val(value.remarks);
+          });
+
+        }
+      });
+
+    });
+
+
+
+    // Update Form Action
+    $(document).on("submit", "#cja_update_body #cja_update_form", function () {
+      $('#cja_update').delay(50).fadeOut(50);
+      setTimeout(function(){
+        $('#cja_update').modal("hide");  
+      }, 100);
+    });
+
+
+
+    // Delete Button Action
+    $(document).on("click", "#cja_delete_btn", function () {
+      $("#cja_delete").modal("show");
+      $("#delete_body #form").attr("action", $(this).data("url"));
+      $("#delete_body #form").attr("data-pjax", '');
+      $(this).val("");
+    });
+
+
+
+    // Delete Form Action
+    $(document).on("submit", "#delete_body #form", function () {
+        $('#cja_delete').delay(100).fadeOut(100);
+       setTimeout(function(){
+          $('#cja_delete').modal("hide");
+       }, 200);
+    });
+
+
+    // CALL PRINT SR MODAL
+    $(document).on("click", "#print_cja", function () {
+
+        $("#print_cja_modal").modal("show");
+        $("#print_cja_form").attr("action", $(this).data("url"));
+        
+    });
+
+
 
   </script>
 
