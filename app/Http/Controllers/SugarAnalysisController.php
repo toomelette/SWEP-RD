@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisFilterRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisReportFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceCreateFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceEditFormRequest;
 use App\Core\Services\SugarAnalysisService;
@@ -82,9 +83,9 @@ class SugarAnalysisController extends Controller{
 
 
 
-     public function report_generate(){
+     public function report_generate(SugarAnalysisReportFormRequest $request){
         
-        return dd('Report Generate');
+        return $this->sa_service->report_generate($request);
 
     }
 

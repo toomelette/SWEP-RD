@@ -14,7 +14,7 @@
     <div class="box">
     
       <div class="box-header with-border">
-        <h3 class="box-title">Sugar Analysis Reports</h3>
+        <h3 class="box-title">Annual Accomplishment Report</h3>
         <div class="pull-right">
             <code>Fields with asterisks(*) are required</code>
         </div> 
@@ -24,9 +24,15 @@
 
         <div class="box-body">
 
+          <input type="hidden" name="t" value="aar">
 
+          {!! __form::datepicker(
+            '3', 'date_from',  'Date Received *', old('date_from') ? old('date_from') : Carbon::now()->format('m/d/Y'), $errors->has('date_from'), $errors->first('date_from')
+          ) !!}
 
-
+          {!! __form::datepicker(
+            '3', 'date_to',  'Date Received *', old('date_to') ? old('date_to') : Carbon::now()->format('m/d/Y'), $errors->has('date_to'), $errors->first('date_to')
+          ) !!}
 
         </div>
 

@@ -191,4 +191,41 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
+
+    public function getByDate_CustomerType_Sample_Id($date_from, $date_to, $customer_type = [], $sample_id = []){
+
+        $customer_type_string = implode(',', $customer_type);
+        $sample_id_string = implode(',', $sample_id);
+
+        $cache_key = 'sugar_analysis:getByDate_CustomerType_Sample_Id:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sample_id_string;
+
+        $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sample_id){
+           
+            $sa_list = $this->sugar_analysis->newQuery();
+
+            if(isset($date_from) || isset($date_to)){
+
+                $df = $this->__dataType->date_parse($date_from);
+                $dt = $this->__dataType->date_parse($date_to);
+
+                $sa_list->whereBetween('date', [$df, $dt]);
+
+            }
+
+            $sa_list->whereIn('customer_type', $customer_type);
+
+            $sa_list->whereIn('sugar_sample_id', $sample_id);
+
+            return $sa_list->get();
+
+        }); 
+
+        return $sa;
+
+    }
+
+
+
+
+
 }
