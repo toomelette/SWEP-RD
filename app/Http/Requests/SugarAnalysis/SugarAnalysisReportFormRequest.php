@@ -22,9 +22,7 @@ class SugarAnalysisReportFormRequest extends FormRequest{
         return [
             
             't'=>'required|string|max:11',
-        	'date_from'=>'nullable|date_format:"m/d/Y"',
-        	'date_to'=>'nullable|date_format:"m/d/Y"',
-
+        	'year'=>'required|integer|max:3000',
         ];
     
     }

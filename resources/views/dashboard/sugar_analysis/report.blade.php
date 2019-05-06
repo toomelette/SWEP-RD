@@ -26,12 +26,8 @@
 
           <input type="hidden" name="t" value="aar">
 
-          {!! __form::datepicker(
-            '3', 'date_from',  'Date Received *', old('date_from') ? old('date_from') : Carbon::now()->format('m/d/Y'), $errors->has('date_from'), $errors->first('date_from')
-          ) !!}
-
-          {!! __form::datepicker(
-            '3', 'date_to',  'Date Received *', old('date_to') ? old('date_to') : Carbon::now()->format('m/d/Y'), $errors->has('date_to'), $errors->first('date_to')
+          {!! __form::textbox(
+            '3', 'year', 'text', 'Year', 'Year', old('year'), $errors->has('year'), $errors->first('year'), ''
           ) !!}
 
         </div>
