@@ -10,43 +10,6 @@
 </section>
 
 <section class="content">
-    
-
-
-  <div class="col-md-12">
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Order of Payment Info</h3>
-      </div>
-      <div class="box-body">
-        <dl class="dl-horizontal">
-          <dt>Type:</dt>
-            @if($sa->customer_type == "CT1001")
-              <dd>Walk in</dd>
-            @elseif($sa->customer_type == "CT1002")
-              <dd>Mill Company</dd>
-            @endif
-          <dt>Sample No:</dt>
-          <dd>{{ $sa->sample_no }}</dd>
-          <dt>Kind of Sample:</dt>
-          <dd>{{ optional($sa->sugarSample)->name }}</dd>
-          <dt>Origin:</dt>
-          <dd>{{ $sa->origin }}</dd>
-          <dt>Address:</dt>
-          <dd>{{ $sa->address }}</dd>
-
-          @if($sa)
-            
-          @endif
-
-          <dt>Charge:</dt>
-          <dd>Php {{ number_format($sa->total_price, 2) }}</dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-
-
 
 
   <div class="col-md-12">
@@ -69,7 +32,7 @@
 
           
           <div class="col-md-5">
-            <div class="box box-solid">
+            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>Form</b></h3>
               </div>
@@ -143,7 +106,7 @@
 
           
           <div class="col-md-7">
-            <div class="box box-solid">
+            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title"><b>Parameters</b></h3>
               </div>
@@ -163,7 +126,7 @@
                   <div class="col-md-1" style="margin-top:30px;"><span> &nbsp;&nbsp;&nbsp;&nbsp;=</span></div>
 
                   {!! __form::select_static(
-                    '5', $assessment_name, 'Assessment', old($assessment_name) ? old($assessment_name) : $data->assessment, ['Within Std.' => 'Within Std.', 'Below Std.' => 'Below Std.'], $errors->has($assessment_name), $errors->first($assessment_name), '', ''
+                    '5', $assessment_name, 'Assessment', old($assessment_name) ? old($assessment_name) : $data->assessment, ['Below Std.' => 'Below Std.', 'Within Std.' => 'Within Std.', 'Above Std.' => 'Above Std.'], $errors->has($assessment_name), $errors->first($assessment_name), '', ''
                   ) !!}
 
                   <div class="col-md-12"></div>

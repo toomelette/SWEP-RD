@@ -19,38 +19,6 @@
 </section>
 
 <section class="content" id="pjax-container">
-    
-
-
-  <div class="col-md-12">
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Order of Payment Info</h3>
-      </div>
-      <div class="box-body">
-        <dl class="dl-horizontal">
-          <dt>Type:</dt>
-            @if($sa->customer_type == "CT1001")
-              <dd>Walk in</dd>
-            @elseif($sa->customer_type == "CT1002")
-              <dd>Mill Company</dd>
-            @endif
-          <dt>Sample No:</dt>
-          <dd>{{ $sa->sample_no }}</dd>
-          <dt>Kind of Sample:</dt>
-          <dd>{{ optional($sa->sugarSample)->name }}</dd>
-          <dt>Origin:</dt>
-          <dd>{{ $sa->origin }}</dd>
-          <dt>Address:</dt>
-          <dd>{{ $sa->address }}</dd>
-          <dt>Charge:</dt>
-          <dd>Php {{ number_format($sa->total_price, 2) }}</dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-
-
 
 
   <div class="col-md-12">
@@ -209,7 +177,6 @@
 
       </div>
     </div>
-
 
 
 </section>

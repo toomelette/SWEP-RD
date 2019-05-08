@@ -53,9 +53,13 @@ class SugarAnalysisService extends BaseService{
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
 
         if($sa->sugar_sample_id == "SS1006"){
+
             return view('dashboard.sugar_analysis.edit_cane_juice')->with('sa', $sa);
+
         }else{
+
             return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
+            
         }  
 
     }
@@ -221,9 +225,11 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisStore($request, $slug){
 
-        $obj = $this->cane_juice_analysis_repo->store($request, $slug);
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
-        $this->event->fire('cane_juice_analysis.store', [$obj[0], $obj[1]]);
+        $cja = $this->cane_juice_analysis_repo->store($request, $sa->sample_no);
+
+        $this->event->fire('cane_juice_analysis.store', [$sa, $cja]);
         return redirect()->back();
 
     }
@@ -235,9 +241,11 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisUpdate($request, $slug, $cja_slug){
 
-        $obj = $this->cane_juice_analysis_repo->update($request, $slug, $cja_slug);
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
-        $this->event->fire('cane_juice_analysis.update', [$obj[0], $obj[1]]);
+        $cja = $this->cane_juice_analysis_repo->update($request, $cja_slug);
+
+        $this->event->fire('cane_juice_analysis.update', [$sa, $cja]);
         return redirect()->back();
 
     }
@@ -249,9 +257,11 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisDestroy($slug, $cja_slug){
 
-        $obj = $this->cane_juice_analysis_repo->destroy($slug, $cja_slug);
+        $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
-        $this->event->fire('cane_juice_analysis.destroy', [$obj[0], $obj[1]]);
+        $cja = $this->cane_juice_analysis_repo->destroy($cja_slug);
+
+        $this->event->fire('cane_juice_analysis.destroy', [$sa, $cja]);
         return redirect()->back();
 
     }

@@ -152,24 +152,13 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function search($model, $key){
+    public function getAll(){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%');
+        $menus = $this->cache->remember('menus:getAll', 240, function(){
+            return $this->menu->select('menu_id', 'name')->get();
         });
-
-    }
-
-
-
-
-
-    public function populate($model){
-
-        return $model->select('name', 'route', 'icon', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+        
+        return $menus;
 
     }
 
@@ -202,13 +191,24 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function getAll(){
+    public function search($model, $key){
 
-        $menus = $this->cache->remember('menus:getAll', 240, function(){
-            return $this->menu->select('menu_id', 'name')->get();
+        return $model->where(function ($model) use ($key) {
+                $model->where('name', 'LIKE', '%'. $key .'%');
         });
-        
-        return $menus;
+
+    }
+
+
+
+
+
+    public function populate($model){
+
+        return $model->select('name', 'route', 'icon', 'slug')
+                     ->sortable()
+                     ->orderBy('updated_at', 'desc')
+                     ->paginate(10);
 
     }
 

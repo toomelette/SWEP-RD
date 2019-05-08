@@ -21,7 +21,7 @@ class SugarAnalysisCaneJuiceCreateFormRequest extends FormRequest{
 
         return [
             
-        	'entry_no'=>'nullable|string|max:45',
+        	'entry_no'=>'required|string|max:45',
         	'date_sampled'=>'nullable|date_format:"m/d/Y"',
         	'date_analyzed'=>'nullable|date_format:"m/d/Y"',
             'variety'=>'nullable|string|max:255',

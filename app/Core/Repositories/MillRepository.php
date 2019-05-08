@@ -129,33 +129,6 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function search($model, $key){
-
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%')
-                      ->orwhere('mill_id', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
-    public function populate($model){
-
-        return $model->select('mill_id', 'name', 'address', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
-
-    }
-
-
-
-
-
-
     public function getAll(){
 
         $mills = $this->cache->remember('mills:getAll', 240, function(){
@@ -184,6 +157,33 @@ class MillRepository extends BaseRepository implements MillInterface {
         }
 
         return $mill;
+
+    }
+
+
+
+
+
+
+    public function search($model, $key){
+
+        return $model->where(function ($model) use ($key) {
+                $model->where('name', 'LIKE', '%'. $key .'%')
+                      ->orwhere('mill_id', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    public function populate($model){
+
+        return $model->select('mill_id', 'name', 'address', 'slug')
+                     ->sortable()
+                     ->orderBy('updated_at', 'desc')
+                     ->paginate(10);
 
     }
 

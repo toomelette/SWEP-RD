@@ -144,33 +144,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function search($model, $key){
-
-        return $model->where(function ($model) use ($key) {
-                $model->where('sample_no', 'LIKE', '%'. $key .'%')
-                      ->orwhere('origin', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
-    public function populate($model){
-
-        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
-
-    }
-
-
-
-
-
-
     public function findBySlug($slug){
 
         $sa = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){
@@ -221,6 +194,33 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         }); 
 
         return $sa;
+
+    }
+
+
+
+
+
+
+    public function search($model, $key){
+
+        return $model->where(function ($model) use ($key) {
+                $model->where('sample_no', 'LIKE', '%'. $key .'%')
+                      ->orwhere('origin', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    public function populate($model){
+
+        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
+                     ->sortable()
+                     ->orderBy('updated_at', 'desc')
+                     ->paginate(10);
 
     }
 

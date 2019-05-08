@@ -151,32 +151,6 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
 
 
-    public function search($model, $key){
-
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
-    public function populate($model){
-
-        return $model->select('name', 'price', 'standard', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
-
-    }
-
-
-
-
-
-
     public function getAll(){
 
         $sugar_services = $this->cache->remember('sugar_services:getAll', 240, function(){
@@ -207,6 +181,32 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         
         return $id;
         
+    }
+
+
+
+
+
+
+    public function search($model, $key){
+
+        return $model->where(function ($model) use ($key) {
+                $model->where('name', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    public function populate($model){
+
+        return $model->select('name', 'price', 'standard', 'slug')
+                     ->sortable()
+                     ->orderBy('updated_at', 'desc')
+                     ->paginate(10);
+
     }
 
 
