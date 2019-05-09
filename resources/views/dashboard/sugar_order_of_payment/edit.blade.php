@@ -6,6 +6,7 @@
   $raw_sugar_special_services = $global_sugar_sample_parameter_raw_sugar_special->pluck('sugar_service_id')->toArray();
   $muscovado_services = $global_sugar_sample_parameter_muscovado->pluck('sugar_service_id')->toArray();
   $molasses_services = $global_sugar_sample_parameter_molasses->pluck('sugar_service_id')->toArray();
+  $cja_services = $global_sugar_sample_parameter_cja->pluck('sugar_service_id')->toArray();
 
 ?>
 
@@ -246,6 +247,27 @@
                 </table>
 
 
+                {{-- CANE JUICE SERVICES --}}
+                <table class="table table-bordered" id="cja">
+                  <tr>
+                    <th>Kind of Analysis</th>
+                    <th>Price</th>
+                  </tr>
+                  @foreach ($global_sugar_service_all as $data)
+                    <tr>  
+                      <td>
+                        <label>
+                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                          {{ in_array($data->sugar_service_id, $cja_services) ? 'checked' : '' }}>
+                          &nbsp; {{ $data->name }}
+                        </label>
+                      </td>
+                      <td>Php {{ $data->price }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+
+
 
               </div> 
             </div>
@@ -355,6 +377,8 @@
         $("#muscovado input").attr("disabled", true);
         $('#molasses').hide();
         $("#molasses input").attr("disabled", true);
+        $('#cja').hide();
+        $("#cja input").attr("disabled", true);
 
       });
 
@@ -374,6 +398,8 @@
         $("#muscovado input").attr("disabled", true);
         $('#molasses').hide();
         $("#molasses input").attr("disabled", true);
+        $('#cja').hide();
+        $("#cja input").attr("disabled", true);
 
       });
 
@@ -399,6 +425,9 @@
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
+
 
         }else if(val == "SS1002"){ 
 
@@ -415,6 +444,8 @@
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
 
         }else if(val == "SS1005"){ 
 
@@ -431,6 +462,8 @@
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
 
         }else if(val == "SS1003"){
 
@@ -447,6 +480,8 @@
           $("#raw_sugar_special input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
 
         }else if(val == "SS1004"){ 
 
@@ -463,6 +498,26 @@
           $("#raw_sugar_special input").attr("disabled", true);
           $('#muscovado').hide();
           $("#muscovado input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
+
+        }else if(val == "SS1006"){ 
+
+          $('#cja').show();
+          $("#cja input").removeAttr('disabled');
+
+          $('#default').hide();
+          $("#default input").attr("disabled", true);
+          $('#raw_sugar').hide();
+          $("#raw_sugar input").attr("disabled", true);
+          $('#raw_sugar_complete').hide();
+          $("#raw_sugar_complete input").attr("disabled", true);
+          $('#raw_sugar_special').hide();
+          $("#raw_sugar_special input").attr("disabled", true);
+          $('#muscovado').hide();
+          $("#muscovado input").attr("disabled", true);
+          $('#molasses').hide();
+          $("#molasses input").attr("disabled", true);
 
         }else{
 
@@ -478,6 +533,8 @@
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
+          $('#cja').hide();
+          $("#cja input").attr("disabled", true);
 
         }
     });
