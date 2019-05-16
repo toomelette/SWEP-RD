@@ -78,10 +78,18 @@
               <td>{{ $data->origin }}</td>
               <td>{{ __dataType::date_parse($data->week_ending, 'F d,Y') }}</td>
               <td>
-                @if($data->status == "PENDING")
-                  <span class="label label-warning">PENDING</span>
-                @elseif($data->status == "ANALYZED")
-                  <span class="label label-success">ANALYZED</span> 
+                @if($data->sugar_sample_id == "SS1006")
+                  @if ($data->caneJuiceAnalysis->isEmpty())
+                    <span class="label label-warning">PENDING</span>
+                  @else
+                    <span class="label label-success">ANALYZED</span> 
+                  @endif
+                @else
+                  @if($data->status == "PENDING")
+                    <span class="label label-warning">PENDING</span>
+                  @elseif($data->status == "ANALYZED")
+                    <span class="label label-success">ANALYZED</span> 
+                  @endif
                 @endif
               </td>
               <td>

@@ -112,9 +112,15 @@
           Kind of Analysis:
         </div>
         <div class="col-sm-7 std_div no-padding">
-          @foreach ($sugar_oop->sugarAnalysisParameter as $data)
-          {{ $data->name }}, 
-          @endforeach
+
+          @if ($sugar_oop->sugarAnalysisParameter->isEmpty())
+            &nbsp;
+          @else
+            @foreach ($sugar_oop->sugarAnalysisParameter as $data)
+              {{ $data->name }}, 
+            @endforeach
+          @endif
+        
         </div>
       </div>
 

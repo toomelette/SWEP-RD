@@ -154,13 +154,22 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = 0.00;
 
-        $services = $request->sugar_service_id;
+        if ($request->sugar_sample_id == "SS1006") {
+            
+            $total_price = 100;
 
-        if(!empty($services)){
-            foreach ($services as $data) {
-                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
-                $total_price += $sugar_service_instance->price;
-            }  
+        }else{
+
+            $services = $request->sugar_service_id;
+
+            if(!empty($services)){
+                foreach ($services as $data) {
+                    $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
+                    $total_price += $sugar_service_instance->price;
+                }  
+            }
+
+                
         }
 
         return $total_price;

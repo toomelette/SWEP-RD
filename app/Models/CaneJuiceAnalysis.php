@@ -24,6 +24,7 @@ class CaneJuiceAnalysis extends Model{
         'slug' => '',
         'sample_no' => '',
         'entry_no' => '',
+        'week_ending' => null,
         'date_sampled' => null,
         'date_analyzed' => null,
         'variety' => '',
