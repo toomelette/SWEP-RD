@@ -34,7 +34,8 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
         $cja->sample_no = $sample_no;
         $cja->entry_no = $request->entry_no;
         $cja->date_sampled = $this->__dataType->date_parse($request->date_sampled);
-        $cja->date_analyzed = $this->__dataType->date_parse($request->date_analyzed);
+        $cja->date_analyzed_from = $this->__dataType->date_parse($request->date_analyzed_from);
+        $cja->date_analyzed_to = $this->__dataType->date_parse($request->date_analyzed_to);
         $cja->variety = $request->variety;
         $cja->hacienda = $request->hacienda;
         $cja->corrected_brix = $request->corrected_brix;
@@ -57,7 +58,8 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
         $cja = $this->findBySlug($cja_slug);
         $cja->entry_no = $request->e_entry_no;
         $cja->date_sampled = $this->__dataType->date_parse($request->e_date_sampled);
-        $cja->date_analyzed = $this->__dataType->date_parse($request->e_date_analyzed);
+        $cja->date_analyzed_from = $this->__dataType->date_parse($request->e_date_analyzed_from);
+        $cja->date_analyzed_to = $this->__dataType->date_parse($request->e_date_analyzed_to);
         $cja->variety = $request->e_variety;
         $cja->hacienda = $request->e_hacienda;
         $cja->corrected_brix = $request->e_corrected_brix;

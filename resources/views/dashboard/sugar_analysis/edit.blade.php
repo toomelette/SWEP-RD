@@ -58,7 +58,11 @@
                 <div class="col-md-12"></div>
 
                 {!! __form::datepicker(
-                  '12', 'date_analyzed',  'Date Analyzed *', old('date_analyzed') ? old('date_analyzed') : __dataType::date_parse($sa->date_analyzed), $errors->has('date_analyzed'), $errors->first('date_analyzed')
+                  '6', 'date_analyzed_from',  'Date Analyzed From *', old('date_analyzed_from') ? old('date_analyzed_from') : __dataType::date_parse($sa->date_analyzed_from), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
+                ) !!}
+
+                {!! __form::datepicker(
+                  '6', 'date_analyzed_to',  'Date Analyzed To *', old('date_analyzed_to') ? old('date_analyzed_to') : __dataType::date_parse($sa->date_analyzed_to), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
                 ) !!}
 
                 <div class="col-md-12"></div>

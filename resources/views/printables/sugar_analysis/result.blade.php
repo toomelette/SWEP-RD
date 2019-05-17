@@ -206,7 +206,7 @@
           <span>DATE ANALYZED</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_parse($sa->date_analyzed, 'F d, Y') }}</p>
+          <p>: {{ __dataType::date_scope($sa->date_analyzed_from, $sa->date_analyzed_to) }}</p>
         </div>
       </div>
 

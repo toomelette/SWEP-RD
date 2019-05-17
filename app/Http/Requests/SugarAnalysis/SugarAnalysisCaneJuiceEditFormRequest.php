@@ -22,8 +22,9 @@ class SugarAnalysisCaneJuiceEditFormRequest extends FormRequest{
         return [
             
         	'e_entry_no'=>'required|string|max:45',
-        	'e_date_sampled'=>'nullable|date_format:"m/d/Y"',
-        	'e_date_analyzed'=>'nullable|date_format:"m/d/Y"',
+        	'e_date_sampled'=>'required|date_format:"m/d/Y"',
+        	'e_date_analyzed_from'=>'required|date_format:"m/d/Y"',
+            'e_date_analyzed_to'=>'required|date_format:"m/d/Y"',
             'e_variety'=>'nullable|string|max:255',
             'e_hacienda'=>'nullable|string|max:255',
             'e_corrected_brix'=>'nullable|string|max:45',

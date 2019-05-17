@@ -14,9 +14,9 @@
   <div class="box">
         
     <div class="box-header with-border">
-      <h3 class="box-title">Details</h3>
+      <h3 class="box-title"><b>Details</b></h3>
       <div class="box-tools">
-        <a href="#" id="print_sugar_analysis" data-url="{{ route('dashboard.sugar_analysis.print', $sa->slug) }}" class="btn btn-sm btn-default">
+        <a href="#" id="print_cja" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default">
           <i class="fa fa-print"></i> Print
         </a>&nbsp;
         <a href="{{ route('dashboard.sugar_analysis.edit', $sa->slug) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
@@ -25,7 +25,7 @@
 
     <div class="box-body">
 
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">Order of Payment Info</h3>
@@ -74,32 +74,42 @@
 
 
 
-      <div class="col-md-6">
+      <div class="col-md-12" style="margin-top:10px;">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Services</h3>
+            <h3 class="box-title">Cane Juice Analysis</h3>
           </div>
+          
           <div class="box-body">
-
-            <table class="table table-bordered">
-              
+            <table class="table table-hover">
               <tr>
-                  <th>Parameters</th>
-                  <th>Results</th>
-                  <th>Standards</th>
-              </tr>  
-
-              @foreach($sa->sugarAnalysisParameter as $data)
+                <th>Entry No.</th>
+                <th>Date Sampled</th>
+                <th>Date Analyzed</th>
+                <th>Variety</th>
+                <th>Hacienda</th>
+                <th>Corrected Brix</th>
+                <th>% POL</th>
+                <th>Purity</th>
+                <th>Remarks</th>
+              </tr>
+              @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
                 <tr>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->result }}</td>
-                    <td>{{ $data->standard }}</td>
-                </tr> 
+                  <td>{{ $data->entry_no }}</td>
+                  <td>{{ __dataType::date_parse($data->date_sampled, '  m/d/Y') }}</td>
+                  <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
+                  <td>{{ $data->variety }}</td>
+                  <td>{{ $data->hacienda }}</td>
+                  <td>{{ $data->corrected_brix }}</td>
+                  <td>{{ $data->polarization }}</td>
+                  <td>{{ $data->purity }}</td>
+                  <td>{{ $data->remarks }}</td>
+                </tr>
               @endforeach
-
             </table>
 
-          </div>
+          </div> 
+
         </div>
       </div>
 
@@ -119,16 +129,16 @@
 @section('modals')
 
   {{-- Print Modal --}}
-  <div class="modal fade" id="print_sa_modal" data-backdrop="static">
+  <div class="modal fade" id="print_cja_modal" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">Please set Signatories!</h4>
+          <h4 class="modal-title">Signatories:</h4>
         </div>
-        <form id="print_sa_form" method="GET" target="_blank">
+        <form id="print_cja_form" method="GET" target="_blank">
           <div class="modal-body">
 
             {!! __form::textbox(
@@ -164,13 +174,13 @@
 
   <script type="text/javascript">
 
+    // CALL PRINT SR MODAL
+    $(document).on("click", "#print_cja", function () {
 
-    {{-- CALL PRINT SR MODAL --}}
-    $(document).on("click", "#print_sugar_analysis", function () {
-        $("#print_sa_modal").modal("show");
-        $("#print_sa_form").attr("action", $(this).data("url"));
+        $("#print_cja_modal").modal("show");
+        $("#print_cja_form").attr("action", $(this).data("url"));
+        
     });
-    
 
   </script>
 
