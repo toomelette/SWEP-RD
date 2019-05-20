@@ -46,6 +46,10 @@ class CaneJuiceAnalysis extends Model{
       return $this->belongsTo('App\Models\SugarAnalysis','sample_no','sample_no');
     }
 
+    public function sugarOrderOfPayment() {
+      return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
+    }
+
 
 
     

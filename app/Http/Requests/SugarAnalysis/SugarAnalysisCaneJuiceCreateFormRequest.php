@@ -25,6 +25,7 @@ class SugarAnalysisCaneJuiceCreateFormRequest extends FormRequest{
         	'date_sampled'=>'required|date_format:"m/d/Y"',
         	'date_analyzed_from'=>'required|date_format:"m/d/Y"',
             'date_analyzed_to'=>'required|date_format:"m/d/Y"',
+            'week_ending'=>'required|date_format:"m/d/Y"',
             'variety'=>'nullable|string|max:255',
             'hacienda'=>'nullable|string|max:255',
             'corrected_brix'=>'nullable|string|max:45',

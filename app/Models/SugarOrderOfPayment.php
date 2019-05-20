@@ -63,6 +63,11 @@ class SugarOrderOfPayment extends Model{
         return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
     }
 
+
+    public function caneJuiceAnalysis() {
+        return $this->hasMany('App\Models\CaneJuiceAnalysis','sample_no','sample_no');
+    }
+
     
 
     

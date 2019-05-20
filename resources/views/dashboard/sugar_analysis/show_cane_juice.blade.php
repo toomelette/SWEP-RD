@@ -54,19 +54,7 @@
                 <dt>Source:</dt>
                 <dd>{{ $sa->source }}</dd>
               @endif
-
-              <dt>Quantity:</dt>
-              <dd>{{ $sa->quantity }}</dd>
-              <dt>Week Ending:</dt>
-              <dd>{{ __dataType::date_parse($sa->week_ending, 'F d,Y') }}</dd>
-              <dt>Date Sampled:</dt>
-              <dd>{{ __dataType::date_parse($sa->date_sampled, 'F d,Y') }}</dd>
-              <dt>Date Submitted:</dt>
-              <dd>{{ __dataType::date_parse($sa->date_submitted, 'F d,Y') }}</dd>
-              <dt>Date Analyzed:</dt>
-              <dd>{{ __dataType::date_scope($sa->date_analyzed_from, $sa->date_analyzed_to) }}</dd>
-              <dt>Description of Sample:</dt>
-              <dd>{{ $sa->description }}</dd>
+              
             </dl>
           </div>
         </div>

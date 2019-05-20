@@ -81,6 +81,13 @@ class SugarOrderOfPaymentService extends BaseService{
         
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
 
+        // Cane Juice Analysis
+        if($sugar_oop->sugar_sample_id == "SS1006"){
+            if ($request->sugar_sample_id != "SS1006") {
+                $sugar_oop->caneJuiceAnalysis()->delete();
+            }
+        }
+
         // Sugar Analysis
         $this->sugar_analysis_repo->updateOrderOfPayment($request, $sugar_oop->sugarAnalysis->slug, $total_price);
 
@@ -127,6 +134,11 @@ class SugarOrderOfPaymentService extends BaseService{
     public function delete($slug){
 
         $sugar_oop = $this->sugar_oop_repo->destroy($slug);
+
+        // Cane Juice Analysis
+        if($sugar_oop->sugar_sample_id == "SS1006"){
+            $sugar_oop->caneJuiceAnalysis()->delete();
+        }
 
         $this->event->fire('sugar_oop.destroy', $sugar_oop);
         return redirect()->back();

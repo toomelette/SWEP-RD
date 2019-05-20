@@ -67,6 +67,10 @@
 
                   <div class="col-md-12"></div>
 
+                  {!! __form::datepicker(
+                    '3', 'week_ending',  'Week Ending', old('week_ending'), $errors->has('week_ending'), $errors->first('week_ending')
+                  ) !!}
+
 
                   {!! __form::textbox(
                      '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
@@ -81,19 +85,18 @@
                      '3', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
                   ) !!}
 
+                  <div class="col-md-12"></div>
 
                   {!! __form::textbox(
                      '3', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
                   ) !!}
-
-                  <div class="col-md-12"></div>
 
                   {!! __form::textbox(
                      '3', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
                   ) !!}
 
                   {!! __form::textbox(
-                     '9', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
+                     '6', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
                   ) !!}
 
                 </div> 
@@ -134,6 +137,7 @@
                     <th>Entry No.</th>
                     <th>Date Sampled</th>
                     <th>Date Analyzed</th>
+                    <th>Week Ending</th>
                     <th>Variety</th>
                     <th>Hacienda</th>
                     <th>Corrected Brix</th>
@@ -148,8 +152,9 @@
                       {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
                     >
                       <td>{{ $data->entry_no }}</td>
-                      <td>{{ __dataType::date_parse($data->date_sampled, '  m/d/Y') }}</td>
+                      <td>{{ __dataType::date_parse($data->date_sampled, 'm/d/Y') }}</td>
                       <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
+                      <td>{{ __dataType::date_parse($data->week_ending, 'm/d/Y') }}</td>
                       <td>{{ $data->variety }}</td>
                       <td>{{ $data->hacienda }}</td>
                       <td>{{ $data->corrected_brix }}</td>
@@ -231,6 +236,11 @@
 
               <div class="col-md-12"></div>
 
+
+              {!! __form::datepicker(
+                '3', 'e_week_ending',  'Week Ending', old('e_week_ending'), $errors->has('e_week_ending'), $errors->first('e_week_ending')
+              ) !!}
+
               {!! __form::textbox(
                  '3', 'e_variety', 'e_variety', 'Variety', 'Variety', old('e_variety'), $errors->has('e_variety'), $errors->first('e_variety'), ''
               ) !!}
@@ -245,12 +255,12 @@
                  '3', 'e_corrected_brix', 'e_corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('e_corrected_brix'), $errors->has('e_corrected_brix'), $errors->first('e_corrected_brix'), ''
               ) !!}
 
+              <div class="col-md-12"></div>
+
 
               {!! __form::textbox(
                  '3', 'e_polarization', 'e_polarization', '% Pol', '% Pol', old('e_polarization'), $errors->has('e_polarization'), $errors->first('e_polarization'), ''
               ) !!}
-
-              <div class="col-md-12"></div>
 
               {!! __form::textbox(
                  '3', 'e_purity', 'e_purity', 'Purity', 'Purity', old('e_purity'), $errors->has('e_purity'), $errors->first('e_purity'), ''
@@ -258,7 +268,7 @@
 
 
               {!! __form::textbox(
-                 '9', 'e_remarks', 'e_remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('e_remarks'), $errors->has('e_remarks'), $errors->first('e_remarks'), ''
+                 '6', 'e_remarks', 'e_remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('e_remarks'), $errors->has('e_remarks'), $errors->first('e_remarks'), ''
               ) !!}
 
 
@@ -358,9 +368,19 @@
           $.each(data, function(key, value) {
             $("#cja_update_form #e_slug").val(value.slug);
             $("#cja_update_form #e_entry_no").val(value.entry_no);
-            $("#cja_update_form #e_date_sampled").datepicker("setDate", new Date(value.date_sampled));
-            $("#cja_update_form #e_date_analyzed_from").datepicker("setDate", new Date(value.date_analyzed_from));
-            $("#cja_update_form #e_date_analyzed_to").datepicker("setDate", new Date(value.date_analyzed_to));
+            if(value.date_sampled != null){
+              $("#cja_update_form #e_date_sampled").datepicker("setDate", new Date(value.date_sampled));
+            }
+            if(value.date_analyzed_from != null){
+              $("#cja_update_form #e_date_analyzed_from").datepicker("setDate", new Date(value.date_analyzed_from));
+            }
+            if(value.date_analyzed_to != null){
+              $("#cja_update_form #e_date_analyzed_to").datepicker("setDate", new Date(value.date_analyzed_to));
+            }
+            if(value.week_ending != null){
+              $("#cja_update_form #e_week_ending").datepicker("setDate", new Date(value.week_ending));
+            }
+            $("#cja_update_form #e_variety").val(value.variety);
             $("#cja_update_form #e_variety").val(value.variety);
             $("#cja_update_form #e_hacienda").val(value.hacienda);
             $("#cja_update_form #e_corrected_brix").val(value.corrected_brix);
