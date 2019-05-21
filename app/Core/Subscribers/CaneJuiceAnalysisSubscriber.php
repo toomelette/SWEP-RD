@@ -64,7 +64,7 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:getBySlug:'. $cja->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:findBySlug:'. $cja->slug .'');
 
-        $this->session->flash('CJ_ANALYSIS_DESTROY_SUCCESS', 'Record successfully updated!');
+        $this->session->flash('CJ_ANALYSIS_DESTROY_SUCCESS', 'Record successfully deleted!');
         $this->session->flash('CJ_ANALYSIS_DESTROY_SUCCESS_SLUG', $cja->slug);
 
     }

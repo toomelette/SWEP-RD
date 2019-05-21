@@ -8,7 +8,7 @@ interface SugarAnalysisInterface {
 	
 	public function fetch($request);
 
-	public function store($request, $total_price);
+	public function storeOrderOfPayment($request, $total_price);
 
 	public function updateOrderOfPayment($request, $slug, $total_price);
 
@@ -16,6 +16,6 @@ interface SugarAnalysisInterface {
 
 	public function findBySlug($slug);
 
-	public function getByDate_CustomerType_Sample_Id($date_from, $date_to, $customer_type, $sample_id);
+	public function getByDate_CustomerType_SampleId($date_from, $date_to, $customer_type, $sample_id);
 		
 }

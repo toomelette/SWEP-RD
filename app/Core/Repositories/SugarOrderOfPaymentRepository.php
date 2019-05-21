@@ -121,7 +121,8 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oop->delete();
         $sugar_oop->sugarAnalysis()->delete();
         $sugar_oop->sugarAnalysisParameter()->delete();
-
+        $sugar_oop->caneJuiceAnalysis()->delete();
+        
         return $sugar_oop;
 
     }

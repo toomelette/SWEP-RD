@@ -38,7 +38,7 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_Sample_Id:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_SampleId:*');
 
         $this->session->flash('SUGAR_OOP_CREATE_SUCCESS', 'Order of Payment has been successfully created!');
         $this->session->flash('SUGAR_OOP_CREATE_SUCCESS_SLUG', $sugar_oop->slug);
@@ -56,7 +56,7 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:*');
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_Sample_Id:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_SampleId:*');
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
 
@@ -76,7 +76,7 @@ class SugarOrderOfPaymentSubscriber extends BaseSubscriber{
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:*');
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_Sample_Id:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByDate_CustomerType_SampleId:*');
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNoSugarServiceId:*');
 

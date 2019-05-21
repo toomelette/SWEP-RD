@@ -63,7 +63,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function store($request, $total_price){
+    public function storeOrderOfPayment($request, $total_price){
 
         $sugar_analysis = new SugarAnalysis;
         $sugar_analysis->slug = $this->str->random(16);
@@ -166,12 +166,12 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function getByDate_CustomerType_Sample_Id($date_from, $date_to, $customer_type = [], $sample_id = []){
+    public function getByDate_CustomerType_SampleId($date_from, $date_to, $customer_type = [], $sample_id = []){
 
         $customer_type_string = implode(',', $customer_type);
         $sample_id_string = implode(',', $sample_id);
 
-        $cache_key = 'sugar_analysis:getByDate_CustomerType_Sample_Id:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sample_id_string;
+        $cache_key = 'sugar_analysis:getByDate_CustomerType_SampleId:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sample_id_string;
 
         $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sample_id){
            
