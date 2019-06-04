@@ -50,30 +50,44 @@
       
     }
 
+    .bg-wm{
+
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      position:absolute;
+      opacity:0.3;
+      margin-top: 150px;
+      padding:80px;
+
+    }
+
+
   </style>
 
 </head>
 
 <body onload="window.print();" onafterprint="window.close()">
 
+  <img class="bg-wm" src="{{ asset('images/sra_wm.jpg') }}">
+
   <div class="wrapper">
-
-
-
 
     {{-- HEADER --}}
     <div class="row" style="padding:10px;">
       <div class="col-md-1"></div>
       <div class="col-md-12">
         <div class="col-sm-3">
-          <img src="{{ asset('images/sra.png') }}" style="width:130px;">
+          <img src="{{ asset('images/sra.png') }}" style="width:110px;">
         </div>
-        <div class="col-sm-8" style="text-align: center; padding-right:125px;">
+        <div class="col-sm-8" style="padding-right:125px; font-family: tahoma; line-height:13px; margin-left:-40px;">
           <span style="font-size:12px;">Republic of the Philippines</span><br>
-          <span style="font-size:13px; font-weight:bold;">SUGAR REGULATORY ADMINISTRATION</span><br>
+          <span style="font-size:12px;">Department of Agriculture</span><br>
+          <span style="font-size:12px; font-weight:bold;">SUGAR REGULATORY ADMINISTRATION</span><br>
           <span style="font-size:12px;">North Avenue, Diliman, Quezon City</span><br>
-          <span style="font-size:12px;">(034)433-4962 / 435-3758, FAX(034)435-3758</span><br>
-          <span style="font-size:12px;">TIN 000784-336-000</span>
+          <span style="font-size:12px;">Philippines 6100</span><br>
+          <span style="font-size:12px;">TIN 000-784-336</span>
         </div>
         <div class="col-sm-1"></div>
       </div>
@@ -84,7 +98,7 @@
 
 
     {{-- Body --}}
-    <div class="row" style="margin-top:5px; border-top:solid 1px;">
+    <div class="row" style="margin-top:5px;">
 
       <div class="col-md-12" style="text-align:center; margin-top:5px;">
         @if ($sa->sugar_sample_id == "SS1003")

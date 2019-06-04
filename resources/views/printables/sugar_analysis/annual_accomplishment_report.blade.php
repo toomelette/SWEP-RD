@@ -98,17 +98,50 @@
       
     }
 
+    .bg-wm{
+
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      position:absolute;
+      opacity:0.3;
+      margin-top: 150px;
+      padding:80px;
+
+    }
+
   </style>
 
 </head>
 
 <body onload="window.print();" onafterprint="window.close()">
 
-  <div class="wrapper" style="margin-top: 50px;">
+  <img class="bg-wm" src="{{ asset('images/sra_wm.jpg') }}">
 
+  <div class="wrapper">
+    
 
     {{-- HEADER --}}
     <div class="row">
+
+      <div class="col-md-12">
+        <div class="col-sm-3">
+          <img src="{{ asset('images/sra.png') }}" style="width:110px;">
+        </div>
+        <div class="col-sm-8" style="padding-right:125px; font-family: tahoma; line-height:13px; margin-left:-40px;">
+          <span style="font-size:12px;">Republic of the Philippines</span><br>
+          <span style="font-size:12px;">Department of Agriculture</span><br>
+          <span style="font-size:12px; font-weight:bold;">SUGAR REGULATORY ADMINISTRATION</span><br>
+          <span style="font-size:12px;">North Avenue, Diliman, Quezon City</span><br>
+          <span style="font-size:12px;">Philippines 6100</span><br>
+          <span style="font-size:12px;">TIN 000-784-336</span>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+
+      <div class="col-sm-12" style="margin-top: 15px;"></div>
+
       <div class="col-sm-12" style="text-align: center;">
         <span style="font-size:14px; font-weight:bold;">HIGHLIGHTS OF ACCOMPLISHMENT REPORT</span><br>
         <span style="font-size:14px; font-weight:bold;">{{ Request::get('year') }}</span>
