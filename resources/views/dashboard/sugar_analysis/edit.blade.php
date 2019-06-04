@@ -39,6 +39,12 @@
               
               <div class="box-body">
 
+                {!! __form::textbox(
+                  '12', 'or_no', 'text', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sa->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
+                ) !!}
+
+                <div class="col-md-12"></div>
+
                 {!! __form::datepicker(
                   '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
                 ) !!}

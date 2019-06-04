@@ -286,11 +286,11 @@
         </div>
 
         <div class="col-sm-2">
-          <span>&nbsp;</span>
+          <span>OR #</span>
         </div>
 
         <div class="col-sm-10">
-          <span>OR #</span>
+          <span> : <b>{{ $sa->or_no }}</b></span>
         </div>
 
         <div class="col-sm-6" style="margin-top:30px;">

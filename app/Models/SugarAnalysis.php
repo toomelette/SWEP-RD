@@ -28,6 +28,7 @@ class SugarAnalysis extends Model{
         'sugar_sample_id' => '',
         'customer_type' => '',
         'date' => null,
+        'or_no' => '',
         'origin' => '',
         'address' => '',
         'quantity' => '',
