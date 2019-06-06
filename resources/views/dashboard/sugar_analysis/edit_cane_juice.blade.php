@@ -33,152 +33,188 @@
       
         <div class="box-body">
 
-          
+
+          {{-- Set OR No. Form --}}
           <div class="col-md-12">
             <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title"><b>Form</b></h3>
+                <h3 class="box-title"><b>Set OR No.</b></h3>
               </div>
               
-              <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sa->slug) }}">
+              <form method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_set_or_no', $sa->slug) }}">
 
               @csrf
 
                 <div class="box-body">
 
                   {!! __form::textbox(
-                     '3', 'entry_no', 'entry_no', 'Entry No. ', 'Entry No.', old('entry_no'), $errors->has('entry_no'), $errors->first('entry_no'), ''
+                     '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sa->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
                   ) !!}
 
-
-                  {!! __form::datepicker(
-                    '3', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
-                  ) !!}
-
-
-                  {!! __form::datepicker(
-                    '3', 'date_analyzed_from',  'Date Analyzed From', old('date_analyzed_from'), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
-                  ) !!}
-
-
-                  {!! __form::datepicker(
-                    '3', 'date_analyzed_to',  'Date Analyzed To', old('date_analyzed_to'), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
-                  ) !!}
-
-                  <div class="col-md-12"></div>
-
-                  {!! __form::datepicker(
-                    '3', 'week_ending',  'Week Ending', old('week_ending'), $errors->has('week_ending'), $errors->first('week_ending')
-                  ) !!}
-
-
-                  {!! __form::textbox(
-                     '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
-                  ) !!}
-
-                  {!! __form::textbox(
-                     '3', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
-                  ) !!}
-
-
-                  {!! __form::textbox(
-                     '3', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
-                  ) !!}
-
-                  <div class="col-md-12"></div>
-
-                  {!! __form::textbox(
-                     '3', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
-                  ) !!}
-
-                  {!! __form::textbox(
-                     '3', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
-                  ) !!}
-
-                  {!! __form::textbox(
-                     '6', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
-                  ) !!}
+                  <div class="col-md-2" style="margin-top: 25px;">
+                    <button type="submit" class="btn btn-default">Submit <i class="fa fa-fw fa-save"></i></button>
+                  </div>
 
                 </div> 
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
+                
               </div>
 
               </form>
-
-            </div>
-
-          </div>
-
-
           
-          <div class="col-md-12" style="margin-top:25px;">
-            <div class="box">
-              <div class="box-header with-border">
-                <h3 class="box-title"><b>List</b></h3>
-                <div class="box-tools">
-                  <a href="#" id="print_cja" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default">
-                    <i class="fa fa-print"></i> Print
-                  </a>
-                </div>
-              </div>
-              
-              <div class="box-body">
-                @if($errors->all())
-                  <ul style="line-height: 10px;">
-                    @foreach ($errors->all() as $data)
-                      <li><p class="text-danger">{{ $data }}</p></li>
-                    @endforeach
-                  </ul>
-                @endif
-                <table class="table table-hover">
-                  <tr>
-                    <th>Entry No.</th>
-                    <th>Date Sampled</th>
-                    <th>Date Analyzed</th>
-                    <th>Week Ending</th>
-                    <th>Variety</th>
-                    <th>Hacienda</th>
-                    <th>Corrected Brix</th>
-                    <th>% POL</th>
-                    <th>Purity</th>
-                    <th>Remarks</th>
-                    <th>Action</th>
-                  </tr>
-                  @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
-                    <tr 
-                      {!! __html::table_highlighter( $data->slug, $table_sessions) !!} 
-                      {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
-                    >
-                      <td>{{ $data->entry_no }}</td>
-                      <td>{{ __dataType::date_parse($data->date_sampled, 'm/d/Y') }}</td>
-                      <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
-                      <td>{{ __dataType::date_parse($data->week_ending, 'm/d/Y') }}</td>
-                      <td>{{ $data->variety }}</td>
-                      <td>{{ $data->hacienda }}</td>
-                      <td>{{ $data->corrected_brix }}</td>
-                      <td>{{ $data->polarization }}</td>
-                      <td>{{ $data->purity }}</td>
-                      <td>{{ $data->remarks }}</td>
-                      <td>
-                        <div class="btn-group">
-                          <a href="#" id="cja_update_btn" es="{{ $data->slug }}" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_update', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
-                            <i class="fa fa-pencil-square-o"></i>
-                          </a>
-                          <a href="#" id="cja_delete_btn" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_destroy', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
-                            <i class="fa  fa-trash-o"></i>
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                  @endforeach
-                </table>
+          </div>
 
-              </div> 
+
+          @if(!empty($sa->or_no))
+            
+            {{-- Cane Juice Analysis Form --}}
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><b>Form</b></h3>
+                </div>
+                
+                <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sa->slug) }}">
+
+                @csrf
+
+                  <div class="box-body">
+
+                    {!! __form::textbox(
+                       '3', 'entry_no', 'entry_no', 'Entry No. ', 'Entry No.', old('entry_no'), $errors->has('entry_no'), $errors->first('entry_no'), ''
+                    ) !!}
+
+
+                    {!! __form::datepicker(
+                      '3', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
+                    ) !!}
+
+
+                    {!! __form::datepicker(
+                      '3', 'date_analyzed_from',  'Date Analyzed From', old('date_analyzed_from'), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
+                    ) !!}
+
+
+                    {!! __form::datepicker(
+                      '3', 'date_analyzed_to',  'Date Analyzed To', old('date_analyzed_to'), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
+                    ) !!}
+
+                    <div class="col-md-12"></div>
+
+                    {!! __form::datepicker(
+                      '3', 'week_ending',  'Week Ending', old('week_ending'), $errors->has('week_ending'), $errors->first('week_ending')
+                    ) !!}
+
+
+                    {!! __form::textbox(
+                       '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
+                    ) !!}
+
+                    {!! __form::textbox(
+                       '3', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
+                    ) !!}
+
+
+                    {!! __form::textbox(
+                       '3', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
+                    ) !!}
+
+                    <div class="col-md-12"></div>
+
+                    {!! __form::textbox(
+                       '3', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
+                    ) !!}
+
+                    {!! __form::textbox(
+                       '3', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
+                    ) !!}
+
+                    {!! __form::textbox(
+                       '6', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
+                    ) !!}
+
+                  </div> 
+
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-default">Save <i class="fa fa-fw fa-save"></i></button>
+                </div>
+
+                </form>
+
+              </div>
 
             </div>
-          </div>
+
+
+            {{-- Cane Juice Analysis List --}}
+            <div class="col-md-12" style="margin-top:25px;">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><b>List</b></h3>
+                  <div class="box-tools">
+                    <a href="#" id="print_cja" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default">
+                      <i class="fa fa-print"></i> Print
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="box-body">
+                  @if($errors->all())
+                    <ul style="line-height: 10px;">
+                      @foreach ($errors->all() as $data)
+                        <li><p class="text-danger">{{ $data }}</p></li>
+                      @endforeach
+                    </ul>
+                  @endif
+                  <table class="table table-hover">
+                    <tr>
+                      <th>Entry No.</th>
+                      <th>Date Sampled</th>
+                      <th>Date Analyzed</th>
+                      <th>Week Ending</th>
+                      <th>Variety</th>
+                      <th>Hacienda</th>
+                      <th>Corrected Brix</th>
+                      <th>% POL</th>
+                      <th>Purity</th>
+                      <th>Remarks</th>
+                      <th>Action</th>
+                    </tr>
+                    @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
+                      <tr 
+                        {!! __html::table_highlighter( $data->slug, $table_sessions) !!} 
+                        {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
+                      >
+                        <td>{{ $data->entry_no }}</td>
+                        <td>{{ __dataType::date_parse($data->date_sampled, 'm/d/Y') }}</td>
+                        <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
+                        <td>{{ __dataType::date_parse($data->week_ending, 'm/d/Y') }}</td>
+                        <td>{{ $data->variety }}</td>
+                        <td>{{ $data->hacienda }}</td>
+                        <td>{{ $data->corrected_brix }}</td>
+                        <td>{{ $data->polarization }}</td>
+                        <td>{{ $data->purity }}</td>
+                        <td>{{ $data->remarks }}</td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="#" id="cja_update_btn" es="{{ $data->slug }}" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_update', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
+                              <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                            <a href="#" id="cja_delete_btn" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_destroy', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
+                              <i class="fa  fa-trash-o"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </table>
+
+                </div> 
+
+              </div>
+            </div>
+
+          @endif
+          
 
 
 

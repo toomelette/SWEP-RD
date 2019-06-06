@@ -146,6 +146,21 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
+    public function setOrNo($request, $slug){
+
+        $sugar_analysis = $this->findBySlug($slug);
+        $sugar_analysis->or_no = $request->or_no;
+        $sugar_analysis->save();
+
+        return $sugar_analysis;
+        
+    }
+
+
+
+
+
+
     public function findBySlug($slug){
 
         $sa = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){

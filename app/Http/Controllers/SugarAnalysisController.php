@@ -7,6 +7,7 @@ use App\Http\Requests\SugarAnalysis\SugarAnalysisFilterRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisReportFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceCreateFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceEditFormRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceSetOrNoFormRequest;
 use App\Core\Services\SugarAnalysisService;
 
 
@@ -86,6 +87,15 @@ class SugarAnalysisController extends Controller{
      public function report_generate(SugarAnalysisReportFormRequest $request){
         
         return $this->sa_service->report_generate($request);
+
+    }
+
+
+
+
+     public function caneJuiceAnalysisSetOrNo(SugarAnalysisCaneJuiceSetOrNoFormRequest $request, $slug){
+        
+        return $this->sa_service->caneJuiceAnalysisSetOrNo($request, $slug);
 
     }
 

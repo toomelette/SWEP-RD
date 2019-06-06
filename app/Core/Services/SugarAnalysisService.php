@@ -232,6 +232,20 @@ class SugarAnalysisService extends BaseService{
 
 
 
+    public function caneJuiceAnalysisSetOrNo($request, $slug){
+
+        $sa = $this->sugar_analysis_repo->setOrNo($request, $slug);
+
+        $this->event->fire('cane_juice_analysis.set_or_no', $sa);
+        return redirect()->back();
+
+    }
+
+
+
+
+
+
     public function caneJuiceAnalysisStore($request, $slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);

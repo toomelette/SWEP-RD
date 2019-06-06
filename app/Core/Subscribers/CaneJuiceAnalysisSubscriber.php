@@ -26,6 +26,7 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
         $events->listen('cane_juice_analysis.store', 'App\Core\Subscribers\CaneJuiceAnalysisSubscriber@onStore');
         $events->listen('cane_juice_analysis.update', 'App\Core\Subscribers\CaneJuiceAnalysisSubscriber@onUpdate');
         $events->listen('cane_juice_analysis.destroy', 'App\Core\Subscribers\CaneJuiceAnalysisSubscriber@onDestroy');
+        $events->listen('cane_juice_analysis.set_or_no', 'App\Core\Subscribers\CaneJuiceAnalysisSubscriber@onSetOrNo');
 
     }
 
@@ -66,6 +67,17 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
 
         $this->session->flash('CJ_ANALYSIS_DESTROY_SUCCESS', 'Record successfully deleted!');
         $this->session->flash('CJ_ANALYSIS_DESTROY_SUCCESS_SLUG', $cja->slug);
+
+    }
+
+
+
+
+    public function onSetOrNo($sa){
+
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
+
+        $this->session->flash('CJ_ANALYSIS_SET_OR_NO_SUCCESS', 'OR No. successfully set!!');
 
     }
 

@@ -16,6 +16,8 @@ interface SugarAnalysisInterface {
 
 	public function findBySlug($slug);
 
+	public function setOrNo($request, $slug);
+
 	public function getByDate_CustomerType_SampleId($date_from, $date_to, $customer_type, $sample_id);
 		
 }

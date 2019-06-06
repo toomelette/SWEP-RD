@@ -32,6 +32,8 @@
           </div>
           <div class="box-body">
             <dl class="dl-horizontal">
+              <dt>OR No.:</dt>
+              <dd>{{ $sa->or_no }}</dd>
               <dt>Date:</dt>
               <dd>{{ __dataType::date_parse($sa->date, 'F d,Y') }}</dd>
               <dt>Sample No:</dt>
