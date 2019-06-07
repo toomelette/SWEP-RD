@@ -470,6 +470,12 @@
     });
 
 
+    {{-- DELETE TOAST --}}
+    @if(Session::has('CJ_ANALYSIS_SET_OR_NO_SUCCESS'))
+      {!! __js::toast(Session::get('CJ_ANALYSIS_SET_OR_NO_SUCCESS')) !!}
+    @endif
+
+
 
   </script>
 
