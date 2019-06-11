@@ -21,7 +21,6 @@ class SugarAnalysisFormRequest extends FormRequest{
 
         return [
             
-            'or_no'=>'required|string|max:45',
         	'week_ending'=>'required|date_format:"m/d/Y"',
         	'date_sampled'=>'required|date_format:"m/d/Y"',
         	'date_submitted'=>'required|date_format:"m/d/Y"',

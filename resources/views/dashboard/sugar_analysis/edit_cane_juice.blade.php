@@ -41,12 +41,14 @@
                 <h3 class="box-title"><b>Set OR No.</b></h3>
               </div>
               
-              <form method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_set_or_no', $sa->slug) }}">
+              <form method="POST" action="{{ route('dashboard.sugar_analysis.set_or_no', $sa->slug) }}">
 
               @csrf
 
                 <div class="box-body">
 
+                  @csrf
+                  
                   {!! __form::textbox(
                      '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sa->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
                   ) !!}
@@ -56,12 +58,13 @@
                   </div>
 
                 </div> 
-                
-              </div>
 
               </form>
-          
+                
+            </div>
           </div>
+
+          
 
 
           @if(!empty($sa->or_no))
@@ -75,7 +78,7 @@
                 
                 <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sa->slug) }}">
 
-                @csrf
+                  @csrf
 
                   <div class="box-body">
 
@@ -470,9 +473,9 @@
     });
 
 
-    {{-- DELETE TOAST --}}
-    @if(Session::has('CJ_ANALYSIS_SET_OR_NO_SUCCESS'))
-      {!! __js::toast(Session::get('CJ_ANALYSIS_SET_OR_NO_SUCCESS')) !!}
+    {{-- Set Or No Toast --}}
+    @if(Session::has('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS'))
+      {!! __js::toast(Session::get('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS')) !!}
     @endif
 
 

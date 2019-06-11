@@ -63,6 +63,21 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
+    public function setOrNo($request, $slug){
+
+        $sugar_analysis = $this->findBySlug($slug);
+        $sugar_analysis->or_no = $request->or_no;
+        $sugar_analysis->save();
+
+        return $sugar_analysis;
+        
+    }
+
+
+
+
+
+
     public function storeOrderOfPayment($request, $total_price){
 
         $sugar_analysis = new SugarAnalysis;
@@ -120,7 +135,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
     public function updateResult($request, $slug){
 
         $sugar_analysis = $this->findBySlug($slug);
-        $sugar_analysis->or_no = $request->or_no;
         $sugar_analysis->week_ending = $this->__dataType->date_parse($request->week_ending);
         $sugar_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
@@ -135,21 +149,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_updated = request()->ip();
         $sugar_analysis->user_updated = $this->auth->user()->user_id;
-        $sugar_analysis->save();
-
-        return $sugar_analysis;
-        
-    }
-
-
-
-
-
-
-    public function setOrNo($request, $slug){
-
-        $sugar_analysis = $this->findBySlug($slug);
-        $sugar_analysis->or_no = $request->or_no;
         $sugar_analysis->save();
 
         return $sugar_analysis;

@@ -7,7 +7,7 @@ use App\Http\Requests\SugarAnalysis\SugarAnalysisFilterRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisReportFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceCreateFormRequest;
 use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceEditFormRequest;
-use App\Http\Requests\SugarAnalysis\SugarAnalysisCaneJuiceSetOrNoFormRequest;
+use App\Http\Requests\SugarAnalysis\SugarAnalysisSetOrNoFormRequest;
 use App\Core\Services\SugarAnalysisService;
 
 
@@ -33,6 +33,15 @@ class SugarAnalysisController extends Controller{
 	 public function index(SugarAnalysisFilterRequest $request){
         
         return $this->sa_service->fetch($request);
+
+    }
+
+
+
+
+     public function setOrNo(SugarAnalysisSetOrNoFormRequest $request, $slug){
+        
+        return $this->sa_service->setOrNo($request, $slug);
 
     }
 

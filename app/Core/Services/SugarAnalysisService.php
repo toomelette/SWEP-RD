@@ -48,6 +48,20 @@ class SugarAnalysisService extends BaseService{
 
 
 
+    public function setOrNo($request, $slug){
+
+        $sa = $this->sugar_analysis_repo->setOrNo($request, $slug);
+
+        $this->event->fire('sugar_analysis.set_or_no', $sa);
+        return redirect()->back();
+
+    }
+
+
+
+
+
+
     public function edit($slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
@@ -224,20 +238,6 @@ class SugarAnalysisService extends BaseService{
                     'fourth_quarter_walkin_caneJuice' => $fourth_quarter_walkin_caneJuice,
 
                 ]);
-
-    }
-
-
-
-
-
-
-    public function caneJuiceAnalysisSetOrNo($request, $slug){
-
-        $sa = $this->sugar_analysis_repo->setOrNo($request, $slug);
-
-        $this->event->fire('cane_juice_analysis.set_or_no', $sa);
-        return redirect()->back();
 
     }
 
