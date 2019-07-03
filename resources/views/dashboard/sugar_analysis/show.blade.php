@@ -16,10 +16,12 @@
     <div class="box-header with-border">
       <h3 class="box-title">Details</h3>
       <div class="box-tools">
-        <a href="#" id="print_sugar_analysis" data-url="{{ route('dashboard.sugar_analysis.print', $sa->slug) }}" class="btn btn-sm btn-default">
+        <a href="{{ route('dashboard.sugar_analysis.print', $sa->slug) }}" class="btn btn-sm btn-default" target="_blank">
           <i class="fa fa-print"></i> Print
         </a>&nbsp;
-        <a href="{{ route('dashboard.sugar_analysis.edit', $sa->slug) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="{{ route('dashboard.sugar_analysis.edit', $sa->slug) }}" class="btn btn-sm btn-default">
+          <i class="fa fa-pencil"></i> Edit
+        </a>
       </div>
     </div>
 
@@ -110,70 +112,5 @@
     </div>
   </div>
 </section>
-
-@endsection
-
-
-
-
-
-
-@section('modals')
-
-  {{-- Print Modal --}}
-  <div class="modal fade" id="print_sa_modal" data-backdrop="static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Please set Signatories!</h4>
-        </div>
-        <form id="print_sa_form" method="GET" target="_blank">
-          <div class="modal-body">
-
-            {!! __form::textbox(
-               '12', 'nb', 'text', 'Noted By:', 'Noted By', old('nb'), $errors->has('nb'), $errors->first('nb'), 'data-transform="uppercase"'
-            ) !!}
-
-            {!! __form::textbox(
-               '12', 'p', 'text', 'Position:', 'Position', old('p'), $errors->has('p'), $errors->first('p'), 'data-transform="uppercase"'
-            ) !!}
-
-            {!! __form::textbox(
-               '12', 'd', 'text', 'Department/Division:', 'Department/Division', old('d'), $errors->has('d'), $errors->first('d'), 'data-transform="uppercase"'
-            ) !!}
-
-          </div>
-          <div class="modal-footer" style="overflow: hidden;">
-            <button class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">Print</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-@endsection
-
-
-
-
-
-
-@section('scripts')
-
-  <script type="text/javascript">
-
-
-    {{-- CALL PRINT SR MODAL --}}
-    $(document).on("click", "#print_sugar_analysis", function () {
-        $("#print_sa_modal").modal("show");
-        $("#print_sa_form").attr("action", $(this).data("url"));
-    });
-    
-
-  </script>
 
 @endsection

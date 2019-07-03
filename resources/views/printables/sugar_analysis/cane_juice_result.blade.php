@@ -186,9 +186,9 @@
         </div>
 
         <div class="col-sm-6" style="margin-top:40px;">
-          <span><b>{{ Request::get('nb') }}</b></span><br>
-          <span>{{ Request::get('p') }}</span><br>
-          <span>{{ Request::get('d') }}</span>
+          <span><b>MARY ANTOINETTE S. TAMPO</b></span><br>
+          <span>DEPARTMENT MANAGER III</span><br>
+          <span>REGULATION DEPARTMENT</span>
         </div>
 
       </div>
