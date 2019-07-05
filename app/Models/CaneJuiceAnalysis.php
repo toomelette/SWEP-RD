@@ -13,7 +13,7 @@ class CaneJuiceAnalysis extends Model{
 
     protected $table = 'sgrlab_cane_juice_analysis';
 
-    protected $dates = ['date_sampled', 'date_analyzed'];
+    protected $dates = ['date_submitted', 'date_sampled', 'date_analyzed_from', 'date_analyzed_to'];
     
 	public $timestamps = false;
 
@@ -24,7 +24,7 @@ class CaneJuiceAnalysis extends Model{
         'slug' => '',
         'sample_no' => '',
         'entry_no' => '',
-        'week_ending' => null,
+        'date_submitted' => null,
         'date_sampled' => null,
         'date_analyzed_from' => null,
         'date_analyzed_to' => null,

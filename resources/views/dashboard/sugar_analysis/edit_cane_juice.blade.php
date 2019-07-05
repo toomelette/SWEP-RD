@@ -88,6 +88,11 @@
 
 
                     {!! __form::datepicker(
+                      '3', 'date_submitted',  'Date Submitted', old('date_submitted'), $errors->has('date_submitted'), $errors->first('date_submitted')
+                    ) !!}
+
+
+                    {!! __form::datepicker(
                       '3', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
                     ) !!}
 
@@ -96,21 +101,17 @@
                       '3', 'date_analyzed_from',  'Date Analyzed From', old('date_analyzed_from'), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
                     ) !!}
 
-
-                    {!! __form::datepicker(
-                      '3', 'date_analyzed_to',  'Date Analyzed To', old('date_analyzed_to'), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
-                    ) !!}
-
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '3', 'week_ending',  'Week Ending', old('week_ending'), $errors->has('week_ending'), $errors->first('week_ending')
+                      '3', 'date_analyzed_to',  'Date Analyzed To', old('date_analyzed_to'), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
                     ) !!}
 
 
                     {!! __form::textbox(
                        '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
                     ) !!}
+
 
                     {!! __form::textbox(
                        '3', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
@@ -171,9 +172,9 @@
                   <table class="table table-hover">
                     <tr>
                       <th>Entry No.</th>
+                      <th>Date Submitted</th>
                       <th>Date Sampled</th>
                       <th>Date Analyzed</th>
-                      <th>Week Ending</th>
                       <th>Variety</th>
                       <th>Hacienda</th>
                       <th>Corrected Brix</th>
@@ -188,9 +189,9 @@
                         {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
                       >
                         <td>{{ $data->entry_no }}</td>
+                        <td>{{ __dataType::date_parse($data->date_submitted, 'm/d/Y') }}</td>
                         <td>{{ __dataType::date_parse($data->date_sampled, 'm/d/Y') }}</td>
                         <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
-                        <td>{{ __dataType::date_parse($data->week_ending, 'm/d/Y') }}</td>
                         <td>{{ $data->variety }}</td>
                         <td>{{ $data->hacienda }}</td>
                         <td>{{ $data->corrected_brix }}</td>
@@ -260,6 +261,11 @@
 
 
               {!! __form::datepicker(
+                '3', 'e_date_submitted',  'Date Submitted', old('e_date_submitted'), $errors->has('e_date_submitted'), $errors->first('e_date_submitted')
+              ) !!}
+
+
+              {!! __form::datepicker(
                 '3', 'e_date_sampled',  'Date Sampled', old('e_date_sampled'), $errors->has('e_date_sampled'), $errors->first('e_date_sampled')
               ) !!}
 
@@ -268,17 +274,12 @@
                 '3', 'e_date_analyzed_from',  'Date Analyzed From', old('e_date_analyzed_from'), $errors->has('e_date_analyzed_from'), $errors->first('e_date_analyzed_from')
               ) !!}
 
+              <div class="col-md-12"></div>
 
               {!! __form::datepicker(
                 '3', 'e_date_analyzed_to',  'Date Analyzed To', old('e_date_analyzed_to'), $errors->has('e_date_analyzed_to'), $errors->first('e_date_analyzed_to')
               ) !!}
 
-              <div class="col-md-12"></div>
-
-
-              {!! __form::datepicker(
-                '3', 'e_week_ending',  'Week Ending', old('e_week_ending'), $errors->has('e_week_ending'), $errors->first('e_week_ending')
-              ) !!}
 
               {!! __form::textbox(
                  '3', 'e_variety', 'e_variety', 'Variety', 'Variety', old('e_variety'), $errors->has('e_variety'), $errors->first('e_variety'), ''
@@ -378,8 +379,8 @@
             if(value.date_analyzed_to != null){
               $("#cja_update_form #e_date_analyzed_to").datepicker("setDate", new Date(value.date_analyzed_to));
             }
-            if(value.week_ending != null){
-              $("#cja_update_form #e_week_ending").datepicker("setDate", new Date(value.week_ending));
+            if(value.date_submitted != null){
+              $("#cja_update_form #e_date_submitted").datepicker("setDate", new Date(value.date_submitted));
             }
             $("#cja_update_form #e_variety").val(value.variety);
             $("#cja_update_form #e_variety").val(value.variety);

@@ -76,6 +76,7 @@
             <table class="table table-hover">
               <tr>
                 <th>Entry No.</th>
+                <th>Date Submitted</th>
                 <th>Date Sampled</th>
                 <th>Date Analyzed</th>
                 <th>Variety</th>
@@ -88,6 +89,7 @@
               @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
                 <tr>
                   <td>{{ $data->entry_no }}</td>
+                  <td>{{ __dataType::date_parse($data->date_submitted, '  m/d/Y') }}</td>
                   <td>{{ __dataType::date_parse($data->date_sampled, '  m/d/Y') }}</td>
                   <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
                   <td>{{ $data->variety }}</td>
