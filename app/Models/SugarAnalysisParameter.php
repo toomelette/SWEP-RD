@@ -23,6 +23,7 @@ class SugarAnalysisParameter extends Model{
         'name' => '',
         'price' => 0.00,
         'result' => '',
+        'result_dec' => 0.00,
         'standard' => '',
         'assessment' => '',
 
