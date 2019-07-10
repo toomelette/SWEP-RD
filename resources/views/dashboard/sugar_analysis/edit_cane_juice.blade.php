@@ -65,6 +65,11 @@
           </div>
 
           
+          <div class="col-md-12">
+            @if(Session::has('CJA_NUM_OF_SAMPLES_ERROR'))
+              {!! __html::alert('error', '<i class="icon fa fa-info"></i> Note!', Session::get('CJA_NUM_OF_SAMPLES_ERROR')) !!}
+            @endif
+          </div>   
 
 
           @if(!empty($sa->or_no))
@@ -150,7 +155,7 @@
 
 
             {{-- Cane Juice Analysis List --}}
-            <div class="col-md-12" style="margin-top:25px;">
+            <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><b>List</b></h3>

@@ -250,6 +250,15 @@ class SugarAnalysisService extends BaseService{
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
+        $cja_samples = $sa->caneJuiceAnalysis()->count() + 1;
+
+        if ($sa->cja_num_of_samples < $cja_samples) {
+            
+            $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sa->cja_num_of_samples .' samples. Please update Order of Payment Record.');
+            return redirect()->back();
+
+        }
+
         $cja = $this->cane_juice_analysis_repo->store($request, $sa->sample_no);
 
         $this->event->fire('cane_juice_analysis.store', [$sa, $cja]);

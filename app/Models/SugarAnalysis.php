@@ -14,7 +14,7 @@ class SugarAnalysis extends Model{
 
     protected $table = 'sgrlab_sugar_analysis';
 
-    protected $dates = ['date', 'week_ending', 'date_received', 'date_sampled', 'date_submitted', 'date_analyzed_from', 'date_analyzed_to', 'created_at', 'updated_at'];
+    protected $dates = ['date', 'week_ending', 'date_sampled', 'date_submitted', 'date_analyzed_from', 'date_analyzed_to', 'created_at', 'updated_at'];
     
 	public $timestamps = false;
 
@@ -33,7 +33,6 @@ class SugarAnalysis extends Model{
         'address' => '',
         'quantity' => '',
         'week_ending' => null,
-        'date_received' => null,
         'date_sampled' => null,
         'date_submitted' => null,
         'date_analyzed_from' => null,
@@ -44,6 +43,7 @@ class SugarAnalysis extends Model{
         'source' => '',
         'report_no' => '',
         'status' => 'PENDING',
+        'cja_num_of_samples' => 0,
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',

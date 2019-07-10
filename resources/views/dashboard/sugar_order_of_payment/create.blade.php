@@ -74,6 +74,12 @@
 
             <div class="col-md-12"></div>
 
+            <div class="col-md-4 no-padding" id="cja_num_of_samples_div">
+              {!! __form::textbox(
+                '12', 'cja_num_of_samples', 'text', 'Number of Cane Juice Samples *', 'Number of Cane Juice Samples', old('cja_num_of_samples'), $errors->has('cja_num_of_samples'), $errors->first('cja_num_of_samples'), ''
+              ) !!}
+            </div>
+
             {!! __form::textbox(
               '4', 'received_by', 'text', 'Received By *', 'Received By', old('received_by'), $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
             ) !!}
@@ -513,6 +519,10 @@
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
 
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').show();
+          $('#cja_num_of_samples').removeAttr("disabled");
+
         }else{
 
           $('#default').show();
@@ -532,6 +542,25 @@
 
         }
     });
+
+    
+
+
+
+    {{-- Number of Cane Juice Samples --}}
+
+    $( document ).ready(function() {
+      $('#cja_num_of_samples_div').hide();
+      $('#cja_num_of_samples').attr("disabled", true);
+    });
+
+    @if (old('sugar_sample_id') == "SS1006")
+      $( document ).ready(function() {
+        $('#cja_num_of_samples_div').show();
+        $('#cja_num_of_samples').removeAttr('disabled');
+      });
+    @endif
+
 
 
 

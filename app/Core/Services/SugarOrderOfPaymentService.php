@@ -163,7 +163,7 @@ class SugarOrderOfPaymentService extends BaseService{
 
         if ($request->sugar_sample_id == "SS1006") {
             
-            $total_price = 100;
+            $total_price = $request->cja_num_of_samples * 100;
 
         }else{
 
