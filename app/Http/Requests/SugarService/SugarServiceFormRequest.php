@@ -18,14 +18,29 @@ class SugarServiceFormRequest extends FormRequest{
 
 
     public function rules(){
+        
+        $rows = $this->request->get('row');
 
-        return [
+        $rules =  [
             
             'name'=>'required|string|max:255',
             'price'=>'required|string|max:13',
             'standard'=>'required|string|max:90'
 
         ];
+
+
+        if(!empty($rows)){
+
+            foreach($rows as $key => $value){
+                    
+                $rules['row.'.$key.'.name'] = 'required|string|max:255';
+
+            } 
+
+        }
+
+        return $rules;
     
     }
 

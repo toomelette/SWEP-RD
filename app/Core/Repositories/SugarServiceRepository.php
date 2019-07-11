@@ -103,7 +103,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
         $sugar_service = $this->findBySlug($slug);
         $sugar_service->delete();
-        
+
+        $sugar_service->sugarMethod()->delete();
+
         return $sugar_service;
 
     }

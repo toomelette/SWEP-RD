@@ -31,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider {
 		$this->app->bind('App\Core\Interfaces\CaneJuiceAnalysisInterface', 'App\Core\Repositories\CaneJuiceAnalysisRepository');
 		$this->app->bind('App\Core\Interfaces\SugarSampleInterface', 'App\Core\Repositories\SugarSampleRepository');
 		$this->app->bind('App\Core\Interfaces\SugarSampleParameterInterface', 'App\Core\Repositories\SugarSampleParameterRepository');
+		$this->app->bind('App\Core\Interfaces\SugarMethodInterface', 'App\Core\Repositories\SugarMethodRepository');
 		
 	}
 

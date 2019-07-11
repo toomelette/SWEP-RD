@@ -34,7 +34,17 @@ class SugarService extends Model{
         'user_created' => '',
         'user_updated' => '',
 
-    ];
+    ];   
+
+
+
+
+    /** RELATIONSHIPS **/ 
+    public function sugarMethod() {
+        return $this->hasMany('App\Models\SugarMethod','sugar_service_id','sugar_service_id');
+    }
     
+
+
     
 }

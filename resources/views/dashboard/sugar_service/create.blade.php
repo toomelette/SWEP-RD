@@ -20,20 +20,86 @@
       <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.store') }}">
 
         <div class="box-body">
-                  
-          @csrf    
+          
 
-          {!! __form::textbox(
-            '4', 'name', 'text', 'Name *', 'Name', old('name'), $errors->has('name'), $errors->first('name'), ''
-          ) !!}
+          <div class="col-md-6">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Fields</h3>
+              </div>
+              
+              <div class="box-body">
 
-          {!! __form::textbox_numeric(
-            '4', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
-          ) !!} 
+                @csrf    
 
-          {!! __form::textbox(
-            '4', 'standard', 'text', 'Standard *', 'Standard', old('standard'), $errors->has('standard'), $errors->first('standard'), ''
-          ) !!}
+                {!! __form::textbox(
+                  '12', 'name', 'text', 'Name *', 'Name', old('name'), $errors->has('name'), $errors->first('name'), ''
+                ) !!}
+
+                {!! __form::textbox_numeric(
+                  '12', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
+                ) !!} 
+
+                {!! __form::textbox(
+                  '12', 'standard', 'text', 'Standard *', 'Standard', old('standard'), $errors->has('standard'), $errors->first('standard'), ''
+                ) !!}
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Methods</h3>
+                <button id="add_row" type="button" class="btn btn-sm bg-green pull-right">Add Row &nbsp;<i class="fa fw fa-plus"></i></button>
+              </div>
+              
+              <div class="box-body no-padding">
+                
+                <table class="table table-bordered">
+
+                  <tr>
+                    <th>Name *</th>
+                    <th style="width: 40px"></th>
+                  </tr>
+
+                  <tbody id="table_body">
+
+
+                    @if(old('row'))
+
+                      @foreach(old('row') as $key => $value)
+
+                        <tr>
+
+                          <td>
+                            <div class="form-group">
+                              <input type="text" name="row[{{ $key }}][name]" class="form-control" placeholder="Name" value="{{ $value['name'] }}">
+                              <small class="text-danger">{{ $errors->first('row.'. $key .'.name') }}</small>
+                            </div>
+                          </td>
+
+
+                          <td>
+                              <button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>
+                          </td>
+
+                        </tr>
+
+                      @endforeach
+
+                    @endif
+
+                    </tbody>
+                </table>
+               
+              </div>
+            </div>
+          </div>
+
+
 
         </div>
 
@@ -77,6 +143,28 @@
     @if(Session::has('SUGAR_SERVICE_CREATE_SUCCESS'))
       $('#ss_create').modal('show');
     @endif
+
+
+    {{-- ADD ROW --}}
+    $(document).ready(function() {
+      $("#add_row").on("click", function() {
+        var i = $("#table_body").children().length;
+        var content ='<tr>' +
+                        '<td>' +
+                          '<div class="form-group">' +
+                            '<input type="text" name="row[' + i + '][name]" class="form-control" placeholder="Name">' +
+                          '</div>' +
+                        '</td>' +
+
+                        '<td>' +
+                            '<button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>' +
+                        '</td>' +
+
+                      '</tr>';
+        $("#table_body").append($(content));
+      });
+    });
+
 
   </script>
     

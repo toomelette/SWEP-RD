@@ -5,6 +5,7 @@ namespace App\Core\Services;
 
 use App\Core\Interfaces\SugarServiceInterface;
 use App\Core\Interfaces\SugarSampleparameterInterface;
+use App\Core\Interfaces\SugarMethodInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -13,13 +14,15 @@ class SugarServiceService extends BaseService{
 
     protected $sugar_service_repo;
     protected $sugar_sample_parameter;
+    protected $sugar_method_repo;
 
 
 
-    public function __construct(SugarServiceInterface $sugar_service_repo, SugarSampleparameterInterface $sugar_sample_parameter){
+    public function __construct(SugarServiceInterface $sugar_service_repo, SugarSampleparameterInterface $sugar_sample_parameter, SugarMethodInterface $sugar_method_repo){
 
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sugar_sample_parameter = $sugar_sample_parameter;
+        $this->sugar_method_repo = $sugar_method_repo;
         parent::__construct();
 
     }
@@ -44,7 +47,19 @@ class SugarServiceService extends BaseService{
 
     public function store($request){
 
+        $rows = $request->row;
+
         $sugar_service = $this->sugar_service_repo->store($request);
+
+        if(!empty($rows)){
+
+            foreach ($rows as $row) {
+
+                $sugar_method = $this->sugar_method_repo->store($sugar_service->sugar_service_id, $row['name']);
+                
+            }
+
+        }
 
         $this->event->fire('sugar_service.store');
         return redirect()->back();
@@ -71,9 +86,24 @@ class SugarServiceService extends BaseService{
 
     public function update($request, $slug){
 
+        $rows = $request->row;
+
         $sugar_service = $this->sugar_service_repo->update($request, $slug);
 
-        $this->sugar_sample_parameter->update($sugar_service);
+        $sugar_sample_parameter = $this->sugar_sample_parameter->update($sugar_service);
+
+        $sugar_service->sugarMethod()->delete();
+
+        if(!empty($rows)){
+
+            foreach ($rows as $row) {
+
+                $sugar_method = $this->sugar_method_repo->store($sugar_service->sugar_service_id, $row['name']);
+                
+            }
+
+        }
+
 
         $this->event->fire('sugar_service.update', $sugar_service);
         return redirect()->route('dashboard.sugar_service.index');
@@ -88,7 +118,7 @@ class SugarServiceService extends BaseService{
     public function destroy($slug){
 
         $sugar_service = $this->sugar_service_repo->destroy($slug);
-
+        
         $this->event->fire('sugar_service.destroy', $sugar_service);
         return redirect()->back();
 
