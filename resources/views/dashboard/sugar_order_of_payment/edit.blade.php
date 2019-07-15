@@ -36,53 +36,65 @@
 
         <div class="box-body">
 
-          <div class="col-md-12">
-                    
-            @csrf
+          <div class="col-md-5">
+                                
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Fields</h3>
+              </div>
+              <div class="box-body">
 
-            <input name="_method" value="PUT" type="hidden">
+                @csrf
 
-            {!! __form::select_static(
-              '4', 'customer_type', 'Customer Type *', old('customer_type') ? old('customer_type') : optional($sugar_oop->sugarAnalysis)->customer_type, ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
-            ) !!}
+                <input name="_method" value="PUT" type="hidden">
 
-            {{-- IF WALK IN --}}
-            <div class="col-md-4 no-padding" id="recieved_from_div">
-              {!! __form::textbox(
-                '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from') ? old('received_from') : $sugar_oop->received_from, $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
-              ) !!}
-            </div>
-            
-            {{-- IF MILL --}}
-            <div class="col-md-4 no-padding" id="mill_div">
-              {!! __form::select_dynamic(
-                '12', 'mill_id', 'Milling Company *', old('mill_id') ? old('mill_id') : optional($sugar_oop->sugarAnalysis)->mill_id, $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
-              ) !!}
-            </div>
+                {!! __form::select_static(
+                  '12', 'customer_type', 'Customer Type *', old('customer_type') ? old('customer_type') : optional($sugar_oop->sugarAnalysis)->customer_type, ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
+                ) !!}
 
-            {!! __form::textbox(
-              '4', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $sugar_oop->address, $errors->has('address'), $errors->first('address'), ''
-            ) !!}
+                {{-- IF WALK IN --}}
+                <div class="col-md-12 no-padding" id="recieved_from_div">
+                  {!! __form::textbox(
+                    '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from') ? old('received_from') : $sugar_oop->received_from, $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
+                  ) !!}
+                </div>
+                
+                {{-- IF MILL --}}
+                <div class="col-md-12 no-padding" id="mill_div">
+                  {!! __form::select_dynamic(
+                    '12', 'mill_id', 'Milling Company *', old('mill_id') ? old('mill_id') : optional($sugar_oop->sugarAnalysis)->mill_id, $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
+                  ) !!}
+                </div>
 
-            <div class="col-md-12"></div>
+                {!! __form::textbox(
+                  '12', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $sugar_oop->address, $errors->has('address'), $errors->first('address'), ''
+                ) !!}
 
-            {!! __form::textbox(
-              '4', 'sample_no', 'text', 'Sample No. *', 'Sample No.', old('sample_no') ? old('sample_no') : $sugar_oop->sample_no, $errors->has('sample_no'), $errors->first('sample_no'), 'data-transform="uppercase"'
-            ) !!}
+                {!! __form::textbox(
+                  '12', 'sample_no', 'text', 'Sample No. *', 'Sample No.', old('sample_no') ? old('sample_no') : $sugar_oop->sample_no, $errors->has('sample_no'), $errors->first('sample_no'), 'data-transform="uppercase"'
+                ) !!}
 
-            {!! __form::datepicker(
-              '4', 'date',  'Date Received *', old('date') ? old('date') : __dataType::date_parse($sugar_oop->date), $errors->has('date'), $errors->first('date')
-            ) !!}
+                {!! __form::datepicker(
+                  '12', 'date',  'Date Received *', old('date') ? old('date') : __dataType::date_parse($sugar_oop->date), $errors->has('date'), $errors->first('date')
+                ) !!}
 
-            {!! __form::select_dynamic(
-              '4', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
-            ) !!}
+                {!! __form::select_dynamic(
+                  '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
+                ) !!}
 
-            <div class="col-md-12"></div>
+                <div class="col-md-12 no-padding" id="cja_num_of_samples_div">
+                  {!! __form::textbox(
+                    '12', 'cja_num_of_samples', 'text', 'Number of Cane Juice Samples *', 'Number of Cane Juice Samples', old('cja_num_of_samples') ? old('cja_num_of_samples') : optional($sugar_oop->sugarAnalysis)->cja_num_of_samples, $errors->has('cja_num_of_samples'), $errors->first('cja_num_of_samples'), ''
+                  ) !!}
+                </div>
 
-            {!! __form::textbox(
-              '4', 'received_by', 'text', 'Received By *', 'Received By', old('received_by') ? old('received_by') : $sugar_oop->received_by, $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
-            ) !!}
+                {!! __form::textbox(
+                  '12', 'received_by', 'text', 'Received By *', 'Received By', old('received_by') ? old('received_by') : $sugar_oop->received_by, $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
+                ) !!}
+
+
+              </div>
+            </div>            
 
           </div>
 
@@ -90,13 +102,37 @@
 
           {{-- Sugar Services --}}
 
-          <div class="col-md-12" style="padding:30px;" id="ss_id">
+          <div class="col-md-7" id="ss_id">
             <div class="box box-solid">
               <div class="box-header with-border">
                 <h3 class="box-title">Services</h3>
               </div>
               
               <div class="box-body no-padding">
+
+
+                {{-- OLD VALUE --}}      
+                @if(is_array(old('sugar_service_id')))         
+                  <table class="table table-bordered" id="old_table">
+                    <tr>
+                      <th>Kind of Analysis</th>
+                      <th>Price</th>
+                    </tr>
+                    @foreach ($global_sugar_service_all as $data)
+                      <tr>  
+                        <td>
+                          <label>
+                            <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
+                            {{ in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
+                            &nbsp; {{ $data->name }}
+                          </label>
+                        </td>
+                        <td>Php {{ $data->price }}</td>
+                      </tr>
+                    @endforeach
+                  </table>
+                @endif 
+
 
                 {{-- DEFAULT --}}
                 <table class="table table-bordered" id="default">
@@ -117,29 +153,6 @@
                     </tr>
                   @endforeach
                 </table>
-
-
-                {{-- OLD VALUE --}}      
-                @if(is_array(old('sugar_service_id')))         
-                  <table class="table table-bordered">
-                    <tr>
-                      <th>Kind of Analysis</th>
-                      <th>Price</th>
-                    </tr>
-                    @foreach ($global_sugar_service_all as $data)
-                      <tr>  
-                        <td>
-                          <label>
-                            <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
-                            {{ in_array($data->sugar_service_id, old('sugar_service_id')) ? 'checked' : '' }}>
-                            &nbsp; {{ $data->name }}
-                          </label>
-                        </td>
-                        <td>Php {{ $data->price }}</td>
-                      </tr>
-                    @endforeach
-                  </table>
-                @endif 
 
 
                 {{-- RAW SUGAR SERVICES --}}
@@ -319,7 +332,10 @@
       $('#soop_update').modal('show');
     @endif
 
+
+
     {{-- CUSTOMER TYPE --}}
+
     @if(old('customer_type') == "CT1001" || optional($sugar_oop->sugarAnalysis)->customer_type == "CT1001")
       $( document ).ready(function() {
         $('#recieved_from_div').show();
@@ -382,6 +398,28 @@
 
       });
 
+
+    @elseif(old('sugar_sample_id') == "SS1006")
+
+      $( document ).ready(function() {
+        
+        $('#default').hide();
+        $("#default input").attr("disabled", true);
+        $('#raw_sugar').hide();
+        $("#raw_sugar input").attr("disabled", true);
+        $('#raw_sugar_complete').hide();
+        $("#raw_sugar_complete input").attr("disabled", true);
+        $('#raw_sugar_special').hide();
+        $("#raw_sugar_special input").attr("disabled", true);
+        $('#muscovado').hide();
+        $("#muscovado input").attr("disabled", true);
+        $('#molasses').hide();
+        $("#molasses input").attr("disabled", true);
+        $('#cja').show();
+        $("#cja input").removeAttr("disabled");
+
+      });
+
     @else
 
       $( document ).ready(function() {
@@ -415,6 +453,9 @@
           $('#raw_sugar').show();
           $("#raw_sugar input").removeAttr('disabled');
 
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar_complete').hide();
@@ -427,6 +468,10 @@
           $("#molasses input").attr("disabled", true);
           $('#cja').hide();
           $("#cja input").attr("disabled", true);
+
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').attr("disabled", true);
 
 
         }else if(val == "SS1002"){ 
@@ -434,6 +479,9 @@
           $('#raw_sugar_complete').show();
           $("#raw_sugar_complete input").removeAttr('disabled');
 
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
@@ -446,12 +494,19 @@
           $("#molasses input").attr("disabled", true);
           $('#cja').hide();
           $("#cja input").attr("disabled", true);
+
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').attr("disabled", true);
 
         }else if(val == "SS1005"){ 
 
           $('#raw_sugar_special').show();
           $("#raw_sugar_special input").removeAttr('disabled');
 
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
@@ -464,12 +519,19 @@
           $("#molasses input").attr("disabled", true);
           $('#cja').hide();
           $("#cja input").attr("disabled", true);
+
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').attr("disabled", true);
 
         }else if(val == "SS1003"){
 
           $('#muscovado').show();
           $("#muscovado input").removeAttr('disabled');
 
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
@@ -482,12 +544,19 @@
           $("#molasses input").attr("disabled", true);
           $('#cja').hide();
           $("#cja input").attr("disabled", true);
+
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').attr("disabled", true);
 
         }else if(val == "SS1004"){ 
 
           $('#molasses').show();
           $("#molasses input").removeAttr('disabled');
 
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
@@ -501,10 +570,17 @@
           $('#cja').hide();
           $("#cja input").attr("disabled", true);
 
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').attr("disabled", true);
+
         }else if(val == "SS1006"){ 
 
           $('#cja').show();
           $("#cja input").removeAttr('disabled');
+
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
 
           $('#default').hide();
           $("#default input").attr("disabled", true);
@@ -519,10 +595,18 @@
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
 
+          {{-- Number of Cane Juice Samples --}}
+          $('#cja_num_of_samples_div').show();
+          $('#cja_num_of_samples').removeAttr("disabled");
+
         }else{
 
           $('#default').show();
           $("#default input").attr("disabled", true);
+
+          $('#old_table').hide();
+          $("#old_table input").attr("disabled", true);
+
           $('#raw_sugar').hide();
           $("#raw_sugar input").attr("disabled", true);
           $('#raw_sugar_complete').hide();
@@ -538,6 +622,36 @@
 
         }
     });
+
+
+
+    {{-- Number of Cane Juice Samples --}}
+    @if (old('sugar_sample_id'))
+
+      @if (old('sugar_sample_id') == "SS1006")
+
+        $( document ).ready(function() {
+          $('#cja_num_of_samples_div').show();
+          $('#cja_num_of_samples').removeAttr('disabled');
+        });
+      
+      @else
+
+        $( document ).ready(function() {
+          $('#cja_num_of_samples_div').hide();
+          $('#cja_num_of_samples').removeAttr("disabled", true);
+        });
+
+      @endif
+
+    @elseif(optional($sugar_oop->sugarAnalysis)->sugar_sample_id == "SS1006")
+
+      $( document ).ready(function() {
+        $('#cja_num_of_samples_div').show();
+        $('#cja_num_of_samples').removeAttr('disabled');
+      });
+
+    @endif
 
 
 

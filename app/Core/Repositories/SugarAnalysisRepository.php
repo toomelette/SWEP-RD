@@ -90,7 +90,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
         $sugar_analysis->total_price = $total_price;
-        $sugar_analysis->cja_num_of_samples = $request->cja_num_of_samples;
+        $sugar_analysis->cja_num_of_samples = $request->sugar_sample_id == "SS1006" ? $request->cja_num_of_samples : 0;
         $sugar_analysis->created_at = $this->carbon->now();
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_created = request()->ip();
