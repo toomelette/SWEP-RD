@@ -17,6 +17,8 @@ class SugarAnalysis extends Model{
     protected $dates = ['date', 'week_ending', 'date_sampled', 'date_submitted', 'date_analyzed_from', 'date_analyzed_to', 'created_at', 'updated_at'];
     
 	public $timestamps = false;
+    
+    public $sortable = ['sample_no', 'sugar_sample_id', 'origin', 'week_ending', 'status'];
 
 
 
@@ -31,6 +33,7 @@ class SugarAnalysis extends Model{
         'or_no' => '',
         'origin' => '',
         'address' => '',
+        'total_price' => 0.00,
         'quantity' => '',
         'week_ending' => null,
         'date_sampled' => null,
@@ -38,7 +41,6 @@ class SugarAnalysis extends Model{
         'date_analyzed_from' => null,
         'date_analyzed_to' => null,
         'description' => '',
-        'total_price' => 0.00,
         'code' => '',
         'source' => '',
         'report_no' => '',

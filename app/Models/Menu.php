@@ -17,6 +17,8 @@ class Menu extends Model{
     protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
+    
+    public $sortable = ['name', 'route'];
 
 
 
@@ -48,8 +50,6 @@ class Menu extends Model{
     public function user() {
     	return $this->belongsTo('App\Models\User','user_id','user_id');
    	}
-
-
 
 
     public function submenu() {

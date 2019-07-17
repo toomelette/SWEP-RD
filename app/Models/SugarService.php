@@ -16,6 +16,8 @@ class SugarService extends Model{
     protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
+    
+    public $sortable = ['name', 'standard', 'price'];
 
 
 

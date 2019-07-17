@@ -65,7 +65,7 @@
         <table class="table table-hover">
           <tr>
             <th>@sortablelink('sample_no', 'Sample No.')</th>
-            <th>@sortablelink('sugar_sample_id', 'Kind of Sample')</th>
+            <th>@sortablelink('sugarSample.name', 'Kind of Sample')</th>
             <th>@sortablelink('origin', 'Origin')</th>
             <th>@sortablelink('week_ending', 'Week Ending')</th>
             <th>@sortablelink('status', 'Status')</th>

@@ -17,6 +17,8 @@ class SugarOrderOfPayment extends Model{
     protected $dates = ['date', 'created_at', 'updated_at'];
     
 	public $timestamps = false;
+    
+    public $sortable = ['sample_no', 'sugar_sample_id', 'received_from', 'date', 'received_by'];
 
 
 
@@ -58,14 +60,14 @@ class SugarOrderOfPayment extends Model{
     }
 
 
-
-    public function sugarSample() {
-        return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
+    public function caneJuiceAnalysis() {
+        return $this->hasMany('App\Models\CaneJuiceAnalysis','sample_no','sample_no');
     }
 
 
-    public function caneJuiceAnalysis() {
-        return $this->hasMany('App\Models\CaneJuiceAnalysis','sample_no','sample_no');
+
+    public function sugarSample() {
+        return $this->belongsTo('App\Models\SugarSample','sugar_sample_id','sugar_sample_id');
     }
 
     

@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
 
 
 class CaneJuiceAnalysis extends Model{
 
 
-	use Sortable;
 
     protected $table = 'sgrlab_cane_juice_analysis';
 

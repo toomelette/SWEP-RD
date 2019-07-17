@@ -16,6 +16,8 @@ class Mill extends Model{
     protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
+    
+    public $sortable = ['mill_id', 'name', 'address'];
 
 
 
