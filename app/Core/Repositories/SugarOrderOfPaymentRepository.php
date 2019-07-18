@@ -91,7 +91,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
     public function update($request, $sugar_oop, $total_price){
-        
+
         $sugar_oop->sample_no = $request->sample_no;
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
@@ -105,6 +105,10 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oop->save();
 
         $sugar_oop->sugarAnalysisParameter()->delete();
+        
+        foreach ($sugar_oop->sugarAnalysisParameter as $data) {
+            $data->sugarAnalysisParameterMethod()->delete();
+        }
 
         return $sugar_oop;
         
@@ -118,10 +122,15 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
     public function destroy($slug){
 
         $sugar_oop = $this->findBySlug($slug);  
+
         $sugar_oop->delete();
         $sugar_oop->sugarAnalysis()->delete();
         $sugar_oop->sugarAnalysisParameter()->delete();
         $sugar_oop->caneJuiceAnalysis()->delete();
+
+        foreach ($sugar_oop->sugarAnalysisParameter as $data) {
+            $data->sugarAnalysisParameterMethod()->delete();
+        }
         
         return $sugar_oop;
 

@@ -42,11 +42,19 @@
       
     }
 
+    .data-row-body-parameter{
+
+      padding:5px;
+      font-size:14px;
+      line-height: 17px;
+      
+    }
+
     .data-row-body{
 
       text-align: center;
       padding:5px;
-      font-size:14  px;
+      font-size:14px;
       
     }
 
@@ -257,7 +265,12 @@
 
         <tbody>
 
-          <td class="data-row-body">{{ $data->name }}</td>
+          <td class="data-row-body-parameter">
+            {{ $data->name }}<br>
+            @foreach ($data->sugarAnalysisParameterMethod as $data_sugar_apm)
+              {{ $data_sugar_apm->name }}<br>
+            @endforeach
+          </td>
           <td class="data-row-body">{{ $data->result }}</td>
           <td class="data-row-body">{{ $data->standard }}</td>
           <td class="data-row-body">{{ $data->assessment }}</td>
@@ -293,21 +306,21 @@
           <span> : <b>{{ $sa->or_no }}</b></span>
         </div>
 
-        <div class="col-sm-6" style="margin-top:30px;">
+        <div class="col-sm-6" style="margin-top:20px;">
           <span>Certified Correct:</span>
         </div>
 
-        <div class="col-sm-6" style="margin-top:30px;">
+        <div class="col-sm-6" style="margin-top:20px;">
           <span>Noted by:</span>
         </div>
 
-        <div class="col-sm-6" style="margin-top:50px;">
+        <div class="col-sm-6" style="margin-top:40px;">
           <span><b>JANET C. DILAG, RCh</b></span><br>
           <span>SRS II - LABORATORY SERVICES, VISAYAS</span><br>
           <span>CHEMIST LICENSE NO. 6302</span>
         </div>
 
-        <div class="col-sm-6" style="margin-top:50px;">
+        <div class="col-sm-6" style="margin-top:40px;">
           <span><b>MARY ANTOINETTE S. TAMPO</b></span><br>
           <span>DEPARTMENT MANAGER III</span><br>
           <span>REGULATION DEPARTMENT</span>

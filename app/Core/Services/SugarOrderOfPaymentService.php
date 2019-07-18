@@ -7,6 +7,7 @@ use App\Core\Interfaces\SugarOrderOfPaymentInterface;
 use App\Core\Interfaces\SugarServiceInterface;
 use App\Core\Interfaces\SugarAnalysisParameterInterface;
 use App\Core\Interfaces\SugarAnalysisInterface;
+use App\Core\Interfaces\SugarAnalysisParameterMethodInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -19,15 +20,17 @@ class SugarOrderOfPaymentService extends BaseService{
     protected $sugar_service_repo;
     protected $sugar_analysis_parameter_repo;
     protected $sugar_analysis_repo;
+    protected $sugar_apm_repo;
 
 
 
-    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, SugarAnalysisInterface $sugar_analysis_repo){
+    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterMethodInterface $sugar_apm_repo){
 
         $this->sugar_oop_repo = $sugar_oop_repo;
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sugar_analysis_parameter_repo = $sugar_analysis_parameter_repo;
         $this->sugar_analysis_repo = $sugar_analysis_repo;
+        $this->sugar_apm_repo = $sugar_apm_repo;
         parent::__construct();
 
     }
@@ -192,10 +195,21 @@ class SugarOrderOfPaymentService extends BaseService{
         $services = $request->sugar_service_id;
 
         if(!empty($services)){
-            foreach ($services as $data) {
-                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data);
-                $this->sugar_analysis_parameter_repo->store($request->sample_no, $sugar_service_instance);
+
+            foreach ($services as $data_sugar_service) {
+
+                $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data_sugar_service);
+
+                $sugar_analysis_parameter_instance = $this->sugar_analysis_parameter_repo->store($request->sample_no, $sugar_service_instance);          
+
+                foreach ($sugar_service_instance->sugarMethod as $data_sugar_method) { 
+                    
+                    $this->sugar_apm_repo->store($sugar_analysis_parameter_instance->sugar_analysis_parameter_id, $data_sugar_method->name);
+
+                }
+
             }  
+
         }
 
         return null;

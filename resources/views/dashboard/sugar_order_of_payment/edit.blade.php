@@ -103,7 +103,7 @@
           {{-- Sugar Services --}}
 
           <div class="col-md-7" id="ss_id">
-            <div class="box box-solid">
+            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Services</h3>
               </div>
