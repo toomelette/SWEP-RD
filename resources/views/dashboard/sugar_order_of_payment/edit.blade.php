@@ -354,6 +354,7 @@
       });
     @endif
 
+
     $(document).on("change", "#customer_type", function () {
       $('#received_from').val('');
       $('#address').val('');
@@ -626,7 +627,14 @@
 
 
     {{-- Number of Cane Juice Samples --}}
-    @if (old('sugar_sample_id'))
+    @if(optional($sugar_oop->sugarAnalysis)->sugar_sample_id == "SS1006")
+
+      $( document ).ready(function() {
+        $('#cja_num_of_samples_div').show();
+        $('#cja_num_of_samples').removeAttr('disabled');
+      });
+
+    @elseif(old('sugar_sample_id'))
 
       @if (old('sugar_sample_id') == "SS1006")
 
@@ -639,16 +647,16 @@
 
         $( document ).ready(function() {
           $('#cja_num_of_samples_div').hide();
-          $('#cja_num_of_samples').removeAttr("disabled", true);
+          $('#cja_num_of_samples').attr("disabled", true);
         });
 
       @endif
 
-    @elseif(optional($sugar_oop->sugarAnalysis)->sugar_sample_id == "SS1006")
+    @else
 
       $( document ).ready(function() {
-        $('#cja_num_of_samples_div').show();
-        $('#cja_num_of_samples').removeAttr('disabled');
+        $('#cja_num_of_samples_div').hide();
+        $('#cja_num_of_samples').attr("disabled", true);
       });
 
     @endif

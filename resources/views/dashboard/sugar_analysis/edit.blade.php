@@ -138,7 +138,7 @@
                     @endif
 
                     {!! __form::textbox(
-                      '12', 'description', 'text', 'Description', 'Description', old('description') ? old('description') : $sa->description, $errors->has('description'), $errors->first('description'), 'data-transform="uppercase"'
+                      '12', 'description', 'text', 'Description', 'Description', old('description') ? old('description') : $sa->description, $errors->has('description'), $errors->first('description'), ''
                     ) !!}
 
                   </div> 
