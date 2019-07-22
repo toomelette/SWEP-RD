@@ -112,13 +112,23 @@
           Kind of Analysis:
         </div>
         <div class="col-sm-7 std_div no-padding">
+          
+          @if ($sugar_oop->sugar_sample_id == "SS1006")
 
-          @if ($sugar_oop->sugarAnalysisParameter->isEmpty())
-            &nbsp;
-          @else
+            Polarization, Corrected Brix, Purity
+          
+          @elseif(!$sugar_oop->sugarAnalysisParameter->isEmpty())
+            
             @foreach ($sugar_oop->sugarAnalysisParameter as $data)
+
               {{ $data->name }}, 
+              
             @endforeach
+
+          @else
+
+            &nbsp;
+
           @endif
         
         </div>
