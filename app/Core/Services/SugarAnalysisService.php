@@ -114,7 +114,19 @@ class SugarAnalysisService extends BaseService{
             $assessment = $data->sugar_service_id.'_assessment';
 
             if (isset($request->$id) || $request->$id == ""){
-                $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
+
+                if (isset($request->SS1017_moisture) && isset($request->SS1017_sf)) {
+                    
+                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment, $request->SS1017_moisture, $request->SS1017_sf);
+
+                }else{
+
+                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
+                
+                }
+
+                
+            
             }
 
         }

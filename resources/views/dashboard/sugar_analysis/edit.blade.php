@@ -161,9 +161,23 @@
                         $assessment_name = $data->sugar_service_id .'_assessment';
                       ?>
 
-                      {!! __form::textbox(
-                        '6', $data->sugar_service_id, 'text', strtoupper($data->name) .' &nbsp;&nbsp;('. $data->standard.')', $data->name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
-                      ) !!}
+                      @if ($data->sugar_service_id == "SS1017")
+                      
+                        {!! __form::textbox(
+                          '3', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", "MOISTURE", old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : $data->result, $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'
+                        ) !!}
+                      
+                        {!! __form::textbox(
+                          '3', $data->sugar_service_id .'_sf', 'text', "SAFETY FACTOR", "SAFETY FACTOR", old($data->sugar_service_id .'_sf') ? old($data->sugar_service_id .'_sf') : $data->result, $errors->has($data->sugar_service_id .'_sf'), $errors->first($data->sugar_service_id .'_sf'), 'data-transform="uppercase"'
+                        ) !!}
+                        
+                      @else
+
+                        {!! __form::textbox(
+                          '6', $data->sugar_service_id, 'text', strtoupper($data->name) .' &nbsp;&nbsp;('. $data->standard.')', $data->name, old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                        ) !!}
+
+                      @endif
 
                       <div class="col-md-1" style="margin-top:30px;"><span> &nbsp;&nbsp;&nbsp;&nbsp;=</span></div>
 

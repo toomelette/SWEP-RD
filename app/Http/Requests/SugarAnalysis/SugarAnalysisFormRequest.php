@@ -48,6 +48,8 @@ class SugarAnalysisFormRequest extends FormRequest{
             'SS1015'=>'sometimes|nullable|numeric|max:10000',
             'SS1016'=>'sometimes|nullable|numeric|max:10000',
             'SS1017'=>'sometimes|nullable|string|max:45',
+            'SS1017_moisture'=>'sometimes|nullable|numeric|max:10000',
+            'SS1017_sf'=>'sometimes|nullable|numeric|max:10000',
             'SS1018'=>'sometimes|nullable|numeric|max:10000',
             'SS1019'=>'sometimes|nullable|numeric|max:10000',
             'SS1020'=>'sometimes|nullable|numeric|max:10000',
