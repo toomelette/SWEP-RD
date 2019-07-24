@@ -67,7 +67,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $sugar_oop = new SugarOrderOfPayment;
         $sugar_oop->slug = $this->str->random(16);
-        $sugar_oop->sample_no = $request->sample_no;
+        $sugar_oop->sample_no = $this->getSampleNoInc();
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
         $sugar_oop->address = $request->address;
@@ -92,7 +92,6 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
     public function update($request, $sugar_oop, $total_price){
 
-        $sugar_oop->sample_no = $request->sample_no;
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
         $sugar_oop->address = $request->address;
@@ -183,6 +182,31 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
                      ->orderBy('updated_at', 'desc')
                      ->paginate(10);
 
+    }
+
+
+
+
+
+
+    private function getSampleNoInc(){
+
+        $sample_no = $this->carbon->now()->format('Y') .'0001';
+
+        $sugar_oop = $this->sugar_oop->select('sample_no')->orderBy('sample_no', 'desc')->first();
+
+        if($sugar_oop != null){
+
+            if($sugar_oop->sample_no != null){
+
+                $sample_no = $sugar_oop->sample_no + 1;
+            
+            }
+        
+        }
+        
+        return $sample_no;
+        
     }
 
 

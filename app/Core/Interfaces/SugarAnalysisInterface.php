@@ -8,7 +8,7 @@ interface SugarAnalysisInterface {
 	
 	public function fetch($request);
 
-	public function storeOrderOfPayment($request, $total_price);
+	public function storeOrderOfPayment($request, $total_price, $sample_no);
 
 	public function updateOrderOfPayment($request, $slug, $total_price);
 

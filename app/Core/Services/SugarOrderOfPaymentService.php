@@ -63,10 +63,10 @@ class SugarOrderOfPaymentService extends BaseService{
         $sugar_oop = $this->sugar_oop_repo->store($request, $total_price);    
 
         // Sugar Analysis
-        $this->sugar_analysis_repo->storeOrderOfPayment($request, $total_price);
+        $this->sugar_analysis_repo->storeOrderOfPayment($request, $total_price, $sugar_oop->sample_no);
 
         // Sugar Analysis Parameter
-        $this->storeSugarAnalysisParameter($request);
+        $this->storeSugarAnalysisParameter($sugar_oop->sample_no, $request);
 
         $this->event->fire('sugar_oop.store', $sugar_oop);
         return redirect()->back();
@@ -98,7 +98,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $this->sugar_oop_repo->update($request, $sugar_oop, $total_price);
 
         // Sugar Analysis Parameters
-        $this->storeSugarAnalysisParameter($request);
+        $this->storeSugarAnalysisParameter($sugar_oop->sample_no, $request);
 
         $this->event->fire('sugar_oop.update', $sugar_oop);
         return redirect()->back();
@@ -190,7 +190,7 @@ class SugarOrderOfPaymentService extends BaseService{
 
 
 
-    private function storeSugarAnalysisParameter($request){
+    private function storeSugarAnalysisParameter($sample_no, $request){
 
         $services = $request->sugar_service_id;
 
@@ -200,11 +200,11 @@ class SugarOrderOfPaymentService extends BaseService{
 
                 $sugar_service_instance = $this->sugar_service_repo->findBySugarServiceId($data_sugar_service);
 
-                $sugar_analysis_parameter_instance = $this->sugar_analysis_parameter_repo->store($request->sample_no, $sugar_service_instance);          
+                $sugar_analysis_parameter = $this->sugar_analysis_parameter_repo->store($sample_no, $sugar_service_instance);          
 
                 foreach ($sugar_service_instance->sugarMethod as $data_sugar_method) { 
                     
-                    $this->sugar_apm_repo->store($sugar_analysis_parameter_instance->sugar_analysis_parameter_id, $data_sugar_method->name);
+                    $this->sugar_apm_repo->store($sugar_analysis_parameter->sugar_analysis_parameter_id, $data_sugar_method->name);
 
                 }
 

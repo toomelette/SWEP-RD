@@ -78,11 +78,11 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function storeOrderOfPayment($request, $total_price){
+    public function storeOrderOfPayment($request, $total_price, $sample_no){
 
         $sugar_analysis = new SugarAnalysis;
         $sugar_analysis->slug = $this->str->random(16);
-        $sugar_analysis->sample_no = $request->sample_no;
+        $sugar_analysis->sample_no = $sample_no;
         $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;
@@ -111,7 +111,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
     public function updateOrderOfPayment($request, $slug, $total_price){
 
         $sugar_analysis = $this->findBySlug($slug);
-        $sugar_analysis->sample_no = $request->sample_no;
         $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;

@@ -42,6 +42,10 @@
 
                 @csrf
 
+                {!! __form::select_dynamic(
+                  '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
+                ) !!}
+
                 {!! __form::select_static(
                   '12', 'customer_type', 'Customer Type *', old('customer_type'), ['Walk in / Trader' => 'CT1001', 'Milling Company' => 'CT1002'], $errors->has('customer_type'), $errors->first('customer_type'), '', ''
                 ) !!}
@@ -64,16 +68,8 @@
                   '12', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
                 ) !!}
 
-                {!! __form::textbox(
-                  '12', 'sample_no', 'text', 'Sample No. *', 'Sample No.', old('sample_no'), $errors->has('sample_no'), $errors->first('sample_no'), 'data-transform="uppercase"'
-                ) !!}
-
                 {!! __form::datepicker(
                   '12', 'date',  'Date Received *', old('date') ? old('date') : Carbon::now()->format('m/d/Y'), $errors->has('date'), $errors->first('date')
-                ) !!}
-
-                {!! __form::select_dynamic(
-                  '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
                 ) !!}
 
                 <div class="col-md-12 no-padding" id="cja_num_of_samples_div">

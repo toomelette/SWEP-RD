@@ -27,7 +27,6 @@ class SugarOrderOfPaymentFormRequest extends FormRequest{
             'received_from'=>'sometimes|required|string|max:90',
             'mill_id'=>'sometimes|required|string|max:45',
             'address'=>'required|string|max:255',
-            'sample_no'=>'required|string|max:11|unique:sgrlab_sugar_order_of_payment,sample_no,'.$this->route('sugar_order_of_payment').',slug',
             'date'=>'required|date_format:"m/d/Y"',
             'sugar_sample_id'=>'required|string|max:11',
             'cja_num_of_samples'=>'sometimes|required|numeric|max:50',
