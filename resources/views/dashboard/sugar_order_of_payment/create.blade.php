@@ -9,7 +9,19 @@
 
 ?>
 
+
+
 @extends('layouts.admin-master')
+
+
+
+@section('css')
+
+  <link type="text/css" rel="stylesheet" href="{{ asset('template/plugins/jquery-ui/jquery-ui.css') }}">
+
+@endsection
+
+
 
 @section('content')
 
@@ -52,11 +64,15 @@
 
                 {{-- IF WALK IN --}}
                 <div class="col-md-12 no-padding" id="recieved_from_div">
+
                   {!! __form::textbox(
                     '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from'), $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
                   ) !!}
+
+                  <input type="hidden" name="sugar_client_id" id="sugar_client_id" value="{{ old('sugar_client_id') }}">
+
                 </div>
-                
+
                 {{-- IF MILL --}}
                 <div class="col-md-12 no-padding" id="mill_div">
                   {!! __form::select_dynamic(
@@ -313,12 +329,16 @@
 
 
 @section('scripts')
+  
+  <script type="text/javascript" src="{{ asset('template/plugins/jquery-ui/jquery-ui.js') }}"></script>
 
   <script type="text/javascript">
+
 
     @if(Session::has('SUGAR_OOP_CREATE_SUCCESS'))
       $('#soop_create').modal('show');
     @endif
+
 
 
     {{-- CUSTOMER TYPE --}}
@@ -359,11 +379,9 @@
     });
 
 
-
     
 
     {{-- SUGAR SAMPLE SERVICES --}}
-
     @if (is_array(old('sugar_service_id')))
 
       $( document ).ready(function() {
@@ -384,7 +402,6 @@
         $("#cja input").attr("disabled", true);
 
       });
-
 
     @elseif(old('sugar_sample_id') == "SS1006")
 
@@ -433,6 +450,7 @@
 
 
     $(document).on("change", "#sugar_sample_id", function () {
+
       var val = $(this).val();
 
         if(val == "SS1001"){ 
@@ -607,6 +625,7 @@
           $("#cja input").attr("disabled", true);
 
         }
+
     });
 
     
@@ -614,7 +633,6 @@
 
 
     {{-- Number of Cane Juice Samples --}}
-
     $( document ).ready(function() {
       $('#cja_num_of_samples_div').hide();
       $('#cja_num_of_samples').attr("disabled", true);
@@ -630,7 +648,7 @@
 
 
 
-    {{-- MILL--}}
+    {{-- MILL --}}
     {!! __js::ajax_select_to_input(
       'mill_id', 'address', '/api/mill/input_mill_byMillId/', 'address'
     ) !!}
@@ -638,6 +656,22 @@
     {!! __js::ajax_select_to_input(
       'mill_id', 'received_from', '/api/mill/input_mill_byMillId/', 'name'
     ) !!}
+
+
+
+
+    {{-- RECEIVED FROM AUTOCOMPLETE --}}
+    var sugar_clients = {!! $global_sugar_clients_all_json !!};
+
+    $('#received_from').autocomplete({ 
+      source: sugar_clients,
+      change: function (event, ui){
+        $('#sugar_client_id').val(ui.item.id);
+        $('#address').val(ui.item.address);
+      }
+    });
+
+
 
   </script>
     

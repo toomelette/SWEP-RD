@@ -38,6 +38,7 @@ class EventServiceProvider extends ServiceProvider{
         'App\Core\Subscribers\SugarServiceSubscriber',
         'App\Core\Subscribers\SugarSampleSubscriber',
         'App\Core\Subscribers\CaneJuiceAnalysisSubscriber',
+        'App\Core\Subscribers\SugarClientSubscriber',
         
     ];
 

@@ -10,7 +10,21 @@
 
 ?>
 
+
+
+
 @extends('layouts.admin-master')
+
+
+
+@section('css')
+
+  <link type="text/css" rel="stylesheet" href="{{ asset('template/plugins/jquery-ui/jquery-ui.css') }}">
+
+@endsection
+
+
+
 
 @section('content')
 
@@ -58,9 +72,13 @@
 
                 {{-- IF WALK IN --}}
                 <div class="col-md-12 no-padding" id="recieved_from_div">
+
                   {!! __form::textbox(
                     '12', 'received_from', 'text', 'Received From *', 'Recieved From', old('received_from') ? old('received_from') : $sugar_oop->received_from, $errors->has('received_from'), $errors->first('received_from'), 'data-transform="uppercase"'
                   ) !!}
+
+                  <input type="hidden" name="sugar_client_id" id="sugar_client_id" value="{{ old('sugar_client_id') ? old('sugar_client_id') : optional($sugar_oop->sugarAnalysis)->sugar_client_id }}">
+
                 </div>
                 
                 {{-- IF MILL --}}
@@ -321,6 +339,8 @@
 
 
 @section('scripts')
+
+  <script type="text/javascript" src="{{ asset('template/plugins/jquery-ui/jquery-ui.js') }}"></script>
 
   <script type="text/javascript">
 
@@ -670,6 +690,20 @@
     {!! __js::ajax_select_to_input(
       'mill_id', 'received_from', '/api/mill/input_mill_byMillId/', 'name'
     ) !!}
+
+
+
+
+    {{-- RECEIVED FROM AUTOCOMPLETE --}}
+    var sugar_clients = {!! $global_sugar_clients_all_json !!};
+
+    $('#received_from').autocomplete({ 
+      source: sugar_clients,
+      change: function (event, ui){
+        $('#sugar_client_id').val(ui.item.id);
+        $('#address').val(ui.item.address);
+      }
+    });
 
     
   </script>

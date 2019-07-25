@@ -8,6 +8,7 @@ use App\Core\Interfaces\SugarServiceInterface;
 use App\Core\Interfaces\SugarAnalysisParameterInterface;
 use App\Core\Interfaces\SugarAnalysisInterface;
 use App\Core\Interfaces\SugarAnalysisParameterMethodInterface;
+use App\Core\Interfaces\SugarClientInterface;
 use App\Core\BaseClasses\BaseService;
 
 
@@ -21,16 +22,18 @@ class SugarOrderOfPaymentService extends BaseService{
     protected $sugar_analysis_parameter_repo;
     protected $sugar_analysis_repo;
     protected $sugar_apm_repo;
+    protected $sugar_client_repo;
 
 
 
-    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterMethodInterface $sugar_apm_repo){
+    public function __construct(SugarOrderOfPaymentInterface $sugar_oop_repo, SugarServiceInterface $sugar_service_repo, SugarAnalysisParameterInterface $sugar_analysis_parameter_repo, SugarAnalysisInterface $sugar_analysis_repo, SugarAnalysisParameterMethodInterface $sugar_apm_repo, SugarClientInterface $sugar_client_repo){
 
         $this->sugar_oop_repo = $sugar_oop_repo;
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sugar_analysis_parameter_repo = $sugar_analysis_parameter_repo;
         $this->sugar_analysis_repo = $sugar_analysis_repo;
         $this->sugar_apm_repo = $sugar_apm_repo;
+        $this->sugar_client_repo = $sugar_client_repo;
         parent::__construct();
 
     }
@@ -59,6 +62,18 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = $this->getTotalPrice($request);
 
+        // Sugar Clients
+        if ($request->customer_type == "CT1001") {
+            
+            if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
+
+                $sugar_client = $this->sugar_client_repo->store($request);
+                $this->event->fire('sugar_client.store');
+
+            }
+
+        }
+
         // Sugar OOP
         $sugar_oop = $this->sugar_oop_repo->store($request, $total_price);    
 
@@ -82,7 +97,19 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = $this->getTotalPrice($request);
         
-        $sugar_oop = $this->sugar_oop_repo->findBySlug($slug);  
+        $sugar_oop = $this->sugar_oop_repo->findBySlug($slug); 
+
+        // Sugar Clients
+        if ($request->customer_type == "CT1001") {
+            
+            if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
+
+                $sugar_client = $this->sugar_client_repo->store($request);
+                $this->event->fire('sugar_client.store');
+
+            }
+
+        } 
 
         // Cane Juice Analysis
         if($sugar_oop->sugar_sample_id == "SS1006"){

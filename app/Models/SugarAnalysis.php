@@ -27,6 +27,7 @@ class SugarAnalysis extends Model{
        	'slug' => '',
         'sample_no' => '',
         'mill_id' => '',
+        'sugar_client_id' => '',
         'sugar_sample_id' => '',
         'customer_type' => '',
         'date' => null,

@@ -86,6 +86,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;
+        $sugar_analysis->sugar_client_id = $request->sugar_client_id;
         $sugar_analysis->date = $this->__dataType->date_parse($request->date);
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
@@ -114,6 +115,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->sugar_sample_id = $request->sugar_sample_id;
         $sugar_analysis->customer_type = $request->customer_type;
         $sugar_analysis->mill_id = $request->mill_id;
+        $sugar_analysis->sugar_client_id = $request->sugar_client_id;
         $sugar_analysis->date = $this->__dataType->date_parse($request->date);
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
@@ -223,7 +225,8 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         return $model->where(function ($model) use ($key) {
                 $model->where('sample_no', 'LIKE', '%'. $key .'%')
-                      ->orwhere('origin', 'LIKE', '%'. $key .'%');
+                      ->orwhere('origin', 'LIKE', '%'. $key .'%')
+                      ->orwhere('or_no', 'LIKE', '%'. $key .'%');
         });
 
     }

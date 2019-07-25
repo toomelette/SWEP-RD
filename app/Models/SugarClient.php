@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
-class SugarClients extends Model{
+class SugarClient extends Model{
 
 
 	use Sortable;
@@ -24,7 +24,7 @@ class SugarClients extends Model{
     protected $attributes = [
 
         'slug' => '',
-        'client_id' => '',
+        'sugar_client_id' => '',
         'name' => '',
         'address' => '',
         'created_at' => null,
