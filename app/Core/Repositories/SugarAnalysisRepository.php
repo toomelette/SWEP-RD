@@ -221,6 +221,40 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
+    public function getByMillId_SugarSampleId_WeekEnding($mill_id, $sugar_sample_id, $week_ending_from, $week_ending_to){
+
+        $cache_key = 'sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $mill_id .':'. $sugar_sample_id .':'. $week_ending_from .'-'. $week_ending_to;
+
+        $sa = $this->cache->remember($cache_key, 240, function() use ($mill_id, $sugar_sample_id, $week_ending_from, $week_ending_to){
+           
+            $sa_list = $this->sugar_analysis->newQuery();
+
+            $sa_list->where('mill_id', $mill_id);
+
+            $sa_list->where('sugar_sample_id', $sugar_sample_id);
+
+            if(isset($week_ending_from) || isset($week_ending_to)){
+
+                $week_ending_from = $this->__dataType->date_parse($week_ending_from);
+                $week_ending_to = $this->__dataType->date_parse($week_ending_to);
+
+                $sa_list->whereBetween('date', [$week_ending_from, $week_ending_to]);
+
+            }
+
+            return $sa_list->get();
+
+        }); 
+
+        return $sa;
+
+    }
+
+
+
+
+
+
     public function search($model, $key){
 
         return $model->where(function ($model) use ($key) {

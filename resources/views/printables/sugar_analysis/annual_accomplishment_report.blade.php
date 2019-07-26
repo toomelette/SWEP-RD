@@ -75,13 +75,6 @@
 
     }
 
-    thead{
-/*
-      -webkit-print-color-adjust: exact; 
-      background-color: #78B681 !important;*/
-
-    }
-
     .data-row-head{
 
       text-align: center;
@@ -191,7 +184,6 @@
 
       </thead>
             
-      {{-- @foreach ($sa->sugarAnalysisParameter as $data) --}}
 
         <tbody>
 
@@ -464,8 +456,7 @@
 
 
         </tbody>
-
-      {{-- @endforeach --}}
+        
 
     </table>
 

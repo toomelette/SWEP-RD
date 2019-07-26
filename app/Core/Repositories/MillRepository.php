@@ -165,6 +165,27 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
+    public function findByMillId($mill_id){
+
+        $mill = $this->cache->remember('mills:findByMillId:' . $mill_id, 240, function() use ($mill_id){
+            return $this->mill->select('address', 'name')
+                              ->where('mill_id', $mill_id)
+                              ->first();
+        }); 
+        
+        if(empty($mill)){
+            abort(404);
+        }
+
+        return $mill;
+
+    }
+
+
+
+
+
+
     public function search($model, $key){
 
         return $model->where(function ($model) use ($key) {

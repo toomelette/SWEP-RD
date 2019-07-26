@@ -19,5 +19,7 @@ interface MillInterface {
 	public function getAll();
 
 	public function getByMillId($mill_id);
+
+	public function findByMillId($mill_id);
 		
 }

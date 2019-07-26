@@ -35,6 +35,7 @@ class SugarAnalysisSubscriber extends BaseSubscriber{
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:*');
 
         $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS', 'Sugar Analysis Result has been successfully updated!');
         $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG', $sa->slug);

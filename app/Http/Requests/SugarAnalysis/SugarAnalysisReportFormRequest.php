@@ -22,7 +22,14 @@ class SugarAnalysisReportFormRequest extends FormRequest{
         return [
             
             't'=>'required|string|max:11',
-        	'year'=>'required|integer|max:3000',
+        	'year'=>'sometimes|required|integer|max:3000',
+
+
+        	'mill_id'=>'sometimes|required|string|max:11',
+            'sugar_sample_id'=>'sometimes|required|string|max:11',
+        	'we_from'=>'sometimes|required|date_format:"m/d/Y"',
+        	'we_to'=>'sometimes|required|date_format:"m/d/Y"',
+        	
         ];
     
     }

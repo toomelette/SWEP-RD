@@ -30,7 +30,8 @@ class ViewComposerServiceProvider extends ServiceProvider{
 
         // MILLS
         View::composer(['dashboard.sugar_order_of_payment.create',
-                        'dashboard.sugar_order_of_payment.edit'], 'App\Core\ViewComposers\MillComposer');
+                        'dashboard.sugar_order_of_payment.edit',
+                        'dashboard.sugar_analysis.report'], 'App\Core\ViewComposers\MillComposer');
         
 
         // SUGAR SERVICES
@@ -44,7 +45,8 @@ class ViewComposerServiceProvider extends ServiceProvider{
         View::composer(['dashboard.sugar_order_of_payment.create',
                         'dashboard.sugar_order_of_payment.edit',
                         'dashboard.sugar_order_of_payment.index',
-                        'dashboard.sugar_analysis.index'], 'App\Core\ViewComposers\SugarSampleComposer');
+                        'dashboard.sugar_analysis.index',
+                        'dashboard.sugar_analysis.report'], 'App\Core\ViewComposers\SugarSampleComposer');
         
 
         // SUGAR SAMPLE PARAMETER
