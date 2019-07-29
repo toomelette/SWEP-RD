@@ -98,22 +98,6 @@
 
         <span style="font-size:14px; font-weight:bold;">STATEMENT OF ACCOUNT</span><br>
 
-        <span style="font-size:14px;">
-            
-            @if (Request::get('sugar_sample_id') == 'SS1001')
-               Raw Sugar
-            @elseif(Request::get('sugar_sample_id') == 'SS1003')
-               Muscovado
-            @elseif(Request::get('sugar_sample_id') == 'SS1004')
-               Molasses
-            @elseif(Request::get('sugar_sample_id') == 'SS1006')
-               Cane Juice
-            @endif
-
-            Analysis Fee
-
-        </span><br>
-
         <span style="font-size:14px; font-weight:bold;">
           Crop Year {{ __dataType::date_parse(Request::get('we_from'), "Y") .' - '. __dataType::date_parse(Request::get('we_to'), "Y") }}
         </span><br>
@@ -124,25 +108,8 @@
 
 
 
-    {{-- Mill Info --}}
-    <div class="row" style="margin-top:20px;">
-      <div class="col-md-12">
-        <div class="col-sm-12">
-          <span style="font-size:12px;">Mill / Company : {{ $mill->name }}</span><br>
-          <span style="font-size:12px;">Address : {{ $mill->address }}</span><br>
-        </div>
-      </div>
-    </div>
-
-
-
-
     {{-- TABLE --}}
     <div class="row" style="margin-top:20px;">
-     
-      <div class="col-md-12" style="text-align: center;">
-        <span style="font-size:14px; font-weight: bold;">DESCRIPTION</span><br>
-      </div>
 
       <div class="col-md-12" style="position: center;">
 
@@ -150,47 +117,81 @@
       
           <thead>
 
-              <td class="data-row-head" >No.</td>
-              <td class="data-row-head" style="width:150px;">Date</td>
-              <td class="data-row-head" style="width:150px;">Entry No.</td>
-              <td class="data-row-head" style="width:150px;">Week Ending</td>
-              <td class="data-row-head" style="width:150px;">Charges (PHP)</td>
+              <td class="data-row-head" style="width:200px;">Sugar Mills</td>
+              <td class="data-row-head" style="width:100px;">Production in Metric Tons</td>
+              <td class="data-row-head" style="width:100px;">Pol</td>
+              <td class="data-row-head" style="width:100px;">Moisture</td>
+              <td class="data-row-head" style="width:100px;">Safety Factor</td>
+              <td class="data-row-head" style="width:100px;">Ash</td>
+              <td class="data-row-head" style="width:100px;">Color Whole</td>
+              <td class="data-row-head" style="width:100px;">Color Affined</td>
+              <td class="data-row-head" style="width:100px;">Grain Size</td>
 
           </thead>
                 
           <tbody>
 
-            @foreach ($sugar_analysis_list as $key => $data)
+            
+
+            @foreach (__static::lmd_mill_districts() as $data_district => $key_district)
 
               <tr>
 
-                <td class="data-row-body">{{ $key + 1 }}</td>
-
-                <td class="data-row-body">{{ __dataType::date_parse($data->date, "m/d/Y") }}</td>
-
-                <td class="data-row-body">{{ $data->sample_no }}</td>
-
-                <td class="data-row-body">{{ __dataType::date_parse($data->week_ending, "m/d/Y") }}</td>
-
-                <td class="data-row-body">{{ number_format($data->total_price, 2) }}</td>
+                <td class="data-row-body" style="border-right:0;"><b>{{ $data_district }}</b></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
+                <td class="data-row-body" style="border-left:0;"></td>
 
               </tr>
+
+              @foreach ($global_mills_all as $data_mill)
+
+                @if ($key_district == $data_mill->district)
+
+                <tr>
+
+                  <td class="data-row-body">{{ $data_mill->short_name }}</td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body">
+                      
+                      @foreach ($sugar_analysis_list as $data_sa)
+                        
+                        @if ($data_sa->mill_id == $data_mill->mill_id)
+
+                         {{ $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->avg('result_dec') }}
+                          
+                        @endif
+
+                      @endforeach
+
+                  </td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body"></td>
+
+                  <td class="data-row-body"></td>
+
+                </tr>
+                  
+                @endif
+                
+              @endforeach
 
             @endforeach
-
-              <tr>
-
-                <td class="data-row-body"></td>
-
-                <td class="data-row-body"></td>
-
-                <td class="data-row-body"></td>
-
-                <td class="data-row-body"><b>TOTAL</b></td>
-
-                <td class="data-row-body">{{ number_format($sugar_analysis_list->sum('total_price'), 2) }}</td>
-
-              </tr>
 
           </tbody>
 

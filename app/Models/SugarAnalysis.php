@@ -79,6 +79,11 @@ class SugarAnalysis extends Model{
         return $this->belongsTo('App\Models\SugarOrderOfPayment','sample_no','sample_no');
     }
 
+
+    public function mill() {
+        return $this->belongsTo('App\Models\Mill','mill_id','mill_id');
+    }
+
     
 
 }

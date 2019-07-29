@@ -31,7 +31,8 @@ class ViewComposerServiceProvider extends ServiceProvider{
         // MILLS
         View::composer(['dashboard.sugar_order_of_payment.create',
                         'dashboard.sugar_order_of_payment.edit',
-                        'dashboard.sugar_analysis.report'], 'App\Core\ViewComposers\MillComposer');
+                        'dashboard.sugar_analysis.report',
+                        'printables.sugar_analysis.summary_of_sugar_analyses'], 'App\Core\ViewComposers\MillComposer');
         
 
         // SUGAR SERVICES

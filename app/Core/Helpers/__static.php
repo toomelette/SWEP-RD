@@ -7,6 +7,7 @@ namespace App\Core\Helpers;
 class __static{
 
 
+
     // Profile
     public static function user_colors(){
 
@@ -24,6 +25,25 @@ class __static{
 	      'Green/Light' => 'sidebar-mini skin-green-light',
 	      'Red/Light' => 'sidebar-mini skin-red-light',
 	      'Yellow/Light' => 'sidebar-mini skin-yellow-light',
+
+	    ];
+
+    
+    }
+
+
+
+
+    // LMD Mills
+    public static function lmd_mill_districts(){
+
+        return [
+
+	      'Panay' => 'PANAY',
+	      'Negros Occidental North' => 'NEGOCC-N',
+	      'Negros Occidental South' => 'NEGOCC-S',
+	      'Negros Oriental' => 'NEGOR',
+	      'Cebu' => 'CEBU',
 
 	    ];
 

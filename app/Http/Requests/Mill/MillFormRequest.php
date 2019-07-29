@@ -21,7 +21,9 @@ class MillFormRequest extends FormRequest{
 
             'mill_id' => 'required|max:45|string',
             'name' => 'required|max:255|string',
+            'short_name' => 'required|max:90|string',
             'address' => 'required|max:255|string',
+            'district' => 'required|max:45|string',
 
         ];
     

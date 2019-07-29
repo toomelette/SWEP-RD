@@ -58,7 +58,9 @@ class MillRepository extends BaseRepository implements MillInterface {
         $mill->slug = $this->str->random(16);
         $mill->mill_id = $request->mill_id;
         $mill->name = $request->name;
+        $mill->short_name = $request->short_name;
         $mill->address = $request->address;
+        $mill->district = $request->district;
         $mill->created_at = $this->carbon->now();
         $mill->updated_at = $this->carbon->now();
         $mill->ip_created = request()->ip();
@@ -81,7 +83,9 @@ class MillRepository extends BaseRepository implements MillInterface {
         $mill = $this->findBySlug($slug);
         $mill->mill_id = $request->mill_id;
         $mill->name = $request->name;
+        $mill->short_name = $request->short_name;
         $mill->address = $request->address;
+        $mill->district = $request->district;
         $mill->updated_at = $this->carbon->now();
         $mill->ip_updated = request()->ip();
         $mill->user_updated = $this->auth->user()->user_id;
@@ -132,7 +136,7 @@ class MillRepository extends BaseRepository implements MillInterface {
     public function getAll(){
 
         $mills = $this->cache->remember('mills:getAll', 240, function(){
-            return $this->mill->select('mill_id', 'name')->get();
+            return $this->mill->select('mill_id', 'name', 'short_name', 'district')->get();
         });
         
         return $mills;
@@ -190,7 +194,9 @@ class MillRepository extends BaseRepository implements MillInterface {
 
         return $model->where(function ($model) use ($key) {
                 $model->where('name', 'LIKE', '%'. $key .'%')
-                      ->orwhere('mill_id', 'LIKE', '%'. $key .'%');
+                      ->orwhere('mill_id', 'LIKE', '%'. $key .'%')
+                      ->orwhere('short_name', 'LIKE', '%'. $key .'%')
+                      ->orwhere('district', 'LIKE', '%'. $key .'%');
         });
 
     }

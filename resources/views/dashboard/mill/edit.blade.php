@@ -29,15 +29,25 @@
           @csrf    
 
           {!! __form::textbox(
-            '2', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id') ? old('mill_id') : $mill->mill_id, $errors->has('mill_id'), $errors->first('mill_id'), ''
+            '4', 'mill_id', 'text', 'Mill Id *', 'Mill Id', old('mill_id') ? old('mill_id') : $mill->mill_id, $errors->has('mill_id'), $errors->first('mill_id'), ''
           ) !!}
 
           {!! __form::textbox(
-            '5', 'name', 'text', 'Company Name *', 'Company Name', old('name') ? old('name') : $mill->name, $errors->has('name'), $errors->first('name'), ''
+            '4', 'name', 'text', 'Company Name *', 'Company Name', old('name') ? old('name') : $mill->name, $errors->has('name'), $errors->first('name'), ''
           ) !!}    
 
           {!! __form::textbox(
-            '5', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $mill->address, $errors->has('address'), $errors->first('address'), ''
+            '4', 'short_name', 'text', 'Short Name / Acronym *', 'Short Name / Acronym', old('short_name') ? old('short_name') : $mill->short_name, $errors->has('short_name'), $errors->first('short_name'), ''
+          ) !!}   
+
+          <div class="col-md-12"></div>
+
+          {!! __form::textbox(
+            '4', 'address', 'text', 'Address *', 'Address', old('address') ? old('address') : $mill->address, $errors->has('address'), $errors->first('address'), ''
+          ) !!}
+
+          {!! __form::select_static(
+            '4', 'district', 'Mill District *', old('district') ? old('district') : $mill->district, __static::lmd_mill_districts(), $errors->has('district'), $errors->first('district'), '', ''
           ) !!}
 
         </div>

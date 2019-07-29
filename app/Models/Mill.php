@@ -27,7 +27,9 @@ class Mill extends Model{
         'slug' => '',
         'mill_id' => '',
         'name' => '',
+        'short_name' => '',
         'address' => '',
+        'district' => '',
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',
@@ -36,6 +38,15 @@ class Mill extends Model{
         'user_updated' => '',
 
     ];
+
+
+
+
+    /** RELATIONSHIPS **/ 
+    public function sugarAnalysis() {
+        return $this->hasMany('App\Models\SugarAnalysis','mill_id','mill_id');
+    }
+
 
 
     

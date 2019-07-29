@@ -233,7 +233,11 @@ class SugarAnalysisService extends BaseService{
 
         }elseif ($request->t == "SOAM") {
 
-            return $this->statementOfAcountReport($request);
+            return $this->statementOfAccountReport($request);
+            
+        }elseif ($request->t == "SOSA") {
+
+            return $this->summaryOfSugarAnalyses($request);
             
         }
 
@@ -352,7 +356,7 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    private function statementOfAcountReport($request){
+    private function statementOfAccountReport($request){
         
         $sugar_analysis_list = $this->sugar_analysis_repo->getByMillId_SugarSampleId_WeekEnding($request->mill_id, $request->sugar_sample_id, $request->we_from, $request->we_to);
 
@@ -364,6 +368,19 @@ class SugarAnalysisService extends BaseService{
             'mill' => $mill,
 
         ]);
+
+    }
+
+
+
+
+
+
+    private function summaryOfSugarAnalyses($request){
+
+        $sugar_analysis_list = $this->sugar_analysis_repo->getBySugarSampleId_WeekEnding($request->sugar_sample_id, $request->we_from, $request->we_to);
+        
+        return view('printables.sugar_analysis.summary_of_sugar_analyses')->with('sugar_analysis_list', $sugar_analysis_list);
 
     }
 
