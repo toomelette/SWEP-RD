@@ -161,15 +161,38 @@
 
                   <td class="data-row-body">
                       
+                      <?php
+
+                        $pol = 0.00;
+
+                        $num_of_sa = 0.00;
+
+                      ?>
+
                       @foreach ($sugar_analysis_list as $data_sa)
                         
                         @if ($data_sa->mill_id == $data_mill->mill_id)
 
-                         {{ $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->avg('result_dec') }}
+                          <?php
+
+                            $num_of_sa++;
+
+                            $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->first();
+
+                            $pol = $sap->result_dec + $pol;
+
+                          ?>
                           
                         @endif
 
                       @endforeach
+
+                      @if ($pol != 0 && $num_of_sa != 0)
+
+                        {{ number_format($pol / $num_of_sa, 2) }}  
+                      
+                      @endif
+                      
 
                   </td>
 

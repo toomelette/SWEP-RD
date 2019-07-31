@@ -271,7 +271,7 @@
               {{ $data_sugar_apm->name }}<br>
             @endforeach
           </td>
-          <td class="data-row-body">{{ $data->result }}</td>
+          <td class="data-row-body">{{ number_format($data->result_dec, 2) }}</td>
           <td class="data-row-body">{{ $data->standard }}</td>
           <td class="data-row-body">{{ $data->assessment }}</td>
 

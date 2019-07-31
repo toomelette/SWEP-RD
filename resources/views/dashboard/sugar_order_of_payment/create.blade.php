@@ -352,6 +352,7 @@
       $( document ).ready(function() {
         $('#mill_div').show();
         $('#recieved_from_div').hide();
+        $('#sugar_client_id').attr("disabled", true);
       });
     @else
       $( document ).ready(function() {
@@ -366,12 +367,14 @@
       var val = $(this).val();
         if(val == "CT1001"){ 
           $('#recieved_from_div').show();
+          $('#sugar_client_id').removeAttr("disabled");
           $('#mill_div').hide();
           $('#mill_id').attr("disabled", true);
         }else if(val == "CT1002"){
           $('#mill_div').show();
           $('#mill_id').removeAttr("disabled");
           $('#recieved_from_div').hide();
+          $('#sugar_client_id').attr("disabled", true);
         }else{
           $('#recieved_from_div').show();
           $('#mill_div').hide();

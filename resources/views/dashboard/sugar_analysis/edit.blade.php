@@ -164,17 +164,17 @@
                       @if ($data->sugar_service_id == "SS1017")
                       
                         {!! __form::textbox(
-                          '3', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", '0.00', old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : $data->result, $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'
+                          '3', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", '0.00', old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : number_format($data->moisture_result_dec, 2), $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'
                         ) !!}
                       
                         {!! __form::textbox(
-                          '3', $data->sugar_service_id .'_sf', 'text', "SAFETY FACTOR", '0.00', old($data->sugar_service_id .'_sf') ? old($data->sugar_service_id .'_sf') : $data->result, $errors->has($data->sugar_service_id .'_sf'), $errors->first($data->sugar_service_id .'_sf'), 'data-transform="uppercase"'
+                          '3', $data->sugar_service_id .'_sf', 'text', "SAFETY FACTOR", '0.00', old($data->sugar_service_id .'_sf') ? old($data->sugar_service_id .'_sf') : number_format($data->moisture_sf_dec, 2), $errors->has($data->sugar_service_id .'_sf'), $errors->first($data->sugar_service_id .'_sf'), 'data-transform="uppercase"'
                         ) !!}
                         
                       @else
 
                         {!! __form::textbox(
-                          '6', $data->sugar_service_id, 'text', strtoupper($data->name), '0.00', old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                          '6', $data->sugar_service_id, 'text', strtoupper($data->name), '0.00', old($data->sugar_service_id) ? old($data->sugar_service_id) : number_format($data->result_dec, 2), $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
                         ) !!}
 
                       @endif
