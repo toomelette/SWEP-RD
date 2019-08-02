@@ -31,23 +31,24 @@ class SugarAnalysisSubscriber extends BaseSubscriber{
 
 
 
-    public function onUpdate($sa){
+    public function onUpdate($sugar_analysis){
 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis->mill_id .':'. $sugar_analysis->sugar_sample_id .':*');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getBySugarSampleId_WeekEnding:'. $sugar_analysis->sugar_sample_id .':*');
 
         $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS', 'Sugar Analysis Result has been successfully updated!');
-        $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG', $sa->slug);
+        $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS_SLUG', $sugar_analysis->slug);
 
     }
 
 
 
 
-    public function onSetOrNo($sa){
+    public function onSetOrNo($sugar_analysis){
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
 
         $this->session->flash('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS', 'OR No. successfully set!!');
 

@@ -184,14 +184,14 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function getByDate_CustomerType_SampleId($date_from, $date_to, $customer_type = [], $sample_id = []){
+    public function getByDate_CustomerType_SugarSampleId($date_from, $date_to, $customer_type = [], $sugar_sample_id = []){
 
         $customer_type_string = implode(',', $customer_type);
-        $sample_id_string = implode(',', $sample_id);
+        $sugar_sample_id_string = implode(',', $sugar_sample_id);
 
-        $cache_key = 'sugar_analysis:getByDate_CustomerType_SampleId:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sample_id_string;
+        $cache_key = 'sugar_analysis:getByDate_CustomerType_SugarSampleId:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sugar_sample_id_string;
 
-        $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sample_id){
+        $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sugar_sample_id){
            
             $sa_list = $this->sugar_analysis->newQuery();
 
@@ -206,7 +206,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
             $sa_list->whereIn('customer_type', $customer_type);
 
-            $sa_list->whereIn('sugar_sample_id', $sample_id);
+            $sa_list->whereIn('sugar_sample_id', $sugar_sample_id);
 
             return $sa_list->get();
 
@@ -238,7 +238,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
 
-                $sa_list->whereBetween('date', [$week_ending_from, $week_ending_to]);
+                $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
 
@@ -270,7 +270,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
 
-                $sa_list->whereBetween('date', [$week_ending_from, $week_ending_to]);
+                $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
 

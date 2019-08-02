@@ -67,27 +67,6 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
-    private function findBySampleNo_SugarServiceId($sample_no, $sugar_service_id){
-
-        $sugar_analysis_parameter = $this->cache->remember('sugar_analysis_parameter:findBySampleNo_SugarServiceId:'.$sample_no.':'. $sugar_service_id, 240, function() use ($sample_no, $sugar_service_id){
-            return $this->sugar_analysis_parameter->where('sample_no', $sample_no)
-                                                  ->where('sugar_service_id', $sugar_service_id)
-                                                  ->first();
-        }); 
-        
-        if(empty($sugar_analysis_parameter)){
-            abort(404);
-        }
-
-        return $sugar_analysis_parameter;
-
-    }
-
-
-
-
-
-
     public function getSugarAnalysisParameterId(){
 
         $id = 'SAP1000001';
@@ -107,6 +86,27 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
         
         return $id;
         
+    }
+
+
+
+
+
+
+    private function findBySampleNo_SugarServiceId($sample_no, $sugar_service_id){
+
+        $sugar_analysis_parameter = $this->cache->remember('sugar_analysis_parameter:findBySampleNo_SugarServiceId:'.$sample_no.':'. $sugar_service_id, 240, function() use ($sample_no, $sugar_service_id){
+            return $this->sugar_analysis_parameter->where('sample_no', $sample_no)
+                                                  ->where('sugar_service_id', $sugar_service_id)
+                                                  ->first();
+        }); 
+        
+        if(empty($sugar_analysis_parameter)){
+            abort(404);
+        }
+
+        return $sugar_analysis_parameter;
+
     }
 
 

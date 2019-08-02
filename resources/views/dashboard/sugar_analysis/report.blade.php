@@ -27,7 +27,7 @@
           <input type="hidden" name="t" value="ARAR">
 
           {!! __form::textbox(
-            '3', 'year', 'text', 'Year', 'Year', old('year'), $errors->has('year'), $errors->first('year'), ''
+            '3', 'arar_year', 'text', 'Year', 'Year', old('arar_year'), $errors->has('arar_year'), $errors->first('arar_year'), ''
           ) !!}
 
         </div>
@@ -60,19 +60,19 @@
           <input type="hidden" name="t" value="SOAM">
 
           {!! __form::select_dynamic(
-            '3', 'mill_id', 'Milling Company *', old('mill_id'), $global_mills_all, 'mill_id', 'name', $errors->has('mill_id'), $errors->first('mill_id'), 'select2', ''
+            '3', 'soam_mill_id', 'Milling Company *', old('soam_mill_id'), $global_mills_all, 'mill_id', 'name', $errors->has('soam_mill_id'), $errors->first('soam_mill_id'), 'select2', ''
           ) !!}
 
           {!! __form::select_dynamic(
-            '3', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
+            '3', 'soam_sugar_sample_id', 'Kind of Sample *', old('soam_sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('soam_sugar_sample_id'), $errors->first('soam_sugar_sample_id'), 'select2', ''
           ) !!}
 
           {!! __form::datepicker(
-            '3', 'we_from',  'Week Ending from *', old('we_from'), $errors->has('we_from'), $errors->first('we_from')
+            '3', 'soam_we_from',  'Week Ending from *', old('soam_we_from'), $errors->has('soam_we_from'), $errors->first('soam_we_from')
           ) !!}
 
           {!! __form::datepicker(
-            '3', 'we_to',  'Week Ending to *', old('we_to'), $errors->has('we_to'), $errors->first('we_to')
+            '3', 'soam_we_to',  'Week Ending to *', old('soam_we_to'), $errors->has('soam_we_to'), $errors->first('soam_we_to')
           ) !!}
 
         </div>
@@ -105,15 +105,15 @@
           <input type="hidden" name="t" value="SOSA">
 
           {!! __form::select_dynamic(
-            '3', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
+            '3', 'sosa_sugar_sample_id', 'Kind of Sample *', old('sosa_sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sosa_sugar_sample_id'), $errors->first('sosa_sugar_sample_id'), 'select2', ''
           ) !!}
 
           {!! __form::datepicker(
-            '3', 'we_from',  'Week Ending from *', old('we_from'), $errors->has('we_from'), $errors->first('we_from')
+            '3', 'sosa_we_from',  'Week Ending from *', old('sosa_we_from'), $errors->has('sosa_we_from'), $errors->first('sosa_we_from')
           ) !!}
 
           {!! __form::datepicker(
-            '3', 'we_to',  'Week Ending to *', old('we_to'), $errors->has('we_to'), $errors->first('we_to')
+            '3', 'sosa_we_to',  'Week Ending to *', old('sosa_we_to'), $errors->has('sosa_we_to'), $errors->first('sosa_we_to')
           ) !!}
 
         </div>

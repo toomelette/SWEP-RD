@@ -92,6 +92,8 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
     public function update($request, $sugar_oop, $total_price){
 
+        $sugar_oop_orig = $sugar_oop->getOriginal();
+        
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
         $sugar_oop->address = $request->address;
@@ -103,10 +105,14 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oop->user_updated = $this->auth->user()->user_id;
         $sugar_oop->save();
 
-        $sugar_oop->sugarAnalysisParameter()->delete();
-        
-        foreach ($sugar_oop->sugarAnalysisParameter as $data) {
-            $data->sugarAnalysisParameterMethod()->delete();
+        if ($sugar_oop_orig['sugar_sample_id'] != $request->sugar_sample_id) {
+
+            $sugar_oop->sugarAnalysisParameter()->delete();
+            
+            foreach ($sugar_oop->sugarAnalysisParameter as $data) {
+                $data->sugarAnalysisParameterMethod()->delete();
+            }
+            
         }
 
         return $sugar_oop;
@@ -144,7 +150,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $sugar_oop = $this->cache->remember('sugar_order_of_payments:findBySlug:' . $slug, 240, function() use ($slug){
             return $this->sugar_oop->where('slug', $slug)
-                              ->with(['sugarAnalysisParameter'])
+                              ->with(['sugarAnalysisParameter', 'sugarAnalysis'])
                               ->first();
         }); 
         
