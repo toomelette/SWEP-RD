@@ -136,7 +136,9 @@ class MillRepository extends BaseRepository implements MillInterface {
     public function getAll(){
 
         $mills = $this->cache->remember('mills:getAll', 240, function(){
-            return $this->mill->select('mill_id', 'name', 'short_name', 'district')->get();
+            return $this->mill->select('mill_id', 'name', 'short_name', 'district')
+                              ->orderBy('short_name', 'asc')
+                              ->get();
         });
         
         return $mills;

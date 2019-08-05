@@ -115,7 +115,7 @@
         </span><br>
 
         <span style="font-size:14px; font-weight:bold;">
-          Crop Year {{ __dataType::date_parse(Request::get('we_from'), "Y") .' - '. __dataType::date_parse(Request::get('we_to'), "Y") }}
+          Crop Year {{ __dataType::date_parse(Request::get('soam_we_from'), "Y") .' - '. __dataType::date_parse(Request::get('soam_we_to'), "Y") }}
         </span><br>
 
       </div>

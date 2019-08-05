@@ -42,6 +42,13 @@
       
     }
 
+    .data-row-body-mill-name{
+
+      padding:5px;
+      font-size:12px;
+      
+    }
+
     .data-row-body{
 
       padding:5px;
@@ -76,7 +83,6 @@
 
     {{-- HEADER --}}
     <div class="row">
-
       <div class="col-md-12">
         <div class="col-sm-3">
           <img src="{{ asset('images/sra.png') }}" style="width:110px;">
@@ -96,10 +102,10 @@
 
       <div class="col-sm-12" style="text-align: center;">
 
-        <span style="font-size:14px; font-weight:bold;">STATEMENT OF ACCOUNT</span><br>
+        <span style="font-size:14px; font-weight:bold;">SUMMARY OF RAW SUGAR ANALYSES</span><br>
 
         <span style="font-size:14px; font-weight:bold;">
-          Crop Year {{ __dataType::date_parse(Request::get('we_from'), "Y") .' - '. __dataType::date_parse(Request::get('we_to'), "Y") }}
+          Crop Year {{ __dataType::date_parse(Request::get('sosa_we_from'), "Y") .' - '. __dataType::date_parse(Request::get('sosa_we_to'), "Y") }}
         </span><br>
 
       </div>
@@ -155,58 +161,170 @@
 
                 <tr>
 
-                  <td class="data-row-body">{{ $data_mill->short_name }}</td>
+                  <td class="data-row-body-mill-name">{{ $data_mill->short_name }}</td>
+
 
                   <td class="data-row-body"></td>
 
+
+                  {{-- Polarization --}}
                   <td class="data-row-body">
-                      
-                      <?php
-
-                        $pol = 0.00;
-
-                        $num_of_sa = 0.00;
-
-                      ?>
-
-                      @foreach ($sugar_analysis_list as $data_sa)
-                        
-                        @if ($data_sa->mill_id == $data_mill->mill_id)
-
-                          <?php
-
-                            $num_of_sa++;
-
-                            $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->first();
-
+                    <?php
+                      $pol = 0.00;
+                      $num_of_sa = 0.00;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->first();
+                          if (!empty($sap)) {
                             $pol = $sap->result_dec + $pol;
-
-                          ?>
-                          
-                        @endif
-
-                      @endforeach
-
-                      @if ($pol != 0 && $num_of_sa != 0)
-
-                        {{ number_format($pol / $num_of_sa, 2) }}  
-                      
+                          }
+                        ?>
                       @endif
-                      
-
+                    @endforeach
+                    @if ($pol != 0 && $num_of_sa != 0)
+                      {{ number_format($pol / $num_of_sa, 2) }}  
+                    @endif
                   </td>
 
-                  <td class="data-row-body"></td>
 
-                  <td class="data-row-body"></td>
+                  {{-- Moisture --}}
+                  <td class="data-row-body">
+                    <?php
+                      $moisture = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1017')->first();
+                          if (!empty($sap)) {
+                            $moisture = $sap->moisture_result_dec + $moisture;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($moisture != 0 && $num_of_sa != 0)
+                      {{ number_format($moisture / $num_of_sa, 2) }}  
+                    @endif
+                  </td>
 
-                  <td class="data-row-body"></td>
 
-                  <td class="data-row-body"></td>
+                  {{-- Safety Factor --}}
+                  <td class="data-row-body">
+                    <?php
+                      $sf = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1017')->first();
+                          if (!empty($sap)) {
+                            $sf = $sap->moisture_sf_dec + $sf;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($sf != 0 && $num_of_sa != 0)
+                      {{ number_format($sf / $num_of_sa, 2) }}  
+                    @endif
+                  </td>
 
-                  <td class="data-row-body"></td>
 
-                  <td class="data-row-body"></td>
+                  {{-- Ash --}}
+                  <td class="data-row-body">
+                    <?php
+                      $ash = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1004')->first();
+                          if (!empty($sap)) {
+                            $ash = $sap->result_dec + $ash;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($ash != 0 && $num_of_sa != 0)
+                      {{ number_format($ash / $num_of_sa, 2) }}  
+                    @endif
+                  </td>
+
+
+                  {{-- Color Whole --}}
+                  <td class="data-row-body">
+                    <?php
+                      $color_whole = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1006')->first();
+                          if (!empty($sap)) {
+                            $sap->result_dec + $color_whole;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($color_whole != 0 && $num_of_sa != 0)
+                      {{ number_format($color_whole / $num_of_sa, 2) }}  
+                    @endif
+                  </td>
+
+
+                  {{-- Color Affined --}}
+                  <td class="data-row-body">
+                    <?php
+                      $color_affined = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1007')->first();
+                          if (!empty($sap)) {
+                            $color_affined = $sap->result_dec + $color_affined;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($color_affined != 0 && $num_of_sa != 0)
+                      {{ number_format($color_affined / $num_of_sa, 2) }}  
+                    @endif
+                  </td>
+
+
+                  {{-- Grain Size --}}
+                  <td class="data-row-body">
+                    <?php
+                      $grain_size = 0.00;
+                      $num_of_sa = 0;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $num_of_sa++;
+                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1008')->first();
+                          if (!empty($sap)) {
+                            $grain_size = $sap->result_dec + $grain_size;
+                          }
+                        ?>
+                      @endif
+                    @endforeach
+                    @if ($grain_size != 0 && $num_of_sa != 0)
+                      {{ number_format($grain_size / $num_of_sa, 2) }}  
+                    @endif</td>
 
                 </tr>
                   

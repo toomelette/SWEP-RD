@@ -256,7 +256,7 @@
   
         <td class="data-row-head" style="width:350px;">PARAMETERS</td>
         <td class="data-row-head" style="width:150px;">RESULTS</td>
-        <td class="data-row-head" style="width:150px;">STANDARDS</td>
+        <td class="data-row-head" style="width:150px;">SPECIFICATION AS PRODUCED</td>
         <td class="data-row-head" style="width:150px;">ASSESSMENT</td>
 
       </thead>

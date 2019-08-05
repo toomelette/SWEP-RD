@@ -27,6 +27,7 @@ class UserSubmenu extends Model{
         'user_menu_id' => '',
         'is_nav' => false,
         'name' => '',
+        'menu_name' => '',
         'route' => '',
 
     ];

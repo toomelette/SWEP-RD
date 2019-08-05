@@ -137,7 +137,7 @@
 
       <div class="col-sm-12" style="text-align: center;">
         <span style="font-size:14px; font-weight:bold;">HIGHLIGHTS OF ACCOMPLISHMENT REPORT</span><br>
-        <span style="font-size:14px; font-weight:bold;">{{ Request::get('year') }}</span>
+        <span style="font-size:14px; font-weight:bold;">{{ Request::get('arar_year') }}</span>
       </div>
     </div>
 
@@ -150,11 +150,11 @@
       <div class="col-sm-12">
 
         <p style="font-size:14px; text-indent: 40px;">
-          The Sugar Reference Unit was in the supervision of Research Development and Extention Department and by the implementation of SRA's Organizational Strenthening was transferred to the supervision of Regulation Department as Laboratory Services on the fourth quarter of {{ Request::get('year') }}.
+          The Sugar Reference Unit was in the supervision of Research Development and Extention Department and by the implementation of SRA's Organizational Strenthening was transferred to the supervision of Regulation Department as Laboratory Services on the fourth quarter of {{ Request::get('arar_year') }}.
         </p>
 
         <p style="font-size:14px; text-indent: 40px;">
-          Maintenance and operations of the Laboratory Services for the quality of weekly raw sugar composite samples and quarterly molasses compositer samples from mills in the Visayas. The samples of raw sugar, muscovado, molasses and cane juice for export and domestic market received and analyzed from millers, planters, traders, surveyors, distillers and other walk-in clients for {{ Request::get('year') }} are as follows:
+          Maintenance and operations of the Laboratory Services for the quality of weekly raw sugar composite samples and quarterly molasses compositer samples from mills in the Visayas. The samples of raw sugar, muscovado, molasses and cane juice for export and domestic market received and analyzed from millers, planters, traders, surveyors, distillers and other walk-in clients for {{ Request::get('arar_year') }} are as follows:
         </p>
 
       </div>
@@ -163,7 +163,7 @@
           
           <span style="font-size:12;">ANNUAL REPORT</span><br>
           <span style="font-size:12;">
-            JANUARY - DECEMBER {{ Request::get('year') }}
+            JANUARY - DECEMBER {{ Request::get('arar_year') }}
           </span>
 
       </div>

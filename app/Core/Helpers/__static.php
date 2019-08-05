@@ -44,6 +44,7 @@ class __static{
 	      'Negros Occidental South' => 'NEGOCC-S',
 	      'Negros Oriental' => 'NEGOR',
 	      'Cebu' => 'CEBU',
+	      'Leyte' => 'LEYTE',
 
 	    ];
 

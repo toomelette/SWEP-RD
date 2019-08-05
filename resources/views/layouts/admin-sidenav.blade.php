@@ -53,7 +53,7 @@
                         @if($user_nav->is_nav == true)
 
                           <li class="{!! Route::currentRouteNamed($user_nav->route) ? 'active' : '' !!}">
-                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->name }}</a>
+                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->menu_name }}</a>
                           </li>
 
                         @endif
@@ -108,7 +108,7 @@
                         @if($user_nav->is_nav == true)
 
                           <li class="{!! Route::currentRouteNamed($user_nav->route) ? 'active' : '' !!}">
-                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->name }}</a>
+                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->menu_name }}</a>
                           </li>
 
                         @endif
@@ -163,7 +163,7 @@
                         @if($user_nav->is_nav == true)
 
                           <li class="{!! Route::currentRouteNamed($user_nav->route) ? 'active' : '' !!}">
-                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->name }}</a>
+                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->menu_name }}</a>
                           </li>
 
                         @endif
@@ -218,7 +218,7 @@
                         @if($user_nav->is_nav == true)
 
                           <li class="{!! Route::currentRouteNamed($user_nav->route) ? 'active' : '' !!}">
-                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->name }}</a>
+                            <a href="{{ route($user_nav->route) }}"><i class="fa fa-caret-right"></i> {{ $user_nav->menu_name }}</a>
                           </li>
 
                         @endif

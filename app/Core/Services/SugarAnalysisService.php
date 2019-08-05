@@ -147,7 +147,7 @@ class SugarAnalysisService extends BaseService{
     public function print($slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
-        return view('printables.sugar_analysis.result')->with('sa', $sa);
+        return view('printables.sugar_analysis.test_certificate')->with('sa', $sa);
 
     }
 
