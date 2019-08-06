@@ -21,7 +21,7 @@ class SugarAnalysis extends Model{
     public $sortable = ['sample_no', 'sugar_sample_id', 'origin', 'week_ending', 'status'];
 
 
-
+    /** Defaults **/
     protected $attributes = [
 
        	'slug' => '',
@@ -35,7 +35,7 @@ class SugarAnalysis extends Model{
         'origin' => '',
         'address' => '',
         'total_price' => 0.00,
-        'quantity' => '',
+        'quantity_mt' => 0.00,
         'week_ending' => null,
         'date_sampled' => null,
         'date_submitted' => null,
@@ -55,8 +55,6 @@ class SugarAnalysis extends Model{
         'user_updated' => '',
 
     ];
-
-
 
 
 

@@ -88,11 +88,11 @@
 
 
 
-    {{-- Summary Of Sugar Analyses --}}
+    {{-- Summary Of Raw Sugar Analyses --}}
     <div class="box">
     
       <div class="box-header with-border">
-        <h3 class="box-title">Summary Of Sugar Analyses</h3>
+        <h3 class="box-title">Summary Of Raw Sugar Analyses</h3>
         <div class="pull-right">
             <code>Fields with asterisks(*) are required</code>
         </div> 
@@ -103,10 +103,6 @@
         <div class="box-body">
 
           <input type="hidden" name="t" value="SOSA">
-
-          {!! __form::select_dynamic(
-            '3', 'sosa_sugar_sample_id', 'Kind of Sample *', old('sosa_sugar_sample_id'), $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sosa_sugar_sample_id'), $errors->first('sosa_sugar_sample_id'), 'select2', ''
-          ) !!}
 
           {!! __form::datepicker(
             '3', 'sosa_we_from',  'Week Ending from *', old('sosa_we_from'), $errors->has('sosa_we_from'), $errors->first('sosa_we_from')

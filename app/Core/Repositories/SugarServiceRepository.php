@@ -61,7 +61,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         $sugar_service->sugar_service_id = $this->getSugarServiceIdInc();
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
-        $sugar_service->standard = $request->standard;
+        $sugar_service->standard_str = $request->standard_str;
+        $sugar_service->standard_dec_max = $request->standard_dec_max;
+        $sugar_service->standard_dec_min = $request->standard_dec_min;
         $sugar_service->created_at = $this->carbon->now();
         $sugar_service->updated_at = $this->carbon->now();
         $sugar_service->ip_created = request()->ip();
@@ -84,7 +86,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
         $sugar_service = $this->findBySlug($slug);
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
-        $sugar_service->standard = $request->standard;
+        $sugar_service->standard_str = $request->standard_str;
+        $sugar_service->standard_dec_max = $request->standard_dec_max;
+        $sugar_service->standard_dec_min = $request->standard_dec_min;
         $sugar_service->updated_at = $this->carbon->now();
         $sugar_service->ip_updated = request()->ip();
         $sugar_service->user_updated = $this->auth->user()->user_id;
@@ -156,7 +160,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     public function getAll(){
 
         $sugar_services = $this->cache->remember('sugar_services:getAll', 240, function(){
-            return $this->sugar_service->select('sugar_service_id', 'name', 'price', 'standard')->get();
+            return $this->sugar_service->select('sugar_service_id', 'name', 'price', 'standard_str')->get();
         });
         
         return $sugar_services;
@@ -204,7 +208,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
     public function populate($model){
 
-        return $model->select('name', 'price', 'standard', 'slug')
+        return $model->select('name', 'price', 'standard_str', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
                      ->paginate(10);

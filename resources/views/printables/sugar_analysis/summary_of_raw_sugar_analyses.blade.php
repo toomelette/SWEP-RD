@@ -163,15 +163,27 @@
 
                   <td class="data-row-body-mill-name">{{ $data_mill->short_name }}</td>
 
-
-                  <td class="data-row-body"></td>
+                  {{-- Quantity in MT --}}
+                  <td class="data-row-body">
+                    <?php
+                      $quantity_mt = 0.000;
+                    ?>
+                    @foreach ($sugar_analysis_list as $data_sa)
+                      @if ($data_sa->mill_id == $data_mill->mill_id)
+                        <?php
+                          $quantity_mt += $data_sa->quantity_mt;
+                        ?>
+                      @endif
+                    @endforeach
+                    {{ number_format($quantity_mt, 3) }}
+                  </td>
 
 
                   {{-- Polarization --}}
                   <td class="data-row-body">
                     <?php
                       $pol = 0.00;
-                      $num_of_sa = 0.00;
+                      $num_of_sa = 0;
                     ?>
                     @foreach ($sugar_analysis_list as $data_sa)
                       @if ($data_sa->mill_id == $data_mill->mill_id)
@@ -186,7 +198,10 @@
                     @endforeach
                     @if ($pol != 0 && $num_of_sa != 0)
                       {{ number_format($pol / $num_of_sa, 2) }}  
+                    @else
+                      0.00
                     @endif
+
                   </td>
 
 
@@ -208,7 +223,9 @@
                       @endif
                     @endforeach
                     @if ($moisture != 0 && $num_of_sa != 0)
-                      {{ number_format($moisture / $num_of_sa, 2) }}  
+                      {{ number_format($moisture / $num_of_sa, 2) }}
+                    @else
+                      0.00  
                     @endif
                   </td>
 
@@ -232,6 +249,8 @@
                     @endforeach
                     @if ($sf != 0 && $num_of_sa != 0)
                       {{ number_format($sf / $num_of_sa, 2) }}  
+                    @else
+                      0.00
                     @endif
                   </td>
 
@@ -254,7 +273,9 @@
                       @endif
                     @endforeach
                     @if ($ash != 0 && $num_of_sa != 0)
-                      {{ number_format($ash / $num_of_sa, 2) }}  
+                      {{ number_format($ash / $num_of_sa, 2) }} 
+                    @else
+                      0.00 
                     @endif
                   </td>
 
@@ -278,6 +299,8 @@
                     @endforeach
                     @if ($color_whole != 0 && $num_of_sa != 0)
                       {{ number_format($color_whole / $num_of_sa, 2) }}  
+                    @else
+                      0.00
                     @endif
                   </td>
 
@@ -301,6 +324,8 @@
                     @endforeach
                     @if ($color_affined != 0 && $num_of_sa != 0)
                       {{ number_format($color_affined / $num_of_sa, 2) }}  
+                    @else
+                      0.00
                     @endif
                   </td>
 
@@ -324,6 +349,8 @@
                     @endforeach
                     @if ($grain_size != 0 && $num_of_sa != 0)
                       {{ number_format($grain_size / $num_of_sa, 2) }}  
+                    @else
+                      0.00
                     @endif</td>
 
                 </tr>

@@ -30,7 +30,6 @@ class SugarAnalysisReportFormRequest extends FormRequest{
         	'soam_we_from'=>'sometimes|required|date_format:"m/d/Y"',
         	'soam_we_to'=>'sometimes|required|date_format:"m/d/Y"',
 
-            'sosa_sugar_sample_id'=>'sometimes|required|string|max:11',
             'sosa_we_from'=>'sometimes|required|date_format:"m/d/Y"',
             'sosa_we_to'=>'sometimes|required|date_format:"m/d/Y"',
 

@@ -45,7 +45,17 @@
                 ) !!}  
 
                 {!! __form::textbox(
-                  '12', 'standard', 'text', 'Standard *', 'Standard', old('standard') ? old('standard') : $sugar_service->standard, $errors->has('standard'), $errors->first('standard'), ''
+                  '12', 'standard_str', 'text', 'Standard in text *', 'Standard in text', old('standard_str') ? old('standard_str') : $sugar_service->standard_str, $errors->has('standard_str'), $errors->first('standard_str'), ''
+                ) !!}
+
+                <div class="col-md-12"></div>
+
+                {!! __form::textbox(
+                  '6', 'standard_dec_max', 'text', 'Max standard in numeric', 'Max standard in numeric', old('standard_dec_max') ? old('standard_dec_max') : $sugar_service->standard_dec_max, $errors->has('standard_dec_max'), $errors->first('standard_dec_max'), ''
+                ) !!}
+
+                {!! __form::textbox(
+                  '6', 'standard_dec_min', 'text', 'Min standard in numeric', 'Min standard in numeric', old('standard_dec_min') ? old('standard_dec_min') : $sugar_service->standard_dec_min, $errors->has('standard_dec_min'), $errors->first('standard_dec_min'), ''
                 ) !!}
 
               </div>

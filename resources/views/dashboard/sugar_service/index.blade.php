@@ -49,7 +49,7 @@
           @foreach($sugar_services as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
               <td>{{ $data->name }}</td>
-              <td>{{ $data->standard }}</td>
+              <td>{{ $data->standard_str }}</td>
               <td>{{ number_format($data->price, 2) }}</td>
               <td> 
                 <select id="action" class="form-control input-md">

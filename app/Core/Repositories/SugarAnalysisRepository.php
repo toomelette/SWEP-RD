@@ -143,7 +143,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
         $sugar_analysis->date_analyzed_from = $this->__dataType->date_parse($request->date_analyzed_from);
         $sugar_analysis->date_analyzed_to = $this->__dataType->date_parse($request->date_analyzed_to);
-        $sugar_analysis->quantity = $request->quantity;
+        $sugar_analysis->quantity_mt = $request->quantity_mt;
         $sugar_analysis->code = $request->code;
         $sugar_analysis->report_no = $request->report_no;
         $sugar_analysis->source = $request->source;
@@ -176,6 +176,34 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         }
 
         return $sa;
+
+    }
+
+
+
+
+
+
+    public function search($model, $key){
+
+        return $model->where(function ($model) use ($key) {
+                $model->where('sample_no', 'LIKE', '%'. $key .'%')
+                      ->orwhere('origin', 'LIKE', '%'. $key .'%')
+                      ->orwhere('or_no', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    public function populate($model){
+
+        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
+                     ->sortable()
+                     ->orderBy('updated_at', 'desc')
+                     ->paginate(10);
 
     }
 
@@ -279,34 +307,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         }); 
 
         return $sa;
-
-    }
-
-
-
-
-
-
-    public function search($model, $key){
-
-        return $model->where(function ($model) use ($key) {
-                $model->where('sample_no', 'LIKE', '%'. $key .'%')
-                      ->orwhere('origin', 'LIKE', '%'. $key .'%')
-                      ->orwhere('or_no', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
-    public function populate($model){
-
-        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
 
     }
 

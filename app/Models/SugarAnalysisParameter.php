@@ -21,11 +21,10 @@ class SugarAnalysisParameter extends Model{
         'sugar_service_id' => '',
         'name' => '',
         'price' => 0.00,
-        'result_str' => '',
         'result_dec' => 0.00,
         'moisture_result_dec' => 0.00,
         'moisture_sf_dec' => 0.00,
-        'standard' => '',
+        'standard_str' => '',
         'assessment' => '',
 
     ];

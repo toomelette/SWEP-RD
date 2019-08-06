@@ -177,7 +177,7 @@
             <span>QUANTITY</span>
           </div>
           <div class="col-sm-8">
-            <p>: {{ $sa->quantity }}</p>
+            <p>: {{ number_format($sa->quantity_mt, 3)  }} MT</p>
           </div>
         </div>
         

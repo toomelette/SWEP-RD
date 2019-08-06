@@ -60,7 +60,7 @@
               @endif
 
               <dt>Quantity:</dt>
-              <dd>{{ $sa->quantity }}</dd>
+              <dd>{{ number_format($sa->quantity_mt, 3) }} MT</dd>
               <dt>Week Ending:</dt>
               <dd>{{ __dataType::date_parse($sa->week_ending, 'F d,Y') }}</dd>
               <dt>Date Submitted:</dt>
@@ -103,7 +103,7 @@
                         {{ number_format($data->result_dec, 2) }}
                       @endif
                     </td>
-                    <td>{{ $data->standard }}</td>
+                    <td>{{ $data->standard_str }}</td>
                 </tr> 
               @endforeach
 

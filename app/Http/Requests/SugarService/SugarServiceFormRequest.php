@@ -25,7 +25,9 @@ class SugarServiceFormRequest extends FormRequest{
             
             'name'=>'required|string|max:255',
             'price'=>'required|string|max:13',
-            'standard'=>'required|string|max:90'
+            'standard_str'=>'required|string|max:90',
+            'standard_dec_max'=>'nullable|numeric|max:100000000',
+            'standard_dec_min'=>'nullable|numeric|max:100000000'
 
         ];
 

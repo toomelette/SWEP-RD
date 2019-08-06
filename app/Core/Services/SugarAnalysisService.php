@@ -127,8 +127,6 @@ class SugarAnalysisService extends BaseService{
                     $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
                 
                 }
-
-                
             
             }
 
@@ -237,7 +235,7 @@ class SugarAnalysisService extends BaseService{
             
         }elseif ($request->t == "SOSA") {
 
-            return $this->summaryOfSugarAnalyses($request);
+            return $this->summaryOfRawSugarAnalyses($request);
             
         }
 
@@ -376,11 +374,11 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    private function summaryOfSugarAnalyses($request){
+    private function summaryOfRawSugarAnalyses($request){
 
-        $sugar_analysis_list = $this->sugar_analysis_repo->getBySugarSampleId_WeekEnding($request->sosa_sugar_sample_id, $request->sosa_we_from, $request->sosa_we_to);
+        $sugar_analysis_list = $this->sugar_analysis_repo->getBySugarSampleId_WeekEnding('SS1001', $request->sosa_we_from, $request->sosa_we_to);
         
-        return view('printables.sugar_analysis.summary_of_sugar_analyses')->with('sugar_analysis_list', $sugar_analysis_list);
+        return view('printables.sugar_analysis.summary_of_raw_sugar_analyses')->with('sugar_analysis_list', $sugar_analysis_list);
 
     }
 
