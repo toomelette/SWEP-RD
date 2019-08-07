@@ -20,7 +20,7 @@ class SugarSampleParameter extends Model{
         'sugar_sample_id' => '',
         'sugar_service_id' => '',
         'name' => '',
-        'price' => 0.00,
+        'price' => null,
         'standard' => '',
 
     ];

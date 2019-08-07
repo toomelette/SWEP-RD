@@ -280,7 +280,7 @@
             @endif
           </td>
 
-          <td class="data-row-body">{{ $data->standard }}</td>
+          <td class="data-row-body">{{ $data->standard_str }}</td>
           <td class="data-row-body">{{ $data->assessment }}</td>
 
         </tbody>

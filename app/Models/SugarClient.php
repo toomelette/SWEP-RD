@@ -3,20 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
 
 class SugarClient extends Model{
 
-
-	use Sortable;
 
     protected $table = 'sgrlab_sugar_clients';
 
     protected $dates = ['created_at', 'updated_at'];
     
 	public $timestamps = false;
-    
-    public $sortable = ['name', 'address'];
 
 
 

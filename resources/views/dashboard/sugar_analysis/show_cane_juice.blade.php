@@ -91,7 +91,7 @@
                   <td>{{ $data->entry_no }}</td>
                   <td>{{ __dataType::date_parse($data->date_submitted, '  m/d/Y') }}</td>
                   <td>{{ __dataType::date_parse($data->date_sampled, '  m/d/Y') }}</td>
-                  <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
+                  <td>{{ $data->date_analyzed }}</td>
                   <td>{{ $data->variety }}</td>
                   <td>{{ $data->hacienda }}</td>
                   <td>{{ $data->corrected_brix }}</td>

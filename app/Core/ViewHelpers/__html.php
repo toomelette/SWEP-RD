@@ -108,19 +108,37 @@ class __html{
 
     /** Wrappers **/
 
-    public static function table_search($refresh_route){
+    public static function table_search($refresh_route, $filter_button_id = null){
+
+    	$string = "'";
 
        return '<div class="box-title">  
-                <div class="input-group input-group-sm" style="width: 250px;">
-                  <input name="q" class="form-control pull-right" placeholder="Search any.." type="text" value="'. old("q") .'">
+                <div class="input-group input-group-sm" style="width: 300px;">
+                  <input name="q" class="form-control pull-right" placeholder="Search" type="text" value="'. old("q") .'">
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default btn-md"><i class="fa fa-search"></i></button>
+                    <button id="table_search_button" type="submit" class="btn btn-default btn-md"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>
 
-              <div class="box-tools">
-                <a href="'. $refresh_route .'" class="btn btn-sm btn-default">Refresh Data &nbsp;<i class="fa fa-refresh"></i></a>
+              <div></div>
+
+              <div class="box-tools" style="margin-top:5px;">
+              	<div class="col-md-3" style="margin-top:6px;">
+              		Entries:
+              	</div>
+              	<div class="col-md-4">
+			        <select id="e" class="form-control input-sm" name="e" onchange="document.getElementById('. $string .''. $filter_button_id .''. $string .').click()">
+			          <option value="">Select</option>
+			          <option value="10">10</option>
+			          <option value="20">20</option>
+			          <option value="50">50</option>
+			          <option value="100">100</option>
+			        </select>
+              	</div>
+              	<div class="col-md-5">
+              		<a href="'. $refresh_route .'" class="btn btn-sm btn-default">Refresh Data &nbsp;<i class="fa fa-refresh"></i></a>
+              	</div>
               </div>';
 
     }
@@ -197,7 +215,7 @@ class __html{
     /** UTILITY METHODS **/
     public static function collapsed_filter(){
 
-       return Input::except('q', 'page', 'sort', 'direction') ? '' : 'collapsed-box';
+       return Input::except('q', 'e', 'page', 'sort', 'direction') ? '' : 'collapsed-box';
 
     }
 

@@ -33,7 +33,7 @@ class SugarOrderOfPayment extends Model{
         'address' => '',
         'received_from' => '',
         'received_by' => '',
-        'total_price' => 0.00,
+        'total_price' => null,
         'created_at' => null,
         'updated_at' => null,
         'ip_created' => '',

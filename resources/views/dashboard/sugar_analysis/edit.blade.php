@@ -95,18 +95,14 @@
 
                     <div class="col-md-12"></div>
 
-                    {!! __form::datepicker(
-                      '6', 'date_analyzed_from',  'Date Analyzed From *', old('date_analyzed_from') ? old('date_analyzed_from') : __dataType::date_parse($sa->date_analyzed_from), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
-                    ) !!}
-
-                    {!! __form::datepicker(
-                      '6', 'date_analyzed_to',  'Date Analyzed To *', old('date_analyzed_to') ? old('date_analyzed_to') : __dataType::date_parse($sa->date_analyzed_to), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
+                    {!! __form::textbox(
+                      '12', 'date_analyzed', 'text', 'Date Analyzed *', 'Date Analyzed', old('date_analyzed') ? old('code') : $sa->date_analyzed, $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::textbox(
-                      '12', 'quantity_mt', 'text', 'Quantity', 'Quantity', old('quantity_mt') ? old('quantity_mt') : $sa->quantity_mt, $errors->has('quantity_mt'), $errors->first('quantity_mt'), ''
+                      '12', 'quantity_mt', 'text', 'Quantity <code>(Metric Tons)</code>', 'Quantity', old('quantity_mt') ? old('quantity_mt') : $sa->quantity_mt, $errors->has('quantity_mt'), $errors->first('quantity_mt'), ''
                     ) !!}
 
                     <div class="col-md-12"></div>
@@ -164,26 +160,24 @@
                       @if ($data->sugar_service_id == "SS1017")
                       
                         {!! __form::textbox(
-                          '3', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", '0.00', old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : $data->moisture_result_dec, $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'
+                          '4', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", '0.00', old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : $data->moisture_result_dec, $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'
                         ) !!}
                       
                         {!! __form::textbox(
-                          '3', $data->sugar_service_id .'_sf', 'text', "SAFETY FACTOR", '0.00', old($data->sugar_service_id .'_sf') ? old($data->sugar_service_id .'_sf') : $data->moisture_sf_dec, $errors->has($data->sugar_service_id .'_sf'), $errors->first($data->sugar_service_id .'_sf'), 'data-transform="uppercase"'
+                          '4', $data->sugar_service_id .'_sf', 'text', "SAFETY FACTOR", '0.00', old($data->sugar_service_id .'_sf') ? old($data->sugar_service_id .'_sf') : $data->moisture_sf_dec, $errors->has($data->sugar_service_id .'_sf'), $errors->first($data->sugar_service_id .'_sf'), 'data-transform="uppercase"'
                         ) !!}
                         
                       @else
 
                         {!! __form::textbox(
-                          '6', $data->sugar_service_id, 'text', strtoupper($data->name), '0.00', old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result_dec, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
+                          '8', $data->sugar_service_id, 'text', strtoupper($data->name), '0.00', old($data->sugar_service_id) ? old($data->sugar_service_id) : $data->result_dec, $errors->has($data->sugar_service_id), $errors->first($data->sugar_service_id), 'data-transform="uppercase"'
                         ) !!}
 
                       @endif
 
-                      <div class="col-md-1" style="margin-top:30px;"><span> &nbsp;&nbsp;&nbsp;&nbsp;=</span></div>
-
-                      {!! __form::select_static(
-                        '5', $assessment_name, 'Assessment', old($assessment_name) ? old($assessment_name) : $data->assessment, ['Below Std.' => 'Below Std.', 'Within Std.' => 'Within Std.', 'Above Std.' => 'Above Std.'], $errors->has($assessment_name), $errors->first($assessment_name), '', ''
-                      ) !!}
+                      <div class="col-md-4" style="margin-top:30px;">
+                          <code>{{ $data->standard_str }}</code>
+                      </div>
 
                       <div class="col-md-12"></div>
                                 
@@ -246,14 +240,37 @@
 
   <script type="text/javascript">
 
+
     @if(Session::has('SUGAR_ANALYSIS_UPDATE_SUCCESS'))
       $('#sa_update').modal('show');
     @endif
+
 
     {{-- Set Or No Toast --}}
     @if(Session::has('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS'))
       {!! __js::toast(Session::get('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS')) !!}
     @endif
+
+
+    $(document).ready(function(){
+      $("#SS1017_moisture").keyup(function(){
+        var denominator = 100 - $("#SS1001").val();
+        var numerator = $("#SS1017_moisture").val();
+        var sf = numerator / denominator;
+        $("#SS1017_sf").val(sf.toFixed(2));
+      });
+    });
+
+
+    $(document).ready(function(){
+      $("#SS1017_moisture").keydown(function(){
+        var denominator = 100 - $("#SS1001").val();
+        var numerator = $("#SS1017_moisture").val();
+        var sf = numerator / denominator;
+        $("#SS1017_sf").val(sf.toFixed(2));
+      });
+    });
+
 
   </script>
 

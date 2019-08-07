@@ -87,9 +87,9 @@ Route::group(['prefix'=>'dashboard', 'as' => 'dashboard.', 'middleware' => ['che
 /** Testing **/
 Route::get('/dashboard/test', function(){
 
-	return dd(Illuminate\Support\Str::random(16));
+	//return dd(Illuminate\Support\Str::random(16));
 	
-	//dd(__dataType::num_to_words(1023.127));
+	//dd(number_format(null));
 
 
 });

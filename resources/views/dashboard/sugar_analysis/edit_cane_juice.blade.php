@@ -88,57 +88,53 @@
                   <div class="box-body">
 
                     {!! __form::textbox(
-                       '3', 'entry_no', 'entry_no', 'Entry No. ', 'Entry No.', old('entry_no'), $errors->has('entry_no'), $errors->first('entry_no'), ''
+                       '4', 'entry_no', 'entry_no', 'Entry No. ', 'Entry No.', old('entry_no'), $errors->has('entry_no'), $errors->first('entry_no'), ''
                     ) !!}
 
 
                     {!! __form::datepicker(
-                      '3', 'date_submitted',  'Date Submitted', old('date_submitted'), $errors->has('date_submitted'), $errors->first('date_submitted')
+                      '4', 'date_submitted',  'Date Submitted', old('date_submitted'), $errors->has('date_submitted'), $errors->first('date_submitted')
                     ) !!}
 
 
                     {!! __form::datepicker(
-                      '3', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
-                    ) !!}
-
-
-                    {!! __form::datepicker(
-                      '3', 'date_analyzed_from',  'Date Analyzed From', old('date_analyzed_from'), $errors->has('date_analyzed_from'), $errors->first('date_analyzed_from')
-                    ) !!}
-
-                    <div class="col-md-12"></div>
-
-                    {!! __form::datepicker(
-                      '3', 'date_analyzed_to',  'Date Analyzed To', old('date_analyzed_to'), $errors->has('date_analyzed_to'), $errors->first('date_analyzed_to')
-                    ) !!}
-
-
-                    {!! __form::textbox(
-                       '3', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
-                    ) !!}
-
-
-                    {!! __form::textbox(
-                       '3', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
-                    ) !!}
-
-
-                    {!! __form::textbox(
-                       '3', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
+                      '4', 'date_sampled',  'Date Sampled', old('date_sampled'), $errors->has('date_sampled'), $errors->first('date_sampled')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::textbox(
-                       '3', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
+                       '4', 'date_analyzed', 'date_analyzed', 'Date Analyzed', 'Date Analyzed', old('date_analyzed'), $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
                     ) !!}
 
                     {!! __form::textbox(
-                       '3', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
+                       '4', 'variety', 'variety', 'Variety', 'Variety', old('variety'), $errors->has('variety'), $errors->first('variety'), ''
+                    ) !!}
+
+
+                    {!! __form::textbox(
+                       '4', 'hacienda', 'hacienda', 'Hacienda', 'Hacienda', old('hacienda'), $errors->has('hacienda'), $errors->first('hacienda'), ''
+                    ) !!}
+
+                    <div class="col-md-12"></div>
+
+
+                    {!! __form::textbox(
+                       '4', 'corrected_brix', 'corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('corrected_brix'), $errors->has('corrected_brix'), $errors->first('corrected_brix'), ''
                     ) !!}
 
                     {!! __form::textbox(
-                       '6', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
+                       '4', 'polarization', 'polarization', '% Pol', '% Pol', old('polarization'), $errors->has('polarization'), $errors->first('polarization'), ''
+                    ) !!}
+
+                    {!! __form::textbox(
+                       '4', 'purity', 'purity', 'Purity', 'Purity', old('purity'), $errors->has('purity'), $errors->first('purity'), ''
+                    ) !!}
+
+                    <div class="col-md-12"></div>
+
+                    {!! __form::textbox(
+                       '4', 'remarks', 'remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('remarks'), $errors->has('remarks'), $errors->first('remarks'), ''
                     ) !!}
 
                   </div> 
@@ -196,7 +192,7 @@
                         <td>{{ $data->entry_no }}</td>
                         <td>{{ __dataType::date_parse($data->date_submitted, 'm/d/Y') }}</td>
                         <td>{{ __dataType::date_parse($data->date_sampled, 'm/d/Y') }}</td>
-                        <td>{{ __dataType::date_scope($data->date_analyzed_from, $data->date_analyzed_to) }}</td>
+                        <td>{{ $data->date_analyzed }}</td>
                         <td>{{ $data->variety }}</td>
                         <td>{{ $data->hacienda }}</td>
                         <td>{{ $data->corrected_brix }}</td>
@@ -261,59 +257,55 @@
               <input name="e_slug" id="e_slug"  type="hidden">
 
               {!! __form::textbox(
-                 '3', 'e_entry_no', 'e_entry_no', 'Entry No. ', 'Entry No.', old('e_entry_no'), $errors->has('e_entry_no'), $errors->first('e_entry_no'), ''
+                 '4', 'e_entry_no', 'e_entry_no', 'Entry No. ', 'Entry No.', old('e_entry_no'), $errors->has('e_entry_no'), $errors->first('e_entry_no'), ''
               ) !!}
 
 
               {!! __form::datepicker(
-                '3', 'e_date_submitted',  'Date Submitted', old('e_date_submitted'), $errors->has('e_date_submitted'), $errors->first('e_date_submitted')
+                '4', 'e_date_submitted',  'Date Submitted', old('e_date_submitted'), $errors->has('e_date_submitted'), $errors->first('e_date_submitted')
               ) !!}
 
 
               {!! __form::datepicker(
-                '3', 'e_date_sampled',  'Date Sampled', old('e_date_sampled'), $errors->has('e_date_sampled'), $errors->first('e_date_sampled')
-              ) !!}
-
-
-              {!! __form::datepicker(
-                '3', 'e_date_analyzed_from',  'Date Analyzed From', old('e_date_analyzed_from'), $errors->has('e_date_analyzed_from'), $errors->first('e_date_analyzed_from')
+                '4', 'e_date_sampled',  'Date Sampled', old('e_date_sampled'), $errors->has('e_date_sampled'), $errors->first('e_date_sampled')
               ) !!}
 
               <div class="col-md-12"></div>
 
-              {!! __form::datepicker(
-                '3', 'e_date_analyzed_to',  'Date Analyzed To', old('e_date_analyzed_to'), $errors->has('e_date_analyzed_to'), $errors->first('e_date_analyzed_to')
+              {!! __form::textbox(
+                 '4', 'e_date_analyzed', 'e_date_analyzed', 'Date Analyzed', 'Date Analyzed', old('e_date_analyzed'), $errors->has('e_date_analyzed'), $errors->first('e_date_analyzed'), ''
               ) !!}
 
 
               {!! __form::textbox(
-                 '3', 'e_variety', 'e_variety', 'Variety', 'Variety', old('e_variety'), $errors->has('e_variety'), $errors->first('e_variety'), ''
+                 '4', 'e_variety', 'e_variety', 'Variety', 'Variety', old('e_variety'), $errors->has('e_variety'), $errors->first('e_variety'), ''
               ) !!}
 
 
               {!! __form::textbox(
-                 '3', 'e_hacienda', 'e_hacienda', 'Hacienda', 'Hacienda', old('e_hacienda'), $errors->has('e_hacienda'), $errors->first('e_hacienda'), ''
-              ) !!}
-
-
-              {!! __form::textbox(
-                 '3', 'e_corrected_brix', 'e_corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('e_corrected_brix'), $errors->has('e_corrected_brix'), $errors->first('e_corrected_brix'), ''
+                 '4', 'e_hacienda', 'e_hacienda', 'Hacienda', 'Hacienda', old('e_hacienda'), $errors->has('e_hacienda'), $errors->first('e_hacienda'), ''
               ) !!}
 
               <div class="col-md-12"></div>
 
 
               {!! __form::textbox(
-                 '3', 'e_polarization', 'e_polarization', '% Pol', '% Pol', old('e_polarization'), $errors->has('e_polarization'), $errors->first('e_polarization'), ''
-              ) !!}
-
-              {!! __form::textbox(
-                 '3', 'e_purity', 'e_purity', 'Purity', 'Purity', old('e_purity'), $errors->has('e_purity'), $errors->first('e_purity'), ''
+                 '4', 'e_corrected_brix', 'e_corrected_brix', 'Corrected Brix ', 'Corrected Brix', old('e_corrected_brix'), $errors->has('e_corrected_brix'), $errors->first('e_corrected_brix'), ''
               ) !!}
 
 
               {!! __form::textbox(
-                 '6', 'e_remarks', 'e_remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('e_remarks'), $errors->has('e_remarks'), $errors->first('e_remarks'), ''
+                 '4', 'e_polarization', 'e_polarization', '% Pol', '% Pol', old('e_polarization'), $errors->has('e_polarization'), $errors->first('e_polarization'), ''
+              ) !!}
+
+              {!! __form::textbox(
+                 '4', 'e_purity', 'e_purity', 'Purity', 'Purity', old('e_purity'), $errors->has('e_purity'), $errors->first('e_purity'), ''
+              ) !!}
+
+              <div class="col-md-12"></div>
+
+              {!! __form::textbox(
+                 '12', 'e_remarks', 'e_remarks', 'Remarks PSTC/LkgTC', 'Remarks PSTC/LkgTC', old('e_remarks'), $errors->has('e_remarks'), $errors->first('e_remarks'), ''
               ) !!}
 
 
@@ -378,16 +370,10 @@
             if(value.date_sampled != null){
               $("#cja_update_form #e_date_sampled").datepicker("setDate", new Date(value.date_sampled));
             }
-            if(value.date_analyzed_from != null){
-              $("#cja_update_form #e_date_analyzed_from").datepicker("setDate", new Date(value.date_analyzed_from));
-            }
-            if(value.date_analyzed_to != null){
-              $("#cja_update_form #e_date_analyzed_to").datepicker("setDate", new Date(value.date_analyzed_to));
-            }
             if(value.date_submitted != null){
               $("#cja_update_form #e_date_submitted").datepicker("setDate", new Date(value.date_submitted));
             }
-            $("#cja_update_form #e_variety").val(value.variety);
+            $("#cja_update_form #e_date_analyzed").val(value.date_analyzed);
             $("#cja_update_form #e_variety").val(value.variety);
             $("#cja_update_form #e_hacienda").val(value.hacienda);
             $("#cja_update_form #e_corrected_brix").val(value.corrected_brix);

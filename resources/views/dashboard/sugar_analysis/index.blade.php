@@ -54,7 +54,7 @@
 
       {{-- Table Search --}}        
       <div class="box-header with-border">
-        {!! __html::table_search(route('dashboard.sugar_analysis.index')) !!}
+        {!! __html::table_search(route('dashboard.sugar_analysis.index'), 'submit_soop_filter') !!}
       </div>
 
     {{-- Form End --}}  

@@ -68,7 +68,7 @@
               <dt>Date Sampled:</dt>
               <dd>{{ __dataType::date_parse($sa->date_sampled, 'F d,Y') }}</dd>
               <dt>Date Analyzed:</dt>
-              <dd>{{ __dataType::date_scope($sa->date_analyzed_from, $sa->date_analyzed_to) }}</dd>
+              <dd>{{ $sa->date_analyzed }}</dd>
               <dt>Description of Sample:</dt>
               <dd>{{ $sa->description }}</dd>
             </dl>

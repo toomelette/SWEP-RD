@@ -141,8 +141,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->week_ending = $this->__dataType->date_parse($request->week_ending);
         $sugar_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
-        $sugar_analysis->date_analyzed_from = $this->__dataType->date_parse($request->date_analyzed_from);
-        $sugar_analysis->date_analyzed_to = $this->__dataType->date_parse($request->date_analyzed_to);
+        $sugar_analysis->date_analyzed = $request->date_analyzed;
         $sugar_analysis->quantity_mt = $request->quantity_mt;
         $sugar_analysis->code = $request->code;
         $sugar_analysis->report_no = $request->report_no;
