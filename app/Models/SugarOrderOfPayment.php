@@ -22,11 +22,6 @@ class SugarOrderOfPayment extends Model{
 
 
 
-    protected $casts = [
-        'date' => 'date:m/d/y',
-    ];
-
-
 
     protected $attributes = [
 
