@@ -31,7 +31,9 @@ class MillRepository extends BaseRepository implements MillInterface {
 
         $key = str_slug($request->fullUrl(), '_');
 
-        $mills = $this->cache->remember('mills:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $mills = $this->cache->remember('mills:fetch:' . $key, 240, function() use ($request, $entries){
 
             $mill = $this->mill->newQuery();
             
@@ -39,7 +41,7 @@ class MillRepository extends BaseRepository implements MillInterface {
                 $this->search($mill, $request->q);
             }
 
-            return $this->populate($mill);
+            return $this->populate($mill, $entries);
 
         });
 
@@ -207,12 +209,12 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('mill_id', 'name', 'address', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 

@@ -33,7 +33,9 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
         $key = str_slug($request->fullUrl(), '_');
 
-        $sugar_samples = $this->cache->remember('sugar_samples:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $sugar_samples = $this->cache->remember('sugar_samples:fetch:' . $key, 240, function() use ($request, $entries){
 
             $sugar_sample = $this->sugar_sample->newQuery();
             
@@ -41,7 +43,7 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
                 $this->search($sugar_sample, $request->q);
             }
 
-            return $this->populate($sugar_sample);
+            return $this->populate($sugar_sample, $entries);
 
         });
 
@@ -180,12 +182,12 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('name', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 

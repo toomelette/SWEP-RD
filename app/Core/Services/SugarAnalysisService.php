@@ -252,50 +252,68 @@ class SugarAnalysisService extends BaseService{
 
         $year = $request->arar_year;
 
-        // first quarter
-        $first_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1002'], ['SS1001', 'SS1002', 'SS1005']);
-        $first_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1002'], ['SS1004']);
-        $first_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1002'], ['SS1003']);
-        $first_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1002'], ['SS1006']);
 
-        $first_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1001'], ['SS1001', 'SS1002', 'SS1005']);
-        $first_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1001'], ['SS1004']);
-        $first_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1001'], ['SS1003']);
-        $first_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', ['CT1001'], ['SS1006']);
+        // first quarter
+        $first_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1002', 'SS1001');
+        $first_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1002', 'SS1004');
+        $first_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1002', 'SS1003');
+        $first_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1002', 'SS1006');
+
+        $first_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1001', 'SS1001');
+        $first_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1001', 'SS1004');
+        $first_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1001', 'SS1003');
+        $first_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-01-01', $year .'-03-31', 'CT1001', 'SS1006');
 
 
         // second quarter
-        $second_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1002'], ['SS1001', 'SS1002', 'SS1005']);
-        $second_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1002'], ['SS1004']);
-        $second_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1002'], ['SS1003']);
-        $second_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1002'], ['SS1006']);
+        $second_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1002', 'SS1001');
+        $second_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1002', 'SS1004');
+        $second_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1002', 'SS1003');
+        $second_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1002', 'SS1006');
 
-        $second_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1001'], ['SS1001', 'SS1002', 'SS1005']);
-        $second_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1001'], ['SS1004']);
-        $second_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1001'], ['SS1003']);
-        $second_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', ['CT1001'], ['SS1006']);
+        $second_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1001', 'SS1001');
+        $second_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1001', 'SS1004');
+        $second_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1001', 'SS1003');
+        $second_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-04-01', $year .'-06-30', 'CT1001', 'SS1006');
+
 
         // third quarter
-        $third_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1002'], ['SS1001', 'SS1002', 'SS1005']);
-        $third_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1002'], ['SS1004']);
-        $third_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1002'], ['SS1003']);
-        $third_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1002'], ['SS1006']);
+        $third_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1002', 'SS1001');
+        $third_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1002', 'SS1004');
+        $third_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1002', 'SS1003');
+        $third_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1002', 'SS1006');
 
-        $third_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1001'], ['SS1001', 'SS1002', 'SS1005']);
-        $third_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1001'], ['SS1004']);
-        $third_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1001'], ['SS1003']);
-        $third_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', ['CT1001'], ['SS1006']);
+        $third_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1001', 'SS1001');
+        $third_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1001', 'SS1004');
+        $third_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1001', 'SS1003');
+        $third_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-07-01', $year .'-09-30', 'CT1001', 'SS1006');
+
 
         // fourth quarter
-        $fourth_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1002'], ['SS1001', 'SS1002', 'SS1005']);
-        $fourth_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1002'], ['SS1004']);
-        $fourth_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1002'], ['SS1003']);
-        $fourth_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1002'], ['SS1006']);
+        $fourth_quarter_mill_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1002', 'SS1001');
+        $fourth_quarter_mill_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1002', 'SS1004');
+        $fourth_quarter_mill_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1002', 'SS1003');
+        $fourth_quarter_mill_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1002', 'SS1006');
 
-        $fourth_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1001'], ['SS1001', 'SS1002', 'SS1005']);
-        $fourth_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1001'], ['SS1004']);
-        $fourth_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1001'], ['SS1003']);
-        $fourth_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', ['CT1001'], ['SS1006']);
+        $fourth_quarter_walkin_rawSugar = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1001', 'SS1001');
+        $fourth_quarter_walkin_molasses = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1001', 'SS1004');
+        $fourth_quarter_walkin_muscovado = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1001', 'SS1003');
+        $fourth_quarter_walkin_caneJuice = $this->sugar_analysis_repo->getByDate_CustomerType_SugarSampleId($year .'-10-01', $year .'-12-31', 'CT1001', 'SS1006');
+
+
+        // Total Revenue per Quarter and Customer Type
+        $total_revenue_first_mill = $first_quarter_mill_rawSugar->sum('total_price') + $first_quarter_mill_molasses->sum('total_price');
+        $total_revenue_first_walkin = $first_quarter_walkin_rawSugar->sum('total_price') + $first_quarter_walkin_molasses->sum('total_price') + $first_quarter_walkin_muscovado->sum('total_price') + $first_quarter_walkin_caneJuice->sum('total_price');
+
+        $total_revenue_second_mill = $second_quarter_mill_rawSugar->sum('total_price') + $second_quarter_mill_molasses->sum('total_price');
+        $total_revenue_second_walkin = $second_quarter_walkin_rawSugar->sum('total_price') + $second_quarter_walkin_molasses->sum('total_price') + $second_quarter_walkin_muscovado->sum('total_price') + $second_quarter_walkin_caneJuice->sum('total_price');
+
+        $total_revenue_third_mill = $third_quarter_mill_rawSugar->sum('total_price') + $third_quarter_mill_molasses->sum('total_price');
+        $total_revenue_third_walkin = $third_quarter_walkin_rawSugar->sum('total_price') + $third_quarter_walkin_molasses->sum('total_price') + $third_quarter_walkin_muscovado->sum('total_price') + $third_quarter_walkin_caneJuice->sum('total_price');
+
+        $total_revenue_fourth_mill = $fourth_quarter_mill_rawSugar->sum('total_price') + $fourth_quarter_mill_molasses->sum('total_price');
+        $total_revenue_fourth_walkin = $fourth_quarter_walkin_rawSugar->sum('total_price') + $fourth_quarter_walkin_molasses->sum('total_price') + $fourth_quarter_walkin_muscovado->sum('total_price') + $fourth_quarter_walkin_caneJuice->sum('total_price');
+
 
         return view('printables.sugar_analysis.annual_accomplishment_report')->with([
 
@@ -310,7 +328,6 @@ class SugarAnalysisService extends BaseService{
                     'first_quarter_walkin_caneJuice' => $first_quarter_walkin_caneJuice,
 
 
-
                     'second_quarter_mill_rawSugar' => $second_quarter_mill_rawSugar,
                     'second_quarter_mill_molasses' => $second_quarter_mill_molasses,
                     'second_quarter_mill_muscovado' => $second_quarter_mill_muscovado,
@@ -320,7 +337,6 @@ class SugarAnalysisService extends BaseService{
                     'second_quarter_walkin_molasses' => $second_quarter_walkin_molasses,
                     'second_quarter_walkin_muscovado' => $second_quarter_walkin_muscovado,
                     'second_quarter_walkin_caneJuice' => $second_quarter_walkin_caneJuice,
-
 
 
                     'third_quarter_mill_rawSugar' => $third_quarter_mill_rawSugar,
@@ -334,7 +350,6 @@ class SugarAnalysisService extends BaseService{
                     'third_quarter_walkin_caneJuice' => $third_quarter_walkin_caneJuice,
 
 
-
                     'fourth_quarter_mill_rawSugar' => $fourth_quarter_mill_rawSugar,
                     'fourth_quarter_mill_molasses' => $fourth_quarter_mill_molasses,
                     'fourth_quarter_mill_muscovado' => $fourth_quarter_mill_muscovado,
@@ -344,6 +359,16 @@ class SugarAnalysisService extends BaseService{
                     'fourth_quarter_walkin_molasses' => $fourth_quarter_walkin_molasses,
                     'fourth_quarter_walkin_muscovado' => $fourth_quarter_walkin_muscovado,
                     'fourth_quarter_walkin_caneJuice' => $fourth_quarter_walkin_caneJuice,
+
+
+                    'total_revenue_first_mill' => $total_revenue_first_mill,
+                    'total_revenue_first_walkin' => $total_revenue_first_walkin,
+                    'total_revenue_second_mill' => $total_revenue_second_mill,
+                    'total_revenue_second_walkin' => $total_revenue_second_walkin,
+                    'total_revenue_third_mill' => $total_revenue_third_mill,
+                    'total_revenue_third_walkin' => $total_revenue_third_walkin,
+                    'total_revenue_fourth_mill' => $total_revenue_fourth_mill,
+                    'total_revenue_fourth_walkin' => $total_revenue_fourth_walkin,
 
                 ]);
 

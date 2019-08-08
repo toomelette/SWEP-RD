@@ -68,7 +68,7 @@ class SugarOrderOfPaymentService extends BaseService{
             if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
 
                 $sugar_client = $this->sugar_client_repo->store($request);
-                $this->event->fire('sugar_client.store');
+                $this->event->fire('sugar_client.store', $sugar_client);
 
             }
 

@@ -83,7 +83,7 @@
 
                     @endif
 
-                    <td>{{ $data->standard }}</td>
+                    <td>{{ $data->standard_str }}</td>
 
                   </tr>
                   @endforeach

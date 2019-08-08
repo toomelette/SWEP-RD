@@ -6,6 +6,7 @@
                         'q'=> Request::get('q'),
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
+                        'e' => Request::get('e'),
 
                         'ss' => Request::get('ss'),
                         'we' => Request::get('we'),
@@ -54,7 +55,7 @@
 
       {{-- Table Search --}}        
       <div class="box-header with-border">
-        {!! __html::table_search(route('dashboard.sugar_analysis.index'), 'submit_soop_filter') !!}
+        {!! __html::table_search(route('dashboard.sugar_analysis.index')) !!}
       </div>
 
     {{-- Form End --}}  

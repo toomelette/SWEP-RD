@@ -32,7 +32,9 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $key = str_slug($request->fullUrl(), '_');
 
-        $sugar_analysis = $this->cache->remember('sugar_analysis:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $sugar_analysis = $this->cache->remember('sugar_analysis:fetch:' . $key, 240, function() use ($request, $entries){
 
             $sa = $this->sugar_analysis->newQuery();
             
@@ -50,7 +52,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
                 $sa->whereDate('week_ending', $we);
             }
 
-            return $this->populate($sa);
+            return $this->populate($sa, $entries);
 
         });
 
@@ -197,12 +199,12 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 
@@ -211,12 +213,9 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function getByDate_CustomerType_SugarSampleId($date_from, $date_to, $customer_type = [], $sugar_sample_id = []){
+    public function getByDate_CustomerType_SugarSampleId($date_from, $date_to, $customer_type, $sugar_sample_id){
 
-        $customer_type_string = implode(',', $customer_type);
-        $sugar_sample_id_string = implode(',', $sugar_sample_id);
-
-        $cache_key = 'sugar_analysis:getByDate_CustomerType_SugarSampleId:'. $date_from .'-'. $date_to .':'. $customer_type_string .':'. $sugar_sample_id_string;
+        $cache_key = 'sugar_analysis:getByDate_CustomerType_SugarSampleId:'. $date_from .'-'. $date_to .':'. $customer_type .':'. $sugar_sample_id;
 
         $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sugar_sample_id){
            
@@ -231,9 +230,8 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
             }
 
-            $sa_list->whereIn('customer_type', $customer_type);
-
-            $sa_list->whereIn('sugar_sample_id', $sugar_sample_id);
+            $sa_list->where('customer_type', $customer_type);
+            $sa_list->where('sugar_sample_id', $sugar_sample_id);
 
             return $sa_list->get();
 

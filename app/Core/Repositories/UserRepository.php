@@ -33,7 +33,9 @@ class UserRepository extends BaseRepository implements UserInterface {
 	
 		$key = str_slug($request->fullUrl(), '_');
 
-        $users = $this->cache->remember('users:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $users = $this->cache->remember('users:fetch:' . $key, 240, function() use ($request, $entries){
 
             $user = $this->user->newQuery();
             
@@ -49,7 +51,7 @@ class UserRepository extends BaseRepository implements UserInterface {
                  $this->isActive($user, $this->__dataType->string_to_boolean($request->a));
             }
 
-            return $this->populate($user);
+            return $this->populate($user, $entries);
 
         });
 
@@ -266,12 +268,12 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('user_id', 'username', 'firstname', 'middlename', 'lastname', 'is_online', 'is_active', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 

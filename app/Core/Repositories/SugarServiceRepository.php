@@ -33,7 +33,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
         $key = str_slug($request->fullUrl(), '_');
 
-        $sugar_services = $this->cache->remember('sugar_services:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $sugar_services = $this->cache->remember('sugar_services:fetch:' . $key, 240, function() use ($request, $entries){
 
             $sugar_service = $this->sugar_service->newQuery();
             
@@ -41,7 +43,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
                 $this->search($sugar_service, $request->q);
             }
 
-            return $this->populate($sugar_service);
+            return $this->populate($sugar_service, $entries);
 
         });
 
@@ -206,12 +208,12 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('name', 'price', 'standard_str', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 

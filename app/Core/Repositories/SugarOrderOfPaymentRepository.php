@@ -32,7 +32,9 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $key = str_slug($request->fullUrl(), '_');
 
-        $sugar_oops = $this->cache->remember('sugar_order_of_payments:fetch:' . $key, 240, function() use ($request){
+        $entries = isset($request->e) ? (int)$request->e : 20;
+
+        $sugar_oops = $this->cache->remember('sugar_order_of_payments:fetch:' . $key, 240, function() use ($request, $entries){
 
             $sugar_oop = $this->sugar_oop->newQuery();
 
@@ -51,7 +53,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
                 $sugar_oop->whereBetween('date', [$df, $dt]);
             }
 
-            return $this->populate($sugar_oop);
+            return $this->populate($sugar_oop, $entries);
 
         });
 
@@ -181,12 +183,12 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function populate($model){
+    public function populate($model, $entries){
 
         return $model->select('sample_no', 'received_from', 'received_by', 'sugar_sample_id', 'date', 'slug')
                      ->sortable()
                      ->orderBy('updated_at', 'desc')
-                     ->paginate(10);
+                     ->paginate($entries);
 
     }
 

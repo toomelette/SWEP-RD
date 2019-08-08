@@ -108,15 +108,20 @@ class __html{
 
     /** Wrappers **/
 
-    public static function table_search($refresh_route, $filter_button_id = null){
+    public static function table_search($refresh_route){
 
     	$string = "'";
+
+    	$seach_button_id = 'table_search_button';
+
+     	$option_50 = Input::old('e') == '50' ? 'selected' : '';
+     	$option_100 = Input::old('e') == '100' ? 'selected' : '';
 
        return '<div class="box-title">  
                 <div class="input-group input-group-sm" style="width: 300px;">
                   <input name="q" class="form-control pull-right" placeholder="Search" type="text" value="'. old("q") .'">
                   <div class="input-group-btn">
-                    <button id="table_search_button" type="submit" class="btn btn-default btn-md"><i class="fa fa-search"></i></button>
+                    <button id="'. $seach_button_id .'" type="submit" class="btn btn-default btn-md"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>
@@ -128,12 +133,10 @@ class __html{
               		Entries:
               	</div>
               	<div class="col-md-4">
-			        <select id="e" class="form-control input-sm" name="e" onchange="document.getElementById('. $string .''. $filter_button_id .''. $string .').click()">
-			          <option value="">Select</option>
-			          <option value="10">10</option>
-			          <option value="20">20</option>
-			          <option value="50">50</option>
-			          <option value="100">100</option>
+			        <select id="e" class="form-control input-sm" name="e" onchange="document.getElementById('.$string.''. $seach_button_id .''.$string.').click()">
+			          <option value="">20</option>
+			          <option value="50" '. $option_50 .'>50</option>
+			          <option value="100" '. $option_100 .'>100</option>
 			        </select>
               	</div>
               	<div class="col-md-5">

@@ -1,48 +1,38 @@
 <?php
-  
+
+  /** Total Number by Customer Type and Sample Type **/
   $total_mill_rawSugar = $first_quarter_mill_rawSugar->count() + $second_quarter_mill_rawSugar->count() + $third_quarter_mill_rawSugar->count() + $fourth_quarter_mill_rawSugar->count(); 
   $total_walkin_rawSugar = $first_quarter_walkin_rawSugar->count() + $second_quarter_walkin_rawSugar->count() + $third_quarter_walkin_rawSugar->count() + $fourth_quarter_walkin_rawSugar->count(); 
-
   $total_mill_molasses = $first_quarter_mill_molasses->count() + $second_quarter_mill_molasses->count() + $third_quarter_mill_molasses->count() + $fourth_quarter_mill_molasses->count(); 
   $total_walkin_molasses = $first_quarter_walkin_molasses->count() + $second_quarter_walkin_molasses->count() + $third_quarter_walkin_molasses->count() + $fourth_quarter_walkin_molasses->count(); 
-
   $total_walkin_muscovado = $first_quarter_walkin_muscovado->count() + $second_quarter_walkin_muscovado->count() + $third_quarter_walkin_muscovado->count() + $fourth_quarter_walkin_muscovado->count(); 
-
   $total_walkin_caneJuice = $first_quarter_walkin_caneJuice->count() + $second_quarter_walkin_caneJuice->count() + $third_quarter_walkin_caneJuice->count() + $fourth_quarter_walkin_caneJuice->count(); 
 
 
+  /** Total Number per Quarter **/
   $total_first = $first_quarter_mill_rawSugar->count() + $first_quarter_walkin_rawSugar->count() + $first_quarter_mill_molasses->count() + $first_quarter_walkin_molasses->count() + $first_quarter_walkin_muscovado->count() + $first_quarter_walkin_caneJuice->count();
   $total_second = $second_quarter_mill_rawSugar->count() + $second_quarter_walkin_rawSugar->count() + $second_quarter_mill_molasses->count() + $second_quarter_walkin_molasses->count() + $second_quarter_walkin_muscovado->count() + $second_quarter_walkin_caneJuice->count();
   $total_third = $third_quarter_mill_rawSugar->count() + $third_quarter_walkin_rawSugar->count() + $third_quarter_mill_molasses->count() + $third_quarter_walkin_molasses->count() + $third_quarter_walkin_muscovado->count() + $third_quarter_walkin_caneJuice->count();
   $total_fourth = $fourth_quarter_mill_rawSugar->count() + $fourth_quarter_walkin_rawSugar->count() + $fourth_quarter_mill_molasses->count() + $fourth_quarter_walkin_molasses->count() + $fourth_quarter_walkin_muscovado->count() + $fourth_quarter_walkin_caneJuice->count();
 
 
+  /** Annual Total Number **/
   $total_annual = $total_first + $total_second + $total_third + $total_fourth;
-
-
-  $total_revenue_first_mill = $first_quarter_mill_rawSugar->sum('total_price') + $first_quarter_mill_molasses->sum('total_price');
-  $total_revenue_first_walkin = $first_quarter_walkin_rawSugar->sum('total_price') + $first_quarter_walkin_molasses->sum('total_price') + $first_quarter_walkin_muscovado->sum('total_price') + $first_quarter_walkin_caneJuice->sum('total_price');
-
-  $total_revenue_second_mill = $second_quarter_mill_rawSugar->sum('total_price') + $second_quarter_mill_molasses->sum('total_price');
-  $total_revenue_second_walkin = $second_quarter_walkin_rawSugar->sum('total_price') + $second_quarter_walkin_molasses->sum('total_price') + $second_quarter_walkin_muscovado->sum('total_price') + $second_quarter_walkin_caneJuice->sum('total_price');
-
-  $total_revenue_third_mill = $third_quarter_mill_rawSugar->sum('total_price') + $third_quarter_mill_molasses->sum('total_price');
-  $total_revenue_third_walkin = $third_quarter_walkin_rawSugar->sum('total_price') + $third_quarter_walkin_molasses->sum('total_price') + $third_quarter_walkin_muscovado->sum('total_price') + $third_quarter_walkin_caneJuice->sum('total_price');
-
-  $total_revenue_fourth_mill = $fourth_quarter_mill_rawSugar->sum('total_price') + $fourth_quarter_mill_molasses->sum('total_price');
-  $total_revenue_fourth_walkin = $fourth_quarter_walkin_rawSugar->sum('total_price') + $fourth_quarter_walkin_molasses->sum('total_price') + $fourth_quarter_walkin_muscovado->sum('total_price') + $fourth_quarter_walkin_caneJuice->sum('total_price');
   
 
+  /** Total Revenue per Customer Type **/
   $total_revenue_mill =   $total_revenue_first_mill +   $total_revenue_second_mill +   $total_revenue_third_mill + $total_revenue_fourth_mill;
   $total_revenue_walkin =   $total_revenue_first_walkin +   $total_revenue_second_walkin +   $total_revenue_third_walkin + $total_revenue_fourth_walkin;
 
 
+  /** Total Revenue per Quarter **/
   $total_revenue_first = $total_revenue_first_mill + $total_revenue_first_walkin;
   $total_revenue_second = $total_revenue_second_mill + $total_revenue_second_walkin;
   $total_revenue_third = $total_revenue_third_mill + $total_revenue_third_walkin;
   $total_revenue_fourth = $total_revenue_fourth_mill + $total_revenue_fourth_walkin;
 
 
+  /** Annual Total Revenue  **/
   $total_annual_revenue = $total_revenue_mill + $total_revenue_walkin;
 
 ?>
