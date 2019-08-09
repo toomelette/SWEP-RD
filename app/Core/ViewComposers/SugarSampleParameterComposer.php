@@ -4,6 +4,7 @@ namespace App\Core\ViewComposers;
 
 
 use View;
+use App\Core\Helpers\__static;
 use App\Core\Interfaces\SugarSampleParameterInterface;
 
 
@@ -13,13 +14,15 @@ class SugarSampleParameterComposer{
 
 
 	protected $ss_parameter;
+    protected $__static;
 
 
 
 
-	public function __construct(SugarSampleParameterInterface $ss_parameter){
+	public function __construct(SugarSampleParameterInterface $ss_parameter, __static $__static){
 
 		$this->ss_parameter = $ss_parameter;
+        $this->__static = $__static;
 
 	}
 
@@ -29,12 +32,15 @@ class SugarSampleParameterComposer{
 
     public function compose($view){
 
-        $ss_parameter_raw_sugar = $this->ss_parameter->getBySugarSampleId('SS1001');
-        $ss_parameter_raw_sugar_complete = $this->ss_parameter->getBySugarSampleId('SS1002');
-        $ss_parameter_raw_sugar_special = $this->ss_parameter->getBySugarSampleId('SS1005');
-        $ss_parameter_muscovado = $this->ss_parameter->getBySugarSampleId('SS1003');
-        $ss_parameter_molasses = $this->ss_parameter->getBySugarSampleId('SS1004');
-        $ss_parameter_cja = $this->ss_parameter->getBySugarSampleId('SS1006');
+        $sugar_samples = $this->__static->sugar_samples();
+
+        $ss_parameter_raw_sugar = $this->ss_parameter->getBySugarSampleId($sugar_samples['rawSugar']);
+        $ss_parameter_muscovado = $this->ss_parameter->getBySugarSampleId($sugar_samples['muscovado']);
+        $ss_parameter_molasses = $this->ss_parameter->getBySugarSampleId($sugar_samples['molasses']);
+        $ss_parameter_cja = $this->ss_parameter->getBySugarSampleId($sugar_samples['cja']);
+        
+        $ss_parameter_raw_sugar_complete = $this->ss_parameter->getBySugarSampleId($sugar_samples['molasses']);
+        $ss_parameter_raw_sugar_special = $this->ss_parameter->getBySugarSampleId($sugar_samples['cja']);
         
     	$view->with([
 

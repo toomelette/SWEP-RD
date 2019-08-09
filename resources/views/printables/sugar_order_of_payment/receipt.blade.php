@@ -1,3 +1,9 @@
+<?php
+    
+    $sugar_samples_static = __static::sugar_samples();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,7 +119,7 @@
         </div>
         <div class="col-sm-7 std_div no-padding">
           
-          @if ($sugar_oop->sugar_sample_id == "SS1006")
+          @if ($sugar_oop->sugar_sample_id == $sugar_samples_static['cja'])
 
             Polarization, Corrected Brix, Purity
           

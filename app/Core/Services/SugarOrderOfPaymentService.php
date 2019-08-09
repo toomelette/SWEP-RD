@@ -101,21 +101,23 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $sugar_oop_orig = $sugar_oop->getOriginal(); 
 
+        $sugar_samples = $this->__static->sugar_samples();
+
         // Sugar Clients
         if ($request->customer_type == "CT1001") {
             
             if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
 
                 $sugar_client = $this->sugar_client_repo->store($request);
-                $this->event->fire('sugar_client.store');
+                $this->event->fire('sugar_client.store', $sugar_client);
 
             }
 
         } 
 
         // Cane Juice Analysis
-        if($sugar_oop->sugar_sample_id == "SS1006"){
-            if ($request->sugar_sample_id != "SS1006") {
+        if($sugar_oop->sugar_sample_id == $sugar_samples['cja']){
+            if ($request->sugar_sample_id != $sugar_samples['cja']) {
                 $sugar_oop->caneJuiceAnalysis()->delete();
             }
         }
@@ -193,9 +195,11 @@ class SugarOrderOfPaymentService extends BaseService{
     // UTILS
     private function getTotalPrice($request){
 
+        $sugar_samples = $this->__static->sugar_samples();
+
         $total_price = 0.00;
 
-        if ($request->sugar_sample_id == "SS1006") {
+        if ($request->sugar_sample_id == $sugar_samples['cja']) {
             
             $total_price = $request->cja_num_of_samples * 100;
 

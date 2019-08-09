@@ -46,6 +46,18 @@ class SugarAnalysisParameter extends Model{
     public function sugarAnalysisParameterMethod() {
       return $this->hasMany('App\Models\SugarAnalysisParameterMethod','sugar_analysis_parameter_id','sugar_analysis_parameter_id');
     }
+
+
+
+    /** Scopes **/
+    public function scopeFindBySugarServiceId($query, $sugar_service_id){
+
+      return $query->whereSugarServiceId($sugar_service_id)
+                   ->first();
+
+
+
+    }
     
 
 

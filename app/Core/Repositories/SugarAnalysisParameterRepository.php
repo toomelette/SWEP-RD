@@ -31,7 +31,7 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
         $sugar_analysis_parameter = new SugarAnalysisParameter;
         $sugar_analysis_parameter->sample_no = $sample_no;
-        $sugar_analysis_parameter->sugar_analysis_parameter_id = $this->getSugarAnalysisParameterId();
+        $sugar_analysis_parameter->sugar_analysis_parameter_id = $this->getSugarAnalysisParameterIdInc();
         $sugar_analysis_parameter->sugar_service_id = $sugar_service->sugar_service_id;
         $sugar_analysis_parameter->name = $sugar_service->name;
         $sugar_analysis_parameter->price = $sugar_service->price;
@@ -91,7 +91,7 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
 
 
-    public function getSugarAnalysisParameterId(){
+    public function getSugarAnalysisParameterIdInc(){
 
         $id = 'SAP1000001';
 

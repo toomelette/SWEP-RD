@@ -1,3 +1,9 @@
+<?php
+  
+  $sugar_samples_static = __static::sugar_samples();
+  
+?>
+
 @extends('layouts.admin-master')
 
 @section('content')
@@ -47,12 +53,12 @@
               <dt>Kind of Sample:</dt>
               <dd>{{ optional($sa->sugarSample)->name }}</dd>
 
-              @if ($sa->sugar_sample_id == "SS1003") 
+              @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado']) 
                 <dt>Code:</dt>
                 <dd>{{ $sa->code }}</dd>
               @endif
 
-              @if ($sa->sugar_sample_id == "SS1004") 
+              @if ($sa->sugar_sample_id == $sugar_samples_static['molasses']) 
                 <dt>Report No:</dt>
                 <dd>{{ $sa->report_no }}</dd>
                 <dt>Source:</dt>

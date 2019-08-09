@@ -169,12 +169,12 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function search($model, $key){
+    public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('sample_no', 'LIKE', '%'. $key .'%')
-                      ->orwhere('received_from', 'LIKE', '%'. $key .'%')
-                      ->orwhere('received_by', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('sample_no', 'LIKE', '%'. $key .'%')
+                         ->orwhere('received_from', 'LIKE', '%'. $key .'%')
+                         ->orwhere('received_by', 'LIKE', '%'. $key .'%');
         });
 
     }
@@ -183,12 +183,12 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function populate($model, $entries){
+    public function populate($instance, $entries){
 
-        return $model->select('sample_no', 'received_from', 'received_by', 'sugar_sample_id', 'date', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->select('sample_no', 'received_from', 'received_by', 'sugar_sample_id', 'date', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

@@ -194,13 +194,13 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function search($model, $key){
+    public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%')
-                      ->orwhere('mill_id', 'LIKE', '%'. $key .'%')
-                      ->orwhere('short_name', 'LIKE', '%'. $key .'%')
-                      ->orwhere('district', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('name', 'LIKE', '%'. $key .'%')
+                         ->orwhere('mill_id', 'LIKE', '%'. $key .'%')
+                         ->orwhere('short_name', 'LIKE', '%'. $key .'%')
+                         ->orwhere('district', 'LIKE', '%'. $key .'%');
         });
 
     }
@@ -209,12 +209,12 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function populate($model, $entries){
+    public function populate($instance, $entries){
 
-        return $model->select('mill_id', 'name', 'address', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->select('mill_id', 'name', 'address', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

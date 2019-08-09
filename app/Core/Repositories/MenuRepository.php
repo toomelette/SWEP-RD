@@ -193,10 +193,10 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function search($model, $key){
+    public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                    $instance->where('name', 'LIKE', '%'. $key .'%');        
         });
 
     }
@@ -205,12 +205,12 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function populate($model, $entries){
+    public function populate($instance, $entries){
 
-        return $model->select('name', 'route', 'icon', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->select('name', 'route', 'icon', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

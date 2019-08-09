@@ -48,8 +48,57 @@ class __static{
 
 	    ];
 
-    
     }
+
+
+
+
+    // Sugar Services
+    public static function sugar_services(){
+
+        return [
+
+			"pol" => "SS1001",
+			"ash" => "SS1004",
+			"affination" => "SS1005",
+			"colorW" => "SS1006",
+			"colorA" => "SS1007",
+			"crainSize" => "SS1008",
+			"dextran" => "SS1009",
+			"sulphite" => "SS1010",
+			"brix" => "SS1012",
+			"reducingSugar" => "SS1013",
+			"sucrose" => "SS1014",
+			"totalSugarAsInvert" => "SS1015",
+			"totalReducingSugarafterHydrolysis" => "SS1016",
+			"moisture" => "SS1017",
+			"starch" => "SS1018",
+			"apparentPurity" => "SS1019",
+			"specificGravity" => "SS1020",
+			"ph" => "SS1021",
+
+	    ];
+
+    }
+
+
+
+
+    // Sugar Samples
+    public static function sugar_samples(){
+
+        return [
+
+        	"rawSugar" => "SS1001",
+			"muscovado" => "SS1003",
+			"molasses" => "SS1004",
+			"cja" => "SS1006",
+
+	    ];
+
+    }
+
+
 
 
 }

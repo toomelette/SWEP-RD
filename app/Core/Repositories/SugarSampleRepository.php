@@ -170,10 +170,10 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function search($model, $key){
+    public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('name', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('name', 'LIKE', '%'. $key .'%');
         });
 
     }
@@ -182,12 +182,12 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function populate($model, $entries){
+    public function populate($instance, $entries){
 
-        return $model->select('name', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->select('name', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

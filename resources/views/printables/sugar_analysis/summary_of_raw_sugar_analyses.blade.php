@@ -74,7 +74,7 @@
 
 </head>
 
-<body onload="window.print();" onafterprint="window.close()">
+<body {{-- onload="window.print();" onafterprint="window.close()" --}}>
 
   <img class="bg-wm" src="{{ asset('images/sra_wm.jpg') }}">
 
@@ -159,94 +159,141 @@
 
                 @if ($key_district == $data_mill->district)
 
+                <?php
+                  
+                  $num_of_sa = 0;
+
+                  $quantity_mt = 0.000;
+                  $pol = 0.00;
+                  $mois = 0.00;
+                  $sf = 0.00;
+                  $ash = 0.00;
+                  $color_whole = 0.00;
+                  $color_affined = 0.00;
+                  $grain_size = 0.00;
+
+                  foreach ($sugar_analysis_list as $data_sa) {
+
+                    if ($data_sa->mill_id == $data_mill->mill_id) {
+                      
+                      $num_of_sa++;
+
+
+                      /** Quantity **/
+                      if (isset($data_sa->quantity_mt)) {
+                        $quantity_mt += $data_sa->quantity_mt;
+                      }
+
+
+                      /** Polarization **/
+                      $pol_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1001');
+
+                      if (!empty($pol_instance)) {
+                        if (isset($pol_instance->result_dec)) {
+                          $pol =+ $pol_instance->result_dec;
+                        }
+                      }
+
+
+                      /** Moisture **/
+                      $mois_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1017');
+                      
+                      if (!empty($mois_instance)) {
+                        if (isset($mois_instance->moisture_result_dec)) {
+                          $mois =+ $mois_instance->moisture_result_dec;
+                        }
+                      }
+
+
+                      /** Safety Factor **/
+                      $sf_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1017');
+                      
+                      if (!empty($sf_instance)) {
+                        if (isset($sf_instance->moisture_sf_dec)) {
+                          $sf =+ $sf_instance->moisture_sf_dec;
+                        }
+                      }
+
+
+                      /** Ash **/
+                      $ash_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1004');
+                      
+                      if (!empty($ash_instance)) {
+                        if (isset($ash_instance->result_dec)) {
+                          $ash =+ $ash_instance->result_dec;  
+                        }
+                      }
+
+
+                      /** Color of Whole **/
+                      $color_whole_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1006');
+                      
+                      if (!empty($color_whole_instance)) {
+                        if (isset($color_whole_instance->result_dec)) {
+                          $color_whole =+ $color_whole_instance->result_dec;  
+                        }
+                      }
+
+
+                      /** Color of Affined **/
+                      $color_affined_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1007');
+                      
+                      if (!empty($color_affined_instance)) {
+                        if (isset($color_affined_instance->result_dec)) {
+                          $color_affined =+ $color_affined_instance->result_dec;  
+                        }
+                      }
+
+
+                      /** Grain Size **/
+                      $grain_size_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1008');
+                      
+                      if (!empty($grain_size_instance)) {
+                        if (isset($grain_size_instance->result_dec)) {
+                          $grain_size =+ $grain_size_instance->result_dec;  
+                        }
+                      }
+
+                    
+                    }
+
+                  }
+
+
+                ?>
+
+
                 <tr>
 
-                  <td class="data-row-body-mill-name">{{ $data_mill->short_name }}</td>
+                  <td class="data-row-body-mill-name">
+                    {{ $data_mill->short_name }}
+                  </td>
 
                   {{-- Quantity in MT --}}
                   <td class="data-row-body">
-                    <?php
-                      $quantity_mt = 0.000;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $quantity_mt += $data_sa->quantity_mt;
-                        ?>
-                      @endif
-                    @endforeach
                     {{ number_format($quantity_mt, 3) }}
                   </td>
 
-
                   {{-- Polarization --}}
                   <td class="data-row-body">
-                    <?php
-                      $pol = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1001')->first();
-                          if (!empty($sap)) {
-                            $pol = $sap->result_dec + $pol;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($pol != 0 && $num_of_sa != 0)
                       {{ number_format($pol / $num_of_sa, 2) }}  
                     @else
                       0.00
                     @endif
-
                   </td>
-
 
                   {{-- Moisture --}}
                   <td class="data-row-body">
-                    <?php
-                      $moisture = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1017')->first();
-                          if (!empty($sap)) {
-                            $moisture = $sap->moisture_result_dec + $moisture;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
-                    @if ($moisture != 0 && $num_of_sa != 0)
-                      {{ number_format($moisture / $num_of_sa, 2) }}
+                    @if ($mois != 0 && $num_of_sa != 0)
+                      {{ number_format($mois / $num_of_sa, 2) }}
                     @else
                       0.00  
                     @endif
                   </td>
 
-
                   {{-- Safety Factor --}}
                   <td class="data-row-body">
-                    <?php
-                      $sf = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1017')->first();
-                          if (!empty($sap)) {
-                            $sf = $sap->moisture_sf_dec + $sf;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($sf != 0 && $num_of_sa != 0)
                       {{ number_format($sf / $num_of_sa, 2) }}  
                     @else
@@ -254,24 +301,8 @@
                     @endif
                   </td>
 
-
                   {{-- Ash --}}
                   <td class="data-row-body">
-                    <?php
-                      $ash = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1004')->first();
-                          if (!empty($sap)) {
-                            $ash = $sap->result_dec + $ash;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($ash != 0 && $num_of_sa != 0)
                       {{ number_format($ash / $num_of_sa, 2) }} 
                     @else
@@ -279,24 +310,8 @@
                     @endif
                   </td>
 
-
                   {{-- Color Whole --}}
                   <td class="data-row-body">
-                    <?php
-                      $color_whole = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1006')->first();
-                          if (!empty($sap)) {
-                            $sap->result_dec + $color_whole;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($color_whole != 0 && $num_of_sa != 0)
                       {{ number_format($color_whole / $num_of_sa, 2) }}  
                     @else
@@ -304,24 +319,8 @@
                     @endif
                   </td>
 
-
                   {{-- Color Affined --}}
                   <td class="data-row-body">
-                    <?php
-                      $color_affined = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1007')->first();
-                          if (!empty($sap)) {
-                            $color_affined = $sap->result_dec + $color_affined;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($color_affined != 0 && $num_of_sa != 0)
                       {{ number_format($color_affined / $num_of_sa, 2) }}  
                     @else
@@ -329,29 +328,14 @@
                     @endif
                   </td>
 
-
                   {{-- Grain Size --}}
                   <td class="data-row-body">
-                    <?php
-                      $grain_size = 0.00;
-                      $num_of_sa = 0;
-                    ?>
-                    @foreach ($sugar_analysis_list as $data_sa)
-                      @if ($data_sa->mill_id == $data_mill->mill_id)
-                        <?php
-                          $num_of_sa++;
-                          $sap = $data_sa->sugarAnalysisParameter->where('sugar_service_id', 'SS1008')->first();
-                          if (!empty($sap)) {
-                            $grain_size = $sap->result_dec + $grain_size;
-                          }
-                        ?>
-                      @endif
-                    @endforeach
                     @if ($grain_size != 0 && $num_of_sa != 0)
                       {{ number_format($grain_size / $num_of_sa, 2) }}  
                     @else
                       0.00
-                    @endif</td>
+                    @endif
+                  </td>
 
                 </tr>
                   

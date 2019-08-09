@@ -1,3 +1,9 @@
+<?php
+
+  $sugar_samples_static = __static::sugar_samples();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,11 +115,11 @@
     <div class="row" style="margin-top:5px;">
 
       <div class="col-md-12" style="text-align:center; margin-top:5px;">
-        @if ($sa->sugar_sample_id == "SS1003")
+        @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
           <span style="font-size:15px; font-weight: bold;">MUSCOVADO SUGAR QUALITY TEST CERTIFICATE</span>
-        @elseif($sa->sugar_sample_id == "SS1004")
+        @elseif($sa->sugar_sample_id == $sugar_samples_static['molasses'])
           <span style="font-size:15px; font-weight: bold;">QUALITY TEST ON MOLASSES</span>
-        @else
+        @elseif($sa->sugar_sample_id == $sugar_samples_static['rawSugar'])
           <span style="font-size:15px; font-weight: bold;">RAW SUGAR QUALITY TEST CERTIFICATE</span>
         @endif
       </div>
@@ -159,7 +165,7 @@
 
 
 
-      @if ($sa->sugar_sample_id == "SS1003")
+      @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
 
         <div class="col-sm-12" style="margin-top:5px;">  
           <div class="col-sm-4">
@@ -183,7 +189,7 @@
         
       @endif
 
-      @if ($sa->sugar_sample_id == "SS1004")
+      @if ($sa->sugar_sample_id == $sugar_samples_static['molasses'])
 
         <div class="col-sm-12" style="margin-top:-10px;">  
           <div class="col-sm-4">
@@ -228,7 +234,7 @@
           <span>DATE ANALYZED</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_scope($sa->date_analyzed_from, $sa->date_analyzed_to) }}</p>
+          <p>: {{ $sa->date_analyzed }}</p>
         </div>
       </div>
 

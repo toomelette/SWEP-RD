@@ -46,19 +46,6 @@
               <dd>{{ $sa->address }}</dd>
               <dt>Kind of Sample:</dt>
               <dd>{{ optional($sa->sugarSample)->name }}</dd>
-
-              @if ($sa->sugar_sample_id == "SS1003") 
-                <dt>Code:</dt>
-                <dd>{{ $sa->code }}</dd>
-              @endif
-
-              @if ($sa->sugar_sample_id == "SS1004") 
-                <dt>Report No:</dt>
-                <dd>{{ $sa->report_no }}</dd>
-                <dt>Source:</dt>
-                <dd>{{ $sa->source }}</dd>
-              @endif
-              
             </dl>
           </div>
         </div>

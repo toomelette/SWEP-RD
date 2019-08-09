@@ -93,7 +93,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->origin = $request->received_from;
         $sugar_analysis->address = $request->address;
         $sugar_analysis->total_price = $total_price;
-        $sugar_analysis->cja_num_of_samples = $request->sugar_sample_id == "SS1006" ? $request->cja_num_of_samples : 0;
+        $sugar_analysis->cja_num_of_samples = $request->cja_num_of_samples;
         $sugar_analysis->created_at = $this->carbon->now();
         $sugar_analysis->updated_at = $this->carbon->now();
         $sugar_analysis->ip_created = request()->ip();
@@ -185,12 +185,12 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function search($model, $key){
+    public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('sample_no', 'LIKE', '%'. $key .'%')
-                      ->orwhere('origin', 'LIKE', '%'. $key .'%')
-                      ->orwhere('or_no', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('sample_no', 'LIKE', '%'. $key .'%')
+                         ->orwhere('origin', 'LIKE', '%'. $key .'%')
+                         ->orwhere('or_no', 'LIKE', '%'. $key .'%');
         });
 
     }
@@ -199,12 +199,12 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function populate($model, $entries){
+    public function populate($instance, $entries){
 
-        return $model->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

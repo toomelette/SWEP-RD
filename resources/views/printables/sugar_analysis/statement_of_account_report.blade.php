@@ -1,3 +1,9 @@
+<?php
+  
+  $sugar_samples_static = __static::sugar_samples();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,13 +106,13 @@
 
         <span style="font-size:14px;">
             
-            @if (Request::get('sugar_sample_id') == 'SS1001')
+            @if (Request::get('sugar_sample_id') == $sugar_samples_static['rawSugar'])
                Raw Sugar
-            @elseif(Request::get('sugar_sample_id') == 'SS1003')
+            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['muscovado'])
                Muscovado
-            @elseif(Request::get('sugar_sample_id') == 'SS1004')
+            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['molasses'])
                Molasses
-            @elseif(Request::get('sugar_sample_id') == 'SS1006')
+            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['cja'])
                Cane Juice
             @endif
 

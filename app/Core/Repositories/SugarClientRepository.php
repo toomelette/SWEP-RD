@@ -59,7 +59,8 @@ class SugarClientRepository extends BaseRepository implements SugarClientInterfa
         $sugar_clients = $this->cache->remember('sugar_clients:getAll', 240, function(){
 
             return $this->sugar_client->select('sugar_client_id','name', 'address')
-                                      ->orderBy('name', 'asc')->get();
+                                      ->orderBy('name', 'asc')
+                                      ->get();
 
         });
         

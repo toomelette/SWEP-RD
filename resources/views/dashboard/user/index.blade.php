@@ -15,6 +15,7 @@
                         'q'=> Request::get('q'), 
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
+                        'e' => Request::get('e'),
 
                         'ol' => Request::get('ol'), 
                         'a' => Request::get('a'),

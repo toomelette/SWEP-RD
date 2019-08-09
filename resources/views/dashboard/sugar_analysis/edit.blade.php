@@ -1,3 +1,9 @@
+<?php
+  
+  $sugar_samples_static = __static::sugar_samples();
+
+?>
+
 @extends('layouts.admin-master')
 
 @section('content')
@@ -78,19 +84,19 @@
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : __dataType::date_parse($sa->week_ending), $errors->has('week_ending'), $errors->first('week_ending')
+                      '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : $sa->week_ending, $errors->has('week_ending'), $errors->first('week_ending')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : __dataType::date_parse($sa->date_submitted), $errors->has('date_submitted'), $errors->first('date_submitted')
+                      '12', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : $sa->date_submitted, $errors->has('date_submitted'), $errors->first('date_submitted')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : __dataType::date_parse($sa->date_sampled), $errors->has('date_sampled'), $errors->first('date_sampled')
+                      '12', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : $sa->date_sampled, $errors->has('date_sampled'), $errors->first('date_sampled')
                     ) !!}
 
                     <div class="col-md-12"></div>
@@ -107,7 +113,7 @@
 
                     <div class="col-md-12"></div>
 
-                    @if($sa->sugar_sample_id == "SS1003")
+                    @if($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
 
                       {!! __form::textbox(
                         '12', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sa->code, $errors->has('code'), $errors->first('code'), ''
@@ -117,7 +123,7 @@
 
                     @endif
 
-                    @if($sa->sugar_sample_id == "SS1004")
+                    @if($sa->sugar_sample_id == $sugar_samples_static['molasses'])
 
                       {!! __form::textbox(
                         '12', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sa->report_no, $errors->has('report_no'), $errors->first('report_no'), ''

@@ -12,6 +12,8 @@
                         'we' => Request::get('we'),
                       ];
 
+  $sugar_samples_static = __static::sugar_samples();
+
 ?>
 
 
@@ -79,7 +81,7 @@
               <td>{{ $data->origin }}</td>
               <td>{{ __dataType::date_parse($data->week_ending, 'F d,Y') }}</td>
               <td>
-                @if($data->sugar_sample_id == "SS1006")
+                @if($data->sugar_sample_id == $sugar_samples_static['cja'])
                   @if ($data->caneJuiceAnalysis->isEmpty())
                     <span class="label label-warning">PENDING</span>
                   @else

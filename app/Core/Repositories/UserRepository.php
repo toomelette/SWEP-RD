@@ -165,13 +165,13 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-    public function resetPassword($model, $request){
+    public function resetPassword($instance, $request){
 
-        $model->password = Hash::make($request->password);
-        $model->is_online = 0;
-        $model->save();
+        $instance->password = Hash::make($request->password);
+        $instance->is_online = 0;
+        $instance->save();
 
-        return $model;
+        return $instance;
 
     }
 
@@ -233,13 +233,13 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-	public function search($model, $key){
+	public function search($instance, $key){
 
-        return $model->where(function ($model) use ($key) {
-                $model->where('firstname', 'LIKE', '%'. $key .'%')
-                      ->orwhere('middlename', 'LIKE', '%'. $key .'%')
-                      ->orwhere('lastname', 'LIKE', '%'. $key .'%')
-                      ->orwhere('username', 'LIKE', '%'. $key .'%');
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('firstname', 'LIKE', '%'. $key .'%')
+                         ->orwhere('middlename', 'LIKE', '%'. $key .'%')
+                         ->orwhere('lastname', 'LIKE', '%'. $key .'%')
+                         ->orwhere('username', 'LIKE', '%'. $key .'%');
         });
 
     }
@@ -248,19 +248,9 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-    public function isOnline($model, $value){
+    public function isOnline($instance, $value){
 
-        return $model->where('is_online', $value);
-
-    }
-
-
-
-
-
-    public function isActive($model, $value){
-
-        return $model->where('is_active', $value);
+        return $instance->where('is_online', $value);
 
     }
 
@@ -268,12 +258,22 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-    public function populate($model, $entries){
+    public function isActive($instance, $value){
 
-        return $model->select('user_id', 'username', 'firstname', 'middlename', 'lastname', 'is_online', 'is_active', 'slug')
-                     ->sortable()
-                     ->orderBy('updated_at', 'desc')
-                     ->paginate($entries);
+        return $instance->where('is_active', $value);
+
+    }
+
+
+
+
+
+    public function populate($instance, $entries){
+
+        return $instance->select('user_id', 'username', 'firstname', 'middlename', 'lastname', 'is_online', 'is_active', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 
