@@ -12,7 +12,9 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 	
 
 
+
     protected $sugar_analysis;
+
 
 
 
@@ -30,27 +32,19 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
-
-        $sugar_analysis = $this->cache->remember('sugar_analysis:fetch:' . $key, 240, function() use ($request, $entries){
+        $sugar_analysis = $this->cache->remember('sugar_analysis:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $sa = $this->sugar_analysis->newQuery();
-            
             $we = $this->__dataType->date_parse($request->we);
 
-            if(isset($request->q)){
-                $this->search($sa, $request->q);
-            }
+            if(isset($request->q)){ $this->search($sa, $request->q); }
             
-            if(isset($request->ss)){
-                $sa->where('sugar_sample_id', $request->ss);
-            }
+            if(isset($request->ss)){ $sa->where('sugar_sample_id', $request->ss); }
             
-            if(isset($request->we)){
-                $sa->whereDate('week_ending', $we);
-            }
+            if(isset($request->we)){ $sa->whereDate('week_ending', $we); }
 
             return $this->populate($sa, $entries);
 
@@ -141,8 +135,8 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $sugar_analysis = $this->findBySlug($slug);
         $sugar_analysis->week_ending = $this->__dataType->date_parse($request->week_ending);
-        $sugar_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
+        $sugar_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);
         $sugar_analysis->date_analyzed = $request->date_analyzed;
         $sugar_analysis->quantity_mt = $request->quantity_mt;
         $sugar_analysis->code = $request->code;
@@ -168,43 +162,13 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $sa = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){
             return $this->sugar_analysis->where('slug', $slug)
-                              ->with(['sugarAnalysisParameter', 'caneJuiceAnalysis'])
-                              ->first();
+                                        ->with(['sugarAnalysisParameter', 'caneJuiceAnalysis'])
+                                        ->first();
         }); 
         
-        if(empty($sa)){
-            abort(404);
-        }
+        if(empty($sa)){ abort(404); }
 
         return $sa;
-
-    }
-
-
-
-
-
-
-    public function search($instance, $key){
-
-        return $instance->where(function ($instance) use ($key) {
-                $instance->where('sample_no', 'LIKE', '%'. $key .'%')
-                         ->orwhere('origin', 'LIKE', '%'. $key .'%')
-                         ->orwhere('or_no', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
-    public function populate($instance, $entries){
-
-        return $instance->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
-                        ->sortable()
-                        ->orderBy('updated_at', 'desc')
-                        ->paginate($entries);
 
     }
 
@@ -221,17 +185,16 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
            
             $sa_list = $this->sugar_analysis->newQuery();
 
+            $sa_list->where('customer_type', $customer_type);
+            $sa_list->where('sugar_sample_id', $sugar_sample_id);
+
             if(isset($date_from) || isset($date_to)){
 
                 $df = $this->__dataType->date_parse($date_from);
                 $dt = $this->__dataType->date_parse($date_to);
-
                 $sa_list->whereBetween('date', [$df, $dt]);
 
             }
-
-            $sa_list->where('customer_type', $customer_type);
-            $sa_list->where('sugar_sample_id', $sugar_sample_id);
 
             return $sa_list->get();
 
@@ -255,14 +218,12 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
             $sa_list = $this->sugar_analysis->newQuery();
 
             $sa_list->where('mill_id', $mill_id);
-
             $sa_list->where('sugar_sample_id', $sugar_sample_id);
 
             if(isset($week_ending_from) || isset($week_ending_to)){
 
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
-
                 $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
@@ -294,7 +255,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
-
                 $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
@@ -304,6 +264,34 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         }); 
 
         return $sa;
+
+    }
+
+
+
+
+
+
+    private function search($instance, $key){
+
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('sample_no', 'LIKE', '%'. $key .'%')
+                         ->orwhere('origin', 'LIKE', '%'. $key .'%')
+                         ->orwhere('or_no', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    private function populate($instance, $entries){
+
+        return $instance->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
 
     }
 

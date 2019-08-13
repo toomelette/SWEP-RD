@@ -12,13 +12,13 @@ class SugarAnalysisParameterMethodRepository extends BaseRepository implements S
 	
 
 
-    protected $sugar_apm;
+    protected $sugar_analysis_pm;
 
 
 
-	public function __construct(SugarAnalysisParameterMethod $sugar_apm){
+	public function __construct(SugarAnalysisParameterMethod $sugar_analysis_pm){
 
-        $this->sugar_apm = $sugar_apm;
+        $this->sugar_analysis_pm = $sugar_analysis_pm;
         parent::__construct();
 
     }
@@ -28,12 +28,12 @@ class SugarAnalysisParameterMethodRepository extends BaseRepository implements S
 
     public function store($sugar_analysis_parameter_id, $name){
 
-        $sugar_apm = new SugarAnalysisParameterMethod;
-        $sugar_apm->sugar_analysis_parameter_id = $sugar_analysis_parameter_id;
-        $sugar_apm->name = $name;
-        $sugar_apm->save();
+        $sugar_analysis_pm = new SugarAnalysisParameterMethod;
+        $sugar_analysis_pm->sugar_analysis_parameter_id = $sugar_analysis_parameter_id;
+        $sugar_analysis_pm->name = $name;
+        $sugar_analysis_pm->save();
 
-        return $sugar_apm;
+        return $sugar_analysis_pm;
         
     }
 

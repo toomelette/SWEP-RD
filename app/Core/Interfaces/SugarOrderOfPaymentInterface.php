@@ -12,6 +12,8 @@ interface SugarOrderOfPaymentInterface {
 
 	public function update($request, $sugar_oop, $total_price);
 
+	public function destroy($slug);
+
 	public function findBySlug($slug);
 		
 }

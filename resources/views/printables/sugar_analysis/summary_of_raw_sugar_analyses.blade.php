@@ -74,7 +74,7 @@
 
 </head>
 
-<body {{-- onload="window.print();" onafterprint="window.close()" --}}>
+<body onload="window.print();" onafterprint="window.close()">
 
   <img class="bg-wm" src="{{ asset('images/sra_wm.jpg') }}">
 
@@ -172,6 +172,8 @@
                   $color_affined = 0.00;
                   $grain_size = 0.00;
 
+                  $sugar_services_static = __static::sugar_services();
+
                   foreach ($sugar_analysis_list as $data_sa) {
 
                     if ($data_sa->mill_id == $data_mill->mill_id) {
@@ -186,7 +188,7 @@
 
 
                       /** Polarization **/
-                      $pol_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1001');
+                      $pol_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['pol']);
 
                       if (!empty($pol_instance)) {
                         if (isset($pol_instance->result_dec)) {
@@ -196,7 +198,7 @@
 
 
                       /** Moisture **/
-                      $mois_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1017');
+                      $mois_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['mois']);
                       
                       if (!empty($mois_instance)) {
                         if (isset($mois_instance->moisture_result_dec)) {
@@ -206,7 +208,7 @@
 
 
                       /** Safety Factor **/
-                      $sf_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1017');
+                      $sf_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['mois']);
                       
                       if (!empty($sf_instance)) {
                         if (isset($sf_instance->moisture_sf_dec)) {
@@ -216,7 +218,7 @@
 
 
                       /** Ash **/
-                      $ash_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1004');
+                      $ash_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['ash']);
                       
                       if (!empty($ash_instance)) {
                         if (isset($ash_instance->result_dec)) {
@@ -226,7 +228,7 @@
 
 
                       /** Color of Whole **/
-                      $color_whole_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1006');
+                      $color_whole_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['colorW']);
                       
                       if (!empty($color_whole_instance)) {
                         if (isset($color_whole_instance->result_dec)) {
@@ -236,7 +238,7 @@
 
 
                       /** Color of Affined **/
-                      $color_affined_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1007');
+                      $color_affined_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['colorA']);
                       
                       if (!empty($color_affined_instance)) {
                         if (isset($color_affined_instance->result_dec)) {
@@ -246,7 +248,7 @@
 
 
                       /** Grain Size **/
-                      $grain_size_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId('SS1008');
+                      $grain_size_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['grainSize']);
                       
                       if (!empty($grain_size_instance)) {
                         if (isset($grain_size_instance->result_dec)) {

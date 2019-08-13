@@ -52,13 +52,9 @@ class SugarServiceService extends BaseService{
         $sugar_service = $this->sugar_service_repo->store($request);
 
         if(!empty($rows)){
-
             foreach ($rows as $row) {
-
                 $sugar_method = $this->sugar_method_repo->store($sugar_service->sugar_service_id, $row['name']);
-                
             }
-
         }
 
         $this->event->fire('sugar_service.store');
@@ -89,21 +85,14 @@ class SugarServiceService extends BaseService{
         $rows = $request->row;
 
         $sugar_service = $this->sugar_service_repo->update($request, $slug);
-
-        $sugar_sample_parameter = $this->sugar_sample_parameter->update($sugar_service);
-
+        $sugar_sample_parameter = $this->sugar_sample_parameter->updateSugarService($sugar_service);
         $sugar_service->sugarMethod()->delete();
 
         if(!empty($rows)){
-
             foreach ($rows as $row) {
-
                 $sugar_method = $this->sugar_method_repo->store($sugar_service->sugar_service_id, $row['name']);
-                
             }
-
         }
-
 
         $this->event->fire('sugar_service.update', $sugar_service);
         return redirect()->route('dashboard.sugar_service.index');

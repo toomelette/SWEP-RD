@@ -6,15 +6,15 @@ namespace App\Core\Interfaces;
 
 interface SugarSampleInterface{
 	
-	public function store($request);
-	
 	public function fetch($request);
 	
-	public function findBySlug($slug);
+	public function store($request);
 	
 	public function update($request, $slug);
 	
 	public function destroy($slug);
+	
+	public function findBySlug($slug);
 
 	public function getAll();
 		

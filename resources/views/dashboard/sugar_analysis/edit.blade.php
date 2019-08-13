@@ -1,6 +1,7 @@
 <?php
   
   $sugar_samples_static = __static::sugar_samples();
+  $sugar_services_static = __static::sugar_services();
 
 ?>
 
@@ -163,7 +164,7 @@
                         $assessment_name = $data->sugar_service_id .'_assessment';
                       ?>
 
-                      @if ($data->sugar_service_id == "SS1017")
+                      @if ($data->sugar_service_id == $sugar_services_static['mois'])
                       
                         {!! __form::textbox(
                           '4', $data->sugar_service_id .'_moisture', 'text', "MOISTURE", '0.00', old($data->sugar_service_id .'_moisture') ? old($data->sugar_service_id .'_moisture') : $data->moisture_result_dec, $errors->has($data->sugar_service_id .'_moisture'), $errors->first($data->sugar_service_id .'_moisture'), 'data-transform="uppercase"'

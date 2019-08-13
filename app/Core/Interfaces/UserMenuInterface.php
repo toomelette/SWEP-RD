@@ -11,5 +11,7 @@ interface UserMenuInterface {
 	public function getAll();
 
 	public function getByCategory($cat);
+
+	public function isExist();
 		
 }

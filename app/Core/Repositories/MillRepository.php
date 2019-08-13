@@ -29,17 +29,15 @@ class MillRepository extends BaseRepository implements MillInterface {
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $mills = $this->cache->remember('mills:fetch:' . $key, 240, function() use ($request, $entries){
+        $mills = $this->cache->remember('mills:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $mill = $this->mill->newQuery();
             
-            if(isset($request->q)){
-                $this->search($mill, $request->q);
-            }
+            if(isset($request->q)){ $this->search($mill, $request->q); }
 
             return $this->populate($mill, $entries);
 
@@ -122,9 +120,24 @@ class MillRepository extends BaseRepository implements MillInterface {
             return $this->mill->where('slug', $slug)->first();
         }); 
         
-        if(empty($mill)){
-            abort(404);
-        }
+        if(empty($mill)){ abort(404); }
+
+        return $mill;
+
+    }
+
+
+
+
+
+
+    public function findByMillId($mill_id){
+
+        $mill = $this->cache->remember('mills:findByMillId:' . $mill_id, 240, function() use ($mill_id){
+            return $this->mill->select('address', 'name')->where('mill_id', $mill_id)->first();
+        }); 
+        
+        if(empty($mill)){ abort(404); }
 
         return $mill;
 
@@ -159,10 +172,6 @@ class MillRepository extends BaseRepository implements MillInterface {
                               ->where('mill_id', $mill_id)
                               ->get();
         }); 
-        
-        if(empty($mill)){
-            abort(404);
-        }
 
         return $mill;
 
@@ -173,28 +182,7 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function findByMillId($mill_id){
-
-        $mill = $this->cache->remember('mills:findByMillId:' . $mill_id, 240, function() use ($mill_id){
-            return $this->mill->select('address', 'name')
-                              ->where('mill_id', $mill_id)
-                              ->first();
-        }); 
-        
-        if(empty($mill)){
-            abort(404);
-        }
-
-        return $mill;
-
-    }
-
-
-
-
-
-
-    public function search($instance, $key){
+    private function search($instance, $key){
 
         return $instance->where(function ($instance) use ($key) {
                 $instance->where('name', 'LIKE', '%'. $key .'%')
@@ -209,7 +197,7 @@ class MillRepository extends BaseRepository implements MillInterface {
 
 
 
-    public function populate($instance, $entries){
+    private function populate($instance, $entries){
 
         return $instance->select('mill_id', 'name', 'address', 'slug')
                         ->sortable()

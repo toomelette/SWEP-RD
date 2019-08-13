@@ -53,31 +53,6 @@ class UserMenuRepository extends BaseRepository implements UserMenuInterface {
 
 
 
-    public function getUserMenuIdInc(){
-
-        $id = 'UM10000001';
-
-        $usermenu = $this->user_menu->select('user_menu_id')->orderBy('user_menu_id', 'desc')->first();
-
-        if($usermenu != null){
-
-            if($usermenu->user_menu_id != null){
-                $num = str_replace('UM', '', $usermenu->user_menu_id) + 1;
-                $id = 'UM' . $num;
-            }
-        
-        }
-        
-        return $id;
-        
-    }
-
-
-
-
-
-
-
 
     public function getByCategory($cat){
 
@@ -132,6 +107,27 @@ class UserMenuRepository extends BaseRepository implements UserMenuInterface {
 
         return $user_menu;
 
+    }
+
+
+
+
+
+
+
+    private function getUserMenuIdInc(){
+
+        $id = 'UM10000001';
+
+        $usermenu = $this->user_menu->select('user_menu_id')->orderBy('user_menu_id', 'desc')->first();
+
+        if($usermenu != null){
+            $num = str_replace('UM', '', $usermenu->user_menu_id) + 1;
+            $id = 'UM' . $num;
+        }
+        
+        return $id;
+        
     }
 
 

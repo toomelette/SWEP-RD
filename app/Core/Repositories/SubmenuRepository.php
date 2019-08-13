@@ -57,9 +57,7 @@ class SubmenuRepository extends BaseRepository implements SubmenuInterface {
             return $this->submenu->where('submenu_id', $submenu_id)->first();
         });
         
-        if(empty($submenu)){
-            abort(404);
-        }
+        if(empty($submenu)){ abort(404); }
         
         return $submenu;
 
@@ -73,7 +71,6 @@ class SubmenuRepository extends BaseRepository implements SubmenuInterface {
     public function getSubmenuIdInc(){
 
         $id = 'SM100001';
-
         $submenu = $this->submenu->select('submenu_id')->orderBy('submenu_id', 'desc')->first();
 
         if($submenu != null){
@@ -94,7 +91,8 @@ class SubmenuRepository extends BaseRepository implements SubmenuInterface {
 
         $submenus = $this->cache->remember('submenus:getAll', 240, function(){
             return $this->submenu->select('menu_id','submenu_id', 'name', 'is_nav')
-                                 ->orderBy('submenu_id', 'asc')->get();
+                                 ->orderBy('submenu_id', 'asc')
+                                 ->get();
         });
         
         return $submenus;

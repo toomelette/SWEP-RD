@@ -31,17 +31,14 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
-
-        $sugar_samples = $this->cache->remember('sugar_samples:fetch:' . $key, 240, function() use ($request, $entries){
+        $sugar_samples = $this->cache->remember('sugar_samples:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $sugar_sample = $this->sugar_sample->newQuery();
             
-            if(isset($request->q)){
-                $this->search($sugar_sample, $request->q);
-            }
+            if(isset($request->q)){ $this->search($sugar_sample, $request->q); }
 
             return $this->populate($sugar_sample, $entries);
 
@@ -120,9 +117,7 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
             return $this->sugar_sample->where('slug', $slug)->first();
         }); 
         
-        if(empty($sugar_sample)){
-            abort(404);
-        }
+        if(empty($sugar_sample)){ abort(404); }
 
         return $sugar_sample;
 
@@ -151,14 +146,11 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
     private function getSugarSampleIdInc(){
 
         $id = 'SS1001';
-
         $sugar_sample = $this->sugar_sample->select('sugar_sample_id')->orderBy('sugar_sample_id', 'desc')->first();
 
         if($sugar_sample != null){
-            if($sugar_sample->sugar_sample_id != null){
-                $num = str_replace('SS', '', $sugar_sample->sugar_sample_id) + 1;
-                $id = 'SS' . $num;
-            }
+            $num = str_replace('SS', '', $sugar_sample->sugar_sample_id) + 1;
+            $id = 'SS' . $num;
         }
         
         return $id;
@@ -170,7 +162,7 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function search($instance, $key){
+    private function search($instance, $key){
 
         return $instance->where(function ($instance) use ($key) {
                 $instance->where('name', 'LIKE', '%'. $key .'%');
@@ -182,7 +174,7 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
 
 
 
-    public function populate($instance, $entries){
+    private function populate($instance, $entries){
 
         return $instance->select('name', 'slug')
                         ->sortable()

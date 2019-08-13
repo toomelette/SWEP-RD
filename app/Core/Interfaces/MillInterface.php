@@ -16,10 +16,10 @@ interface MillInterface {
 
 	public function findBySlug($slug);
 
+	public function findByMillId($mill_id);
+
 	public function getAll();
 
 	public function getByMillId($mill_id);
-
-	public function findByMillId($mill_id);
 		
 }

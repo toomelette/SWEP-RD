@@ -39,14 +39,9 @@ class SugarSampleParameterComposer{
         $ss_parameter_molasses = $this->ss_parameter->getBySugarSampleId($sugar_samples['molasses']);
         $ss_parameter_cja = $this->ss_parameter->getBySugarSampleId($sugar_samples['cja']);
         
-        $ss_parameter_raw_sugar_complete = $this->ss_parameter->getBySugarSampleId($sugar_samples['molasses']);
-        $ss_parameter_raw_sugar_special = $this->ss_parameter->getBySugarSampleId($sugar_samples['cja']);
-        
     	$view->with([
 
-    		'global_sugar_sample_parameter_raw_sugar' => $ss_parameter_raw_sugar,
-    		'global_sugar_sample_parameter_raw_sugar_complete' => $ss_parameter_raw_sugar_complete, 
-    		'global_sugar_sample_parameter_raw_sugar_special' => $ss_parameter_raw_sugar_special, 
+    		'global_sugar_sample_parameter_raw_sugar' => $ss_parameter_raw_sugar, 
     		'global_sugar_sample_parameter_muscovado' => $ss_parameter_muscovado, 
             'global_sugar_sample_parameter_molasses' => $ss_parameter_molasses, 
             'global_sugar_sample_parameter_cja' => $ss_parameter_cja, 

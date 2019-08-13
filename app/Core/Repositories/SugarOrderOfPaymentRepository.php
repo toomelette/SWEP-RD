@@ -30,28 +30,21 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $sugar_oops = $this->cache->remember('sugar_order_of_payments:fetch:' . $key, 240, function() use ($request, $entries){
+        $sugar_oops = $this->cache->remember('sugar_order_of_payments:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $sugar_oop = $this->sugar_oop->newQuery();
-
             $df = $this->__dataType->date_parse($request->df);
             $dt = $this->__dataType->date_parse($request->dt);
 
-            if(isset($request->q)){
-                $this->search($sugar_oop, $request->q);
-            }
+            if(isset($request->q)){ $this->search($sugar_oop, $request->q); }
 
-            if(isset($request->ss)){
-                $sugar_oop->where('sugar_sample_id', $request->ss);
-            }
+            if(isset($request->ss)){ $sugar_oop->where('sugar_sample_id', $request->ss); }
 
-            if(isset($request->df) || isset($request->dt)){
-                $sugar_oop->whereBetween('date', [$df, $dt]);
-            }
+            if(isset($request->df) || isset($request->dt)){ $sugar_oop->whereBetween('date', [$df, $dt]); }
 
             return $this->populate($sugar_oop, $entries);
 
@@ -152,13 +145,11 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $sugar_oop = $this->cache->remember('sugar_order_of_payments:findBySlug:' . $slug, 240, function() use ($slug){
             return $this->sugar_oop->where('slug', $slug)
-                              ->with(['sugarAnalysisParameter', 'sugarAnalysis'])
-                              ->first();
+                                   ->with(['sugarAnalysisParameter', 'sugarAnalysis'])
+                                   ->first();
         }); 
         
-        if(empty($sugar_oop)){
-            abort(404);
-        }
+        if(empty($sugar_oop)){ abort(404); }
 
         return $sugar_oop;
 
@@ -169,7 +160,23 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function search($instance, $key){
+    private function getSampleNoInc(){
+
+        $sample_no = $this->carbon->now()->format('Y') .'0001';
+        $sugar_oop = $this->sugar_oop->select('sample_no')->orderBy('sample_no', 'desc')->first();
+
+        if($sugar_oop != null){ $sample_no = $sugar_oop->sample_no + 1; }
+        
+        return $sample_no;
+        
+    }
+
+
+
+
+
+
+    private function search($instance, $key){
 
         return $instance->where(function ($instance) use ($key) {
                 $instance->where('sample_no', 'LIKE', '%'. $key .'%')
@@ -183,7 +190,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    public function populate($instance, $entries){
+    private function populate($instance, $entries){
 
         return $instance->select('sample_no', 'received_from', 'received_by', 'sugar_sample_id', 'date', 'slug')
                         ->sortable()
@@ -191,31 +198,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
                         ->paginate($entries);
 
     }
-
-
-
-
-
-
-    private function getSampleNoInc(){
-
-        $sample_no = $this->carbon->now()->format('Y') .'0001';
-
-        $sugar_oop = $this->sugar_oop->select('sample_no')->orderBy('sample_no', 'desc')->first();
-
-        if($sugar_oop != null){
-
-            if($sugar_oop->sample_no != null){
-
-                $sample_no = $sugar_oop->sample_no + 1;
-            
-            }
-        
-        }
-        
-        return $sample_no;
-        
-    }
+    
 
 
 

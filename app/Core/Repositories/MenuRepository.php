@@ -29,17 +29,14 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
-
-        $menus = $this->cache->remember('menus:fetch:' . $key, 240, function() use ($request, $entries){
+        $menus = $this->cache->remember('menus:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $menu = $this->menu->newQuery();
             
-            if(isset($request->q)){
-                $this->search($menu, $request->q);
-            }
+            if(isset($request->q)){ $this->search($menu, $request->q); }
 
             return $this->populate($menu, $entries);
 
@@ -122,9 +119,7 @@ class MenuRepository extends BaseRepository implements MenuInterface {
             return $this->menu->where('slug', $slug)->first();
         }); 
         
-        if(empty($menu)){
-            abort(404);
-        }
+        if(empty($menu)){ abort(404); }
 
         return $menu;
 
@@ -141,9 +136,7 @@ class MenuRepository extends BaseRepository implements MenuInterface {
             return $this->menu->where('menu_id', $menu_id)->first();
         });
         
-        if(empty($menu)){
-            abort(404);
-        }
+        if(empty($menu)){ abort(404); }
         
         return $menu;
 
@@ -169,19 +162,14 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function getMenuIdInc(){
+    private function getMenuIdInc(){
 
         $id = 'M10001';
-
         $menu = $this->menu->select('menu_id')->orderBy('menu_id', 'desc')->first();
 
         if($menu != null){
-
-            if($menu->menu_id != null){
-                $num = str_replace('M', '', $menu->menu_id) + 1;
-                $id = 'M' . $num;
-            }
-        
+            $num = str_replace('M', '', $menu->menu_id) + 1;
+            $id = 'M' . $num;
         }
         
         return $id;
@@ -193,7 +181,7 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function search($instance, $key){
+    private function search($instance, $key){
 
         return $instance->where(function ($instance) use ($key) {
                     $instance->where('name', 'LIKE', '%'. $key .'%');        
@@ -205,7 +193,7 @@ class MenuRepository extends BaseRepository implements MenuInterface {
 
 
 
-    public function populate($instance, $entries){
+    private function populate($instance, $entries){
 
         return $instance->select('name', 'route', 'icon', 'slug')
                         ->sortable()

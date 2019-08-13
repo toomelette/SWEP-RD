@@ -2,8 +2,6 @@
   
   $ss_id_array = $sugar_oop->sugarAnalysisParameter->pluck('sugar_service_id')->toArray();
   $raw_sugar_services = $global_sugar_sample_parameter_raw_sugar->pluck('sugar_service_id')->toArray();
-  $raw_sugar_complete_services = $global_sugar_sample_parameter_raw_sugar_complete->pluck('sugar_service_id')->toArray();
-  $raw_sugar_special_services = $global_sugar_sample_parameter_raw_sugar_special->pluck('sugar_service_id')->toArray();
   $muscovado_services = $global_sugar_sample_parameter_muscovado->pluck('sugar_service_id')->toArray();
   $molasses_services = $global_sugar_sample_parameter_molasses->pluck('sugar_service_id')->toArray();
   $cja_services = $global_sugar_sample_parameter_cja->pluck('sugar_service_id')->toArray();
@@ -188,49 +186,6 @@
                     </tr>
                   @endforeach
                 </table>
-
-
-                {{-- RAW SUGAR COMPLETE SERVICES --}}
-                <table class="table table-bordered" id="raw_sugar_complete">
-                  <tr>
-                    <th>Kind of Analysis</th>
-                    <th>Price</th>
-                  </tr>
-                  @foreach ($global_sugar_service_all as $data)
-                    <tr>  
-                      <td>
-                        <label>
-                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
-                          {{ in_array($data->sugar_service_id, $raw_sugar_complete_services) ? 'checked' : '' }}>
-                          &nbsp; {{ $data->name }}
-                        </label>
-                      </td>
-                      <td>Php {{ $data->price }}</td>
-                    </tr>
-                  @endforeach
-                </table>
-
-
-                {{-- RAW SUGAR SPECIAL SERVICES --}}
-                <table class="table table-bordered" id="raw_sugar_special">
-                  <tr>
-                    <th>Kind of Analysis</th>
-                    <th>Price</th>
-                  </tr>
-                  @foreach ($global_sugar_service_all as $data)
-                    <tr>  
-                      <td>
-                        <label>
-                          <input type="checkbox" class="minimal" name="sugar_service_id[]" value="{{ $data->sugar_service_id }}"
-                          {{ in_array($data->sugar_service_id, $raw_sugar_special_services) ? 'checked' : '' }}>
-                          &nbsp; {{ $data->name }}
-                        </label>
-                      </td>
-                      <td>Php {{ $data->price }}</td>
-                    </tr>
-                  @endforeach
-                </table>
-
 
                 {{-- MUSCOVADO SERVICES --}}
                 <table class="table table-bordered" id="muscovado">

@@ -31,25 +31,19 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 	public function fetch($request){
 	
-		$key = str_slug($request->fullUrl(), '_');
+		$cache_key = str_slug($request->fullUrl(), '_');
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $users = $this->cache->remember('users:fetch:' . $key, 240, function() use ($request, $entries){
+        $users = $this->cache->remember('users:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $user = $this->user->newQuery();
             
-            if(isset($request->q)){
-                $this->search($user, $request->q);
-            }
+            if(isset($request->q)){ $this->search($user, $request->q); }
 
-            if(isset($request->ol)){
-                $this->isOnline($user, $this->__dataType->string_to_boolean($request->ol));
-            }
+            if(isset($request->ol)){ $this->isOnline($user, $this->__dataType->string_to_boolean($request->ol)); }
 
-            if(isset($request->a)){
-                 $this->isActive($user, $this->__dataType->string_to_boolean($request->a));
-            }
+            if(isset($request->a)){ $this->isActive($user, $this->__dataType->string_to_boolean($request->a)); }
 
             return $this->populate($user, $entries);
 
@@ -213,41 +207,6 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-
-	public function findBySlug($slug){
-
-        $user = $this->cache->remember('users:findBySlug:' . $slug, 240, function() use ($slug){
-            return $this->user->where('slug', $slug)->with(['userMenu', 'userMenu.userSubMenu'])->first();
-        }); 
-        
-        if(empty($user)){
-            abort(404);
-        }
-
-        return $user;
-
-    }
-
-
-
-
-
-
-	public function search($instance, $key){
-
-        return $instance->where(function ($instance) use ($key) {
-                $instance->where('firstname', 'LIKE', '%'. $key .'%')
-                         ->orwhere('middlename', 'LIKE', '%'. $key .'%')
-                         ->orwhere('lastname', 'LIKE', '%'. $key .'%')
-                         ->orwhere('username', 'LIKE', '%'. $key .'%');
-        });
-
-    }
-
-
-
-
-
     public function isOnline($instance, $value){
 
         return $instance->where('is_online', $value);
@@ -268,36 +227,17 @@ class UserRepository extends BaseRepository implements UserInterface {
 
 
 
-    public function populate($instance, $entries){
 
-        return $instance->select('user_id', 'username', 'firstname', 'middlename', 'lastname', 'is_online', 'is_active', 'slug')
-                        ->sortable()
-                        ->orderBy('updated_at', 'desc')
-                        ->paginate($entries);
+	public function findBySlug($slug){
 
-    }
-
-
-
-
-
-    public function getUserIdInc(){
-
-        $id = 'U10001';
-
-        $user = $this->user->select('user_id')->orderBy('user_id', 'desc')->first();
-
-        if($user != null){
-
-            if($user->user_id != null){
-                $num = str_replace('U', '', $user->user_id) + 1;
-                $id = 'U' . $num;
-            }
+        $user = $this->cache->remember('users:findBySlug:' . $slug, 240, function() use ($slug){
+            return $this->user->where('slug', $slug)->with(['userMenu', 'userMenu.userSubMenu'])->first();
+        }); 
         
-        }
-        
-        return $id;
-        
+        if(empty($user)){ abort(404); }
+
+        return $user;
+
     }
 
 
@@ -313,7 +253,55 @@ class UserRepository extends BaseRepository implements UserInterface {
         return $users;
         
     }
-    
+
+
+
+
+
+
+    private function getUserIdInc(){
+
+        $id = 'U10001';
+
+        $user = $this->user->select('user_id')->orderBy('user_id', 'desc')->first();
+
+        if($user != null){
+            $num = str_replace('U', '', $user->user_id) + 1;
+            $id = 'U' . $num;
+        }
+        
+        return $id;
+        
+    }
+
+
+
+
+
+
+    private function search($instance, $key){
+
+        return $instance->where(function ($instance) use ($key) {
+                $instance->where('firstname', 'LIKE', '%'. $key .'%')
+                         ->orwhere('middlename', 'LIKE', '%'. $key .'%')
+                         ->orwhere('lastname', 'LIKE', '%'. $key .'%')
+                         ->orwhere('username', 'LIKE', '%'. $key .'%');
+        });
+
+    }
+
+
+
+
+
+    private function populate($instance, $entries){
+
+        return $instance->select('user_id', 'username', 'firstname', 'middlename', 'lastname', 'is_online', 'is_active', 'slug')
+                        ->sortable()
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate($entries);
+
+    }    
 
 
 

@@ -33,7 +33,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
         $sugar_sample_parameter->sugar_service_id = $sugar_service->sugar_service_id;
         $sugar_sample_parameter->name = $sugar_service->name;
         $sugar_sample_parameter->price = $sugar_service->price;
-        $sugar_sample_parameter->standard = $sugar_service->standard;
+        $sugar_sample_parameter->standard_str = $sugar_service->standard_str;
         $sugar_sample_parameter->save();
 
         return $sugar_sample_parameter;
@@ -44,7 +44,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
 
 
 
-    public function update($sugar_service){
+    public function updateSugarService($sugar_service){
 
         $sugar_service_id = $sugar_service->sugar_service_id;
         
@@ -52,7 +52,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
 
             'name' => $sugar_service->name, 
             'price' => $sugar_service->price, 
-            'standard' => $sugar_service->standard 
+            'standard_str' => $sugar_service->standard_str 
 
         ]);
 
@@ -65,9 +65,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
     public function getBySugarSampleId($sugar_sample_id){
 
         $sugar_sample_parameters = $this->cache->remember('sugar_sample_parameters:getBySugarSampleId:'. $sugar_sample_id, 240, function() use ($sugar_sample_id){
-        
-            return $this->sugar_sample_parameter->where('sugar_sample_id', $sugar_sample_id)
-                                       ->get();
+            return $this->sugar_sample_parameter->where('sugar_sample_id', $sugar_sample_id)->get();
         });
 
         return $sugar_sample_parameters;

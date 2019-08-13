@@ -31,17 +31,15 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
     public function fetch($request){
 
-        $key = str_slug($request->fullUrl(), '_');
+        $cache_key = str_slug($request->fullUrl(), '_');
 
-        $entries = isset($request->e) ? (int)$request->e : 20;
+        $entries = isset($request->e) ? $request->e : 20;
 
-        $sugar_services = $this->cache->remember('sugar_services:fetch:' . $key, 240, function() use ($request, $entries){
+        $sugar_services = $this->cache->remember('sugar_services:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
             $sugar_service = $this->sugar_service->newQuery();
             
-            if(isset($request->q)){
-                $this->search($sugar_service, $request->q);
-            }
+            if(isset($request->q)){ $this->search($sugar_service, $request->q); }
 
             return $this->populate($sugar_service, $entries);
 
@@ -109,7 +107,6 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
         $sugar_service = $this->findBySlug($slug);
         $sugar_service->delete();
-
         $sugar_service->sugarMethod()->delete();
 
         return $sugar_service;
@@ -127,9 +124,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
             return $this->sugar_service->where('slug', $slug)->first();
         }); 
         
-        if(empty($sugar_service)){
-            abort(404);
-        }
+        if(empty($sugar_service)){ abort(404); }
 
         return $sugar_service;
 
@@ -146,9 +141,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
             return $this->sugar_service->where('sugar_service_id', $sugar_service_id)->first();
         });
         
-        if(empty($sugar_service)){
-            abort(404);
-        }
+        if(empty($sugar_service)){ abort(404); }
         
         return $sugar_service;
 
@@ -177,14 +170,11 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     private function getSugarServiceIdInc(){
 
         $id = 'SS1001';
-
         $sugar_service = $this->sugar_service->select('sugar_service_id')->orderBy('sugar_service_id', 'desc')->first();
 
         if($sugar_service != null){
-            if($sugar_service->sugar_service_id != null){
-                $num = str_replace('SS', '', $sugar_service->sugar_service_id) + 1;
-                $id = 'SS' . $num;
-            }
+            $num = str_replace('SS', '', $sugar_service->sugar_service_id) + 1;
+            $id = 'SS' . $num;
         }
         
         return $id;
@@ -196,7 +186,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
 
 
-    public function search($instance, $key){
+    private function search($instance, $key){
 
         return $instance->where(function ($instance) use ($key) {
                 $instance->where('name', 'LIKE', '%'. $key .'%');
@@ -208,7 +198,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
 
 
-    public function populate($instance, $entries){
+    private function populate($instance, $entries){
 
         return $instance->select('name', 'price', 'standard_str', 'slug')
                         ->sortable()

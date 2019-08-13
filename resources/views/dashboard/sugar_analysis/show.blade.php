@@ -1,6 +1,7 @@
 <?php
   
   $sugar_samples_static = __static::sugar_samples();
+  $sugar_services_static = __static::sugar_services();
   
 ?>
 
@@ -103,7 +104,7 @@
                 <tr>
                     <td>{{ $data->name }}</td>
                     <td>
-                      @if ($data->sugar_service_id == "SS1017")
+                      @if ($data->sugar_service_id == $sugar_services_static['mois'])
                         {{ number_format($data->moisture_result_dec, 2) .' / '. number_format($data->moisture_sf_dec, 2)}}
                       @else
                         {{ number_format($data->result_dec, 2) }}

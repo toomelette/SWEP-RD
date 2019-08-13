@@ -117,18 +117,23 @@ class SugarAnalysisService extends BaseService{
 
         foreach ($sa->sugarAnalysisParameter as $data) {
             
+            $sugar_services = $this->__static->sugar_services();
+
             $id = $data->sugar_service_id;
             $assessment = $data->sugar_service_id.'_assessment';
 
+            $req_moisture = $sugar_services['mois'].'_moisture';
+            $req_sf = $sugar_services['mois'].'_sf';
+
             if (isset($request->$id) || $request->$id == ""){
 
-                if (isset($request->SS1017_moisture) && isset($request->SS1017_sf)) {
+                if (isset($request->$req_moisture) && isset($request->$req_sf)) {
                     
-                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment, $request->SS1017_moisture, $request->SS1017_sf);
+                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$req_moisture, $request->$req_sf);
 
                 }else{
 
-                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$assessment);
+                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id);
                 
                 }
             

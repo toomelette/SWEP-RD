@@ -94,13 +94,10 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
     public function findBySlug($cja_slug){
 
         $cja = $this->cache->remember('sugar_analysis:cane_juice_analysis:findBySlug:' . $cja_slug, 240, function() use ($cja_slug){
-            return $this->cane_juice_analysis->where('slug', $cja_slug)
-                                             ->first();
+            return $this->cane_juice_analysis->where('slug', $cja_slug)->first();
         }); 
         
-        if(empty($cja)){
-            abort(404);
-        }
+        if(empty($cja)){ abort(404); }
 
         return $cja;
 
@@ -114,13 +111,10 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
     public function getBySlug($cja_slug){
 
         $cja = $this->cache->remember('sugar_analysis:cane_juice_analysis:getBySlug:' . $cja_slug, 240, function() use ($cja_slug){
-            return $this->cane_juice_analysis->where('slug', $cja_slug)
-                                             ->get();
+            return $this->cane_juice_analysis->where('slug', $cja_slug)->get();
         }); 
         
-        if(empty($cja)){
-            abort(404);
-        }
+        if(empty($cja)){ abort(404); }
 
         return $cja;
 

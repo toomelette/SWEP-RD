@@ -57,11 +57,9 @@ class SugarClientRepository extends BaseRepository implements SugarClientInterfa
     public function getAll(){
 
         $sugar_clients = $this->cache->remember('sugar_clients:getAll', 240, function(){
-
             return $this->sugar_client->select('sugar_client_id','name', 'address')
                                       ->orderBy('name', 'asc')
                                       ->get();
-
         });
         
         return $sugar_clients;
@@ -75,9 +73,7 @@ class SugarClientRepository extends BaseRepository implements SugarClientInterfa
     public function isExist($sugar_client_id){
 
         $sugar_clients = $this->cache->remember('sugar_clients:isExist:'. $sugar_client_id .'', 240, function() use ($sugar_client_id){
-            
             return $this->sugar_client->where('sugar_client_id', $sugar_client_id)->exists();
-
         });
         
         return $sugar_clients;
@@ -92,14 +88,11 @@ class SugarClientRepository extends BaseRepository implements SugarClientInterfa
     private function getSugarClientInc(){
 
         $id = 'SC1001';
-
         $sugar_client = $this->sugar_client->select('sugar_client_id')->orderBy('sugar_client_id', 'desc')->first();
 
         if($sugar_client != null){
-
             $num = str_replace('SC', '', $sugar_client->sugar_client_id) + 1;
             $id = 'SC' . $num;
-            
         }
         
         return $id;
