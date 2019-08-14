@@ -46,7 +46,6 @@ class SugarOrderOfPaymentService extends BaseService{
     public function fetch($request){
 
         $sugar_oops = $this->sugar_oop_repo->fetch($request);
-
         $request->flash();
         
         return view('dashboard.sugar_order_of_payment.index')->with('sugar_oops', $sugar_oops);
@@ -64,14 +63,10 @@ class SugarOrderOfPaymentService extends BaseService{
 
         // Sugar Clients
         if ($request->customer_type == "CT1001") {
-            
             if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
-
                 $sugar_client = $this->sugar_client_repo->store($request);
                 $this->event->fire('sugar_client.store', $sugar_client);
-
             }
-
         }
 
         // Sugar OOP
@@ -96,23 +91,16 @@ class SugarOrderOfPaymentService extends BaseService{
     public function update($request, $slug){
 
         $total_price = $this->getTotalPrice($request);
-        
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug); 
-
         $sugar_oop_orig = $sugar_oop->getOriginal(); 
-
         $sugar_samples = $this->__static->sugar_samples();
 
         // Sugar Clients
         if ($request->customer_type == "CT1001") {
-            
             if(!$this->sugar_client_repo->isExist($request->sugar_client_id)){
-
                 $sugar_client = $this->sugar_client_repo->store($request);
                 $this->event->fire('sugar_client.store', $sugar_client);
-
             }
-
         } 
 
         // Cane Juice Analysis
@@ -196,13 +184,10 @@ class SugarOrderOfPaymentService extends BaseService{
     private function getTotalPrice($request){
 
         $sugar_samples = $this->__static->sugar_samples();
-
         $total_price = 0.00;
 
         if ($request->sugar_sample_id == $sugar_samples['cja']) {
-            
             $total_price = $request->cja_num_of_samples * 100;
-
         }else{
 
             $services = $request->sugar_service_id;
@@ -213,8 +198,7 @@ class SugarOrderOfPaymentService extends BaseService{
                     $total_price += $sugar_service_instance->price;
                 }  
             }
-
-                
+    
         }
 
         return $total_price;
@@ -234,13 +218,10 @@ class SugarOrderOfPaymentService extends BaseService{
             foreach ($services as $data_sugar_service) {
 
                 $sugar_service = $this->sugar_service_repo->findBySugarServiceId($data_sugar_service);
-
                 $sugar_analysis_parameter = $this->sugar_analysis_parameter_repo->store($sample_no, $sugar_service);          
 
                 foreach ($sugar_service->sugarMethod as $data_sugar_method) { 
-                    
                     $this->sugar_apm_repo->store($sugar_analysis_parameter->sugar_analysis_parameter_id, $data_sugar_method->name);
-
                 }
 
             }  

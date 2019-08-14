@@ -39,7 +39,6 @@ class SugarAnalysisService extends BaseService{
     public function fetch($request){
 
         $sugar_analysis = $this->sugar_analysis_repo->fetch($request);
-
         $request->flash();
         
         return view('dashboard.sugar_analysis.index')->with('sugar_analysis', $sugar_analysis);
@@ -68,17 +67,12 @@ class SugarAnalysisService extends BaseService{
     public function edit($slug){
 
         $sugar_samples = $this->__static->sugar_samples();
-
         $sa = $this->sugar_analysis_repo->findBySlug($slug);  
 
         if($sa->sugar_sample_id == $sugar_samples['cja']){
-
             return view('dashboard.sugar_analysis.edit_cane_juice')->with('sa', $sa);
-
         }else{
-
             return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
-            
         }  
 
     }
@@ -91,17 +85,12 @@ class SugarAnalysisService extends BaseService{
     public function show($slug){
 
         $sugar_samples = $this->__static->sugar_samples();
-
         $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
         if($sa->sugar_sample_id == $sugar_samples['cja']){
-
             return view('dashboard.sugar_analysis.show_cane_juice')->with('sa', $sa);
-
         }else{
-
             return view('dashboard.sugar_analysis.show')->with('sa', $sa);
-            
         } 
 
     }
@@ -118,25 +107,17 @@ class SugarAnalysisService extends BaseService{
         foreach ($sa->sugarAnalysisParameter as $data) {
             
             $sugar_services = $this->__static->sugar_services();
-
             $id = $data->sugar_service_id;
             $assessment = $data->sugar_service_id.'_assessment';
-
             $req_moisture = $sugar_services['mois'].'_moisture';
             $req_sf = $sugar_services['mois'].'_sf';
 
             if (isset($request->$id) || $request->$id == ""){
-
                 if (isset($request->$req_moisture) && isset($request->$req_sf)) {
-                    
                     $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$req_moisture, $request->$req_sf);
-
                 }else{
-
                     $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id);
-                
                 }
-            
             }
 
         }
@@ -166,14 +147,11 @@ class SugarAnalysisService extends BaseService{
     public function caneJuiceAnalysisStore($request, $slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);
-
         $cja_samples = $sa->caneJuiceAnalysis()->count() + 1;
 
         if ($sa->cja_num_of_samples < $cja_samples) {
-            
-            $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sa->cja_num_of_samples .' samples. Please update Order of Payment Record.');
+            $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sa->cja_num_of_samples .' samples. Please update Number of Cane Juice Samples Field.');
             return redirect()->back();
-
         }
 
         $cja = $this->cane_juice_analysis_repo->store($request, $sa->sample_no);
@@ -191,7 +169,6 @@ class SugarAnalysisService extends BaseService{
     public function caneJuiceAnalysisUpdate($request, $slug, $cja_slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);
-
         $cja = $this->cane_juice_analysis_repo->update($request, $cja_slug);
 
         $this->event->fire('cane_juice_analysis.update', [$sa, $cja]);
@@ -207,7 +184,6 @@ class SugarAnalysisService extends BaseService{
     public function caneJuiceAnalysisDestroy($slug, $cja_slug){
 
         $sa = $this->sugar_analysis_repo->findBySlug($slug);
-
         $cja = $this->cane_juice_analysis_repo->destroy($cja_slug);
 
         $this->event->fire('cane_juice_analysis.destroy', [$sa, $cja]);
@@ -234,19 +210,9 @@ class SugarAnalysisService extends BaseService{
 
     public function report_generate($request){
 
-        if ($request->t == "ARAR") {
-
-            return $this->annualRevenueAccomplishmentReport($request);
-
-        }elseif ($request->t == "SOAM") {
-            
-            return $this->statementOfAccountReport($request);
-            
-        }elseif ($request->t == "SOSA") {
-
-            return $this->summaryOfRawSugarAnalyses($request);
-            
-        }
+        if ($request->t == "ARAR") { return $this->annualRevenueAccomplishmentReport($request); }
+        elseif ($request->t == "SOAM") { return $this->statementOfAccountReport($request); }
+        elseif ($request->t == "SOSA") { return $this->summaryOfRawSugarAnalyses($request); }
 
     }
 
@@ -260,7 +226,6 @@ class SugarAnalysisService extends BaseService{
     private function annualRevenueAccomplishmentReport($request){
 
         $year = $request->arar_year;
-
         $sugar_samples = $this->__static->sugar_samples();
         
 
@@ -393,14 +358,11 @@ class SugarAnalysisService extends BaseService{
     private function statementOfAccountReport($request){
         
         $sugar_analysis_list = $this->sugar_analysis_repo->getByMillId_SugarSampleId_WeekEnding($request->soam_mill_id, $request->soam_sugar_sample_id, $request->soam_we_from, $request->soam_we_to);
-
         $mill = $this->mill_repo->findByMillId($request->soam_mill_id);
 
         return view('printables.sugar_analysis.statement_of_account_report')->with([
-
             'sugar_analysis_list' => $sugar_analysis_list,
             'mill' => $mill,
-
         ]);
 
     }
@@ -413,7 +375,6 @@ class SugarAnalysisService extends BaseService{
     private function summaryOfRawSugarAnalyses($request){
 
         $sugar_samples = $this->__static->sugar_samples();
-
         $sugar_analysis_list = $this->sugar_analysis_repo->getBySugarSampleId_WeekEnding($sugar_samples['rawSugar'], $request->sosa_we_from, $request->sosa_we_to);
         
         return view('printables.sugar_analysis.summary_of_raw_sugar_analyses')->with('sugar_analysis_list', $sugar_analysis_list);

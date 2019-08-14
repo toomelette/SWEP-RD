@@ -48,7 +48,6 @@ class SugarServiceService extends BaseService{
     public function store($request){
 
         $rows = $request->row;
-
         $sugar_service = $this->sugar_service_repo->store($request);
 
         if(!empty($rows)){
@@ -86,6 +85,7 @@ class SugarServiceService extends BaseService{
 
         $sugar_service = $this->sugar_service_repo->update($request, $slug);
         $sugar_sample_parameter = $this->sugar_sample_parameter->updateSugarService($sugar_service);
+        
         $sugar_service->sugarMethod()->delete();
 
         if(!empty($rows)){

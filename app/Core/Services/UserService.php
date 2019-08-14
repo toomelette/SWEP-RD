@@ -42,7 +42,6 @@ class UserService extends BaseService{
     public function fetch($request){
 
         $users = $this->user_repo->fetch($request);
-
         $request->flash();
         
         return view('dashboard.user.index')->with('users', $users);
@@ -65,7 +64,6 @@ class UserService extends BaseService{
             for($i = 0; $i < $count_menu; $i++){
 
                 $menu = $this->menu_repo->findByMenuId($request->menu[$i]);
-
                 $user_menu = $this->user_menu_repo->store($user, $menu);
 
                 if(!empty($request->submenu)){
@@ -75,9 +73,7 @@ class UserService extends BaseService{
                         $submenu = $this->submenu_repo->findBySubmenuId($data);
 
                         if($menu->menu_id == $submenu->menu_id){
-
                             $this->user_submenu_repo->store($submenu, $user_menu);
-                        
                         }
 
                     }
@@ -133,7 +129,6 @@ class UserService extends BaseService{
             for($i = 0; $i < $count_menu; $i++){
 
                 $menu = $this->menu_repo->findByMenuId($request->menu[$i]);
-
                 $user_menu = $this->user_menu_repo->store($user, $menu);
 
                 if(!empty($request->submenu)){
@@ -143,9 +138,7 @@ class UserService extends BaseService{
                         $submenu = $this->submenu_repo->findBySubmenuId($data);
 
                         if($menu->menu_id === $submenu->menu_id){
-
                             $this->user_submenu_repo->store($submenu, $user_menu);
-                        
                         }
 
                     }

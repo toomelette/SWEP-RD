@@ -36,7 +36,6 @@ class SugarSampleService extends BaseService{
     public function fetch($request){
 
         $sugar_samples = $this->sugar_sample_repo->fetch($request);
-
         $request->flash();
         
         return view('dashboard.sugar_sample.index')->with('sugar_samples', $sugar_samples);
