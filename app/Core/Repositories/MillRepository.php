@@ -30,7 +30,6 @@ class MillRepository extends BaseRepository implements MillInterface {
     public function fetch($request){
 
         $cache_key = str_slug($request->fullUrl(), '_');
-
         $entries = isset($request->e) ? $request->e : 20;
 
         $mills = $this->cache->remember('mills:fetch:' . $cache_key, 240, function() use ($request, $entries){

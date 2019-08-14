@@ -18,7 +18,7 @@ interface SugarAnalysisInterface {
 
 	public function findBySlug($slug);
 
-	public function getByDate_CustomerType_SugarSampleId($date_from, $date_to, $customer_type, $sugar_sample_id);
+	public function getByCustomerType_SugarSampleId_Date($customer_type, $sugar_sample_id, $date_from, $date_to);
 
 	public function getByMillId_SugarSampleId_WeekEnding($mill_id, $sugar_sample_id, $week_ending_from, $week_ending_to);
 

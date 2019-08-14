@@ -33,11 +33,32 @@ class SugarAnalysisSubscriber extends BaseSubscriber{
 
     public function onUpdate($sugar_analysis){
 
+        $sugar_analysis_orig = $sugar_analysis->getOriginal();
+
+        $sugar_analysis_year_orig = $this->__dataType->date_parse($sugar_analysis_orig['date'],'Y');
+        $sugar_analysis_year = $this->__dataType->date_parse($sugar_analysis->date,'Y');
+
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis->mill_id .':'. $sugar_analysis->sugar_sample_id .':*');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getBySugarSampleId_WeekEnding:'. $sugar_analysis->sugar_sample_id .':*');
 
+
+        if($sugar_analysis_orig['sugar_sample_id'] != $sugar_analysis->sugar_sample_id){
+
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis_orig['mill_id'] .':'. $sugar_analysis_orig['sugar_sample_id'] .':*');
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis->mill_id .':'. $sugar_analysis->sugar_sample_id .':*');
+
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getBySugarSampleId_WeekEnding:'. $sugar_analysis_orig['sugar_sample_id'] .':*');
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getBySugarSampleId_WeekEnding:'. $sugar_analysis->sugar_sample_id .':*');
+        
+        }
+
+        if($sugar_analysis_orig['mill_id'] != $sugar_analysis->mill_id){
+
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis_orig['mill_id'] .':*');
+            $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $sugar_analysis->mill_id .':*');
+        
+        }
+        
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis_parameter:findBySampleNo_SugarServiceId:'. $sugar_analysis->sample_no .':*');
 
         $this->session->flash('SUGAR_ANALYSIS_UPDATE_SUCCESS', 'Sugar Analysis Result has been successfully updated!');

@@ -49,7 +49,9 @@ class MillSubscriber extends BaseSubscriber{
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getAll');
+
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findBySlug:'. $mill->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findByMillId:'. $mill->mill_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getByMillId:'. $mill->mill_id .'');
 
         $this->session->flash('MILL_UPDATE_SUCCESS', 'Mill has been successfully updated!');
@@ -63,7 +65,9 @@ class MillSubscriber extends BaseSubscriber{
         
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getAll');
+        
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findBySlug:'. $mill->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findByMillId:'. $mill->mill_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getByMillId:'. $mill->mill_id .'');
 
         $this->session->flash('MILL_DELETE_SUCCESS', 'Mill has been successfully deleted!');

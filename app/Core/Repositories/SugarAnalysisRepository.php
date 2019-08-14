@@ -177,11 +177,11 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function getByDate_CustomerType_SugarSampleId($date_from, $date_to, $customer_type, $sugar_sample_id){
+    public function getByCustomerType_SugarSampleId_Date($customer_type, $sugar_sample_id, $date_from, $date_to){
 
-        $cache_key = 'sugar_analysis:getByDate_CustomerType_SugarSampleId:'. $date_from .'-'. $date_to .':'. $customer_type .':'. $sugar_sample_id;
+        $cache_key = 'sugar_analysis:getByCustomerType_SugarSampleId_Date:'. $customer_type .':'. $sugar_sample_id.':'. $date_from .'-'. $date_to;
 
-        $sa = $this->cache->remember($cache_key, 240, function() use ($date_from, $date_to, $customer_type, $sugar_sample_id){
+        $sa = $this->cache->remember($cache_key, 240, function() use ($customer_type, $sugar_sample_id, $date_from, $date_to){
            
             $sa_list = $this->sugar_analysis->newQuery();
 
