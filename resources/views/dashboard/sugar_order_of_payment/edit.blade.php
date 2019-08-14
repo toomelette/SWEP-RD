@@ -61,7 +61,7 @@
                 <input name="_method" value="PUT" type="hidden">
 
                 {!! __form::select_dynamic(
-                  '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), 'select2', ''
+                  '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), '', ''
                 ) !!}
 
                 {!! __form::select_static(

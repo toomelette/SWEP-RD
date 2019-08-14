@@ -177,12 +177,16 @@
 
 @section('scripts')
 
-   <script type="text/javascript">    
+   <script type="text/javascript">   
+    
+    {{-- Select2 Zoom Adjust --}}
+    $('select').select2({ dropdownParent: $('#table_body') });
 
     {{-- ADD ROW --}}
     $(document).ready(function() {
         $("#add_row").on("click", function() {
             $('select').select2('destroy');
+            $('select').select2({ dropdownParent: $('#table_body') });
             var content ='<tr>' +
                           '<td style="width:450px;">' +
                             '<select name="menu[]" id="menu" class="form-control select2" style="width:90%;">' +
@@ -200,7 +204,6 @@
                                   '<option value="{{ $data->submenu_id }}">{{$data->name}}</option>' +
                               '@endforeach' +
                             '</select>' +
-
                           '</td>' +
 
                           '<td>' +

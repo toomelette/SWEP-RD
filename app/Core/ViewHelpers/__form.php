@@ -39,7 +39,7 @@ class __form{
       
        return '<div class="form-group col-md-'. $class .' '. self::error_response($error_has) .'">
                 <label for="'. $key .'">'. $label .'</label>
-                <select name="'. $key .'" id="'. $key .'" class="form-control '. $select2 .'" '. $extra_attr .'>
+                <select name="'. $key .'" id="'. $key .'" class="form-control '. $select2 .'" '. $extra_attr .' style="font-size:15px;">
                   <option value="">Select</option>
                   '. self::dynamic_options($array, $var1, $var2, $old_value) .'
                 </select>
@@ -54,7 +54,7 @@ class __form{
       
        return '<div class="form-group col-md-'. $class .' '. self::error_response($error_has) .'">
                 <label for="'. $key .'">'. $label .'</label>
-                <select name="'. $key .'" id="'. $key .'" class="form-control '. $select2 .'" '. $extra_attr .'>
+                <select name="'. $key .'" id="'. $key .'" class="form-control '. $select2 .'" '. $extra_attr .' style="font-size:15px;">
                   <option value="">Select</option>
                   '. self::static_options($array, $old_value) .'
                 </select>
