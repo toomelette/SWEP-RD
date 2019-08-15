@@ -47,10 +47,12 @@ class MillSubscriber extends BaseSubscriber{
 
     public function onUpdate($mill){
         
+        $mill_orig = $mill->getOriginal();
+
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:fetch:*');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getAll');
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findBySlug:'. $mill->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findBySlug:'. $mill->slug .''); 
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:findByMillId:'. $mill->mill_id .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:mills:getByMillId:'. $mill->mill_id .'');
 

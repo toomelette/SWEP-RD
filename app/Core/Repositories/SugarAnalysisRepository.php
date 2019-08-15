@@ -131,9 +131,8 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
 
 
-    public function updateResult($request, $slug){
+    public function updateResult($request, $sugar_analysis){
 
-        $sugar_analysis = $this->findBySlug($slug);
         $sugar_analysis->week_ending = $this->__dataType->date_parse($request->week_ending);
         $sugar_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
         $sugar_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);

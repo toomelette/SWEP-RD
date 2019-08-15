@@ -32,9 +32,9 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
 
 
 
-    public function onStore($sa, $cja){
+    public function onStore($sugar_analysis, $cja){
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
 
         $this->session->flash('CJ_ANALYSIS_CREATE_SUCCESS', 'Record successfully created!');
         $this->session->flash('CJ_ANALYSIS_CREATE_SUCCESS_SLUG', $cja->slug);
@@ -44,11 +44,11 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
 
 
 
-    public function onUpdate($sa, $cja){
-
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:getBySlug:'. $cja->slug .'');
+    public function onUpdate($sugar_analysis, $cja){
+        
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:findBySlug:'. $cja->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:getBySlug:'. $cja->slug .'');
 
         $this->session->flash('CJ_ANALYSIS_UPDATE_SUCCESS', 'Record successfully updated!');
         $this->session->flash('CJ_ANALYSIS_UPDATE_SUCCESS_SLUG', $cja->slug);
@@ -58,9 +58,9 @@ class CaneJuiceAnalysisSubscriber extends BaseSubscriber{
 
 
 
-    public function onDestroy($sa, $cja){
+    public function onDestroy($sugar_analysis, $cja){
 
-        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sa->slug .'');
+        $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:findBySlug:'. $sugar_analysis->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:getBySlug:'. $cja->slug .'');
         $this->__cache->deletePattern(''. config('app.name') .'_cache:sugar_analysis:cane_juice_analysis:findBySlug:'. $cja->slug .'');
 

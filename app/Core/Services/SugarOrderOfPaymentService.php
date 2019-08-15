@@ -94,6 +94,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug); 
         $sugar_oop_orig = $sugar_oop->getOriginal(); 
         $sugar_samples = $this->__static->sugar_samples();
+        $sugar_analysis_orig = $sugar_oop->sugarAnalysis->getOriginal();
 
         // Sugar Clients
         if ($request->customer_type == "CT1001") {
@@ -121,7 +122,7 @@ class SugarOrderOfPaymentService extends BaseService{
             $this->storeSugarAnalysisParameter($sugar_oop->sample_no, $request);
         }
 
-        $this->event->fire('sugar_oop.update', [$sugar_oop, $sugar_analysis]);
+        $this->event->fire('sugar_oop.update', [$sugar_oop, $sugar_analysis, $sugar_analysis_orig]);
         return redirect()->back();
 
     }

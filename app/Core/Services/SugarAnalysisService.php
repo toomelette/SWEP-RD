@@ -102,9 +102,12 @@ class SugarAnalysisService extends BaseService{
 
     public function update($request, $slug){
 
-        $sa = $this->sugar_analysis_repo->updateResult($request, $slug);
+        $sugar_analysis_instance = $this->sugar_analysis_repo->findBySlug($slug);
+        $sugar_analysis_orig = $sugar_analysis_instance->getoriginal();
 
-        foreach ($sa->sugarAnalysisParameter as $data) {
+        $sugar_analysis_latest = $this->sugar_analysis_repo->updateResult($request, $sugar_analysis_instance);
+
+        foreach ($sugar_analysis_latest->sugarAnalysisParameter as $data) {
             
             $sugar_services = $this->__static->sugar_services();
             $id = $data->sugar_service_id;
@@ -114,15 +117,15 @@ class SugarAnalysisService extends BaseService{
 
             if (isset($request->$id) || $request->$id == ""){
                 if (isset($request->$req_moisture) && isset($request->$req_sf)) {
-                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id, $request->$req_moisture, $request->$req_sf);
+                    $this->sugar_analysis_parameter_repo->update($sugar_analysis_latest->sample_no, $data->sugar_service_id, $request->$id, $request->$req_moisture, $request->$req_sf);
                 }else{
-                    $this->sugar_analysis_parameter_repo->update($sa->sample_no, $data->sugar_service_id, $request->$id);
+                    $this->sugar_analysis_parameter_repo->update($sugar_analysis_latest->sample_no, $data->sugar_service_id, $request->$id);
                 }
             }
 
         }
 
-        $this->event->fire('sugar_analysis.update', $sa);
+        $this->event->fire('sugar_analysis.update', [$sugar_analysis_latest, $sugar_analysis_orig]);
         return redirect()->back();
 
     }
