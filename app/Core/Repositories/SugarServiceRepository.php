@@ -121,7 +121,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     public function findBySlug($slug){
 
         $sugar_service = $this->cache->remember('sugar_services:findBySlug:'. $slug, 240, function() use ($slug){
-            return $this->sugar_service->where('slug', $slug)->first();
+            return $this->sugar_service->where('slug', $slug)
+                                       ->with(['sugarMethod'])
+                                       ->first();
         }); 
         
         if(empty($sugar_service)){ abort(404); }

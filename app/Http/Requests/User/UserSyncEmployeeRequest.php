@@ -20,9 +20,7 @@ class UserSyncEmployeeRequest extends FormRequest{
 
     public function rules(){
         
-        return [
-            's' => 'required|max:45|string',
-        ];
+        return ['s' => 'required|max:45|string',];
     
     }
 

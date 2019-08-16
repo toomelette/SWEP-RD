@@ -21,11 +21,7 @@ class SugarServiceFilterRequest extends FormRequest{
 
     public function rules(){
 
-        return [
-            
-        	'q'=>'nullable|string|max:90',
-            
-        ];
+        return ['q'=>'nullable|string|max:90',];
 
     }
 

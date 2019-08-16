@@ -35,22 +35,22 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $cache_key = str_slug($request->fullUrl(), '_');
         $entries = isset($request->e) ? $request->e : 20;
 
-        $sugar_analysis = $this->cache->remember('sugar_analysis:fetch:' . $cache_key, 240, function() use ($request, $entries){
+        $sugar_analyses = $this->cache->remember('sugar_analysis:fetch:' . $cache_key, 240, function() use ($request, $entries){
 
-            $sa = $this->sugar_analysis->newQuery();
+            $sugar_analysis = $this->sugar_analysis->newQuery();
             $we = $this->__dataType->date_parse($request->we);
 
-            if(isset($request->q)){ $this->search($sa, $request->q); }
+            if(isset($request->q)){ $this->search($sugar_analysis, $request->q); }
             
-            if(isset($request->ss)){ $sa->where('sugar_sample_id', $request->ss); }
+            if(isset($request->ss)){ $sugar_analysis->where('sugar_sample_id', $request->ss); }
             
-            if(isset($request->we)){ $sa->whereDate('week_ending', $we); }
+            if(isset($request->we)){ $sugar_analysis->whereDate('week_ending', $we); }
 
-            return $this->populate($sa, $entries);
+            return $this->populate($sugar_analysis, $entries);
 
         });
 
-        return $sugar_analysis;
+        return $sugar_analyses;
 
     }
 
@@ -159,15 +159,18 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
     public function findBySlug($slug){
 
-        $sa = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){
+        $sugar_analysis = $this->cache->remember('sugar_analysis:findBySlug:' . $slug, 240, function() use ($slug){
             return $this->sugar_analysis->where('slug', $slug)
-                                        ->with(['sugarAnalysisParameter', 'caneJuiceAnalysis'])
+                                        ->with(['sugarAnalysisParameter', 
+                                                'sugarAnalysisParameter.sugarAnalysisParameterMethod', 
+                                                'caneJuiceAnalysis', 
+                                                'sugarSample'])
                                         ->first();
         }); 
         
-        if(empty($sa)){ abort(404); }
+        if(empty($sugar_analysis)){ abort(404); }
 
-        return $sa;
+        return $sugar_analysis;
 
     }
 
@@ -180,26 +183,26 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $cache_key = 'sugar_analysis:getByCustomerType_SugarSampleId_Date:'. $customer_type .':'. $sugar_sample_id.':'. $date_from .'-'. $date_to;
 
-        $sa = $this->cache->remember($cache_key, 240, function() use ($customer_type, $sugar_sample_id, $date_from, $date_to){
+        $sugar_analyses = $this->cache->remember($cache_key, 240, function() use ($customer_type, $sugar_sample_id, $date_from, $date_to){
            
-            $sa_list = $this->sugar_analysis->newQuery();
+            $sugar_analysis = $this->sugar_analysis->newQuery();
 
-            $sa_list->where('customer_type', $customer_type);
-            $sa_list->where('sugar_sample_id', $sugar_sample_id);
+            $sugar_analysis->where('customer_type', $customer_type);
+            $sugar_analysis->where('sugar_sample_id', $sugar_sample_id);
 
-            if(isset($date_from) || isset($date_to)){
+            if(isset($date_from) && isset($date_to)){
 
                 $df = $this->__dataType->date_parse($date_from);
                 $dt = $this->__dataType->date_parse($date_to);
-                $sa_list->whereBetween('date', [$df, $dt]);
+                $sugar_analysis->whereBetween('date', [$df, $dt]);
 
             }
 
-            return $sa_list->get();
+            return $sugar_analysis->get();
 
         }); 
 
-        return $sa;
+        return $sugar_analyses;
 
     }
 
@@ -212,26 +215,26 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $cache_key = 'sugar_analysis:getByMillId_SugarSampleId_WeekEnding:'. $mill_id .':'. $sugar_sample_id .':'. $week_ending_from .'-'. $week_ending_to;
 
-        $sa = $this->cache->remember($cache_key, 240, function() use ($mill_id, $sugar_sample_id, $week_ending_from, $week_ending_to){
+        $sugar_analyses = $this->cache->remember($cache_key, 240, function() use ($mill_id, $sugar_sample_id, $week_ending_from, $week_ending_to){
            
-            $sa_list = $this->sugar_analysis->newQuery();
+            $sugar_analysis = $this->sugar_analysis->newQuery();
 
-            $sa_list->where('mill_id', $mill_id);
-            $sa_list->where('sugar_sample_id', $sugar_sample_id);
+            $sugar_analysis->where('mill_id', $mill_id);
+            $sugar_analysis->where('sugar_sample_id', $sugar_sample_id);
 
-            if(isset($week_ending_from) || isset($week_ending_to)){
+            if(isset($week_ending_from) && isset($week_ending_to)){
 
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
-                $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
+                $sugar_analysis->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
 
-            return $sa_list->get();
+            return $sugar_analysis->get();
 
         }); 
 
-        return $sa;
+        return $sugar_analyses;
 
     }
 
@@ -244,25 +247,27 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
 
         $cache_key = 'sugar_analysis:getBySugarSampleId_WeekEnding:'. $sugar_sample_id .':'. $week_ending_from .'-'. $week_ending_to;
 
-        $sa = $this->cache->remember($cache_key, 240, function() use ($sugar_sample_id, $week_ending_from, $week_ending_to){
+        $sugar_analyses = $this->cache->remember($cache_key, 240, function() use ($sugar_sample_id, $week_ending_from, $week_ending_to){
            
-            $sa_list = $this->sugar_analysis->newQuery();
+            $sugar_analysis = $this->sugar_analysis->newQuery();
 
-            $sa_list->where('sugar_sample_id', $sugar_sample_id);
+            $sugar_analysis->where('sugar_sample_id', $sugar_sample_id);
 
             if(isset($week_ending_from) || isset($week_ending_to)){
 
                 $week_ending_from = $this->__dataType->date_parse($week_ending_from);
                 $week_ending_to = $this->__dataType->date_parse($week_ending_to);
-                $sa_list->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
+                $sugar_analysis->whereBetween('week_ending', [$week_ending_from, $week_ending_to]);
 
             }
 
-            return $sa_list->get();
+            $sugar_analysis->with(['sugarAnalysisParameter']);
+
+            return $sugar_analysis->get();
 
         }); 
 
-        return $sa;
+        return $sugar_analyses;
 
     }
 
@@ -288,6 +293,7 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
     private function populate($instance, $entries){
 
         return $instance->select('sample_no', 'origin', 'sugar_sample_id', 'week_ending', 'status', 'slug')
+                        ->with(['sugarSample', 'caneJuiceAnalysis'])
                         ->sortable()
                         ->orderBy('updated_at', 'desc')
                         ->paginate($entries);

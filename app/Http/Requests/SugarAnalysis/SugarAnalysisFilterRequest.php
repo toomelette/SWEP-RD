@@ -23,7 +23,7 @@ class SugarAnalysisFilterRequest extends FormRequest{
             
         	'q'=>'nullable|string|max:90',
             'ss' => 'nullable|max:20|string',
-            'we' => 'date_format:"m/d/Y"|nullable',
+            'we' => 'nullable|date_format:"m/d/Y"',
             
         ];
 

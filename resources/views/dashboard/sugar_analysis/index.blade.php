@@ -24,7 +24,7 @@
 @section('content')
     
   <section class="content-header">
-      <h1>Sugar Analysis List</h1>
+      <h1>Manage Sugar Analyses</h1>
   </section>
 
   <section class="content">

@@ -12,7 +12,7 @@
 <section class="content-header">
     <h1>Fill Up Results</h1>
     <div class="pull-right" style="margin-top: -25px;">
-      {!! __html::back_button(['dashboard.sugar_analysis.index']) !!}
+      {!! __html::back_button(['dashboard.sugar_analysis.index', 'dashboard.sugar_analysis.show']) !!}
     </div>
 </section>
 
@@ -41,7 +41,7 @@
               <h3 class="box-title"><b>Set OR No.</b></h3>
             </div>
             
-            <form method="POST" action="{{ route('dashboard.sugar_analysis.set_or_no', $sa->slug) }}">
+            <form method="POST" action="{{ route('dashboard.sugar_analysis.set_or_no', $sugar_analysis->slug) }}">
 
             @csrf
 
@@ -50,7 +50,7 @@
                 @csrf
                 
                 {!! __form::textbox(
-                   '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sa->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
+                   '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sugar_analysis->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
                 ) !!}
 
                 <div class="col-md-2" style="margin-top: 25px;">
@@ -65,10 +65,9 @@
 
 
 
-        @if(!empty($sa->or_no))
+        @if(!empty($sugar_analysis->or_no))
 
-
-          <form method="POST" action="{{ route('dashboard.sugar_analysis.update', $sa->slug) }}">
+          <form method="POST" action="{{ route('dashboard.sugar_analysis.update', $sugar_analysis->slug) }}">
 
               @csrf
 
@@ -85,55 +84,55 @@
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : $sa->week_ending, $errors->has('week_ending'), $errors->first('week_ending')
+                      '12', 'week_ending',  'Week Ending *', old('week_ending') ? old('week_ending') : $sugar_analysis->week_ending, $errors->has('week_ending'), $errors->first('week_ending')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : $sa->date_submitted, $errors->has('date_submitted'), $errors->first('date_submitted')
+                      '12', 'date_submitted',  'Date Submitted *', old('date_submitted') ? old('date_submitted') : $sugar_analysis->date_submitted, $errors->has('date_submitted'), $errors->first('date_submitted')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::datepicker(
-                      '12', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : $sa->date_sampled, $errors->has('date_sampled'), $errors->first('date_sampled')
+                      '12', 'date_sampled',  'Date Sampled *', old('date_sampled') ? old('date_sampled') : $sugar_analysis->date_sampled, $errors->has('date_sampled'), $errors->first('date_sampled')
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::textbox(
-                      '12', 'date_analyzed', 'text', 'Date Analyzed *', 'Date Analyzed', old('date_analyzed') ? old('code') : $sa->date_analyzed, $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
+                      '12', 'date_analyzed', 'text', 'Date Analyzed *', 'Date Analyzed', old('date_analyzed') ? old('code') : $sugar_analysis->date_analyzed, $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
                     ) !!}
 
                     <div class="col-md-12"></div>
 
                     {!! __form::textbox(
-                      '12', 'quantity_mt', 'text', 'Quantity <code>(Metric Tons)</code>', 'Quantity', old('quantity_mt') ? old('quantity_mt') : $sa->quantity_mt, $errors->has('quantity_mt'), $errors->first('quantity_mt'), ''
+                      '12', 'quantity_mt', 'text', 'Quantity <code>(Metric Tons)</code>', 'Quantity', old('quantity_mt') ? old('quantity_mt') : $sugar_analysis->quantity_mt, $errors->has('quantity_mt'), $errors->first('quantity_mt'), ''
                     ) !!}
 
                     <div class="col-md-12"></div>
 
-                    @if($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
+                    @if($sugar_analysis->sugar_sample_id == $sugar_samples_static['muscovado'])
 
                       {!! __form::textbox(
-                        '12', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sa->code, $errors->has('code'), $errors->first('code'), ''
+                        '12', 'code', 'text', 'Code', 'Code', old('code') ? old('code') : $sugar_analysis->code, $errors->has('code'), $errors->first('code'), ''
                       ) !!}
 
                       <div class="col-md-12"></div>
 
                     @endif
 
-                    @if($sa->sugar_sample_id == $sugar_samples_static['molasses'])
+                    @if($sugar_analysis->sugar_sample_id == $sugar_samples_static['molasses'])
 
                       {!! __form::textbox(
-                        '12', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sa->report_no, $errors->has('report_no'), $errors->first('report_no'), ''
+                        '12', 'report_no', 'text', 'Report No.', 'Report No.', old('report_no') ? old('report_no') : $sugar_analysis->report_no, $errors->has('report_no'), $errors->first('report_no'), ''
                       ) !!}
 
                       <div class="col-md-12"></div>
 
                       {!! __form::textbox(
-                        '12', 'source', 'text', 'Source', 'Source', old('source') ? old('source') : $sa->source, $errors->has('source'), $errors->first('source'), ''
+                        '12', 'source', 'text', 'Source', 'Source', old('source') ? old('source') : $sugar_analysis->source, $errors->has('source'), $errors->first('source'), ''
                       ) !!}
 
                       <div class="col-md-12"></div>
@@ -141,7 +140,7 @@
                     @endif
 
                     {!! __form::textbox(
-                      '12', 'description', 'text', 'Description', 'Description', old('description') ? old('description') : $sa->description, $errors->has('description'), $errors->first('description'), ''
+                      '12', 'description', 'text', 'Description', 'Description', old('description') ? old('description') : $sugar_analysis->description, $errors->has('description'), $errors->first('description'), ''
                     ) !!}
 
                   </div> 
@@ -158,11 +157,7 @@
                   
                   <div class="box-body">
 
-                    @foreach ($sa->sugarAnalysisParameter as $data)
-
-                      <?php
-                        $assessment_name = $data->sugar_service_id .'_assessment';
-                      ?>
+                    @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
 
                       @if ($data->sugar_service_id == $sugar_services_static['mois'])
                       
@@ -258,7 +253,7 @@
       {!! __js::toast(Session::get('SUGAR_ANALYSIS_SET_OR_NO_SUCCESS')) !!}
     @endif
 
-
+    {{-- Moisture Textbox --}}
     $(document).ready(function(){
       $("#SS1017_moisture").keyup(function(){
         var denominator = 100 - $("#SS1001").val();
@@ -271,6 +266,26 @@
 
     $(document).ready(function(){
       $("#SS1017_moisture").keydown(function(){
+        var denominator = 100 - $("#SS1001").val();
+        var numerator = $("#SS1017_moisture").val();
+        var sf = numerator / denominator;
+        $("#SS1017_sf").val(sf.toFixed(2));
+      });
+    });
+
+    {{-- Pol Textbox--}}
+    $(document).ready(function(){
+      $("#SS1001").keyup(function(){
+        var denominator = 100 - $("#SS1001").val();
+        var numerator = $("#SS1017_moisture").val();
+        var sf = numerator / denominator;
+        $("#SS1017_sf").val(sf.toFixed(2));
+      });
+    });
+
+
+    $(document).ready(function(){
+      $("#SS1001").keydown(function(){
         var denominator = 100 - $("#SS1001").val();
         var numerator = $("#SS1017_moisture").val();
         var sf = numerator / denominator;

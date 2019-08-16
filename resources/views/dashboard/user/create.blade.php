@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="content-header">
-    <h1>Create User</h1>
+    <h1>Add User</h1>
 </section>
 
 <section class="content">

@@ -19,11 +19,7 @@ class SugarAnalysisSetOrNoFormRequest extends FormRequest{
 
     public function rules(){
 
-        return [
-            
-        	'or_no'=>'required|string|max:45',
-
-        ];
+        return ['or_no'=>'required|string|max:45',];
     
     }
 

@@ -19,16 +19,10 @@ class SugarSampleFormRequest extends FormRequest{
 
     public function rules(){
 
-        $sugar_sample = $this->request->get('sugar_service_id');
-
-        $rules = [
-            
-            'name'=>'required|string|max:250',
-
-        ];
+        $rules = ['name'=>'required|string|max:250',];
         
-	    if(!empty($sugar_sample)){
-	        foreach($sugar_sample as $key => $value){
+	    if(!empty($this->request->get('sugar_service_id'))){
+	        foreach($this->request->get('sugar_service_id') as $key => $value){
 	            $rules['sugar_service_id.'.$key] = 'required|string|max:11';
 	        } 
 	    }

@@ -361,10 +361,6 @@
         $("#default input").attr("disabled", true);
         $('#raw_sugar').hide();
         $("#raw_sugar input").attr("disabled", true);
-        $('#raw_sugar_complete').hide();
-        $("#raw_sugar_complete input").attr("disabled", true);
-        $('#raw_sugar_special').hide();
-        $("#raw_sugar_special input").attr("disabled", true);
         $('#muscovado').hide();
         $("#muscovado input").attr("disabled", true);
         $('#molasses').hide();
@@ -383,10 +379,6 @@
         $("#default input").attr("disabled", true);
         $('#raw_sugar').hide();
         $("#raw_sugar input").attr("disabled", true);
-        $('#raw_sugar_complete').hide();
-        $("#raw_sugar_complete input").attr("disabled", true);
-        $('#raw_sugar_special').hide();
-        $("#raw_sugar_special input").attr("disabled", true);
         $('#muscovado').hide();
         $("#muscovado input").attr("disabled", true);
         $('#molasses').hide();
@@ -404,10 +396,6 @@
         $("#default input").removeAttr('disabled');
         $('#raw_sugar').hide();
         $("#raw_sugar input").attr("disabled", true);
-        $('#raw_sugar_complete').hide();
-        $("#raw_sugar_complete input").attr("disabled", true);
-        $('#raw_sugar_special').hide();
-        $("#raw_sugar_special input").attr("disabled", true);
         $('#muscovado').hide();
         $("#muscovado input").attr("disabled", true);
         $('#molasses').hide();
@@ -430,16 +418,10 @@
 
           $('#raw_sugar').show();
           $("#raw_sugar input").removeAttr('disabled');
-
           $('#old_table').hide();
           $("#old_table input").attr("disabled", true);
-
           $('#default').hide();
           $("#default input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
           $('#muscovado').hide();
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
@@ -451,73 +433,17 @@
           $('#cja_num_of_samples_div').hide();
           $('#cja_num_of_samples').attr("disabled", true);
 
-
-        }else if(val == "SS1002"){ 
-
-          $('#raw_sugar_complete').show();
-          $("#raw_sugar_complete input").removeAttr('disabled');
-
-          $('#old_table').hide();
-          $("#old_table input").attr("disabled", true);
-
-          $('#default').hide();
-          $("#default input").attr("disabled", true);
-          $('#raw_sugar').hide();
-          $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
-          $('#muscovado').hide();
-          $("#muscovado input").attr("disabled", true);
-          $('#molasses').hide();
-          $("#molasses input").attr("disabled", true);
-          $('#cja').hide();
-          $("#cja input").attr("disabled", true);
-
-          {{-- Number of Cane Juice Samples --}}
-          $('#cja_num_of_samples_div').hide();
-          $('#cja_num_of_samples').attr("disabled", true);
-
-        }else if(val == "SS1005"){ 
-
-          $('#raw_sugar_special').show();
-          $("#raw_sugar_special input").removeAttr('disabled');
-
-          $('#old_table').hide();
-          $("#old_table input").attr("disabled", true);
-
-          $('#default').hide();
-          $("#default input").attr("disabled", true);
-          $('#raw_sugar').hide();
-          $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#muscovado').hide();
-          $("#muscovado input").attr("disabled", true);
-          $('#molasses').hide();
-          $("#molasses input").attr("disabled", true);
-          $('#cja').hide();
-          $("#cja input").attr("disabled", true);
-
-          {{-- Number of Cane Juice Samples --}}
-          $('#cja_num_of_samples_div').hide();
-          $('#cja_num_of_samples').attr("disabled", true);
 
         }else if(val == "SS1003"){
 
           $('#muscovado').show();
           $("#muscovado input").removeAttr('disabled');
-
           $('#old_table').hide();
           $("#old_table input").attr("disabled", true);
-
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
           $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
           $('#molasses').hide();
           $("#molasses input").attr("disabled", true);
           $('#cja').hide();
@@ -531,18 +457,12 @@
 
           $('#molasses').show();
           $("#molasses input").removeAttr('disabled');
-
           $('#old_table').hide();
           $("#old_table input").attr("disabled", true);
-
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
           $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
           $('#muscovado').hide();
           $("#muscovado input").attr("disabled", true);
           $('#cja').hide();
@@ -556,18 +476,12 @@
 
           $('#cja').show();
           $("#cja input").removeAttr('disabled');
-
           $('#old_table').hide();
           $("#old_table input").attr("disabled", true);
-
           $('#default').hide();
           $("#default input").attr("disabled", true);
           $('#raw_sugar').hide();
           $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
           $('#muscovado').hide();
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();
@@ -581,16 +495,10 @@
 
           $('#default').show();
           $("#default input").attr("disabled", true);
-
           $('#old_table').hide();
           $("#old_table input").attr("disabled", true);
-
           $('#raw_sugar').hide();
           $("#raw_sugar input").attr("disabled", true);
-          $('#raw_sugar_complete').hide();
-          $("#raw_sugar_complete input").attr("disabled", true);
-          $('#raw_sugar_special').hide();
-          $("#raw_sugar_special input").attr("disabled", true);
           $('#muscovado').hide();
           $("#muscovado input").attr("disabled", true);
           $('#molasses').hide();

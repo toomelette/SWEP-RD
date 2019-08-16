@@ -52,9 +52,9 @@ class SugarAnalysisService extends BaseService{
 
     public function setOrNo($request, $slug){
 
-        $sa = $this->sugar_analysis_repo->setOrNo($request, $slug);
+        $sugar_analysis = $this->sugar_analysis_repo->setOrNo($request, $slug);
 
-        $this->event->fire('sugar_analysis.set_or_no', $sa);
+        $this->event->fire('sugar_analysis.set_or_no', $sugar_analysis);
         return redirect()->back();
 
     }
@@ -66,13 +66,13 @@ class SugarAnalysisService extends BaseService{
 
     public function edit($slug){
 
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);  
         $sugar_samples = $this->__static->sugar_samples();
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
 
-        if($sa->sugar_sample_id == $sugar_samples['cja']){
-            return view('dashboard.sugar_analysis.edit_cane_juice')->with('sa', $sa);
+        if($sugar_analysis->sugar_sample_id == $sugar_samples['cja']){
+            return view('dashboard.sugar_analysis.edit_cane_juice')->with('sugar_analysis', $sugar_analysis);
         }else{
-            return view('dashboard.sugar_analysis.edit')->with('sa', $sa);
+            return view('dashboard.sugar_analysis.edit')->with('sugar_analysis', $sugar_analysis);
         }  
 
     }
@@ -83,14 +83,14 @@ class SugarAnalysisService extends BaseService{
 
 
     public function show($slug){
-
+        
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);
         $sugar_samples = $this->__static->sugar_samples();
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);
 
-        if($sa->sugar_sample_id == $sugar_samples['cja']){
-            return view('dashboard.sugar_analysis.show_cane_juice')->with('sa', $sa);
+        if($sugar_analysis->sugar_sample_id == $sugar_samples['cja']){
+            return view('dashboard.sugar_analysis.show_cane_juice')->with('sugar_analysis', $sugar_analysis);
         }else{
-            return view('dashboard.sugar_analysis.show')->with('sa', $sa);
+            return view('dashboard.sugar_analysis.show')->with('sugar_analysis', $sugar_analysis);
         } 
 
     }
@@ -137,8 +137,8 @@ class SugarAnalysisService extends BaseService{
 
     public function print($slug){
 
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
-        return view('printables.sugar_analysis.test_certificate')->with('sa', $sa);
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);  
+        return view('printables.sugar_analysis.test_certificate')->with('sugar_analysis', $sugar_analysis);
 
     }
 
@@ -149,17 +149,17 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisStore($request, $slug){
 
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);
-        $cja_samples = $sa->caneJuiceAnalysis()->count() + 1;
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);
+        $cja_samples = $sugar_analysis->caneJuiceAnalysis()->count() + 1;
 
-        if ($sa->cja_num_of_samples < $cja_samples) {
+        if ($sugar_analysis->cja_num_of_samples < $cja_samples) {
             $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sa->cja_num_of_samples .' samples. Please update Number of Cane Juice Samples Field.');
             return redirect()->back();
         }
 
-        $cja = $this->cane_juice_analysis_repo->store($request, $sa->sample_no);
+        $cane_juice_analysis = $this->cane_juice_analysis_repo->store($request, $sugar_analysis->sample_no);
 
-        $this->event->fire('cane_juice_analysis.store', [$sa, $cja]);
+        $this->event->fire('cane_juice_analysis.store', [$sugar_analysis, $cane_juice_analysis]);
         return redirect()->back();
 
     }
@@ -169,12 +169,12 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    public function caneJuiceAnalysisUpdate($request, $slug, $cja_slug){
+    public function caneJuiceAnalysisUpdate($request, $slug, $cane_juice_analysis_slug){
 
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);
-        $cja = $this->cane_juice_analysis_repo->update($request, $cja_slug);
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);
+        $cane_juice_analysis = $this->cane_juice_analysis_repo->update($request, $cane_juice_analysis_slug);
 
-        $this->event->fire('cane_juice_analysis.update', [$sa, $cja]);
+        $this->event->fire('cane_juice_analysis.update', [$sugar_analysis, $cane_juice_analysis]);
         return redirect()->back();
 
     }
@@ -184,12 +184,12 @@ class SugarAnalysisService extends BaseService{
 
 
 
-    public function caneJuiceAnalysisDestroy($slug, $cja_slug){
+    public function caneJuiceAnalysisDestroy($slug, $cane_juice_analysis_slug){
 
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);
-        $cja = $this->cane_juice_analysis_repo->destroy($cja_slug);
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);
+        $cane_juice_analysis = $this->cane_juice_analysis_repo->destroy($cane_juice_analysis_slug);
 
-        $this->event->fire('cane_juice_analysis.destroy', [$sa, $cja]);
+        $this->event->fire('cane_juice_analysis.destroy', [$sugar_analysis, $cane_juice_analysis]);
         return redirect()->back();
 
     }
@@ -201,8 +201,8 @@ class SugarAnalysisService extends BaseService{
 
     public function caneJuiceAnalysisPrint($slug){
 
-        $sa = $this->sugar_analysis_repo->findBySlug($slug);  
-        return view('printables.sugar_analysis.cane_juice_result')->with('sa', $sa);
+        $sugar_analysis = $this->sugar_analysis_repo->findBySlug($slug);  
+        return view('printables.sugar_analysis.cane_juice_result')->with('sugar_analysis', $sugar_analysis);
 
     }
 
@@ -320,12 +320,12 @@ class SugarAnalysisService extends BaseService{
 
                     'third_quarter_mill_rawSugar' => $third_quarter_mill_rawSugar,
                     'third_quarter_mill_molasses' => $third_quarter_mill_molasses,
-                    'third_quarter_mill_muscovado' => $third_quarter_mill_caneJuice,
+                    'third_quarter_mill_muscovado' => $third_quarter_mill_muscovado,
                     'third_quarter_mill_caneJuice' => $third_quarter_mill_caneJuice,
 
                     'third_quarter_walkin_rawSugar' => $third_quarter_walkin_rawSugar,
                     'third_quarter_walkin_molasses' => $third_quarter_walkin_molasses,
-                    'third_quarter_walkin_muscovado' => $third_quarter_walkin_caneJuice,
+                    'third_quarter_walkin_muscovado' => $third_quarter_walkin_muscovado,
                     'third_quarter_walkin_caneJuice' => $third_quarter_walkin_caneJuice,
 
 

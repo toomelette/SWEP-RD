@@ -24,7 +24,7 @@
 @section('content')
     
   <section class="content-header">
-      <h1>Order of Payment List</h1>
+      <h1>Manage Order of Payments</h1>
   </section>
 
   <section class="content">

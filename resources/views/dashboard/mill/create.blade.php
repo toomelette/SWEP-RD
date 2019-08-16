@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="content-header">
-    <h1>Create Mill</h1>
+    <h1>Add Mill</h1>
 </section>
 
 <section class="content">

@@ -29,6 +29,7 @@ class SugarAnalysisFormRequest extends FormRequest{
             'code'=>'sometimes|nullable|string|max:45',
             'report_no'=>'sometimes|nullable|string|max:45',
             'source'=>'sometimes|nullable|string|max:255',
+            'description'=>'nullable|string|max:255',
 
             'SS1001'=>'sometimes|nullable|numeric|max:10000',
             'SS1002'=>'sometimes|nullable|numeric|max:10000',
@@ -53,7 +54,6 @@ class SugarAnalysisFormRequest extends FormRequest{
             'SS1019'=>'sometimes|nullable|numeric|max:10000',
             'SS1020'=>'sometimes|nullable|numeric|max:10000',
             'SS1021'=>'sometimes|nullable|numeric|max:10000',
-
 
         ];
     

@@ -16,10 +16,10 @@
     <div class="box-header with-border">
       <h3 class="box-title"><b>Details</b></h3>
       <div class="box-tools">
-        <a href="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default" target="_blank">
+        <a href="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sugar_analysis->slug) }}" class="btn btn-sm btn-default" target="_blank">
           <i class="fa fa-print"></i> Print
         </a>&nbsp;
-        <a href="{{ route('dashboard.sugar_analysis.edit', $sa->slug) }}" class="btn btn-sm btn-default">
+        <a href="{{ route('dashboard.sugar_analysis.edit', $sugar_analysis->slug) }}" class="btn btn-sm btn-default">
           <i class="fa fa-pencil"></i> Edit
         </a>
       </div>
@@ -35,17 +35,17 @@
           <div class="box-body">
             <dl class="dl-horizontal">
               <dt>OR No.:</dt>
-              <dd>{{ $sa->or_no }}</dd>
+              <dd>{{ $sugar_analysis->or_no }}</dd>
               <dt>Date:</dt>
-              <dd>{{ __dataType::date_parse($sa->date, 'F d,Y') }}</dd>
+              <dd>{{ __dataType::date_parse($sugar_analysis->date, 'F d,Y') }}</dd>
               <dt>Sample No:</dt>
-              <dd>{{ $sa->sample_no }}</dd>
+              <dd>{{ $sugar_analysis->sample_no }}</dd>
               <dt>Origin/Mill Company:</dt>
-              <dd>{{ $sa->origin }}</dd>
+              <dd>{{ $sugar_analysis->origin }}</dd>
               <dt>Address:</dt>
-              <dd>{{ $sa->address }}</dd>
+              <dd>{{ $sugar_analysis->address }}</dd>
               <dt>Kind of Sample:</dt>
-              <dd>{{ optional($sa->sugarSample)->name }}</dd>
+              <dd>{{ optional($sugar_analysis->sugarSample)->name }}</dd>
             </dl>
           </div>
         </div>
@@ -73,7 +73,7 @@
                 <th>Purity</th>
                 <th>Remarks</th>
               </tr>
-              @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
+              @foreach($sugar_analysis->caneJuiceAnalysis->sortBy('entry_no') as $data) 
                 <tr>
                   <td>{{ $data->entry_no }}</td>
                   <td>{{ __dataType::date_parse($data->date_submitted, '  m/d/Y') }}</td>

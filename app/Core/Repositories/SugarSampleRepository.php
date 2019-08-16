@@ -114,7 +114,9 @@ class SugarSampleRepository extends BaseRepository implements SugarSampleInterfa
     public function findBySlug($slug){
 
         $sugar_sample = $this->cache->remember('sugar_samples:findBySlug:'. $slug, 240, function() use ($slug){
-            return $this->sugar_sample->where('slug', $slug)->first();
+            return $this->sugar_sample->where('slug', $slug)
+                                      ->with(['sugarSampleParameter'])
+                                      ->first();
         }); 
         
         if(empty($sugar_sample)){ abort(404); }

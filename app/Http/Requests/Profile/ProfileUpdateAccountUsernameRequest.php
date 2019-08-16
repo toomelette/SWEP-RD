@@ -20,11 +20,7 @@ class ProfileUpdateAccountUsernameRequest extends FormRequest{
 
     public function rules(){
     	
-        return [
-
-            'username' => 'required|max:45|string|unique:users,username',
-
-        ];
+        return ['username' => 'required|max:45|string|unique:users,username',];
 
     }
 

@@ -96,7 +96,6 @@
                             </div>
                           </td>
 
-
                           <td>
                               <button id="delete_row" type="button" class="btn btn-sm bg-red"><i class="fa fa-times"></i></button>
                           </td>

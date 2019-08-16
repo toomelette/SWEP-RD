@@ -116,7 +116,7 @@
 
       </thead>
             
-      @foreach ($sa->caneJuiceAnalysis->sortBy('entry_no') as $data)
+      @foreach ($sugar_analysis->caneJuiceAnalysis->sortBy('entry_no') as $data)
 
         <tbody>
 
@@ -160,7 +160,7 @@
         </div>
 
         <div class="col-sm-11">
-          <span>: Php <b>{{ number_format($sa->total_price, 2) }}</b></span>
+          <span>: Php <b>{{ number_format($sugar_analysis->total_price, 2) }}</b></span>
         </div>
 
         <div class="col-sm-1">

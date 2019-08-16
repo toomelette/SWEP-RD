@@ -20,7 +20,7 @@
 @section('content')
     
   <section class="content-header">
-      <h1>List of Sugar Samples</h1>
+      <h1>Manage Sugar Samples</h1>
   </section>
 
   <section class="content">

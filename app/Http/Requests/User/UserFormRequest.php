@@ -20,8 +20,6 @@ class UserFormRequest extends FormRequest{
     
     public function rules(){
 
-        $menus = $this->request->get('menu');
-
         $rules = [
             
             'employee_sync'=>'nullable|string|max:45',
@@ -35,14 +33,13 @@ class UserFormRequest extends FormRequest{
 
         ];
 
-        if(!empty($menus)){
+        if(!empty($this->request->get('menu'))){
 
             if(!empty($this->request->get('menu'))){
                 foreach($this->request->get('menu') as $key => $value){
                     $rules['menu.'.$key] = 'required|string';
                 } 
             }
-
 
             if(!empty($this->request->get('submenu'))){
                 foreach($this->request->get('submenu') as $key => $value){

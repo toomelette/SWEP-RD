@@ -41,7 +41,7 @@
                 <h3 class="box-title"><b>Set OR No.</b></h3>
               </div>
               
-              <form method="POST" action="{{ route('dashboard.sugar_analysis.set_or_no', $sa->slug) }}">
+              <form method="POST" action="{{ route('dashboard.sugar_analysis.set_or_no', $sugar_analysis->slug) }}">
 
               @csrf
 
@@ -50,7 +50,7 @@
                   @csrf
                   
                   {!! __form::textbox(
-                     '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sa->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
+                     '3', 'or_no', 'or_no', 'OR No. *', 'OR No.', old('or_no') ? old('or_no') : $sugar_analysis->or_no, $errors->has('or_no'), $errors->first('or_no'), ''
                   ) !!}
 
                   <div class="col-md-2" style="margin-top: 25px;">
@@ -72,7 +72,7 @@
           </div>   
 
 
-          @if(!empty($sa->or_no))
+          @if(!empty($sugar_analysis->or_no))
             
             {{-- Cane Juice Analysis Form --}}
             <div class="col-md-12">
@@ -81,7 +81,7 @@
                   <h3 class="box-title"><b>Form</b></h3>
                 </div>
                 
-                <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sa->slug) }}">
+                <form data-pjax role="form" method="POST" action="{{ route('dashboard.sugar_analysis.cane_juice_analysis_store', $sugar_analysis->slug) }}">
 
                   @csrf
 
@@ -156,7 +156,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"><b>List</b></h3>
                   <div class="box-tools">
-                    <a href="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sa->slug) }}" class="btn btn-sm btn-default" target="_blank">
+                    <a href="{{ route('dashboard.sugar_analysis.cane_juice_analysis_print', $sugar_analysis->slug) }}" class="btn btn-sm btn-default" target="_blank">
                       <i class="fa fa-print"></i> Print
                     </a>
                   </div>
@@ -184,7 +184,7 @@
                       <th>Remarks</th>
                       <th>Action</th>
                     </tr>
-                    @foreach($sa->caneJuiceAnalysis->sortBy('entry_no') as $data) 
+                    @foreach($sugar_analysis->caneJuiceAnalysis->sortBy('entry_no') as $data) 
                       <tr 
                         {!! __html::table_highlighter( $data->slug, $table_sessions) !!} 
                         {!! old('e_slug') == $data->slug ? 'style="background-color: #F5B7B1;"' : '' !!}
@@ -201,10 +201,10 @@
                         <td>{{ $data->remarks }}</td>
                         <td>
                           <div class="btn-group">
-                            <a href="#" id="cja_update_btn" es="{{ $data->slug }}" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_update', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
+                            <a href="#" id="cja_update_btn" es="{{ $data->slug }}" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_update', [$sugar_analysis->slug, $data->slug]) }}" class="btn btn-sm btn-default">
                               <i class="fa fa-pencil-square-o"></i>
                             </a>
-                            <a href="#" id="cja_delete_btn" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_destroy', [$sa->slug, $data->slug]) }}" class="btn btn-sm btn-default">
+                            <a href="#" id="cja_delete_btn" data-url="{{ route('dashboard.sugar_analysis.cane_juice_analysis_destroy', [$sugar_analysis->slug, $data->slug]) }}" class="btn btn-sm btn-default">
                               <i class="fa  fa-trash-o"></i>
                             </a>
                           </div>
@@ -322,10 +322,8 @@
   </div>
 
 
-
   {{-- Delete CJA --}}
   {!! __html::modal_delete('cja_delete') !!}
-
 
 @endsection 
 
@@ -340,7 +338,7 @@
   <script type="text/javascript">
 
 
-    // Update Button Action
+    // Edit Button Action
     $(document).on("click", "#cja_update_btn", function () {
 
       var slug = $(this).attr("es");
@@ -411,10 +409,10 @@
 
     // Delete Form Action
     $(document).on("submit", "#delete_body #form", function () {
-        $('#cja_delete').delay(100).fadeOut(100);
-       setTimeout(function(){
-          $('#cja_delete').modal("hide");
-       }, 200);
+      $('#cja_delete').delay(100).fadeOut(100);
+      setTimeout(function(){
+        $('#cja_delete').modal("hide");
+      }, 200);
     });
 
 

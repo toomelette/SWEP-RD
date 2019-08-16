@@ -18,12 +18,7 @@ class MenuFilterRequest extends FormRequest{
 
     public function rules(){
 
-        return [
-
-            'q' => 'nullable|string|max:90',
-            'd' => 'nullable|date_format:"m/d/Y"',
-
-        ];
+        return ['q' => 'nullable|string|max:90',];
 
     }
 

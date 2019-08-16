@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="content-header">
-    <h1>Create Laboratory Service</h1>
+    <h1>Add Laboratory Service</h1>
 </section>
 
 <section class="content">

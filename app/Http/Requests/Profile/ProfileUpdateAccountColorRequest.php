@@ -19,11 +19,7 @@ class ProfileUpdateAccountColorRequest extends FormRequest{
 
     public function rules(){
 
-        return [
-
-            'color' => 'required|max:45|string',
-
-        ];
+        return ['color' => 'required|max:45|string',];
 
     }
 

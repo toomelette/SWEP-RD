@@ -3,10 +3,12 @@
   $table_sessions = [ Session::get('MILL_UPDATE_SUCCESS_SLUG') ];
 
   $appended_requests = [
+
                         'q'=> Request::get('q'),
                         'sort' => Request::get('sort'),
                         'direction' => Request::get('direction'),
                         'e' => Request::get('e'),
+
                       ];
 
 ?>
@@ -20,7 +22,7 @@
 @section('content')
     
   <section class="content-header">
-      <h1>Mill List</h1>
+      <h1>Manage Mills</h1>
   </section>
 
   <section class="content">

@@ -116,11 +116,11 @@
     <div class="row" style="margin-top:5px;">
 
       <div class="col-md-12" style="text-align:center; margin-top:5px;">
-        @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
+        @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['muscovado'])
           <span style="font-size:15px; font-weight: bold;">MUSCOVADO SUGAR QUALITY TEST CERTIFICATE</span>
-        @elseif($sa->sugar_sample_id == $sugar_samples_static['molasses'])
+        @elseif($sugar_analysis->sugar_sample_id == $sugar_samples_static['molasses'])
           <span style="font-size:15px; font-weight: bold;">QUALITY TEST ON MOLASSES</span>
-        @elseif($sa->sugar_sample_id == $sugar_samples_static['rawSugar'])
+        @elseif($sugar_analysis->sugar_sample_id == $sugar_samples_static['rawSugar'])
           <span style="font-size:15px; font-weight: bold;">RAW SUGAR QUALITY TEST CERTIFICATE</span>
         @endif
       </div>
@@ -132,7 +132,7 @@
           <span>DATE</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_parse($sa->date, 'F d, Y') }}</p>
+          <p>: {{ __dataType::date_parse($sugar_analysis->date, 'F d, Y') }}</p>
         </div>
       </div>
 
@@ -141,7 +141,7 @@
           <span>SAMPLE NO.</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->sample_no }}</p>
+          <p>: {{ $sugar_analysis->sample_no }}</p>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
           <span>ORIGIN</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->origin }}</p>
+          <p>: {{ $sugar_analysis->origin }}</p>
         </div>
       </div>
 
@@ -159,21 +159,21 @@
           <span>ADDRESS</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->address }}</p>
+          <p>: {{ $sugar_analysis->address }}</p>
         </div>
       </div>
 
 
 
 
-      @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado'])
+      @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['muscovado'])
 
         <div class="col-sm-12" style="margin-top:5px;">  
           <div class="col-sm-4">
             <span>CODE</span>
           </div>
           <div class="col-sm-8">
-            <p>: {{ $sa->code }}</p>
+            <p>: {{ $sugar_analysis->code }}</p>
           </div>
         </div>
 
@@ -184,20 +184,20 @@
             <span>QUANTITY</span>
           </div>
           <div class="col-sm-8">
-            <p>: {{ number_format($sa->quantity_mt, 3)  }} MT</p>
+            <p>: {{ number_format($sugar_analysis->quantity_mt, 3)  }} MT</p>
           </div>
         </div>
         
       @endif
 
-      @if ($sa->sugar_sample_id == $sugar_samples_static['molasses'])
+      @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['molasses'])
 
         <div class="col-sm-12" style="margin-top:-10px;">  
           <div class="col-sm-4">
             <span>SOURCE</span>
           </div>
           <div class="col-sm-8">
-            <p>: {{ $sa->source }}</p>
+            <p>: {{ $sugar_analysis->source }}</p>
           </div>
         </div>
 
@@ -208,7 +208,7 @@
           <span>WEEK ENDING</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_parse($sa->week_ending, 'F d, Y') }}</p>
+          <p>: {{ __dataType::date_parse($sugar_analysis->week_ending, 'F d, Y') }}</p>
         </div>
       </div>
 
@@ -217,7 +217,7 @@
           <span>DATE SAMPLED</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_parse($sa->date_sampled, 'F d, Y') }}</p>
+          <p>: {{ __dataType::date_parse($sugar_analysis->date_sampled, 'F d, Y') }}</p>
         </div>
       </div>
 
@@ -226,7 +226,7 @@
           <span>DATE SUBMITTED</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ __dataType::date_parse($sa->date_submitted, 'F d, Y') }}</p>
+          <p>: {{ __dataType::date_parse($sugar_analysis->date_submitted, 'F d, Y') }}</p>
         </div>
       </div>
 
@@ -235,7 +235,7 @@
           <span>DATE ANALYZED</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->date_analyzed }}</p>
+          <p>: {{ $sugar_analysis->date_analyzed }}</p>
         </div>
       </div>
 
@@ -246,7 +246,7 @@
           <span>DESCRIPTION OF SAMPLE</span>
         </div>
         <div class="col-sm-8">
-          <p>: {{ $sa->description }}</p>
+          <p>: {{ $sugar_analysis->description }}</p>
         </div>
       </div>
 
@@ -268,7 +268,7 @@
 
       </thead>
             
-      @foreach ($sa->sugarAnalysisParameter as $data)
+      @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
 
         <tbody>
 
@@ -310,7 +310,7 @@
         </div>
 
         <div class="col-sm-10">
-          <span>: Php <b>{{ number_format($sa->total_price, 2) }}</b></span>
+          <span>: Php <b>{{ number_format($sugar_analysis->total_price, 2) }}</b></span>
         </div>
 
         <div class="col-sm-2">
@@ -318,7 +318,7 @@
         </div>
 
         <div class="col-sm-10">
-          <span> : <b>{{ $sa->or_no }}</b></span>
+          <span> : <b>{{ $sugar_analysis->or_no }}</b></span>
         </div>
 
         <div class="col-sm-6" style="margin-top:20px;">

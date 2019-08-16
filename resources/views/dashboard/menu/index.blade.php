@@ -20,7 +20,7 @@
 @section('content')
     
   <section class="content-header">
-      <h1>Menu List</h1>
+      <h1>Manage Menus</h1>
   </section>
 
   <section class="content">

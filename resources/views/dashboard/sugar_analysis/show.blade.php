@@ -23,10 +23,10 @@
     <div class="box-header with-border">
       <h3 class="box-title">Details</h3>
       <div class="box-tools">
-        <a href="{{ route('dashboard.sugar_analysis.print', $sa->slug) }}" class="btn btn-sm btn-default" target="_blank">
+        <a href="{{ route('dashboard.sugar_analysis.print', $sugar_analysis->slug) }}" class="btn btn-sm btn-default" target="_blank">
           <i class="fa fa-print"></i> Print
         </a>&nbsp;
-        <a href="{{ route('dashboard.sugar_analysis.edit', $sa->slug) }}" class="btn btn-sm btn-default">
+        <a href="{{ route('dashboard.sugar_analysis.edit', $sugar_analysis->slug) }}" class="btn btn-sm btn-default">
           <i class="fa fa-pencil"></i> Edit
         </a>
       </div>
@@ -42,42 +42,42 @@
           <div class="box-body">
             <dl class="dl-horizontal">
               <dt>OR #:</dt>
-              <dd>{{ $sa->or_no }}</dd>
+              <dd>{{ $sugar_analysis->or_no }}</dd>
               <dt>Date:</dt>
-              <dd>{{ __dataType::date_parse($sa->date, 'F d,Y') }}</dd>
+              <dd>{{ __dataType::date_parse($sugar_analysis->date, 'F d,Y') }}</dd>
               <dt>Sample No:</dt>
-              <dd>{{ $sa->sample_no }}</dd>
+              <dd>{{ $sugar_analysis->sample_no }}</dd>
               <dt>Origin/Mill Company:</dt>
-              <dd>{{ $sa->origin }}</dd>
+              <dd>{{ $sugar_analysis->origin }}</dd>
               <dt>Address:</dt>
-              <dd>{{ $sa->address }}</dd>
+              <dd>{{ $sugar_analysis->address }}</dd>
               <dt>Kind of Sample:</dt>
-              <dd>{{ optional($sa->sugarSample)->name }}</dd>
+              <dd>{{ optional($sugar_analysis->sugarSample)->name }}</dd>
 
-              @if ($sa->sugar_sample_id == $sugar_samples_static['muscovado']) 
+              @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['muscovado']) 
                 <dt>Code:</dt>
-                <dd>{{ $sa->code }}</dd>
+                <dd>{{ $sugar_analysis->code }}</dd>
               @endif
 
-              @if ($sa->sugar_sample_id == $sugar_samples_static['molasses']) 
+              @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['molasses']) 
                 <dt>Report No:</dt>
-                <dd>{{ $sa->report_no }}</dd>
+                <dd>{{ $sugar_analysis->report_no }}</dd>
                 <dt>Source:</dt>
-                <dd>{{ $sa->source }}</dd>
+                <dd>{{ $sugar_analysis->source }}</dd>
               @endif
 
               <dt>Quantity:</dt>
-              <dd>{{ number_format($sa->quantity_mt, 3) }} MT</dd>
+              <dd>{{ number_format($sugar_analysis->quantity_mt, 3) }} MT</dd>
               <dt>Week Ending:</dt>
-              <dd>{{ __dataType::date_parse($sa->week_ending, 'F d,Y') }}</dd>
+              <dd>{{ __dataType::date_parse($sugar_analysis->week_ending, 'F d,Y') }}</dd>
               <dt>Date Submitted:</dt>
-              <dd>{{ __dataType::date_parse($sa->date_submitted, 'F d,Y') }}</dd>
+              <dd>{{ __dataType::date_parse($sugar_analysis->date_submitted, 'F d,Y') }}</dd>
               <dt>Date Sampled:</dt>
-              <dd>{{ __dataType::date_parse($sa->date_sampled, 'F d,Y') }}</dd>
+              <dd>{{ __dataType::date_parse($sugar_analysis->date_sampled, 'F d,Y') }}</dd>
               <dt>Date Analyzed:</dt>
-              <dd>{{ $sa->date_analyzed }}</dd>
+              <dd>{{ $sugar_analysis->date_analyzed }}</dd>
               <dt>Description of Sample:</dt>
-              <dd>{{ $sa->description }}</dd>
+              <dd>{{ $sugar_analysis->description }}</dd>
             </dl>
           </div>
         </div>
@@ -100,7 +100,7 @@
                   <th>Standards</th>
               </tr>  
 
-              @foreach($sa->sugarAnalysisParameter as $data)
+              @foreach($sugar_analysis->sugarAnalysisParameter as $data)
                 <tr>
                     <td>{{ $data->name }}</td>
                     <td>

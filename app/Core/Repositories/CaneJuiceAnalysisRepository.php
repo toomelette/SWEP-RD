@@ -29,20 +29,44 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
 
     public function store($request, $sample_no){
 
-        $cja = new CaneJuiceAnalysis;
-        $cja->slug = $this->str->random(32);
-        $cja->sample_no = $sample_no;
-        $cja->entry_no = $request->entry_no;
-        $cja->date_submitted = $this->__dataType->date_parse($request->date_submitted);
-        $cja->date_sampled = $this->__dataType->date_parse($request->date_sampled);
-        $cja->date_analyzed = $request->date_analyzed;
-        $cja->variety = $request->variety;
-        $cja->hacienda = $request->hacienda;
-        $cja->corrected_brix = $request->corrected_brix;
-        $cja->polarization = $request->polarization;
-        $cja->purity = $request->purity;
-        $cja->remarks = $request->remarks;
-        $cja->save();
+        $cane_juice_analysis = new CaneJuiceAnalysis;
+        $cane_juice_analysis->slug = $this->str->random(32);
+        $cane_juice_analysis->sample_no = $sample_no;
+        $cane_juice_analysis->entry_no = $request->entry_no;
+        $cane_juice_analysis->date_submitted = $this->__dataType->date_parse($request->date_submitted);
+        $cane_juice_analysis->date_sampled = $this->__dataType->date_parse($request->date_sampled);
+        $cane_juice_analysis->date_analyzed = $request->date_analyzed;
+        $cane_juice_analysis->variety = $request->variety;
+        $cane_juice_analysis->hacienda = $request->hacienda;
+        $cane_juice_analysis->corrected_brix = $request->corrected_brix;
+        $cane_juice_analysis->polarization = $request->polarization;
+        $cane_juice_analysis->purity = $request->purity;
+        $cane_juice_analysis->remarks = $request->remarks;
+        $cane_juice_analysis->save();
+
+        return $cane_juice_analysis;
+        
+    }
+
+
+
+
+
+
+    public function update($request, $cane_juice_analysis_slug){
+
+        $cane_juice_analysis = $this->findBySlug($cane_juice_analysis_slug);
+        $cane_juice_analysis->entry_no = $request->e_entry_no;
+        $cane_juice_analysis->date_submitted = $this->__dataType->date_parse($request->e_date_submitted);
+        $cane_juice_analysis->date_sampled = $this->__dataType->date_parse($request->e_date_sampled);
+        $cane_juice_analysis->date_analyzed = $request->e_date_analyzed;
+        $cane_juice_analysis->variety = $request->e_variety;
+        $cane_juice_analysis->hacienda = $request->e_hacienda;
+        $cane_juice_analysis->corrected_brix = $request->e_corrected_brix;
+        $cane_juice_analysis->polarization = $request->e_polarization;
+        $cane_juice_analysis->purity = $request->e_purity;
+        $cane_juice_analysis->remarks = $request->e_remarks;
+        $cane_juice_analysis->save();
 
         return $cja;
         
@@ -53,22 +77,12 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
 
 
 
-    public function update($request, $cja_slug){
+    public function destroy($cane_juice_analysis_slug){
 
-        $cja = $this->findBySlug($cja_slug);
-        $cja->entry_no = $request->e_entry_no;
-        $cja->date_submitted = $this->__dataType->date_parse($request->e_date_submitted);
-        $cja->date_sampled = $this->__dataType->date_parse($request->e_date_sampled);
-        $cja->date_analyzed = $request->e_date_analyzed;
-        $cja->variety = $request->e_variety;
-        $cja->hacienda = $request->e_hacienda;
-        $cja->corrected_brix = $request->e_corrected_brix;
-        $cja->polarization = $request->e_polarization;
-        $cja->purity = $request->e_purity;
-        $cja->remarks = $request->e_remarks;
-        $cja->save();
+        $cane_juice_analysis = $this->findBySlug($cane_juice_analysis_slug);  
+        $cane_juice_analysis->delete();
 
-        return $cja;
+        return $cane_juice_analysis;
         
     }
 
@@ -77,29 +91,15 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
 
 
 
-    public function destroy($cja_slug){
+    public function findBySlug($cane_juice_analysis_slug){
 
-        $cja = $this->findBySlug($cja_slug);  
-        $cja->delete();
-
-        return $cja;
-        
-    }
-
-
-
-
-
-
-    public function findBySlug($cja_slug){
-
-        $cja = $this->cache->remember('sugar_analysis:cane_juice_analysis:findBySlug:' . $cja_slug, 240, function() use ($cja_slug){
-            return $this->cane_juice_analysis->where('slug', $cja_slug)->first();
+        $cane_juice_analysis = $this->cache->remember('sugar_analysis:cane_juice_analysis:findBySlug:' . $cane_juice_analysis_slug, 240, function() use ($cane_juice_analysis_slug){
+            return $this->cane_juice_analysis->where('slug', $cane_juice_analysis_slug)->first();
         }); 
         
-        if(empty($cja)){ abort(404); }
+        if(empty($cane_juice_analysis)){ abort(404); }
 
-        return $cja;
+        return $cane_juice_analysis;
 
     }
 
@@ -108,15 +108,15 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
 
 
 
-    public function getBySlug($cja_slug){
+    public function getBySlug($cane_juice_analysis_slug){
 
-        $cja = $this->cache->remember('sugar_analysis:cane_juice_analysis:getBySlug:' . $cja_slug, 240, function() use ($cja_slug){
-            return $this->cane_juice_analysis->where('slug', $cja_slug)->get();
+        $cane_juice_analysis = $this->cache->remember('sugar_analysis:cane_juice_analysis:getBySlug:' . $cane_juice_analysis_slug, 240, function() use ($cane_juice_analysis_slug){
+            return $this->cane_juice_analysis->where('slug', $cane_juice_analysis_slug)->get();
         }); 
         
-        if(empty($cja)){ abort(404); }
+        if(empty($cane_juice_analysis)){ abort(404); }
 
-        return $cja;
+        return $cane_juice_analysis;
 
     }
 
