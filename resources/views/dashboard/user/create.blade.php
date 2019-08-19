@@ -180,7 +180,6 @@
   $(document).ready(function() {
     $("#add_row").on("click", function() {
         $('select').select2('destroy');
-        $('select').select2({ dropdownParent: $('#table_body') });
         var content ='<tr>' +
                       '<td style="width:450px;">' +
                         '<select name="menu[]" id="menu" class="form-control select2" style="width:90%;">' +
@@ -207,6 +206,7 @@
 
       $("#table_body").append($(content));
       $('select').select2({width:400});
+      $('select').select2({ dropdownParent: $('#table_body') });
     });
   });
 
