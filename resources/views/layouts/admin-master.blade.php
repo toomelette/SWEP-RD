@@ -31,7 +31,7 @@
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.1.0
+          <b>Version</b> 1.2.0
         </div>
         <strong>Copyright &copy; 2019-2020 <a href="#">MIS-VISAYAS</a>.</strong> All rights
         reserved.

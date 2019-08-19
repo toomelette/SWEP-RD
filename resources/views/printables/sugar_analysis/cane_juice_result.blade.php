@@ -58,7 +58,7 @@
       background-position: center;
       position:absolute;
       opacity:0.3;
-      margin-top: -160px;
+      margin-top: -200px;
       padding:280px;
 
     }
@@ -89,7 +89,7 @@
           <span style="font-size:12px;">TIN 000-784-336</span>
         </div>
 
-      <div class="col-sm-12" style="margin-top: 15px;"></div>
+      <div class="col-sm-12" style="margin-top: 10px;"></div>
 
       <div class="col-sm-12" style="text-align: center; margin-top: 15px;">
           <span style="font-size:14px; font-weight: bold;">CANE JUICE ANALYSIS</span>

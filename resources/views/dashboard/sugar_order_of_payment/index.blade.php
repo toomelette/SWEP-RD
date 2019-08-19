@@ -85,7 +85,7 @@
               <td>{{ __dataType::date_parse($data->date, 'F d,Y') }}</td>
               <td>{{ $data->received_by }}</td>
               <td> 
-                <select id="action" class="form-control input-md">
+                <select id="action" class="form-control input-md" style="font-size:15px;">
                   <option value="">Select</option>
                   <option data-type="1" data-url="{{ route('dashboard.sugar_order_of_payment.show', $data->slug) }}">Print</option>
                   <option data-type="1" data-url="{{ route('dashboard.sugar_order_of_payment.edit', $data->slug) }}">Edit</option>

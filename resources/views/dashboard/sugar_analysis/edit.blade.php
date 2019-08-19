@@ -102,7 +102,7 @@
                     <div class="col-md-12"></div>
 
                     {!! __form::textbox(
-                      '12', 'date_analyzed', 'text', 'Date Analyzed *', 'Date Analyzed', old('date_analyzed') ? old('code') : $sugar_analysis->date_analyzed, $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
+                      '12', 'date_analyzed', 'text', 'Date Analyzed *', 'Date Analyzed', old('date_analyzed') ? old('date_analyzed') : $sugar_analysis->date_analyzed, $errors->has('date_analyzed'), $errors->first('date_analyzed'), ''
                     ) !!}
 
                     <div class="col-md-12"></div>

@@ -68,7 +68,7 @@ class CaneJuiceAnalysisRepository extends BaseRepository implements CaneJuiceAna
         $cane_juice_analysis->remarks = $request->e_remarks;
         $cane_juice_analysis->save();
 
-        return $cja;
+        return $cane_juice_analysis;
         
     }
 

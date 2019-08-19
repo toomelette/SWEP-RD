@@ -77,6 +77,8 @@
         </div>
       </div>
 
+      <div class="col-sm-12"></div>
+
       <div class="col-sm-6">
         <div class="col-sm-5 std_font_size">
           Received From:
@@ -94,6 +96,8 @@
           {{ $sugar_oop->address }}
         </div>
       </div>
+
+      <div class="col-sm-12"></div>
 
       <div class="col-sm-6">
         <div class="col-sm-5 std_font_size">
@@ -113,6 +117,8 @@
         </div>
       </div>
 
+      <div class="col-sm-12"></div>
+
       <div class="col-sm-6">
         <div class="col-sm-5 std_font_size">
           Kind of Analysis:
@@ -120,21 +126,13 @@
         <div class="col-sm-7 std_div no-padding">
           
           @if ($sugar_oop->sugar_sample_id == $sugar_samples_static['cja'])
-
             Polarization, Corrected Brix, Purity
-          
           @elseif(!$sugar_oop->sugarAnalysisParameter->isEmpty())
-            
             @foreach ($sugar_oop->sugarAnalysisParameter as $data)
-
               {{ $data->name }}, 
-              
             @endforeach
-
           @else
-
             &nbsp;
-
           @endif
         
         </div>
@@ -189,6 +187,7 @@
         </div>
       </div>
 
+      <div class="col-sm-12"></div>
 
       <div class="col-sm-12 no-padding">
         <div class="col-sm-5" >
