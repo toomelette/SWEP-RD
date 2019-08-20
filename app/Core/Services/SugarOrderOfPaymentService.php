@@ -92,7 +92,6 @@ class SugarOrderOfPaymentService extends BaseService{
 
         $total_price = $this->getTotalPrice($request);
         $sugar_oop = $this->sugar_oop_repo->findBySlug($slug); 
-        $sugar_oop_orig = $sugar_oop->getOriginal(); 
         $sugar_samples = $this->__static->sugar_samples();
         $sugar_analysis_orig = $sugar_oop->sugarAnalysis->getOriginal();
 
@@ -118,9 +117,7 @@ class SugarOrderOfPaymentService extends BaseService{
         $sugar_analysis = $this->sugar_analysis_repo->updateOrderOfPayment($request, $sugar_oop->sugarAnalysis->slug, $total_price);
 
         // Sugar Analysis Parameters
-        if ($request->sugar_sample_id != $sugar_oop_orig['sugar_sample_id']) {
-            $this->storeSugarAnalysisParameter($sugar_oop->sample_no, $request);
-        }
+        $this->storeSugarAnalysisParameter($sugar_oop->sample_no, $request);
 
         $this->event->fire('sugar_oop.update', [$sugar_oop, $sugar_analysis, $sugar_analysis_orig]);
         return redirect()->back();

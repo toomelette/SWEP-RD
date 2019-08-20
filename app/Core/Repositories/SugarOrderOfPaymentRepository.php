@@ -86,8 +86,6 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
     public function update($request, $sugar_oop, $total_price){
-
-        $sugar_oop_orig = $sugar_oop->getOriginal();
         
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
@@ -100,14 +98,10 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
         $sugar_oop->user_updated = $this->auth->user()->user_id;
         $sugar_oop->save();
 
-        if ($sugar_oop_orig['sugar_sample_id'] != $request->sugar_sample_id) {
-
-            $sugar_oop->sugarAnalysisParameter()->delete();
-            
-            foreach ($sugar_oop->sugarAnalysisParameter as $data) {
-                $data->sugarAnalysisParameterMethod()->delete();
-            }
-            
+        $sugar_oop->sugarAnalysisParameter()->delete();
+        
+        foreach ($sugar_oop->sugarAnalysisParameter as $data) {
+            $data->sugarAnalysisParameterMethod()->delete();
         }
 
         return $sugar_oop;
