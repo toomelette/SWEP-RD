@@ -62,7 +62,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $sugar_oop = new SugarOrderOfPayment;
         $sugar_oop->slug = $this->str->random(16);
-        $sugar_oop->sample_no = $this->getSampleNoInc();
+        $sugar_oop->sample_no = $this->getSampleNoInc($request->date);
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
         $sugar_oop->address = $request->address;
@@ -157,13 +157,42 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
 
 
-    private function getSampleNoInc(){
+    private function getSampleNoInc($date){
 
-        $sample_no = $this->carbon->now()->format('Y') .'0001';
-        $sugar_oop = $this->sugar_oop->select('sample_no')->orderBy('sample_no', 'desc')->first();
+        $date = $this->carbon->parse($date);
 
-        if($sugar_oop != null){ $sample_no = $sugar_oop->sample_no + 1; }
-        
+        $sample_no = "";
+
+        $current_year = (int)$date->format('Y');
+        $current_month = (int)$date->format('m');
+
+        $year_from = "";
+        $year_to = "";
+
+        if ($current_month < 9) {
+            $year_from = (int)$current_year - 1;
+            $year_to = (int)$current_year;
+            $sample_no = (string)$year_from .'-'. (string)$year_to.'-10001';
+        }elseif ($current_month >= 9) {
+            $year_from = (int)$current_year;
+            $year_to = (int)$current_year + 1;
+            $sample_no = (string)$year_from .'-'. (string)$year_to .'-10001';
+        }
+
+        $date_from = (string)$year_from .'-09-01';
+        $date_to = (string)$year_to .'-08-31';
+
+        $sugar_oop = $this->sugar_oop->select('sample_no')
+                                     ->whereBetween('date', [$date_from, $date_to])
+                                     ->orderBy('sample_no', 'desc')
+                                     ->first();
+
+
+        if($sugar_oop != null){ 
+            $num = str_replace((string)$year_from .'-'. (string)$year_to .'-', '', $sugar_oop->sample_no) + 1;
+            $sample_no = (string)$year_from .'-'. (string)$year_to .'-'. $num ;
+        }  
+
         return $sample_no;
         
     }
