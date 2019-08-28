@@ -17,7 +17,7 @@
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.mill.store') }}">
+      <form method="POST" autocomplete="off" action="{{ route('dashboard.mill.store') }}" autocomplete="off">
 
         <div class="box-body">
                   

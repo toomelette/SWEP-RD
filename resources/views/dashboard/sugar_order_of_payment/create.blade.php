@@ -40,7 +40,7 @@
         </div> 
       </div>
       
-      <form method="POST" action="{{ route('dashboard.sugar_order_of_payment.store') }}">
+      <form method="POST" action="{{ route('dashboard.sugar_order_of_payment.store') }}" autocomplete="off">
 
         <div class="box-body">
 

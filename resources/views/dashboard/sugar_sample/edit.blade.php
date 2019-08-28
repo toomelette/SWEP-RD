@@ -26,7 +26,7 @@
         </div> 
       </div>
       
-      <form method="POST" action="{{ route('dashboard.sugar_sample.update', $sugar_sample->slug) }}">
+      <form method="POST" action="{{ route('dashboard.sugar_sample.update', $sugar_sample->slug) }}" autocomplete="off">
 
         <div class="box-body">
 

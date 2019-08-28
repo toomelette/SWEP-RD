@@ -17,7 +17,7 @@
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.store') }}">
+      <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.store') }}" autocomplete="off">
 
         <div class="box-body">
           

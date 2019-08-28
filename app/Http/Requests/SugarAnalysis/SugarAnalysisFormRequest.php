@@ -27,7 +27,6 @@ class SugarAnalysisFormRequest extends FormRequest{
         	'date_analyzed'=>'required|string|max:255',
             'quantity_mt'=>'nullable|numeric|max:100000',
             'code'=>'sometimes|nullable|string|max:45',
-            'report_no'=>'sometimes|nullable|string|max:45',
             'source'=>'sometimes|nullable|string|max:255',
             'description'=>'nullable|string|max:255',
 

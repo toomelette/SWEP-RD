@@ -139,7 +139,6 @@ class SugarAnalysisRepository extends BaseRepository implements SugarAnalysisInt
         $sugar_analysis->date_analyzed = $request->date_analyzed;
         $sugar_analysis->quantity_mt = $request->quantity_mt;
         $sugar_analysis->code = $request->code;
-        $sugar_analysis->report_no = $request->report_no;
         $sugar_analysis->source = $request->source;
         $sugar_analysis->description = $request->description;
         $sugar_analysis->status = "ANALYZED";

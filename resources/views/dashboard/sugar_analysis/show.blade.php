@@ -60,8 +60,6 @@
               @endif
 
               @if ($sugar_analysis->sugar_sample_id == $sugar_samples_static['molasses']) 
-                <dt>Report No:</dt>
-                <dd>{{ $sugar_analysis->report_no }}</dd>
                 <dt>Source:</dt>
                 <dd>{{ $sugar_analysis->source }}</dd>
               @endif

@@ -20,7 +20,7 @@
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.update', $sugar_service->slug) }}">
+      <form method="POST" autocomplete="off" action="{{ route('dashboard.sugar_service.update', $sugar_service->slug) }}" autocomplete="off">
 
         <div class="box-body">
             

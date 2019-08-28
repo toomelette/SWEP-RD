@@ -43,7 +43,6 @@ class SugarAnalysis extends Model{
         'description' => '',
         'code' => '',
         'source' => '',
-        'report_no' => '',
         'status' => 'PENDING',
         'cja_num_of_samples' => null,
         'created_at' => null,

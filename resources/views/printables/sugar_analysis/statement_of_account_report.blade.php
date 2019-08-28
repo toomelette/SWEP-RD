@@ -106,13 +106,13 @@
 
         <span style="font-size:14px;">
             
-            @if (Request::get('sugar_sample_id') == $sugar_samples_static['rawSugar'])
+            @if (Request::get('soam_sugar_sample_id') == $sugar_samples_static['rawSugar'])
                Raw Sugar
-            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['muscovado'])
+            @elseif(Request::get('soam_sugar_sample_id') == $sugar_samples_static['muscovado'])
                Muscovado
-            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['molasses'])
+            @elseif(Request::get('soam_sugar_sample_id') == $sugar_samples_static['molasses'])
                Molasses
-            @elseif(Request::get('sugar_sample_id') == $sugar_samples_static['cja'])
+            @elseif(Request::get('soam_sugar_sample_id') == $sugar_samples_static['cja'])
                Cane Juice
             @endif
 

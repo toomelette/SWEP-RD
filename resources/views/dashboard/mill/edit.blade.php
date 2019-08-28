@@ -20,7 +20,7 @@
         </div> 
       </div>
       
-      <form method="POST" autocomplete="off" action="{{ route('dashboard.mill.update', $mill->slug) }}">
+      <form method="POST" autocomplete="off" action="{{ route('dashboard.mill.update', $mill->slug) }}" autocomplete="off">
 
         <div class="box-body">
 

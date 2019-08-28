@@ -128,10 +128,9 @@
               <td class="data-row-head" style="width:100px;">Pol</td>
               <td class="data-row-head" style="width:100px;">Moisture</td>
               <td class="data-row-head" style="width:100px;">Safety Factor</td>
-              <td class="data-row-head" style="width:100px;">Ash</td>
               <td class="data-row-head" style="width:100px;">Color Whole</td>
               <td class="data-row-head" style="width:100px;">Color Affined</td>
-              <td class="data-row-head" style="width:100px;">Grain Size</td>
+              <td class="data-row-head" style="width:100px;">Dextran</td>
 
           </thead>
                 
@@ -144,7 +143,6 @@
               <tr>
 
                 <td class="data-row-body" style="border-right:0;"><b>{{ $data_district }}</b></td>
-                <td class="data-row-body" style="border-right:0; border-left:0;"></td>
                 <td class="data-row-body" style="border-right:0; border-left:0;"></td>
                 <td class="data-row-body" style="border-right:0; border-left:0;"></td>
                 <td class="data-row-body" style="border-right:0; border-left:0;"></td>
@@ -167,10 +165,9 @@
                   $pol = 0.00;
                   $mois = 0.00;
                   $sf = 0.00;
-                  $ash = 0.00;
                   $color_whole = 0.00;
                   $color_affined = 0.00;
-                  $grain_size = 0.00;
+                  $dextran = 0.00;
 
                   $sugar_services_static = __static::sugar_services();
 
@@ -217,16 +214,6 @@
                       }
 
 
-                      /** Ash **/
-                      $ash_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['ash']);
-                      
-                      if (!empty($ash_instance)) {
-                        if (isset($ash_instance->result_dec)) {
-                          $ash =+ $ash_instance->result_dec;  
-                        }
-                      }
-
-
                       /** Color of Whole **/
                       $color_whole_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['colorW']);
                       
@@ -247,12 +234,12 @@
                       }
 
 
-                      /** Grain Size **/
-                      $grain_size_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['grainSize']);
+                      /** Dextran **/
+                      $dextran_instance = $data_sa->sugarAnalysisParameter()->findBySugarServiceId($sugar_services_static['dextran']);
                       
-                      if (!empty($grain_size_instance)) {
-                        if (isset($grain_size_instance->result_dec)) {
-                          $grain_size =+ $grain_size_instance->result_dec;  
+                      if (!empty($dextran_instance)) {
+                        if (isset($dextran_instance->result_dec)) {
+                          $dextran =+ $dextran_instance->result_dec;  
                         }
                       }
 
@@ -303,15 +290,6 @@
                     @endif
                   </td>
 
-                  {{-- Ash --}}
-                  <td class="data-row-body">
-                    @if ($ash != 0 && $num_of_sa != 0)
-                      {{ number_format($ash / $num_of_sa, 2) }} 
-                    @else
-                      0.00 
-                    @endif
-                  </td>
-
                   {{-- Color Whole --}}
                   <td class="data-row-body">
                     @if ($color_whole != 0 && $num_of_sa != 0)
@@ -330,10 +308,10 @@
                     @endif
                   </td>
 
-                  {{-- Grain Size --}}
+                  {{-- Dextran --}}
                   <td class="data-row-body">
-                    @if ($grain_size != 0 && $num_of_sa != 0)
-                      {{ number_format($grain_size / $num_of_sa, 2) }}  
+                    @if ($dextran != 0 && $num_of_sa != 0)
+                      {{ number_format($dextran / $num_of_sa, 2) }}  
                     @else
                       0.00
                     @endif
