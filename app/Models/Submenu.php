@@ -26,6 +26,7 @@ class Submenu extends Model{
         'menu_id' => '',
         'is_nav' => false,
         'name' => '',
+        'nav_name' => '',
         'route' => '',
 
     ];
