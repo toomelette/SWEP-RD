@@ -81,7 +81,7 @@
                 </div>
 
                 {!! __form::textbox(
-                  '12', 'address', 'text', 'Address *', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
+                  '12', 'address', 'text', 'Address ', 'Address', old('address'), $errors->has('address'), $errors->first('address'), ''
                 ) !!}
 
                 {!! __form::datepicker(
@@ -95,7 +95,7 @@
                 </div>
 
                 {!! __form::textbox(
-                  '12', 'received_by', 'text', 'Received By *', 'Received By', old('received_by'), $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
+                  '12', 'received_by', 'text', 'Received By', 'Received By', old('received_by'), $errors->has('received_by'), $errors->first('received_by'), 'data-transform="uppercase"'
                 ) !!}
 
 
@@ -133,7 +133,7 @@
                             &nbsp; {{ $data->name }}
                           </label>
                         </td>
-                        <td>Php {{ $data->price }}</td>
+                        <td>Php {{ number_format($data->price, 2) }}</td>
                       </tr>
                     @endforeach
                   </table>
@@ -154,7 +154,7 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-                      <td>Php {{ $data->price }}</td>
+                      <td>Php {{ number_format($data->price, 2) }}</td>
                     </tr>
                   @endforeach
                 </table>
@@ -175,7 +175,7 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-                      <td>Php {{ $data->price }}</td>
+                      <td>Php {{ number_format($data->price, 2) }}</td>
                     </tr>
                   @endforeach
                 </table>
@@ -196,7 +196,7 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-                      <td>Php {{ $data->price }}</td>
+                      <td>Php {{ number_format($data->price, 2) }}</td>
                     </tr>
                   @endforeach
                 </table>
@@ -217,7 +217,7 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-                      <td>Php {{ $data->price }}</td>
+                      <td>Php {{ number_format($data->price, 2) }}</td>
                     </tr>
                   @endforeach
                 </table>
@@ -238,7 +238,7 @@
                           &nbsp; {{ $data->name }}
                         </label>
                       </td>
-                      <td>Php {{ $data->price }}</td>
+                      <td>Php {{ number_format($data->price, 2) }}</td>
                     </tr>
                   @endforeach
                 </table>

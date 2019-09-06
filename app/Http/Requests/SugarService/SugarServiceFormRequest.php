@@ -21,8 +21,8 @@ class SugarServiceFormRequest extends FormRequest{
         
         $rules =  [
             'name'=>'required|string|max:255',
-            'price'=>'required|string|max:13',
-            'standard_str'=>'required|string|max:90',
+            'price'=>'nullable|string|max:13',
+            'standard_str'=>'nullable|string|max:90',
             'standard_dec_max'=>'nullable|numeric|max:100000000',
             'standard_dec_min'=>'nullable|numeric|max:100000000'
         ];

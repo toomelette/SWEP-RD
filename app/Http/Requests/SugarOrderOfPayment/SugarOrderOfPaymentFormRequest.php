@@ -26,10 +26,10 @@ class SugarOrderOfPaymentFormRequest extends FormRequest{
             'received_from'=>'sometimes|required|string|max:90',
             'sugar_client_id'=>'sometimes|nullable|string|max:11',
             'mill_id'=>'sometimes|required|string|max:45',
-            'address'=>'required|string|max:255',
+            'address'=>'nullable|string|max:255',
             'date'=>'required|date_format:"m/d/Y"',
             'cja_num_of_samples'=>'sometimes|required|numeric|max:50',
-            'received_by'=>'required|string|max:90',
+            'received_by'=>'nullable|string|max:90',
 
         ];
         

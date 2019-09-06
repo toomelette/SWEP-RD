@@ -37,11 +37,11 @@
                 ) !!}
 
                 {!! __form::textbox_numeric(
-                  '12', 'price', 'text', 'Price *', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
+                  '12', 'price', 'text', 'Price ', 'Price', old('price'), $errors->has('price'), $errors->first('price'), ''
                 ) !!} 
 
                 {!! __form::textbox(
-                  '12', 'standard_str', 'text', 'Standard in text *', 'Standard in text', old('standard_str'), $errors->has('standard_str'), $errors->first('standard_str'), ''
+                  '12', 'standard_str', 'text', 'Standard in text', 'Standard in text', old('standard_str'), $errors->has('standard_str'), $errors->first('standard_str'), ''
                 ) !!}
 
                 <div class="col-md-12"></div>

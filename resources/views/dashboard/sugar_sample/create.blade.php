@@ -46,7 +46,7 @@
                 <table class="table table-bordered">
                   <tr>
                     <th>Kind of Analysis</th>
-                    <th>Standards</th>
+                    <th>Price</th>
                   </tr>
                   @foreach ($global_sugar_service_all as $data)
                   <tr>  
@@ -59,7 +59,7 @@
                       </label>
                     </td>
 
-                    <td>{{ $data->standard }}</td>
+                    <td>{{ number_format($data->price, 2) }}</td>
 
                   </tr>
                   @endforeach
