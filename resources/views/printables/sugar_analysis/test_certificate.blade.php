@@ -254,47 +254,90 @@
 
 
 
-
-
     {{-- TABLE --}}
-    <table style="margin-left:10px; margin-right:10px; border:solid 1px;">
-      
-      <thead>
+
+    @if ($sugar_analysis->sugar_sample_id == "SS1001")
+
+      {{-- Raw Sugar --}}
+      <table style="margin-left:10px; margin-right:10px; border:solid 1px;">
   
-        <td class="data-row-head" style="width:350px;">PARAMETERS</td>
-        <td class="data-row-head" style="width:150px;">RESULTS</td>
-        <td class="data-row-head" style="width:150px;">SPECIFICATION AS PRODUCED</td>
-        <td class="data-row-head" style="width:150px;">ASSESSMENT</td>
+        <thead>
+          <td class="data-row-head" style="width:350px;">PARAMETERS</td>
+          <td class="data-row-head" style="width:150px;">RESULTS</td>
+          <td class="data-row-head" style="width:150px;">SPECIFICATION AS PRODUCED</td>
+          <td class="data-row-head" style="width:150px;">ASSESSMENT</td>
+        </thead>
+              
+        @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
 
-      </thead>
-            
-      @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
+          <tbody>
 
-        <tbody>
+            <td class="data-row-body-parameter">
+              {{ $data->name }}<br>
+              @foreach ($data->sugarAnalysisParameterMethod as $data_sugar_apm)
+                {{ $data_sugar_apm->name }}<br>
+              @endforeach
+            </td>
 
-          <td class="data-row-body-parameter">
-            {{ $data->name }}<br>
-            @foreach ($data->sugarAnalysisParameterMethod as $data_sugar_apm)
-              {{ $data_sugar_apm->name }}<br>
-            @endforeach
-          </td>
+            <td class="data-row-body">
+              @if ($data->sugar_service_id == $sugar_services_static['mois'])
+                {{ number_format($data->moisture_result_dec, 2) .' / '. number_format($data->moisture_sf_dec, 2)}}
+              @else
+                {{ number_format($data->result_dec, 2) }}
+              @endif
+            </td>
 
-          <td class="data-row-body">
-            @if ($data->sugar_service_id == $sugar_services_static['mois'])
-              {{ number_format($data->moisture_result_dec, 2) .' / '. number_format($data->moisture_sf_dec, 2)}}
-            @else
-              {{ number_format($data->result_dec, 2) }}
-            @endif
-          </td>
+            <td class="data-row-body">{{ $data->standard_str }}</td>
+            <td class="data-row-body">{{ $data->assessment }}</td>
 
-          <td class="data-row-body">{{ $data->standard_str }}</td>
-          <td class="data-row-body">{{ $data->assessment }}</td>
+          </tbody>
 
-        </tbody>
+        @endforeach
 
-      @endforeach
+      </table>
 
-    </table>
+    @elseif($sugar_analysis->sugar_sample_id == "SS1004" || $sugar_analysis->sugar_sample_id == "SS1003")
+
+      {{-- Molasses --}}
+      <table style="margin-left:auto; margin-right:auto; border:solid 1px;">
+  
+        <thead>
+          <td class="data-row-head" style="width:350px;">PARAMETERS</td>
+          <td class="data-row-head" style="width:150px;">RESULTS</td>
+        </thead>
+              
+        @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
+
+          <tbody>
+
+            <td class="data-row-body-parameter">
+              {{ $data->name }}<br>
+              @if ($data->sugar_service_id == $sugar_services_static['totalReducingSugarafterHydrolysis'])
+                @foreach ($data->sugarAnalysisParameterMethod as $data_sugar_apm)
+                  {{ $data_sugar_apm->name }}<br>
+                @endforeach
+              @endif
+            </td>
+
+            <td class="data-row-body">
+              @if ($data->sugar_service_id == $sugar_services_static['mois'])
+                {{ number_format($data->moisture_result_dec, 2) .' / '. number_format($data->moisture_sf_dec, 2)}}
+              @else
+                {{ number_format($data->result_dec, 2) }}
+              @endif
+            </td>
+
+          </tbody>
+
+        @endforeach
+
+      </table>
+
+      @endif
+
+    
+
+
 
 
 
