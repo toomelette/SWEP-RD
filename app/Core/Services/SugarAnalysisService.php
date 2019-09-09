@@ -153,7 +153,7 @@ class SugarAnalysisService extends BaseService{
         $cja_samples = $sugar_analysis->caneJuiceAnalysis()->count() + 1;
 
         if ($sugar_analysis->cja_num_of_samples < $cja_samples) {
-            $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sa->cja_num_of_samples .' samples. Please update Number of Cane Juice Samples Field.');
+            $this->session->flash('CJA_NUM_OF_SAMPLES_ERROR', 'You Encoded more than '. $sugar_analysis->cja_num_of_samples .' samples. Please update Number of Cane Juice Samples Field.');
             return redirect()->back();
         }
 
