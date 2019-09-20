@@ -4,7 +4,7 @@ namespace App\Core\Services;
 
 
 use App\Core\Interfaces\SugarServiceInterface;
-use App\Core\Interfaces\SugarSampleparameterInterface;
+use App\Core\Interfaces\SugarSampleParameterInterface;
 use App\Core\Interfaces\SugarMethodInterface;
 use App\Core\BaseClasses\BaseService;
 
@@ -18,7 +18,7 @@ class SugarServiceService extends BaseService{
 
 
 
-    public function __construct(SugarServiceInterface $sugar_service_repo, SugarSampleparameterInterface $sugar_sample_parameter, SugarMethodInterface $sugar_method_repo){
+    public function __construct(SugarServiceInterface $sugar_service_repo, SugarSampleParameterInterface $sugar_sample_parameter, SugarMethodInterface $sugar_method_repo){
 
         $this->sugar_service_repo = $sugar_service_repo;
         $this->sugar_sample_parameter = $sugar_sample_parameter;

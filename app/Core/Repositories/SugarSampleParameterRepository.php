@@ -52,7 +52,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
 
             'name' => $sugar_service->name, 
             'price' => $sugar_service->price, 
-            'standard_str' => $sugar_service->standard_str 
+            'standard_str' => $sugar_service->standard_str,
 
         ]);
 
