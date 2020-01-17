@@ -37,6 +37,10 @@
                 @csrf    
 
                 {!! __form::textbox(
+                  '12', 'seq_no', 'text', 'Sequence No. *', 'Sequence No.', old('seq_no') ? old('seq_no') : $sugar_service->seq_no, $errors->has('seq_no'), $errors->first('seq_no'), ''
+                ) !!}
+
+                {!! __form::textbox(
                   '12', 'name', 'text', 'Name *', 'Name', old('name') ? old('name') : $sugar_service->name, $errors->has('name'), $errors->first('name'), ''
                 ) !!}
 

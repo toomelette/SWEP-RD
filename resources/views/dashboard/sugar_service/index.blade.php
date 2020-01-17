@@ -42,6 +42,7 @@
       <div class="box-body no-padding">
         <table class="table table-hover">
           <tr>
+            <th>@sortablelink('seq_no', 'Sequence No.')</th>
             <th>@sortablelink('name', 'Name')</th>
             <th>@sortablelink('standard', 'Standards')</th>
             <th>@sortablelink('price', 'Price')</th>
@@ -49,6 +50,7 @@
           </tr>
           @foreach($sugar_services as $data) 
             <tr {!! __html::table_highlighter($data->slug, $table_sessions) !!} >
+              <td>{{ $data->seq_no }}</td>
               <td>{{ $data->name }}</td>
               <td>{{ $data->standard_str }}</td>
               <td>{{ number_format($data->price, 2) }}</td>

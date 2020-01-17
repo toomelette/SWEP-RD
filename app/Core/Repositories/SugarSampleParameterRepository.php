@@ -29,6 +29,7 @@ class SugarSampleParameterRepository extends BaseRepository implements SugarSamp
     public function store($sugar_sample_id, $sugar_service){
 
         $sugar_sample_parameter = new SugarSampleParameter;
+        $sugar_sample_parameter->seq_no = $sugar_service->seq_no;
         $sugar_sample_parameter->sugar_sample_id = $sugar_sample_id;
         $sugar_sample_parameter->sugar_service_id = $sugar_service->sugar_service_id;
         $sugar_sample_parameter->name = $sugar_service->name;

@@ -268,7 +268,7 @@
           <td class="data-row-head" style="width:150px;">ASSESSMENT</td>
         </thead>
               
-        @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
+        @foreach ($sugar_analysis->sugarAnalysisParameter->sortBy('seq_no') as $data)
 
           <tbody>
 

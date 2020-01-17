@@ -20,6 +20,7 @@ class SugarServiceFormRequest extends FormRequest{
     public function rules(){
         
         $rules =  [
+            'seq_no'=>'required|int|max:100',
             'name'=>'required|string|max:255',
             'price'=>'nullable|string|max:13',
             'standard_str'=>'nullable|string|max:90',

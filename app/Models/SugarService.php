@@ -25,6 +25,7 @@ class SugarService extends Model{
     protected $attributes = [
 
         'slug' => '',
+        'seq_no' => 0,
         'sugar_service_id' => '',
         'name' => '',
         'price' => null,

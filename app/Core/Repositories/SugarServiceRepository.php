@@ -58,6 +58,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
         $sugar_service = new SugarService;
         $sugar_service->slug = $this->str->random(16);
+        $sugar_service->seq_no = (int)$request->seq_no;
         $sugar_service->sugar_service_id = $this->getSugarServiceIdInc();
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
@@ -84,6 +85,7 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     public function update($request, $slug){
 
         $sugar_service = $this->findBySlug($slug);
+        $sugar_service->seq_no = (int)$request->seq_no;
         $sugar_service->name = $request->name;
         $sugar_service->price = $this->__dataType->string_to_num($request->price);
         $sugar_service->standard_str = $request->standard_str;
@@ -157,7 +159,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
     public function getAll(){
 
         $sugar_services = $this->cache->remember('sugar_services:getAll', 240, function(){
-            return $this->sugar_service->select('sugar_service_id', 'name', 'price', 'standard_str')->get();
+            return $this->sugar_service->select('sugar_service_id', 'name', 'price', 'standard_str')
+                                       ->orderBy('seq_no', 'asc')
+                                       ->get();
         });
         
         return $sugar_services;
@@ -202,9 +206,9 @@ class SugarServiceRepository extends BaseRepository implements SugarServiceInter
 
     private function populate($instance, $entries){
 
-        return $instance->select('name', 'price', 'standard_str', 'slug')
+        return $instance->select('seq_no', 'name', 'price', 'standard_str', 'slug')
                         ->sortable()
-                        ->orderBy('updated_at', 'desc')
+                        ->orderBy('seq_no', 'asc')
                         ->paginate($entries);
 
     }

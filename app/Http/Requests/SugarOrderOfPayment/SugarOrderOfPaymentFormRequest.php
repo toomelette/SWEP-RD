@@ -21,6 +21,7 @@ class SugarOrderOfPaymentFormRequest extends FormRequest{
 
         $rules = [
             
+            'sample_no'=>'required|string|max:45',
             'sugar_sample_id'=>'required|string|max:11',
             'customer_type'=>'required|string|max:11',
             'received_from'=>'sometimes|required|string|max:90',

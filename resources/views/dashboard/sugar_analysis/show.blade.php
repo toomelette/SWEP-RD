@@ -98,7 +98,7 @@
                   <th>Standards</th>
               </tr>  
 
-              @foreach($sugar_analysis->sugarAnalysisParameter as $data)
+              @foreach($sugar_analysis->sugarAnalysisParameter->sortBy('seq_no') as $data)
                 <tr>
                     <td>{{ $data->name }}</td>
                     <td>

@@ -151,7 +151,7 @@
                 
                 <div class="box-body">
 
-                  @foreach ($sugar_analysis->sugarAnalysisParameter as $data)
+                  @foreach ($sugar_analysis->sugarAnalysisParameter->sortBy('seq_no') as $data)
 
                     @if ($data->sugar_service_id == $sugar_services_static['mois'])
                     

@@ -60,6 +60,10 @@
 
                 <input name="_method" value="PUT" type="hidden">
 
+                {!! __form::textbox(
+                  '12', 'sample_no', 'text', 'Sample No. ', 'Sample No.', old('sample_no') ? old('sample_no') : $sugar_oop->sample_no, $errors->has('sample_no'), $errors->first('sample_no'), ''
+                ) !!}
+
                 {!! __form::select_dynamic(
                   '12', 'sugar_sample_id', 'Kind of Sample *', old('sugar_sample_id') ? old('sugar_sample_id') : $sugar_oop->sugar_sample_id, $global_sugar_samples_all, 'sugar_sample_id', 'name', $errors->has('sugar_sample_id'), $errors->first('sugar_sample_id'), '', ''
                 ) !!}

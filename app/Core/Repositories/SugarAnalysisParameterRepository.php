@@ -31,6 +31,7 @@ class SugarAnalysisParameterRepository extends BaseRepository implements SugarAn
 
         $sugar_analysis_param = new SugarAnalysisParameter;
         $sugar_analysis_param->sample_no = $sample_no;
+        $sugar_analysis_param->seq_no = $sugar_service->seq_no;
         $sugar_analysis_param->sugar_analysis_parameter_id = $this->getSugarAnalysisParameterIdInc();
         $sugar_analysis_param->sugar_service_id = $sugar_service->sugar_service_id;
         $sugar_analysis_param->name = $sugar_service->name;

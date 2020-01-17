@@ -62,7 +62,7 @@ class SugarOrderOfPaymentRepository extends BaseRepository implements SugarOrder
 
         $sugar_oop = new SugarOrderOfPayment;
         $sugar_oop->slug = $this->str->random(16);
-        $sugar_oop->sample_no = $this->getSampleNoInc($request->date);
+        $sugar_oop->sample_no = $request->sample_no;
         $sugar_oop->sugar_sample_id = $request->sugar_sample_id;
         $sugar_oop->date = $this->__dataType->date_parse($request->date);
         $sugar_oop->address = $request->address;
